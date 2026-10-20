@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+# large, regenerable intermediates (rebuild with the scripts; see README「交接说明」)
+results/cache/
+results/**/*.npz
+dist/

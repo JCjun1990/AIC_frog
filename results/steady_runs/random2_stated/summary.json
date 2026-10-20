@@ -1,0 +1,146 @@
+{
+  "surface": "frog",
+  "pattern": "spots",
+  "params": {
+    "F": 0.028,
+    "k": 0.062,
+    "Du": 0.000278,
+    "Dv": 0.000139
+  },
+  "mesh": {
+    "name": "frog",
+    "laplacian": "robust",
+    "vertices": 29010,
+    "triangles": 58016,
+    "area": 6.95524597217705,
+    "euler_characteristic": 2,
+    "edge_min": 0.0011996598157266482,
+    "edge_median": 0.015334581432839585,
+    "edge_max": 0.05166110920297427,
+    "negative_weight_fraction": 0.0,
+    "bbox_extent": [
+      1.4125142857142858,
+      1.7825714285714285,
+      0.9638857142857145
+    ]
+  },
+  "args": {
+    "surface": "frog",
+    "pattern": "spots",
+    "level": 6,
+    "frog": "/Users/jcjun1990/Desktop/turing/frog.mat",
+    "laplacian": "robust",
+    "ic": "seeded",
+    "no_normalize_z": false,
+    "eps": 0.05,
+    "noise_length": 0.05,
+    "seed": 2,
+    "scheme": "sbdf2",
+    "dt": 1.0,
+    "t_switch": 20000,
+    "dt_late": 4.0,
+    "t_max": 100000.0,
+    "t_min": 2000,
+    "tol": 1e-07,
+    "polish_tol": 1e-11,
+    "polish_from": 0.0001,
+    "log_every": 500,
+    "backend": "lu",
+    "device": "cpu",
+    "no_stability": false,
+    "out": "results/steady_runs",
+    "F": null,
+    "k": null,
+    "Du": null,
+    "Dv": null,
+    "name": "random2_stated"
+  },
+  "scales": {
+    "diffusion_length_ell": 0.09964221709983889,
+    "reaction_time_tau": 35.714285714285715,
+    "equivalent_radius": 0.743962961743383,
+    "radius_over_ell": 7.466342915653428,
+    "h_median_over_ell": 0.1538964294368795,
+    "explicit_dt_limit": 0.0012942299221846184,
+    "dt_over_tau": 0.028,
+    "diffusion_number_median": 1.1822271905320214,
+    "uniform_equilibrium_exists": false
+  },
+  "time": {
+    "t_final": 100000.0,
+    "steps": 40000,
+    "wall_seconds_time_integration": 311.3420341014862,
+    "wall_seconds_total": 311.84908509254456,
+    "device": "cpu",
+    "backend": "lu",
+    "torch": "2.14.1"
+  },
+  "converged_time_integration": false,
+  "final_rates": {
+    "dudt_rms": 1.7825859316072165e-06,
+    "dvdt_rms": 1.1971792654567439e-06
+  },
+  "polish": null,
+  "final_residual": {
+    "Ru_rms": 1.7823200868327864e-06,
+    "Rv_rms": 1.1970301984950567e-06,
+    "steady_Ru_rms": 1.7823200868327864e-06,
+    "steady_Rv_rms": 1.1970301984950567e-06,
+    "reaction_scale": 0.011508490732731873,
+    "steady_rel": 0.00010640536733313725
+  },
+  "final_pattern": {
+    "v_min": 0.00045058912082448555,
+    "v_max": 0.38626493514159627,
+    "contrast": 0.32996134064082033,
+    "wavelength": 0.46449798570687223,
+    "type": "spots",
+    "threshold": 0.16950181753934188,
+    "n_components": 26,
+    "n_low_components": 3,
+    "area_fraction": 0.2439318934063394,
+    "euler": 24,
+    "perimeter": 23.444038155081483,
+    "compactness": 1.008554689721611,
+    "mean_component_area": 0.06525408919615244
+  },
+  "linear_stability": {
+    "eigenvalues": [
+      [
+        -4.741380816309488e-05,
+        0.0
+      ],
+      [
+        -0.00020028291518635636,
+        0.0
+      ],
+      [
+        -0.0002991009853318921,
+        0.0
+      ],
+      [
+        -0.00034002828019032215,
+        0.0
+      ],
+      [
+        -0.0005604822192329076,
+        0.0
+      ],
+      [
+        -0.0006198227718704596,
+        0.0
+      ],
+      [
+        -0.0008173990170599879,
+        0.0
+      ],
+      [
+        -0.000936660539640292,
+        0.0
+      ]
+    ],
+    "max_real": -4.741380816309488e-05,
+    "sigma": 0.001,
+    "seconds": 0.502277135848999
+  }
+}

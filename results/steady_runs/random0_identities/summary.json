@@ -1,0 +1,271 @@
+{
+  "surface": "frog",
+  "pattern": "spots",
+  "params": {
+    "F": 0.029,
+    "k": 0.0611,
+    "Du": 0.000278,
+    "Dv": 0.000139
+  },
+  "mesh": {
+    "name": "frog",
+    "laplacian": "robust",
+    "vertices": 29010,
+    "triangles": 58016,
+    "area": 6.95524597217705,
+    "euler_characteristic": 2,
+    "edge_min": 0.0011996598157266482,
+    "edge_median": 0.015334581432839585,
+    "edge_max": 0.05166110920297427,
+    "negative_weight_fraction": 0.0,
+    "bbox_extent": [
+      1.4125142857142858,
+      1.7825714285714285,
+      0.9638857142857145
+    ]
+  },
+  "args": {
+    "surface": "frog",
+    "pattern": "spots",
+    "level": 6,
+    "frog": "/Users/jcjun1990/Desktop/turing/frog.mat",
+    "laplacian": "robust",
+    "ic": "seeded",
+    "no_normalize_z": false,
+    "eps": 0.05,
+    "noise_length": 0.05,
+    "seed": 0,
+    "scheme": "sbdf2",
+    "dt": 1.0,
+    "t_switch": 20000,
+    "dt_late": 4.0,
+    "t_max": 100000.0,
+    "t_min": 2000,
+    "tol": 1e-07,
+    "polish_tol": 1e-11,
+    "polish_from": 0.0001,
+    "log_every": 500,
+    "backend": "lu",
+    "device": "cpu",
+    "no_stability": false,
+    "out": "results/steady_runs",
+    "F": 0.029,
+    "k": 0.0611,
+    "Du": null,
+    "Dv": null,
+    "name": "random0_identities"
+  },
+  "scales": {
+    "diffusion_length_ell": 0.09790917677394557,
+    "reaction_time_tau": 34.48275862068965,
+    "equivalent_radius": 0.743962961743383,
+    "radius_over_ell": 7.598500837782118,
+    "h_median_over_ell": 0.15662047152377082,
+    "explicit_dt_limit": 0.0012942299221846184,
+    "dt_over_tau": 0.029,
+    "diffusion_number_median": 1.1822271905320214,
+    "uniform_equilibrium_exists": false
+  },
+  "time": {
+    "t_final": 100000.0,
+    "steps": 40000,
+    "wall_seconds_time_integration": 866.4936149120331,
+    "wall_seconds_total": 880.247848033905,
+    "device": "cpu",
+    "backend": "lu",
+    "torch": "2.14.1"
+  },
+  "converged_time_integration": false,
+  "final_rates": {
+    "dudt_rms": 3.8995464498430054e-07,
+    "dvdt_rms": 2.7368228881424355e-07
+  },
+  "polish": {
+    "history": [
+      {
+        "iter": 0,
+        "dtau": 0.0,
+        "rel_residual": 1.1612343400708387e-05,
+        "wall_s": 0.0,
+        "accepted": true
+      },
+      {
+        "iter": 1,
+        "dtau": 1103.4446954908035,
+        "rel_residual": 1.0523720353328002e-05,
+        "wall_s": 0.9950671195983887,
+        "accepted": true
+      },
+      {
+        "iter": 2,
+        "dtau": 1246.9796484055603,
+        "rel_residual": 9.312376040424083e-06,
+        "wall_s": 1.8547499179840088,
+        "accepted": true
+      },
+      {
+        "iter": 3,
+        "dtau": 1425.2163882851314,
+        "rel_residual": 8.147775661407285e-06,
+        "wall_s": 2.744011878967285,
+        "accepted": true
+      },
+      {
+        "iter": 4,
+        "dtau": 1653.7223962147584,
+        "rel_residual": 7.021942393286887e-06,
+        "wall_s": 3.5083460807800293,
+        "accepted": true
+      },
+      {
+        "iter": 5,
+        "dtau": 1954.9681524730754,
+        "rel_residual": 5.939914359228068e-06,
+        "wall_s": 4.257143020629883,
+        "accepted": true
+      },
+      {
+        "iter": 6,
+        "dtau": 2366.408371118497,
+        "rel_residual": 4.907159534438151e-06,
+        "wall_s": 5.01343297958374,
+        "accepted": true
+      },
+      {
+        "iter": 7,
+        "dtau": 2954.3118028430345,
+        "rel_residual": 3.9306424560648725e-06,
+        "wall_s": 5.742564916610718,
+        "accepted": true
+      },
+      {
+        "iter": 8,
+        "dtau": 3846.2097685252215,
+        "rel_residual": 3.0191653860733097e-06,
+        "wall_s": 6.423428058624268,
+        "accepted": true
+      },
+      {
+        "iter": 9,
+        "dtau": 5316.637673805577,
+        "rel_residual": 2.1841517352068168e-06,
+        "wall_s": 7.108308792114258,
+        "accepted": true
+      },
+      {
+        "iter": 10,
+        "dtau": 8055.8982977247515,
+        "rel_residual": 1.4414709535233445e-06,
+        "wall_s": 7.8191468715667725,
+        "accepted": true
+      },
+      {
+        "iter": 11,
+        "dtau": 14237.175942692127,
+        "rel_residual": 8.156353090985677e-07,
+        "wall_s": 8.544581890106201,
+        "accepted": true
+      },
+      {
+        "iter": 12,
+        "dtau": 33537.05321260502,
+        "rel_residual": 3.462541364947307e-07,
+        "wall_s": 9.243159055709839,
+        "accepted": true
+      },
+      {
+        "iter": 13,
+        "dtau": 143557.24371539734,
+        "rel_residual": 8.088998576574713e-08,
+        "wall_s": 9.970002889633179,
+        "accepted": true
+      },
+      {
+        "iter": 14,
+        "dtau": 2279192.6417198298,
+        "rel_residual": 5.094937210724741e-09,
+        "wall_s": 10.67270803451538,
+        "accepted": true
+      },
+      {
+        "iter": 15,
+        "dtau": 570280848.4014966,
+        "rel_residual": 2.0362499342662315e-11,
+        "wall_s": 11.372267961502075,
+        "accepted": true
+      },
+      {
+        "iter": 16,
+        "dtau": 724892744372.1208,
+        "rel_residual": 1.6019395270353584e-14,
+        "wall_s": 12.08892297744751,
+        "accepted": true
+      }
+    ],
+    "accepted": true,
+    "seconds": 12.118317127227783,
+    "max_abs_change_v": 0.017589670660400653
+  },
+  "final_residual": {
+    "Ru_rms": 6.522902536858521e-16,
+    "Rv_rms": 7.843263543657875e-17,
+    "steady_Ru_rms": 6.522902536858521e-16,
+    "steady_Rv_rms": 7.843263543657875e-17,
+    "reaction_scale": 0.011673950655008569,
+    "steady_rel": 2.5197341004221755e-14
+  },
+  "final_pattern": {
+    "v_min": 0.00031680245467817286,
+    "v_max": 0.37847173844186216,
+    "contrast": 0.3349964966049435,
+    "wavelength": 0.4608526727890041,
+    "type": "spots",
+    "threshold": 0.17259453051525878,
+    "n_components": 25,
+    "n_low_components": 3,
+    "area_fraction": 0.27364347648353726,
+    "euler": 23,
+    "perimeter": 25.152766496017115,
+    "compactness": 0.9450960481179956,
+    "mean_component_area": 0.07613030750498591
+  },
+  "linear_stability": {
+    "eigenvalues": [
+      [
+        -0.0001108261175893062,
+        0.0
+      ],
+      [
+        -0.00028096145883825465,
+        0.0
+      ],
+      [
+        -0.00039359852739611614,
+        0.0
+      ],
+      [
+        -0.0005889476989427284,
+        0.0
+      ],
+      [
+        -0.000679027890978085,
+        0.0
+      ],
+      [
+        -0.0007167185687332659,
+        0.0
+      ],
+      [
+        -0.0007698973540156934,
+        0.0
+      ],
+      [
+        -0.0009127723022273827,
+        0.0
+      ]
+    ],
+    "max_real": -0.0001108261175893062,
+    "sigma": 0.001,
+    "seconds": 1.61763596534729
+  }
+}

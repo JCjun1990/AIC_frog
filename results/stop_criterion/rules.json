@@ -1,0 +1,12 @@
+{
+  "ic": "rules",
+  "t_stop": 263.0,
+  "change_at_stop": 9.99515758915992e-05,
+  "type": "uniform",
+  "n_components": 0,
+  "wavelength": 2.2734867286481077,
+  "v_max": 3.872942006443544e-08,
+  "v_min": 7.118079563636472e-10,
+  "frac_v_neg": 0.0,
+  "corr_v_with_target": -0.04221498350938548
+}

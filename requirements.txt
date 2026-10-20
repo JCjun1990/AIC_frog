@@ -1,0 +1,10 @@
+# Tested with Python 3.11 and the versions in comments.
+# On Windows + NVIDIA GPU install torch first from https://pytorch.org/get-started/locally/
+# (Windows / Pip / CUDA 12.x), then `pip install -r requirements.txt`.
+numpy>=2.0            # 2.4.6
+scipy>=1.13           # 1.17.1
+torch>=2.5            # 2.14.1
+matplotlib>=3.8       # 3.11.2
+robust-laplacian>=1.0 # 1.1.0
+scikit-learn>=1.4    # 1.9.1 (identifiability analysis)
+cma>=3.3             # 4.x (CMA-ES refinement)

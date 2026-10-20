@@ -1,0 +1,71 @@
+noise floor — steady state, unperturbed: drift 0.0000
+noise floor — steady state + target small-scale part: drift 0.0110
+target at the stated spot parameters: drift 2.1793
+/Users/jcjun1990/Desktop/turing/scripts/stationarity_inversion.py:83: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  return {k: float(v) for k, v in P.items()}
+[stated spot parameters] it   0 drift=2.1793  F=0.0280 k=0.0620 Du=0.000278 Dv=0.000139 (Dv/Du=0.500)  (1s)
+[stated spot parameters] it   5 drift=1.1485  F=0.0305 k=0.0575 Du=0.000299 Dv=0.00013 (Dv/Du=0.433)  (10s)
+[stated spot parameters] it  10 drift=1.0554  F=0.0306 k=0.0581 Du=0.000304 Dv=0.000128 (Dv/Du=0.422)  (18s)
+[stated spot parameters] it  15 drift=1.0226  F=0.0301 k=0.0603 Du=0.000301 Dv=0.00013 (Dv/Du=0.432)  (27s)
+[stated spot parameters] it  20 drift=1.0433  F=0.0305 k=0.0607 Du=0.000303 Dv=0.00013 (Dv/Du=0.429)  (35s)
+[stated spot parameters] it  25 drift=0.9226  F=0.0314 k=0.0599 Du=0.000309 Dv=0.000129 (Dv/Du=0.416)  (44s)
+[stated spot parameters] it  30 drift=0.9424  F=0.0320 k=0.0595 Du=0.000312 Dv=0.000129 (Dv/Du=0.414)  (52s)
+[stated spot parameters] it  35 drift=0.9084  F=0.0322 k=0.0603 Du=0.000309 Dv=0.000132 (Dv/Du=0.428)  (61s)
+[stated spot parameters] it  40 drift=0.8888  F=0.0328 k=0.0601 Du=0.000308 Dv=0.000134 (Dv/Du=0.436)  (69s)
+[stated spot parameters] it  45 drift=0.8872  F=0.0335 k=0.0598 Du=0.000308 Dv=0.000136 (Dv/Du=0.442)  (78s)
+[stated spot parameters] it  50 drift=0.8763  F=0.0337 k=0.0602 Du=0.000306 Dv=0.00014 (Dv/Du=0.456)  (86s)
+[stated spot parameters] it  55 drift=0.8701  F=0.0341 k=0.0598 Du=0.000306 Dv=0.000142 (Dv/Du=0.462)  (95s)
+[stated spot parameters] it  60 drift=0.8664  F=0.0341 k=0.0599 Du=0.000305 Dv=0.000144 (Dv/Du=0.472)  (103s)
+[stated spot parameters] it  65 drift=0.8637  F=0.0341 k=0.0597 Du=0.000306 Dv=0.000146 (Dv/Du=0.475)  (112s)
+[stated spot parameters] it  70 drift=0.8607  F=0.0339 k=0.0597 Du=0.000307 Dv=0.000147 (Dv/Du=0.479)  (120s)
+[stated spot parameters] it  75 drift=0.8591  F=0.0337 k=0.0596 Du=0.000308 Dv=0.000148 (Dv/Du=0.480)  (129s)
+[stated spot parameters] it  79 drift=0.8584  F=0.0335 k=0.0595 Du=0.000309 Dv=0.000148 (Dv/Du=0.480)  (136s)
+[integral identities + stated D] it   0 drift=1.5666  F=0.0290 k=0.0611 Du=0.000278 Dv=0.000139 (Dv/Du=0.500)  (2s)
+[integral identities + stated D] it   5 drift=1.1725  F=0.0311 k=0.0575 Du=0.000298 Dv=0.00013 (Dv/Du=0.438)  (10s)
+[integral identities + stated D] it  10 drift=1.0101  F=0.0308 k=0.0598 Du=0.000295 Dv=0.000134 (Dv/Du=0.454)  (19s)
+[integral identities + stated D] it  15 drift=1.0319  F=0.0312 k=0.0604 Du=0.000299 Dv=0.000135 (Dv/Du=0.451)  (27s)
+[integral identities + stated D] it  20 drift=0.9317  F=0.0322 k=0.0593 Du=0.000309 Dv=0.000132 (Dv/Du=0.426)  (36s)
+[integral identities + stated D] it  25 drift=0.9070  F=0.0326 k=0.0597 Du=0.00031 Dv=0.000134 (Dv/Du=0.432)  (44s)
+[integral identities + stated D] it  30 drift=0.8818  F=0.0329 k=0.0601 Du=0.000309 Dv=0.000136 (Dv/Du=0.441)  (53s)
+[integral identities + stated D] it  35 drift=0.8922  F=0.0335 k=0.0597 Du=0.000311 Dv=0.000138 (Dv/Du=0.443)  (61s)
+[integral identities + stated D] it  40 drift=0.8669  F=0.0338 k=0.0600 Du=0.000308 Dv=0.000142 (Dv/Du=0.460)  (70s)
+[integral identities + stated D] it  45 drift=0.8726  F=0.0343 k=0.0597 Du=0.000309 Dv=0.000144 (Dv/Du=0.465)  (78s)
+[integral identities + stated D] it  50 drift=0.8631  F=0.0343 k=0.0598 Du=0.000308 Dv=0.000146 (Dv/Du=0.476)  (87s)
+[integral identities + stated D] it  55 drift=0.8663  F=0.0343 k=0.0596 Du=0.000309 Dv=0.000148 (Dv/Du=0.478)  (95s)
+[integral identities + stated D] it  60 drift=0.8638  F=0.0340 k=0.0598 Du=0.000309 Dv=0.000149 (Dv/Du=0.482)  (104s)
+[integral identities + stated D] it  65 drift=0.8596  F=0.0338 k=0.0596 Du=0.000312 Dv=0.000149 (Dv/Du=0.479)  (112s)
+[integral identities + stated D] it  70 drift=0.8577  F=0.0335 k=0.0595 Du=0.000314 Dv=0.00015 (Dv/Du=0.477)  (121s)
+[integral identities + stated D] it  75 drift=0.8565  F=0.0332 k=0.0596 Du=0.000316 Dv=0.00015 (Dv/Du=0.476)  (129s)
+[integral identities + stated D] it  79 drift=0.8560  F=0.0331 k=0.0595 Du=0.000317 Dv=0.000151 (Dv/Du=0.475)  (136s)
+[snapshot inversion (CMA-ES)] it   0 drift=1.2821  F=0.0337 k=0.0608 Du=0.000253 Dv=8.64e-05 (Dv/Du=0.342)  (2s)
+[snapshot inversion (CMA-ES)] it   5 drift=1.1582  F=0.0330 k=0.0620 Du=0.000243 Dv=9.19e-05 (Dv/Du=0.379)  (10s)
+[snapshot inversion (CMA-ES)] it  10 drift=1.2551  F=0.0340 k=0.0600 Du=0.000249 Dv=9.09e-05 (Dv/Du=0.365)  (19s)
+[snapshot inversion (CMA-ES)] it  15 drift=1.1093  F=0.0335 k=0.0605 Du=0.000247 Dv=9.35e-05 (Dv/Du=0.379)  (27s)
+[snapshot inversion (CMA-ES)] it  20 drift=1.0945  F=0.0329 k=0.0615 Du=0.000241 Dv=9.74e-05 (Dv/Du=0.404)  (36s)
+[snapshot inversion (CMA-ES)] it  25 drift=1.0670  F=0.0332 k=0.0608 Du=0.000242 Dv=9.9e-05 (Dv/Du=0.409)  (44s)
+[snapshot inversion (CMA-ES)] it  30 drift=1.0451  F=0.0338 k=0.0598 Du=0.000244 Dv=0.0001 (Dv/Du=0.411)  (53s)
+[snapshot inversion (CMA-ES)] it  35 drift=0.9838  F=0.0337 k=0.0601 Du=0.000241 Dv=0.000103 (Dv/Du=0.428)  (61s)
+[snapshot inversion (CMA-ES)] it  40 drift=0.9471  F=0.0343 k=0.0598 Du=0.00024 Dv=0.000106 (Dv/Du=0.442)  (70s)
+[snapshot inversion (CMA-ES)] it  45 drift=0.9303  F=0.0347 k=0.0598 Du=0.000238 Dv=0.000109 (Dv/Du=0.459)  (78s)
+[snapshot inversion (CMA-ES)] it  50 drift=0.9144  F=0.0350 k=0.0596 Du=0.000237 Dv=0.000112 (Dv/Du=0.474)  (87s)
+[snapshot inversion (CMA-ES)] it  55 drift=0.8970  F=0.0352 k=0.0595 Du=0.000236 Dv=0.000115 (Dv/Du=0.490)  (95s)
+[snapshot inversion (CMA-ES)] it  60 drift=0.8928  F=0.0353 k=0.0594 Du=0.000235 Dv=0.000118 (Dv/Du=0.503)  (104s)
+[snapshot inversion (CMA-ES)] it  65 drift=0.8875  F=0.0352 k=0.0593 Du=0.000234 Dv=0.00012 (Dv/Du=0.513)  (112s)
+[snapshot inversion (CMA-ES)] it  70 drift=0.8836  F=0.0350 k=0.0591 Du=0.000235 Dv=0.000122 (Dv/Du=0.520)  (121s)
+[snapshot inversion (CMA-ES)] it  75 drift=0.8808  F=0.0348 k=0.0589 Du=0.000235 Dv=0.000123 (Dv/Du=0.524)  (129s)
+[snapshot inversion (CMA-ES)] it  79 drift=0.8878  F=0.0346 k=0.0588 Du=0.000235 Dv=0.000124 (Dv/Du=0.527)  (136s)
+stated spot parameters: corr(v(t), target) t=10:0.974  t=25:0.939  t=50:0.841  t=100:0.515  t=200:0.362  t=400:0.325  t=800:0.311  t=1500:0.283  t=3000:0.299
+stationarity optimum: corr(v(t), target) t=10:0.974  t=25:0.939  t=50:0.861  t=100:0.724  t=200:0.690  t=400:0.652  t=800:0.558  t=1500:0.486  t=3000:0.411
+# 稳态反演（漂移最小化）
+
+漂移 D = 检查点 t ∈ [25, 50, 100, 150, 200] 上 u、v 相对初值的归一化平方偏差均值；初值为目标去掉不可能取值后的场。
+
+| 情形 | 漂移 D |
+| --- | --- |
+| 参照：steady state, unperturbed，题给参数 | 0.0000 |
+| 参照：steady state + target small-scale part，题给参数 | 0.0110 |
+| 目标，题给斑点参数 | 2.1793 |
+| 目标，从「stated spot parameters」出发优化后 | 0.8584（F=0.0335, k=0.0595, Du=0.000309, Dv=0.000148, Dv/Du=0.480） |
+| 目标，从「integral identities + stated D」出发优化后 | 0.8560（F=0.0331, k=0.0595, Du=0.000317, Dv=0.000151, Dv/Du=0.475） |
+| 目标，从「snapshot inversion (CMA-ES)」出发优化后 | 0.8786（F=0.0346, k=0.0589, Du=0.000235, Dv=0.000124, Dv/Du=0.526） |

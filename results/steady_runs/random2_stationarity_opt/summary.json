@@ -1,0 +1,222 @@
+{
+  "surface": "frog",
+  "pattern": "spots",
+  "params": {
+    "F": 0.0331286,
+    "k": 0.0595319,
+    "Du": 0.000317424,
+    "Dv": 0.000150632
+  },
+  "mesh": {
+    "name": "frog",
+    "laplacian": "robust",
+    "vertices": 29010,
+    "triangles": 58016,
+    "area": 6.95524597217705,
+    "euler_characteristic": 2,
+    "edge_min": 0.0011996598157266482,
+    "edge_median": 0.015334581432839585,
+    "edge_max": 0.05166110920297427,
+    "negative_weight_fraction": 0.0,
+    "bbox_extent": [
+      1.4125142857142858,
+      1.7825714285714285,
+      0.9638857142857145
+    ]
+  },
+  "args": {
+    "surface": "frog",
+    "pattern": "spots",
+    "level": 6,
+    "frog": "/Users/jcjun1990/Desktop/turing/frog.mat",
+    "laplacian": "robust",
+    "ic": "seeded",
+    "no_normalize_z": false,
+    "eps": 0.05,
+    "noise_length": 0.05,
+    "seed": 2,
+    "scheme": "sbdf2",
+    "dt": 1.0,
+    "t_switch": 20000,
+    "dt_late": 4.0,
+    "t_max": 100000.0,
+    "t_min": 2000,
+    "tol": 1e-07,
+    "polish_tol": 1e-11,
+    "polish_from": 0.0001,
+    "log_every": 500,
+    "backend": "lu",
+    "device": "cpu",
+    "no_stability": false,
+    "out": "results/steady_runs",
+    "F": 0.0331286,
+    "k": 0.0595319,
+    "Du": 0.000317424,
+    "Dv": 0.000150632,
+    "name": "random2_stationarity_opt"
+  },
+  "scales": {
+    "diffusion_length_ell": 0.09788549434394336,
+    "reaction_time_tau": 30.185398718931676,
+    "equivalent_radius": 0.743962961743383,
+    "radius_over_ell": 7.600339220122818,
+    "h_median_over_ell": 0.1566583643022528,
+    "explicit_dt_limit": 0.001133486813748563,
+    "dt_over_tau": 0.0331286,
+    "diffusion_number_median": 1.349882315566318,
+    "uniform_equilibrium_exists": false
+  },
+  "time": {
+    "t_final": 86000.0,
+    "steps": 36500,
+    "wall_seconds_time_integration": 806.9554057121277,
+    "wall_seconds_total": 824.8620359897614,
+    "device": "cpu",
+    "backend": "lu",
+    "torch": "2.14.1"
+  },
+  "converged_time_integration": true,
+  "final_rates": {
+    "dudt_rms": 8.814650203591237e-08,
+    "dvdt_rms": 6.625686287784929e-08
+  },
+  "polish": {
+    "history": [
+      {
+        "iter": 0,
+        "dtau": 0.0,
+        "rel_residual": 2.3514694050140613e-06,
+        "wall_s": 0.0,
+        "accepted": true
+      },
+      {
+        "iter": 1,
+        "dtau": 1316.152460870162,
+        "rel_residual": 1.786623871416393e-06,
+        "wall_s": 1.7162821292877197,
+        "accepted": true
+      },
+      {
+        "iter": 2,
+        "dtau": 1828.9011932814024,
+        "rel_residual": 1.285727962588876e-06,
+        "wall_s": 3.3295819759368896,
+        "accepted": true
+      },
+      {
+        "iter": 3,
+        "dtau": 2780.8830644401846,
+        "rel_residual": 8.455837050765858e-07,
+        "wall_s": 4.9411351680755615,
+        "accepted": true
+      },
+      {
+        "iter": 4,
+        "dtau": 4938.742821777318,
+        "rel_residual": 4.76127121794091e-07,
+        "wall_s": 6.512769937515259,
+        "accepted": true
+      },
+      {
+        "iter": 5,
+        "dtau": 11687.655393332878,
+        "rel_residual": 2.0119256821649933e-07,
+        "wall_s": 8.073067903518677,
+        "accepted": true
+      },
+      {
+        "iter": 6,
+        "dtau": 49371.944276506496,
+        "rel_residual": 4.762764439343746e-08,
+        "wall_s": 9.615262269973755,
+        "accepted": true
+      },
+      {
+        "iter": 7,
+        "dtau": 721692.792714386,
+        "rel_residual": 3.258269209215546e-09,
+        "wall_s": 11.167992115020752,
+        "accepted": true
+      },
+      {
+        "iter": 8,
+        "dtau": 144604214.64365575,
+        "rel_residual": 1.6261416797627398e-11,
+        "wall_s": 12.745280027389526,
+        "accepted": true
+      },
+      {
+        "iter": 9,
+        "dtau": 168699196283.1998,
+        "rel_residual": 1.3938829922263456e-14,
+        "wall_s": 14.345165967941284,
+        "accepted": true
+      }
+    ],
+    "accepted": true,
+    "seconds": 14.401460886001587,
+    "max_abs_change_v": 0.0012767154658041568
+  },
+  "final_residual": {
+    "Ru_rms": 6.461200012838875e-16,
+    "Rv_rms": 9.484377595241099e-17,
+    "steady_Ru_rms": 6.461200012838875e-16,
+    "steady_Rv_rms": 9.484377595241099e-17,
+    "reaction_scale": 0.010735466358212918,
+    "steady_rel": 2.2366287052163342e-14
+  },
+  "final_pattern": {
+    "v_min": 0.0024345981431316615,
+    "v_max": 0.37033591655221115,
+    "contrast": 0.3026528716045612,
+    "wavelength": 0.48982143827948027,
+    "type": "stripes_or_maze",
+    "threshold": 0.17116364563613717,
+    "n_components": 7,
+    "n_low_components": 9,
+    "area_fraction": 0.4639163796978648,
+    "euler": -1,
+    "perimeter": 28.142743072437234,
+    "compactness": 0.3583663739470656,
+    "mean_component_area": 0.460950361617219
+  },
+  "linear_stability": {
+    "eigenvalues": [
+      [
+        -0.0002770890969848827,
+        0.0
+      ],
+      [
+        -0.0005849112683446553,
+        0.0
+      ],
+      [
+        -0.0006800486483549933,
+        0.0
+      ],
+      [
+        -0.0007267732227964406,
+        0.0
+      ],
+      [
+        -0.0009187753330606747,
+        0.0
+      ],
+      [
+        -0.00109521467270174,
+        0.0
+      ],
+      [
+        -0.0012066082388376602,
+        0.0
+      ],
+      [
+        -0.0013838922013524528,
+        0.0
+      ]
+    ],
+    "max_real": -0.0002770890969848827,
+    "sigma": 0.001,
+    "seconds": 3.4631049633026123
+  }
+}

@@ -1,0 +1,52 @@
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'suggested (no noise)', 'seed': 0, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'suggested + 5% noise', 'seed': 0, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'suggested + 5% noise', 'seed': 1, 't': 3000, 'type': 'spots', 'n_components': 16, 'area_fraction': 0.118, 'wavelength': 0.61}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'suggested + 5% noise', 'seed': 2, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'suggested + seeds', 'seed': 0, 't': 3000, 'type': 'spots', 'n_components': 28, 'area_fraction': 0.195, 'wavelength': 0.551}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'suggested + seeds', 'seed': 1, 't': 3000, 'type': 'spots', 'n_components': 38, 'area_fraction': 0.236, 'wavelength': 0.505}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'suggested + seeds', 'seed': 2, 't': 3000, 'type': 'spots', 'n_components': 42, 'area_fraction': 0.241, 'wavelength': 0.485}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'z-normalised + seeds', 'seed': 0, 't': 3000, 'type': 'spots', 'n_components': 28, 'area_fraction': 0.195, 'wavelength': 0.551}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'z-normalised + seeds', 'seed': 1, 't': 3000, 'type': 'spots', 'n_components': 38, 'area_fraction': 0.236, 'wavelength': 0.505}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'z-normalised + seeds', 'seed': 2, 't': 3000, 'type': 'spots', 'n_components': 42, 'area_fraction': 0.241, 'wavelength': 0.485}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'Pearson background + seeds', 'seed': 0, 't': 3000, 'type': 'spots', 'n_components': 43, 'area_fraction': 0.239, 'wavelength': 0.485}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'Pearson background + seeds', 'seed': 1, 't': 3000, 'type': 'spots', 'n_components': 40, 'area_fraction': 0.236, 'wavelength': 0.498}
+{'surface': 'sphere_L6', 'params': 'spots', 'ic': 'Pearson background + seeds', 'seed': 2, 't': 3000, 'type': 'spots', 'n_components': 41, 'area_fraction': 0.237, 'wavelength': 0.493}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'suggested (no noise)', 'seed': 0, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'suggested + 5% noise', 'seed': 0, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 8, 'area_fraction': 0.45, 'wavelength': 0.476}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'suggested + 5% noise', 'seed': 1, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 5, 'area_fraction': 0.452, 'wavelength': 0.487}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'suggested + 5% noise', 'seed': 2, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 5, 'area_fraction': 0.463, 'wavelength': 0.48}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'suggested + seeds', 'seed': 0, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 6, 'area_fraction': 0.448, 'wavelength': 0.488}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'suggested + seeds', 'seed': 1, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 4, 'area_fraction': 0.449, 'wavelength': 0.494}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'suggested + seeds', 'seed': 2, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 7, 'area_fraction': 0.456, 'wavelength': 0.474}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'z-normalised + seeds', 'seed': 0, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 6, 'area_fraction': 0.448, 'wavelength': 0.488}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'z-normalised + seeds', 'seed': 1, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 4, 'area_fraction': 0.449, 'wavelength': 0.494}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'z-normalised + seeds', 'seed': 2, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 7, 'area_fraction': 0.456, 'wavelength': 0.474}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'Pearson background + seeds', 'seed': 0, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'Pearson background + seeds', 'seed': 1, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'sphere_L6', 'params': 'stripes', 'ic': 'Pearson background + seeds', 'seed': 2, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'frog', 'params': 'spots', 'ic': 'suggested (no noise)', 'seed': 0, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'frog', 'params': 'spots', 'ic': 'suggested + 5% noise', 'seed': 0, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'frog', 'params': 'spots', 'ic': 'suggested + 5% noise', 'seed': 1, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'frog', 'params': 'spots', 'ic': 'suggested + 5% noise', 'seed': 2, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'frog', 'params': 'spots', 'ic': 'suggested + seeds', 'seed': 0, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'frog', 'params': 'spots', 'ic': 'suggested + seeds', 'seed': 1, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'frog', 'params': 'spots', 'ic': 'suggested + seeds', 'seed': 2, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'frog', 'params': 'spots', 'ic': 'z-normalised + seeds', 'seed': 0, 't': 3000, 'type': 'spots', 'n_components': 16, 'area_fraction': 0.217, 'wavelength': 0.519}
+{'surface': 'frog', 'params': 'spots', 'ic': 'z-normalised + seeds', 'seed': 1, 't': 3000, 'type': 'spots', 'n_components': 18, 'area_fraction': 0.254, 'wavelength': 0.495}
+{'surface': 'frog', 'params': 'spots', 'ic': 'z-normalised + seeds', 'seed': 2, 't': 3000, 'type': 'spots', 'n_components': 18, 'area_fraction': 0.242, 'wavelength': 0.493}
+{'surface': 'frog', 'params': 'spots', 'ic': 'Pearson background + seeds', 'seed': 0, 't': 3000, 'type': 'spots', 'n_components': 19, 'area_fraction': 0.226, 'wavelength': 0.507}
+{'surface': 'frog', 'params': 'spots', 'ic': 'Pearson background + seeds', 'seed': 1, 't': 3000, 'type': 'spots', 'n_components': 17, 'area_fraction': 0.242, 'wavelength': 0.494}
+{'surface': 'frog', 'params': 'spots', 'ic': 'Pearson background + seeds', 'seed': 2, 't': 3000, 'type': 'spots', 'n_components': 22, 'area_fraction': 0.247, 'wavelength': 0.48}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'suggested (no noise)', 'seed': 0, 't': 3000, 'type': 'spots', 'n_components': 4, 'area_fraction': 0.18, 'wavelength': 0.653}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'suggested + 5% noise', 'seed': 0, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 7, 'area_fraction': 0.438, 'wavelength': 0.483}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'suggested + 5% noise', 'seed': 1, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 6, 'area_fraction': 0.433, 'wavelength': 0.505}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'suggested + 5% noise', 'seed': 2, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 7, 'area_fraction': 0.426, 'wavelength': 0.517}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'suggested + seeds', 'seed': 0, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 7, 'area_fraction': 0.448, 'wavelength': 0.5}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'suggested + seeds', 'seed': 1, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 7, 'area_fraction': 0.435, 'wavelength': 0.495}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'suggested + seeds', 'seed': 2, 't': 3000, 'type': 'spots', 'n_components': 9, 'area_fraction': 0.443, 'wavelength': 0.496}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'z-normalised + seeds', 'seed': 0, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 5, 'area_fraction': 0.438, 'wavelength': 0.498}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'z-normalised + seeds', 'seed': 1, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 5, 'area_fraction': 0.437, 'wavelength': 0.499}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'z-normalised + seeds', 'seed': 2, 't': 3000, 'type': 'stripes_or_maze', 'n_components': 4, 'area_fraction': 0.422, 'wavelength': 0.517}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'Pearson background + seeds', 'seed': 0, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'Pearson background + seeds', 'seed': 1, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}
+{'surface': 'frog', 'params': 'stripes', 'ic': 'Pearson background + seeds', 'seed': 2, 't': 3000, 'type': 'uniform', 'n_components': 0, 'area_fraction': 0.0, 'wavelength': ''}

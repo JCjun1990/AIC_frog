@@ -1,0 +1,7 @@
+[Du1_r0.5] t=   625 alive= 35/225 best corr_v=0.170(F=0.0450,k=0.0600), 0.157(F=0.0650,k=0.0575) | best shape_d=1.09(F=0.0400,k=0.0550,t=300) n(shape_d<=1)=0 (555s)
+[Du1_r0.5] t=  1250 alive= 22/225 best corr_v=0.175(F=0.0450,k=0.0625), 0.170(F=0.0450,k=0.0600) | best shape_d=1.09(F=0.0400,k=0.0550,t=300) n(shape_d<=1)=0 (671s)
+[Du1_r0.5] t=  1875 alive= 18/225 best corr_v=0.250(F=0.0500,k=0.0650), 0.195(F=0.0450,k=0.0625) | best shape_d=1.09(F=0.0400,k=0.0550,t=300) n(shape_d<=1)=0 (755s)
+[Du1_r0.5] t=  2500 alive= 15/225 best corr_v=0.253(F=0.0500,k=0.0650), 0.195(F=0.0450,k=0.0625) | best shape_d=1.09(F=0.0400,k=0.0550,t=300) n(shape_d<=1)=0 (824s)
+[Du1_r0.5] t=  3125 alive= 13/225 best corr_v=0.253(F=0.0500,k=0.0650), 0.195(F=0.0450,k=0.0625) | best shape_d=1.09(F=0.0400,k=0.0550,t=300) n(shape_d<=1)=0 (882s)
+[Du1_r0.5] t=  3750 alive= 13/225 best corr_v=0.253(F=0.0500,k=0.0650), 0.195(F=0.0450,k=0.0625) | best shape_d=1.09(F=0.0400,k=0.0550,t=300) n(shape_d<=1)=0 (938s)
+[Du1_r0.5] DONE best corr_v=0.253 at F=0.0500, k=0.0650, t=2050 | {"n_with_match": 0, "best_shape_d": 1.0947881218849849, "best_F": 0.04, "best_k": 0.055, "best_t": 300.0}; statuses: {"dead": 120, "steady": 92, "running": 13} (961s)

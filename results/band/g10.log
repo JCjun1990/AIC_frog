@@ -1,0 +1,26 @@
+/Users/jcjun1990/Desktop/turing/turing_rd/batch.py:27: RuntimeWarning: overflow encountered in multiply
+  r = u * v * v
+/Users/jcjun1990/Desktop/turing/turing_rd/batch.py:49: RuntimeWarning: overflow encountered in multiply
+  un = self.lu2u.solve(Mc * (2 * self.u - 0.5 * self.up + dt * (2 * fu - self.fup)))
+/Users/jcjun1990/Desktop/turing/turing_rd/batch.py:50: RuntimeWarning: overflow encountered in multiply
+  vn = self.lu2v.solve(Mc * (2 * self.v - 0.5 * self.vp + dt * (2 * fv - self.fvp)))
+/Users/jcjun1990/Desktop/turing/turing_rd/batch.py:49: RuntimeWarning: invalid value encountered in add
+  un = self.lu2u.solve(Mc * (2 * self.u - 0.5 * self.up + dt * (2 * fu - self.fup)))
+/Users/jcjun1990/Desktop/turing/turing_rd/batch.py:50: RuntimeWarning: invalid value encountered in add
+  vn = self.lu2v.solve(Mc * (2 * self.v - 0.5 * self.vp + dt * (2 * fv - self.fvp)))
+[g10_Du0.7_r0.15] t=   50 alive= 44/48 rows=44 (11s)
+[g10_Du0.7_r0.15] t=  100 alive= 44/48 rows=88 (20s)
+[g10_Du0.7_r0.15] t=  150 alive= 44/48 rows=132 (29s)
+[g10_Du0.7_r0.15] t=  200 alive= 44/48 rows=176 (40s)
+[g10_Du0.7_r0.15] t=  300 alive= 44/48 rows=220 (61s)
+[g10_Du0.7_r0.15] t=  400 alive= 44/48 rows=264 (82s)
+[g10_Du0.7_r0.15] t=  500 alive= 44/48 rows=308 (104s)
+[g10_Du0.7_r0.15] t=  650 alive= 44/48 rows=352 (137s)
+[g10_Du0.7_r0.15] t=  800 alive= 44/48 rows=396 (168s)
+[g10_Du0.7_r0.15] t= 1000 alive= 44/48 rows=440 (209s)
+[g10_Du0.7_r0.15] t= 1250 alive= 44/48 rows=484 (260s)
+[g10_Du0.7_r0.15] t= 1500 alive= 44/48 rows=528 (314s)
+[g10_Du0.7_r0.15] t= 2000 alive= 44/48 rows=572 (414s)
+[g10_Du0.7_r0.15] t= 2500 alive= 44/48 rows=616 (515s)
+[g10_Du0.7_r0.15] t= 3000 alive= 44/48 rows=660 (615s)
+[g10_Du0.7_r0.15] DONE 660 rows from 48 trajectories (615s)

@@ -1,0 +1,230 @@
+{
+  "surface": "frog",
+  "pattern": "stripes",
+  "params": {
+    "F": 0.054,
+    "k": 0.063,
+    "Du": 0.000278,
+    "Dv": 0.000139
+  },
+  "mesh": {
+    "name": "frog",
+    "laplacian": "robust",
+    "vertices": 29010,
+    "triangles": 58016,
+    "area": 6.95524597217705,
+    "euler_characteristic": 2,
+    "edge_min": 0.0011996598157266482,
+    "edge_median": 0.015334581432839585,
+    "edge_max": 0.05166110920297427,
+    "negative_weight_fraction": 0.0,
+    "bbox_extent": [
+      1.4125142857142858,
+      1.7825714285714285,
+      0.9638857142857145
+    ]
+  },
+  "args": {
+    "surface": "frog",
+    "pattern": "stripes",
+    "level": 6,
+    "frog": "/Users/jcjun1990/Desktop/turing/frog.mat",
+    "laplacian": "robust",
+    "ic": "seeded",
+    "no_normalize_z": false,
+    "eps": 0.05,
+    "noise_length": 0.05,
+    "seed": 0,
+    "scheme": "sbdf2",
+    "dt": 1.0,
+    "t_switch": 20000,
+    "dt_late": 4.0,
+    "t_max": 400000,
+    "t_min": 2000,
+    "tol": 1e-07,
+    "polish_tol": 1e-11,
+    "log_every": 500,
+    "backend": "lu",
+    "device": "cpu",
+    "no_stability": false,
+    "out": "/Users/jcjun1990/Desktop/turing/results/baseline"
+  },
+  "scales": {
+    "diffusion_length_ell": 0.07175059684872417,
+    "reaction_time_tau": 18.51851851851852,
+    "equivalent_radius": 0.743962961743383,
+    "radius_over_ell": 10.368735514659509,
+    "h_median_over_ell": 0.2137206114838368,
+    "explicit_dt_limit": 0.0012942299221846184,
+    "dt_over_tau": 0.054,
+    "diffusion_number_median": 1.1822271905320214,
+    "uniform_equilibrium_exists": false
+  },
+  "time": {
+    "t_final": 44000.0,
+    "steps": 26000,
+    "wall_seconds_time_integration": 122.30799317359924,
+    "wall_seconds_total": 129.59220504760742,
+    "device": "cpu",
+    "backend": "lu",
+    "torch": "2.14.1"
+  },
+  "converged_time_integration": true,
+  "final_rates": {
+    "dudt_rms": 9.334726213701803e-08,
+    "dvdt_rms": 6.793505966825395e-08
+  },
+  "polish": {
+    "history": [
+      {
+        "iter": 0,
+        "dtau": 0.0,
+        "rel_residual": 1.511073689454305e-06,
+        "wall_s": 0.0,
+        "accepted": true
+      },
+      {
+        "iter": 1,
+        "dtau": 1170.4875529246372,
+        "rel_residual": 1.2909780079921932e-06,
+        "wall_s": 0.5785009860992432,
+        "accepted": true
+      },
+      {
+        "iter": 2,
+        "dtau": 1406.1066459154392,
+        "rel_residual": 1.0746508409186327e-06,
+        "wall_s": 1.1353950500488281,
+        "accepted": true
+      },
+      {
+        "iter": 3,
+        "dtau": 1746.0516887110136,
+        "rel_residual": 8.654232284325005e-07,
+        "wall_s": 1.6819310188293457,
+        "accepted": true
+      },
+      {
+        "iter": 4,
+        "dtau": 2269.992433512264,
+        "rel_residual": 6.656734476935167e-07,
+        "wall_s": 2.222761869430542,
+        "accepted": true
+      },
+      {
+        "iter": 5,
+        "dtau": 3154.82515699435,
+        "rel_residual": 4.789722454520832e-07,
+        "wall_s": 2.7636001110076904,
+        "accepted": true
+      },
+      {
+        "iter": 6,
+        "dtau": 4861.546019046093,
+        "rel_residual": 3.108216364782658e-07,
+        "wall_s": 3.307060956954956,
+        "accepted": true
+      },
+      {
+        "iter": 7,
+        "dtau": 8905.426944047107,
+        "rel_residual": 1.6968009495203284e-07,
+        "wall_s": 3.8578107357025146,
+        "accepted": true
+      },
+      {
+        "iter": 8,
+        "dtau": 22434.32454905644,
+        "rel_residual": 6.735543502324248e-08,
+        "wall_s": 4.402904033660889,
+        "accepted": true
+      },
+      {
+        "iter": 9,
+        "dtau": 108148.93391240164,
+        "rel_residual": 1.397215520106969e-08,
+        "wall_s": 4.946635961532593,
+        "accepted": true
+      },
+      {
+        "iter": 10,
+        "dtau": 2111204.764018869,
+        "rel_residual": 7.157399960474888e-10,
+        "wall_s": 5.492944955825806,
+        "accepted": true
+      },
+      {
+        "iter": 11,
+        "dtau": 774564893.3437368,
+        "rel_residual": 1.9508677742043234e-12,
+        "wall_s": 6.039438962936401,
+        "accepted": true
+      }
+    ],
+    "accepted": true,
+    "seconds": 6.062630891799927,
+    "max_abs_change_v": 0.0031295488458643606
+  },
+  "final_residual": {
+    "Ru_rms": 1.1913619677483452e-13,
+    "Rv_rms": 8.945663301320484e-14,
+    "steady_Ru_rms": 1.1913619677483452e-13,
+    "steady_Rv_rms": 8.945663301320484e-14,
+    "reaction_scale": 0.012623757396495313,
+    "steady_rel": 3.862830181259988e-12
+  },
+  "final_pattern": {
+    "v_min": 0.00014834775695664036,
+    "v_max": 0.43063441940275693,
+    "contrast": 0.3721939758963754,
+    "wavelength": 0.49594796511645983,
+    "type": "stripes_or_maze",
+    "threshold": 0.18951903216391464,
+    "n_components": 4,
+    "n_low_components": 5,
+    "area_fraction": 0.4464993880294737,
+    "euler": 0,
+    "perimeter": 26.72689461720689,
+    "compactness": 0.21852755881171063,
+    "mean_component_area": 0.7763782675428786
+  },
+  "linear_stability": {
+    "eigenvalues": [
+      [
+        -0.0001753983044888237,
+        0.0
+      ],
+      [
+        -0.00022480548357138824,
+        0.0
+      ],
+      [
+        -0.000448893912538578,
+        0.0
+      ],
+      [
+        -0.0005410971156957383,
+        0.0
+      ],
+      [
+        -0.0005495362935158874,
+        0.0
+      ],
+      [
+        -0.0007892910746096352,
+        0.0
+      ],
+      [
+        -0.0008194813239765448,
+        0.0
+      ],
+      [
+        -0.000858276777873857,
+        0.0
+      ]
+    ],
+    "max_real": -0.0001753983044888237,
+    "sigma": 0.001,
+    "seconds": 1.2076449394226074
+  }
+}

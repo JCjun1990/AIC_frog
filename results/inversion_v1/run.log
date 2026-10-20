@@ -1,0 +1,68 @@
+[1] cut-off kappa_half = 20 (auto 20, Gaussian sigma 0.060); v<0 area 0.117 -> 0; v max 0.676 -> 0.425
+[2] closed form F0 = 0.02751, k0 = 0.05964 (raw, only clipped: 0.02896, 0.06108); cut-off band 0.8-1.25x: F 0.02677-0.02806, k 0.05841-0.06044
+    target (preprocessed): type spots, n 15, wavelength 0.547, coherence 0.312, spot defects 0.60
+[3] type map 13 x 13: {'uniform': 124, 'stripes': 17, 'spots': 17, 'maze': 11} (102s)
+    grid 1/49: F=0.0215 k=0.0626 polished 6/6, t_end 2508, types ['uniform', 'uniform', 'uniform', 'uniform', 'uniform', 'uniform'] (24s)
+    grid 2/49: F=0.0215 k=0.0616 polished 6/6, t_end 2508, types ['uniform', 'uniform', 'uniform', 'uniform', 'uniform', 'uniform'] (24s)
+    grid 3/49: F=0.0215 k=0.0606 polished 5/6, t_end 40004, types ['uniform', 'uniform', 'uniform', 'spots', 'uniform', 'uniform'] (58s)
+    grid 4/49: F=0.0215 k=0.0596 polished 3/6, t_end 40004, types ['spots', 'uniform', 'uniform', 'spots', 'spots', 'uniform'] (101s)
+    grid 5/49: F=0.0215 k=0.0586 polished 1/6, t_end 40004, types ['spots', 'uniform', 'spots', 'spots', 'spots', 'spots'] (136s)
+    grid 6/49: F=0.0215 k=0.0576 polished 0/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (155s)
+    grid 7/49: F=0.0215 k=0.0566 polished 0/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (155s)
+    grid 8/49: F=0.0235 k=0.0566 polished 0/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (155s)
+    grid 9/49: F=0.0235 k=0.0586 polished 0/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (179s)
+    grid 10/49: F=0.0235 k=0.0576 polished 0/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (179s)
+    grid 11/49: F=0.0235 k=0.0626 polished 6/6, t_end 8508, types ['other', 'uniform', 'uniform', 'uniform', 'uniform', 'uniform'] (195s)
+    grid 12/49: F=0.0235 k=0.0596 polished 0/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (213s)
+    grid 13/49: F=0.0235 k=0.0616 polished 2/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'uniform', 'uniform'] (251s)
+    grid 14/49: F=0.0235 k=0.0606 polished 0/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (256s)
+    grid 15/49: F=0.0255 k=0.0576 polished 0/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (315s)
+    grid 16/49: F=0.0255 k=0.0566 polished 0/6, t_end 40004, types ['spots', 'spots', 'other', 'spots', 'spots', 'spots'] (315s)
+    grid 17/49: F=0.0255 k=0.0596 polished 0/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (339s)
+    grid 18/49: F=0.0255 k=0.0586 polished 0/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (339s)
+    grid 19/49: F=0.0255 k=0.0606 polished 1/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (350s)
+    grid 20/49: F=0.0255 k=0.0626 polished 4/6, t_end 40004, types ['spots', 'uniform', 'uniform', 'spots', 'uniform', 'spots'] (350s)
+    grid 21/49: F=0.0255 k=0.0616 polished 1/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (374s)
+    grid 22/49: F=0.0275 k=0.0566 polished 1/6, t_end 40004, types ['other', 'other', 'other', 'other', 'other', 'other'] (432s)
+    grid 23/49: F=0.0275 k=0.0576 polished 0/6, t_end 40004, types ['other', 'other', 'spots', 'other', 'spots', 'other'] (479s)
+    grid 24/49: F=0.0275 k=0.0596 polished 1/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (501s)
+    grid 25/49: F=0.0275 k=0.0606 polished 1/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (502s)
+    grid 26/49: F=0.0275 k=0.0626 polished 2/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (510s)
+    grid 27/49: F=0.0275 k=0.0586 polished 2/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (529s)
+    grid 28/49: F=0.0295 k=0.0566 polished 6/6, t_end 38508, types ['other', 'other', 'other', 'other', 'other', 'other'] (584s)
+    grid 29/49: F=0.0275 k=0.0616 polished 2/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (603s)
+    grid 30/49: F=0.0295 k=0.0576 polished 3/6, t_end 40004, types ['other', 'other', 'other', 'other', 'other', 'other'] (647s)
+    grid 31/49: F=0.0295 k=0.0606 polished 3/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (664s)
+    grid 32/49: F=0.0295 k=0.0596 polished 2/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (669s)
+    grid 33/49: F=0.0295 k=0.0626 polished 1/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (688s)
+    grid 34/49: F=0.0295 k=0.0616 polished 2/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (699s)
+    grid 35/49: F=0.0295 k=0.0586 polished 1/6, t_end 40004, types ['other', 'other', 'other', 'other', 'other', 'other'] (707s)
+    grid 36/49: F=0.0315 k=0.0576 polished 4/6, t_end 40004, types ['other', 'other', 'other', 'other', 'other', 'other'] (798s)
+    grid 37/49: F=0.0315 k=0.0566 polished 4/6, t_end 40004, types ['other', 'other', 'other', 'other', 'other', 'other'] (807s)
+    grid 38/49: F=0.0315 k=0.0606 polished 4/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (832s)
+    grid 39/49: F=0.0315 k=0.0596 polished 3/6, t_end 40004, types ['other', 'spots', 'other', 'other', 'other', 'other'] (864s)
+    grid 40/49: F=0.0315 k=0.0586 polished 4/6, t_end 40004, types ['other', 'other', 'other', 'other', 'other', 'other'] (876s)
+    grid 41/49: F=0.0315 k=0.0616 polished 4/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (881s)
+    grid 42/49: F=0.0335 k=0.0566 polished 3/6, t_end 40004, types ['other', 'other', 'other', 'other', 'other', 'other'] (885s)
+    grid 43/49: F=0.0315 k=0.0626 polished 4/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (903s)
+    grid 44/49: F=0.0335 k=0.0586 polished 6/6, t_end 38508, types ['other', 'other', 'other', 'other', 'other', 'other'] (956s)
+    grid 45/49: F=0.0335 k=0.0596 polished 5/6, t_end 40004, types ['other', 'other', 'other', 'other', 'other', 'other'] (1002s)
+    grid 46/49: F=0.0335 k=0.0606 polished 5/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (1015s)
+    grid 47/49: F=0.0335 k=0.0576 polished 2/6, t_end 40004, types ['other', 'other', 'other', 'other', 'other', 'other'] (1016s)
+    grid 48/49: F=0.0335 k=0.0626 polished 2/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (1035s)
+    grid 49/49: F=0.0335 k=0.0616 polished 3/6, t_end 40004, types ['spots', 'spots', 'spots', 'spots', 'spots', 'spots'] (1035s)
+[4] grid 7 x 7 x 6 seeds: polished 39%, J min 1.037 at (0.0235124, 0.0566398) (1037s)
+[5] GP kernel 1.04**2 * RBF(length_scale=[1.95, 2.45]) + WhiteKernel(noise_level=0.2); estimate F = 0.02291, k = 0.05749, J = 1.213; band (J <= 1.598) F 0.0215-0.0266, k 0.0566-0.0606; bootstrap F 16-84% 0.0227-0.0233, k 0.0572-0.0579; GP J at given 2.035, at closed form 2.118; cut-off sensitivity {'16.0': {'F': 0.0220124, 'k': 0.057089799999999996, 'J_min': 0.9687759232284661}, '25.0': {'F': 0.0252124, 'k': 0.059489799999999995, 'J_min': 1.2039654675948965}}
+[6] estimate seed 1000: moving, t=80004, residual 2.8e-02 (steady_rel 5.3e-02), max Re lambda nan, type spots, n 18, distance 1.311
+[6] estimate seed 2000: moving, t=80004, residual 2.6e-03 (steady_rel 5.0e-03), max Re lambda nan, type spots, n 18, distance 1.619
+[6] estimate seed 3000: moving, t=80004, residual 3.7e-03 (steady_rel 7.1e-03), max Re lambda nan, type spots, n 21, distance 1.887
+[6] estimate seed 4000: moving, t=80004, residual 4.9e-03 (steady_rel 9.7e-03), max Re lambda nan, type spots, n 19, distance 1.624
+[6] estimate seed 5000: moving, t=80004, residual 1.6e-02 (steady_rel 3.2e-02), max Re lambda nan, type spots, n 17, distance 1.265
+[6] estimate seed 6000: moving, t=80004, residual 1.8e-03 (steady_rel 3.5e-03), max Re lambda nan, type spots, n 20, distance 1.690
+[6] given    seed 1000: steady, t=34508, residual 5.4e-14 (steady_rel 1.1e-13), max Re lambda -1.59e-04, type spots, n 25, distance 2.312
+[6] given    seed 2000: moving, t=80004, residual 1.6e-14 (steady_rel 2.5e-14), max Re lambda -1.97e-04, type spots, n 20, distance 2.082
+[6] given    seed 3000: steady, t=46508, residual 1.7e-14 (steady_rel 2.9e-14), max Re lambda -1.87e-04, type spots, n 24, distance 2.247
+[6] given    seed 4000: moving, t=80004, residual 2.9e-04 (steady_rel 5.7e-04), max Re lambda nan, type spots, n 22, distance 2.150
+[6] given    seed 5000: steady, t=38508, residual 1.7e-14 (steady_rel 2.6e-14), max Re lambda -2.07e-04, type spots, n 24, distance 2.324
+[6] given    seed 6000: moving, t=80004, residual 1.4e-03 (steady_rel 2.7e-03), max Re lambda nan, type spots, n 23, distance 2.302
+done in 1330s

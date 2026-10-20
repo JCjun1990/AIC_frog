@@ -1,0 +1,82 @@
+20:53:52 [1/24] ai frog F=0.0280 k=0.0620 seed=1: spots n=22 converged=True t=14500 264s
+21:00:22 [2/24] ai frog F=0.0280 k=0.0620 seed=2: spots n=21 converged=True t=45000 654s
+21:02:19 [3/24] ai frog F=0.0280 k=0.0620 seed=3: spots n=23 converged=True t=57500 771s
+21:02:55 [4/24] ai frog F=0.0284 k=0.0620 seed=1: spots n=22 converged=True t=34000 543s
+21:05:10 [5/24] ai frog F=0.0284 k=0.0620 seed=2: spots n=20 converged=True t=17500 288s
+21:09:30 [6/24] ai frog F=0.0284 k=0.0620 seed=3: spots n=22 converged=True t=26000 430s
+21:12:35 [7/24] ai frog F=0.0540 k=0.0630 seed=3: stripes_or_maze n=8 converged=True t=108500 1388s
+21:13:48 [8/24] ai frog F=0.0540 k=0.0630 seed=1: spots n=9 converged=True t=110000 1461s
+21:13:49 [9/24] ai frog F=0.0388 k=0.0601 seed=1: stripes_or_maze n=11 converged=True t=46000 655s
+21:14:23 [10/24] ai frog F=0.0540 k=0.0630 seed=2: stripes_or_maze n=6 converged=True t=122000 1495s
+21:14:36 [11/24] ai frog F=0.0388 k=0.0601 seed=2: stripes_or_maze n=16 converged=True t=36000 565s
+21:16:26 [12/24] ai frog F=0.0388 k=0.0601 seed=3: holes n=4 converged=True t=28500 416s
+21:19:27 [13/24] ai frog F=0.0568 k=0.0639 seed=2: spots n=10 converged=True t=18500 339s
+21:23:20 [14/24] ai frog F=0.0381 k=0.0599 seed=3: holes n=4 converged=True t=28500 414s
+21:27:41 [15/24] ai frog F=0.0381 k=0.0599 seed=2: stripes_or_maze n=15 converged=True t=58500 785s
+21:33:23 [16/24] ai frog F=0.0568 k=0.0639 seed=3: spots n=11 converged=True t=88500 1173s
+21:33:37 [17/24] ai frog F=0.0381 k=0.0601 seed=1: stripes_or_maze n=13 converged=True t=65000 850s
+21:35:56 [18/24] ai frog F=0.0381 k=0.0599 seed=1: stripes_or_maze n=13 converged=True t=103500 1293s
+21:36:12 [19/24] ai frog F=0.0568 k=0.0639 seed=1: stripes_or_maze n=9 converged=True t=114500 1416s
+21:40:04 [20/24] ai frog F=0.0381 k=0.0601 seed=3: holes n=3 converged=True t=59500 743s
+21:40:48 [21/24] ai frog F=0.0381 k=0.0601 seed=2: stripes_or_maze n=18 converged=True t=88000 1047s
+21:41:25 [22/24] ai frog F=0.0377 k=0.0596 seed=3: holes n=3 converged=True t=24500 328s
+21:42:44 [23/24] ai frog F=0.0377 k=0.0596 seed=1: stripes_or_maze n=11 converged=True t=51000 560s
+21:45:19 [24/24] ai frog F=0.0377 k=0.0596 seed=2: stripes_or_maze n=15 converged=True t=66500 702s
+21:45:22 # AI 初值 + Newton 精修 vs 普通初值 + 时间积分
+
+- 成功：相对残差 ≤ 1e-11，且线性稳定（max Re λ < 1e-6）。
+- 求解时间：AI 推断与合成 + 积分与 Newton 的墙钟，不含稳定性分析。4 进程并行，两条流程交错运行。
+- 未成功的运行按上限 t = 200 000 计时，计入中位数。
+
+| 曲面 | 参数点 | 流程 | 成功 | 求解时间中位数 s | 积分时间中位数 | 类型 | 斑点数 | 波长 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frog | random1 (F=0.0284, k=0.062) | ai | 3/3 | 424 | 26000 | spots | 22 | 0.468 |
+| frog | random1 (F=0.0284, k=0.062) | pde | 1/3 | 1189 | 49000 | spots | 23 | 0.471 |
+| frog | random2 (F=0.0388, k=0.0601) | ai | 3/3 | 559 | 36000 | holes/stripes_or_maze | 11 | 0.480 |
+| frog | random2 (F=0.0388, k=0.0601) | pde | 3/3 | 1941 | 115000 | holes | 2 | 0.485 |
+| frog | random3 (F=0.0568, k=0.0639) | ai | 3/3 | 1166 | 88500 | spots/stripes_or_maze | 10 | 0.478 |
+| frog | random3 (F=0.0568, k=0.0639) | pde | 3/3 | 1158 | 43000 | stripes_or_maze | 6 | 0.511 |
+| frog | random4 (F=0.0381, k=0.0599) | ai | 3/3 | 778 | 58500 | holes/stripes_or_maze | 13 | 0.483 |
+| frog | random4 (F=0.0381, k=0.0599) | pde | 3/3 | 1678 | 93000 | holes | 2 | 0.485 |
+| frog | random5 (F=0.0381, k=0.0601) | ai | 3/3 | 843 | 65000 | holes/stripes_or_maze | 13 | 0.481 |
+| frog | random5 (F=0.0381, k=0.0601) | pde | 3/3 | 956 | 29000 | holes | 3 | 0.486 |
+| frog | random6 (F=0.0377, k=0.0596) | ai | 3/3 | 556 | 51000 | holes/stripes_or_maze | 11 | 0.484 |
+| frog | random6 (F=0.0377, k=0.0596) | pde | 3/3 | 1133 | 37000 | holes | 2 | 0.489 |
+| frog | task_spots (F=0.028, k=0.062) | ai | 3/3 | 648 | 45000 | spots | 22 | 0.465 |
+| frog | task_spots (F=0.028, k=0.062) | pde | 3/3 | 1228 | 50000 | spots | 22 | 0.467 |
+| frog | task_stripes (F=0.054, k=0.063) | ai | 3/3 | 1454 | 110000 | spots/stripes_or_maze | 8 | 0.482 |
+| frog | task_stripes (F=0.054, k=0.063) | pde | 3/3 | 1071 | 37000 | stripes_or_maze | 4 | 0.484 |
+| sphere5 | random1 (F=0.0284, k=0.062) | pde | 1/3 | 1549 | 200000 | spots | 44 | 0.480 |
+| sphere5 | random2 (F=0.0388, k=0.0601) | pde | 0/3 | 1456 | 200000 | — | nan | nan |
+| sphere5 | random3 (F=0.0568, k=0.0639) | pde | 0/3 | 1430 | 200000 | — | nan | nan |
+| sphere5 | random4 (F=0.0381, k=0.0599) | pde | 0/3 | 1374 | 200000 | — | nan | nan |
+| sphere5 | random5 (F=0.0381, k=0.0601) | pde | 0/3 | 1287 | 200000 | — | nan | nan |
+| sphere5 | task_spots (F=0.028, k=0.062) | pde | 2/3 | 1449 | 181000 | spots | 44 | 0.482 |
+| sphere5 | task_stripes (F=0.054, k=0.063) | pde | 0/3 | 1450 | 200000 | — | nan | nan |
+
+## 每个曲面的汇总
+
+| 曲面 | AI 成功率 | 普通成功率 | AI 求解时间中位数 s | 普通求解时间中位数 s | 加速比 |
+| --- | --- | --- | --- | --- | --- |
+| frog | 24/24 | 22/24 | 673 | 1159 | 1.7x |
+| sphere5 | 0/0 | 3/21 | nan | 1438 | nanx |
+
+## 端到端泛化误差（留出参数点上，AI 结果相对普通流程结果的特征差，各取成功运行的中位数）
+
+| 曲面 | 参数点 | 类型一致 | 波长相对差 | 斑点数相对差 | v 峰值相对差 |
+| --- | --- | --- | --- | --- | --- |
+| frog | random1 | 是 | 0.7% | 4.3% | 2.8% |
+| frog | random2 | 否 | 1.0% | 450.0% | 0.7% |
+| frog | random3 | 否 | 6.6% | 66.7% | 3.1% |
+| frog | random4 | 否 | 0.4% | 550.0% | 3.7% |
+| frog | random5 | 否 | 1.0% | 333.3% | 2.6% |
+| frog | random6 | 否 | 1.1% | 450.0% | 1.6% |
+| frog | task_spots | 是 | 0.5% | 0.0% | 0.1% |
+| frog | task_stripes | 是 | 0.4% | 100.0% | 0.0% |
+| sphere5 | random1 | — | — | — | — |
+| sphere5 | random2 | — | — | — | — |
+| sphere5 | random3 | — | — | — | — |
+| sphere5 | random4 | — | — | — | — |
+| sphere5 | random5 | — | — | — | — |
+| sphere5 | task_spots | — | — | — | — |
+| sphere5 | task_stripes | — | — | — | — |

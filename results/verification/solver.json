@@ -1,0 +1,17 @@
+{
+  "gradcheck": {
+    "lu": true,
+    "cg": true,
+    "checkpoint_rel_diff": 0.0
+  },
+  "benchmark_frog": {
+    "torch": "2.14.1",
+    "device": "cpu",
+    "lu_cpu_float64_ms_per_step": 3.8602256774902344,
+    "cg_float32_batch2_ms_per_step": 166.18486046791077,
+    "cg_float32_batch2_ms_per_simulation_step": 83.09243023395538,
+    "max_abs_diff_float32_vs_lu": 0.0021834249436639697,
+    "max_v_reference": 0.46940561397888225,
+    "max_abs_diff_float64_cg_vs_lu": 2.1106889569466603e-09
+  }
+}

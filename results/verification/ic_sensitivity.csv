@@ -1,0 +1,53 @@
+surface,params,ic,seed,t,type,n_components,area_fraction,wavelength
+sphere_L6,spots,suggested (no noise),0,3000,uniform,0,0.0,
+sphere_L6,spots,suggested + 5% noise,0,3000,uniform,0,0.0,
+sphere_L6,spots,suggested + 5% noise,1,3000,spots,16,0.118,0.61
+sphere_L6,spots,suggested + 5% noise,2,3000,uniform,0,0.0,
+sphere_L6,spots,suggested + seeds,0,3000,spots,28,0.195,0.551
+sphere_L6,spots,suggested + seeds,1,3000,spots,38,0.236,0.505
+sphere_L6,spots,suggested + seeds,2,3000,spots,42,0.241,0.485
+sphere_L6,spots,z-normalised + seeds,0,3000,spots,28,0.195,0.551
+sphere_L6,spots,z-normalised + seeds,1,3000,spots,38,0.236,0.505
+sphere_L6,spots,z-normalised + seeds,2,3000,spots,42,0.241,0.485
+sphere_L6,spots,Pearson background + seeds,0,3000,spots,43,0.239,0.485
+sphere_L6,spots,Pearson background + seeds,1,3000,spots,40,0.236,0.498
+sphere_L6,spots,Pearson background + seeds,2,3000,spots,41,0.237,0.493
+sphere_L6,stripes,suggested (no noise),0,3000,uniform,0,0.0,
+sphere_L6,stripes,suggested + 5% noise,0,3000,stripes_or_maze,8,0.45,0.476
+sphere_L6,stripes,suggested + 5% noise,1,3000,stripes_or_maze,5,0.452,0.487
+sphere_L6,stripes,suggested + 5% noise,2,3000,stripes_or_maze,5,0.463,0.48
+sphere_L6,stripes,suggested + seeds,0,3000,stripes_or_maze,6,0.448,0.488
+sphere_L6,stripes,suggested + seeds,1,3000,stripes_or_maze,4,0.449,0.494
+sphere_L6,stripes,suggested + seeds,2,3000,stripes_or_maze,7,0.456,0.474
+sphere_L6,stripes,z-normalised + seeds,0,3000,stripes_or_maze,6,0.448,0.488
+sphere_L6,stripes,z-normalised + seeds,1,3000,stripes_or_maze,4,0.449,0.494
+sphere_L6,stripes,z-normalised + seeds,2,3000,stripes_or_maze,7,0.456,0.474
+sphere_L6,stripes,Pearson background + seeds,0,3000,uniform,0,0.0,
+sphere_L6,stripes,Pearson background + seeds,1,3000,uniform,0,0.0,
+sphere_L6,stripes,Pearson background + seeds,2,3000,uniform,0,0.0,
+frog,spots,suggested (no noise),0,3000,uniform,0,0.0,
+frog,spots,suggested + 5% noise,0,3000,uniform,0,0.0,
+frog,spots,suggested + 5% noise,1,3000,uniform,0,0.0,
+frog,spots,suggested + 5% noise,2,3000,uniform,0,0.0,
+frog,spots,suggested + seeds,0,3000,uniform,0,0.0,
+frog,spots,suggested + seeds,1,3000,uniform,0,0.0,
+frog,spots,suggested + seeds,2,3000,uniform,0,0.0,
+frog,spots,z-normalised + seeds,0,3000,spots,16,0.217,0.519
+frog,spots,z-normalised + seeds,1,3000,spots,18,0.254,0.495
+frog,spots,z-normalised + seeds,2,3000,spots,18,0.242,0.493
+frog,spots,Pearson background + seeds,0,3000,spots,19,0.226,0.507
+frog,spots,Pearson background + seeds,1,3000,spots,17,0.242,0.494
+frog,spots,Pearson background + seeds,2,3000,spots,22,0.247,0.48
+frog,stripes,suggested (no noise),0,3000,spots,4,0.18,0.653
+frog,stripes,suggested + 5% noise,0,3000,stripes_or_maze,7,0.438,0.483
+frog,stripes,suggested + 5% noise,1,3000,stripes_or_maze,6,0.433,0.505
+frog,stripes,suggested + 5% noise,2,3000,stripes_or_maze,7,0.426,0.517
+frog,stripes,suggested + seeds,0,3000,stripes_or_maze,7,0.448,0.5
+frog,stripes,suggested + seeds,1,3000,stripes_or_maze,7,0.435,0.495
+frog,stripes,suggested + seeds,2,3000,spots,9,0.443,0.496
+frog,stripes,z-normalised + seeds,0,3000,stripes_or_maze,5,0.438,0.498
+frog,stripes,z-normalised + seeds,1,3000,stripes_or_maze,5,0.437,0.499
+frog,stripes,z-normalised + seeds,2,3000,stripes_or_maze,4,0.422,0.517
+frog,stripes,Pearson background + seeds,0,3000,uniform,0,0.0,
+frog,stripes,Pearson background + seeds,1,3000,uniform,0,0.0,
+frog,stripes,Pearson background + seeds,2,3000,uniform,0,0.0,

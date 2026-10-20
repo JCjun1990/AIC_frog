@@ -1,0 +1,25 @@
+{
+  "du_scale": 1.4,
+  "ratio": 0.25,
+  "F": [
+    0.01,
+    0.08,
+    15
+  ],
+  "k": [
+    0.04,
+    0.075,
+    15
+  ],
+  "dt": 1.0,
+  "t_max": 4000,
+  "log_every": 20,
+  "laplacian": "robust",
+  "normalize_z": false,
+  "keep": 12,
+  "tag": null,
+  "out": "/Users/jcjun1990/Desktop/turing/results/scan",
+  "Du": 0.0003892,
+  "Dv": 9.73e-05,
+  "wall_seconds": 969.2939450740814
+}

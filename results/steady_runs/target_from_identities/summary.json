@@ -1,0 +1,243 @@
+{
+  "surface": "frog",
+  "pattern": "spots",
+  "params": {
+    "F": 0.029,
+    "k": 0.0611,
+    "Du": 0.000278,
+    "Dv": 0.000139
+  },
+  "mesh": {
+    "name": "frog",
+    "laplacian": "robust",
+    "vertices": 29010,
+    "triangles": 58016,
+    "area": 6.95524597217705,
+    "euler_characteristic": 2,
+    "edge_min": 0.0011996598157266482,
+    "edge_median": 0.015334581432839585,
+    "edge_max": 0.05166110920297427,
+    "negative_weight_fraction": 0.0,
+    "bbox_extent": [
+      1.4125142857142858,
+      1.7825714285714285,
+      0.9638857142857145
+    ]
+  },
+  "args": {
+    "surface": "frog",
+    "pattern": "spots",
+    "level": 6,
+    "frog": "/Users/jcjun1990/Desktop/turing/frog.mat",
+    "laplacian": "robust",
+    "ic": "target",
+    "no_normalize_z": false,
+    "eps": 0.05,
+    "noise_length": 0.05,
+    "seed": 0,
+    "scheme": "sbdf2",
+    "dt": 1.0,
+    "t_switch": 20000,
+    "dt_late": 4.0,
+    "t_max": 100000.0,
+    "t_min": 2000,
+    "tol": 1e-07,
+    "polish_tol": 1e-11,
+    "polish_from": 0.0001,
+    "log_every": 500,
+    "backend": "lu",
+    "device": "cpu",
+    "no_stability": false,
+    "out": "results/steady_runs",
+    "F": 0.029,
+    "k": 0.0611,
+    "Du": null,
+    "Dv": null,
+    "name": "target_from_identities"
+  },
+  "scales": {
+    "diffusion_length_ell": 0.09790917677394557,
+    "reaction_time_tau": 34.48275862068965,
+    "equivalent_radius": 0.743962961743383,
+    "radius_over_ell": 7.598500837782118,
+    "h_median_over_ell": 0.15662047152377082,
+    "explicit_dt_limit": 0.0012942299221846184,
+    "dt_over_tau": 0.029,
+    "diffusion_number_median": 1.1822271905320214,
+    "uniform_equilibrium_exists": false
+  },
+  "time": {
+    "t_final": 58000.0,
+    "steps": 29500,
+    "wall_seconds_time_integration": 648.9119076728821,
+    "wall_seconds_total": 672.1529767513275,
+    "device": "cpu",
+    "backend": "lu",
+    "torch": "2.14.1"
+  },
+  "converged_time_integration": true,
+  "final_rates": {
+    "dudt_rms": 9.796108267488191e-08,
+    "dvdt_rms": 6.977912643505035e-08
+  },
+  "polish": {
+    "history": [
+      {
+        "iter": 0,
+        "dtau": 0.0,
+        "rel_residual": 2.931410882671884e-06,
+        "wall_s": 0.0,
+        "accepted": true
+      },
+      {
+        "iter": 1,
+        "dtau": 1144.0274765039767,
+        "rel_residual": 2.562360557658944e-06,
+        "wall_s": 1.6905851364135742,
+        "accepted": true
+      },
+      {
+        "iter": 2,
+        "dtau": 1335.9169718663338,
+        "rel_residual": 2.1943061914817775e-06,
+        "wall_s": 3.2808499336242676,
+        "accepted": true
+      },
+      {
+        "iter": 3,
+        "dtau": 1598.0936252780114,
+        "rel_residual": 1.8343173618266096e-06,
+        "wall_s": 5.100314140319824,
+        "accepted": true
+      },
+      {
+        "iter": 4,
+        "dtau": 1973.911881333493,
+        "rel_residual": 1.4850768721709829e-06,
+        "wall_s": 6.769998073577881,
+        "accepted": true
+      },
+      {
+        "iter": 5,
+        "dtau": 2547.9711798333014,
+        "rel_residual": 1.1504882417326514e-06,
+        "wall_s": 8.415422916412354,
+        "accepted": true
+      },
+      {
+        "iter": 6,
+        "dtau": 3504.9334126864574,
+        "rel_residual": 8.36367068219142e-07,
+        "wall_s": 9.957056045532227,
+        "accepted": true
+      },
+      {
+        "iter": 7,
+        "dtau": 5314.560102215276,
+        "rel_residual": 5.515810953854825e-07,
+        "wall_s": 11.570458173751831,
+        "accepted": true
+      },
+      {
+        "iter": 8,
+        "dtau": 9466.17319810454,
+        "rel_residual": 3.096722214272242e-07,
+        "wall_s": 13.17599892616272,
+        "accepted": true
+      },
+      {
+        "iter": 9,
+        "dtau": 22588.544299021607,
+        "rel_residual": 1.2977422731923696e-07,
+        "wall_s": 14.77206802368164,
+        "accepted": true
+      },
+      {
+        "iter": 10,
+        "dtau": 97102.21183320977,
+        "rel_residual": 3.018891977154033e-08,
+        "wall_s": 16.402651071548462,
+        "accepted": true
+      },
+      {
+        "iter": 11,
+        "dtau": 1481767.4434576847,
+        "rel_residual": 1.978320481810206e-09,
+        "wall_s": 18.013686895370483,
+        "accepted": true
+      },
+      {
+        "iter": 12,
+        "dtau": 328534621.0751848,
+        "rel_residual": 8.922684839358327e-12,
+        "wall_s": 19.573959827423096,
+        "accepted": true
+      }
+    ],
+    "accepted": true,
+    "seconds": 19.634427785873413,
+    "max_abs_change_v": 0.004025655957899471
+  },
+  "final_residual": {
+    "Ru_rms": 2.9315386330826085e-13,
+    "Rv_rms": 2.1902528413877802e-13,
+    "steady_Ru_rms": 2.9315386330826085e-13,
+    "steady_Rv_rms": 2.1902528413877802e-13,
+    "reaction_scale": 0.011395319723951641,
+    "steady_rel": 1.7661349911966858e-11
+  },
+  "final_pattern": {
+    "v_min": 0.0004426490085225444,
+    "v_max": 0.36861852639921744,
+    "contrast": 0.3283259753165294,
+    "wavelength": 0.46752256010840726,
+    "type": "spots",
+    "threshold": 0.16987239306212937,
+    "n_components": 21,
+    "n_low_components": 4,
+    "area_fraction": 0.28871292026261586,
+    "euler": 18,
+    "perimeter": 25.22661284153352,
+    "compactness": 0.8327027283683428,
+    "mean_component_area": 0.09562235122723964
+  },
+  "linear_stability": {
+    "eigenvalues": [
+      [
+        -0.0001497269838474978,
+        0.0
+      ],
+      [
+        -0.00036692562454815705,
+        0.0
+      ],
+      [
+        -0.0004496029404443278,
+        0.0
+      ],
+      [
+        -0.0007192258368456112,
+        0.0
+      ],
+      [
+        -0.0008078072380072773,
+        0.0
+      ],
+      [
+        -0.0008404091915266145,
+        0.0
+      ],
+      [
+        -0.000877690938367278,
+        0.0
+      ],
+      [
+        -0.0009312034216828174,
+        0.0
+      ]
+    ],
+    "max_real": -0.0001497269838474978,
+    "sigma": 0.001,
+    "seconds": 3.5765879154205322
+  }
+}
