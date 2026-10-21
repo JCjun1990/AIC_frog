@@ -1,0 +1,13 @@
+10:49:36 [1/4] ai sphere6 F=0.0280 k=0.0620 seed=21: spots n=45 converged=True t=69000 1059s
+10:52:04 [2/4] ai sphere6 F=0.0540 k=0.0630 seed=21: stripes_or_maze n=6 converged=True t=2000 148s
+11:03:57 [3/4] ai sphere6 F=0.0280 k=0.0620 seed=22: spots n=45 converged=True t=157000 1920s
+11:14:08 [4/4] ai sphere6 F=0.0540 k=0.0630 seed=22: stripes_or_maze n=7 converged=True t=110500 1323s
+11:14:09 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| sphere6 · spots | 22 | 16/22 | spots | 45–45 | 0.475–0.475 | 9.3e-06 | -6.9e-05 … -1.1e-05 | 1456 |
+| sphere6 · stripes | 19 | 18/19 | stripes_or_maze | 6–7 | 0.471–0.486 | 3.9e-06 | -4.8e-05 … -4.6e-05 | 1001 |

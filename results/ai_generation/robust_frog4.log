@@ -1,0 +1,42 @@
+09:43:51 resuming: 32 finished jobs loaded from /Users/jcjun1990/Desktop/turing/results/ai_generation/tasks/robustness_jobs, 32 to run
+09:45:30 [1/64] ai frog F=0.0280 k=0.0620 seed=18: spots n=24 converged=True t=37500 95s
+09:46:49 [2/64] ai frog F=0.0280 k=0.0620 seed=19: spots n=22 converged=True t=30000 78s
+09:48:06 [3/64] ai frog F=0.0280 k=0.0620 seed=20: spots n=22 converged=True t=27500 77s
+09:49:09 [4/64] ai frog F=0.0280 k=0.0620 seed=21: spots n=22 converged=True t=16500 62s
+09:49:43 [5/64] ai frog F=0.0280 k=0.0620 seed=17: spots n=22 converged=True t=146000 348s
+09:51:18 [6/64] ai frog F=0.0280 k=0.0620 seed=22: spots n=23 converged=True t=43000 130s
+09:52:58 [7/64] ai frog F=0.0280 k=0.0620 seed=23: spots n=23 converged=True t=70500 195s
+09:59:02 [8/64] ai frog F=0.0280 k=0.0620 seed=24: spots n=23 converged=True t=174500 463s
+09:59:58 [9/64] ai frog F=0.0280 k=0.0620 seed=26: spots n=21 converged=True t=12000 56s
+10:01:15 [10/64] ai frog F=0.0280 k=0.0620 seed=25: spots n=23 converged=False t=200000 497s
+10:02:34 [11/64] ai frog F=0.0280 k=0.0620 seed=28: spots n=21 converged=True t=20000 79s
+10:04:08 [12/64] ai frog F=0.0280 k=0.0620 seed=29: spots n=23 converged=True t=25000 93s
+10:04:36 [13/64] ai frog F=0.0280 k=0.0620 seed=27: spots n=22 converged=True t=81500 278s
+10:05:38 [14/64] ai frog F=0.0280 k=0.0620 seed=31: spots n=18 converged=True t=10500 61s
+10:08:58 [15/64] ai frog F=0.0280 k=0.0620 seed=30: spots n=25 converged=True t=89000 291s
+10:09:42 [16/64] ai frog F=0.0280 k=0.0620 seed=32: spots n=22 converged=True t=73000 244s
+10:14:10 [17/64] ai frog F=0.0540 k=0.0630 seed=18: stripes_or_maze n=5 converged=True t=69000 267s
+10:15:36 [18/64] ai frog F=0.0540 k=0.0630 seed=19: stripes_or_maze n=7 converged=True t=17000 86s
+10:17:10 [19/64] ai frog F=0.0540 k=0.0630 seed=20: stripes_or_maze n=6 converged=True t=24500 93s
+10:18:37 [20/64] ai frog F=0.0540 k=0.0630 seed=17: stripes_or_maze n=5 converged=True t=192500 578s
+10:19:01 [21/64] ai frog F=0.0540 k=0.0630 seed=21: spots n=10 converged=True t=28000 111s
+10:19:50 [22/64] ai frog F=0.0540 k=0.0630 seed=23: stripes_or_maze n=7 converged=True t=9000 49s
+10:22:05 [23/64] ai frog F=0.0540 k=0.0630 seed=24: stripes_or_maze n=5 converged=True t=44500 135s
+10:23:52 [24/64] ai frog F=0.0540 k=0.0630 seed=22: stripes_or_maze n=6 converged=True t=104500 315s
+10:24:12 [25/64] ai frog F=0.0540 k=0.0630 seed=25: stripes_or_maze n=7 converged=True t=45000 127s
+10:24:52 [26/64] ai frog F=0.0540 k=0.0630 seed=27: stripes_or_maze n=7 converged=True t=12500 40s
+10:26:30 [27/64] ai frog F=0.0540 k=0.0630 seed=26: stripes_or_maze n=4 converged=True t=83500 158s
+10:27:17 [28/64] ai frog F=0.0540 k=0.0630 seed=29: stripes_or_maze n=5 converged=True t=32000 47s
+10:27:59 [29/64] ai frog F=0.0540 k=0.0630 seed=30: stripes_or_maze n=6 converged=True t=21000 42s
+10:28:56 [30/64] ai frog F=0.0540 k=0.0630 seed=31: stripes_or_maze n=5 converged=True t=9500 57s
+10:30:04 [31/64] ai frog F=0.0540 k=0.0630 seed=28: stripes_or_maze n=3 converged=True t=172000 312s
+10:31:13 [32/64] ai frog F=0.0540 k=0.0630 seed=32: stripes_or_maze n=5 converged=True t=29500 137s
+10:31:14 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frog · spots | 33 | 31/33 | spots | 18–25 | 0.461–0.477 | 3.9e-03 | -3.1e-04 … -3.5e-05 | 120 |
+| frog · stripes | 33 | 33/33 | spots/stripes_or_maze | 3–10 | 0.467–0.511 | 9.7e-12 | -4.2e-04 … -4.6e-05 | 137 |

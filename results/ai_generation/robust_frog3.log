@@ -1,0 +1,26 @@
+08:54:37 resuming: 16 finished jobs loaded from /Users/jcjun1990/Desktop/turing/results/ai_generation/tasks/robustness_jobs, 16 to run
+08:55:46 [1/32] ai frog F=0.0280 k=0.0620 seed=10: spots n=21 converged=True t=26000 66s
+08:55:51 [2/32] ai frog F=0.0280 k=0.0620 seed=14: spots n=24 converged=True t=25500 70s
+08:56:38 [3/32] ai frog F=0.0280 k=0.0620 seed=11: spots n=22 converged=True t=43500 118s
+08:56:45 [4/32] ai frog F=0.0280 k=0.0620 seed=12: spots n=23 converged=True t=53500 125s
+08:56:59 [5/32] ai frog F=0.0280 k=0.0620 seed=9: spots n=23 converged=True t=60500 139s
+08:57:02 [6/32] ai frog F=0.0280 k=0.0620 seed=13: spots n=22 converged=True t=64000 142s
+08:57:06 [7/32] ai frog F=0.0280 k=0.0620 seed=16: spots n=21 converged=True t=21500 75s
+08:57:48 [8/32] ai frog F=0.0280 k=0.0620 seed=15: spots n=21 converged=True t=41000 122s
+08:58:51 [9/32] ai frog F=0.0540 k=0.0630 seed=9: stripes_or_maze n=7 converged=True t=44500 133s
+08:59:05 [10/32] ai frog F=0.0540 k=0.0630 seed=11: stripes_or_maze n=3 converged=True t=36500 126s
+08:59:36 [11/32] ai frog F=0.0540 k=0.0630 seed=10: stripes_or_maze n=5 converged=True t=52000 171s
+09:01:17 [12/32] ai frog F=0.0540 k=0.0630 seed=16: stripes_or_maze n=7 converged=True t=46500 131s
+09:01:41 [13/32] ai frog F=0.0540 k=0.0630 seed=13: stripes_or_maze n=6 converged=True t=95500 275s
+09:01:52 [14/32] ai frog F=0.0540 k=0.0630 seed=12: stripes_or_maze n=6 converged=True t=107500 290s
+09:03:07 [15/32] ai frog F=0.0540 k=0.0630 seed=14: stripes_or_maze n=5 converged=True t=115500 319s
+09:05:29 [16/32] ai frog F=0.0540 k=0.0630 seed=15: stripes_or_maze n=5 converged=True t=187500 397s
+09:05:30 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frog · spots | 17 | 17/17 | spots | 19–24 | 0.463–0.477 | 7.1e-12 | -2.1e-04 … -7.0e-05 | 120 |
+| frog · stripes | 17 | 17/17 | spots/stripes_or_maze | 3–9 | 0.471–0.501 | 8.0e-12 | -4.2e-04 … -4.6e-05 | 169 |

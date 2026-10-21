@@ -492,16 +492,65 @@ def stage_generate(log, surfaces=("frog", "sphere6"), t_max=200000.0):
                 f"max Re lambda {r['max_re_lambda']} total {r['total_s']:.0f}s")
 
 
+def stage_robustness(log, surfaces, seeds, workers, t_max=200000.0):
+    """Task pipeline (as in generate) at the given parameters for extra seeds; with seed 0 from generate it
+    gives the spread of each task result. Finished runs are kept in tasks/robustness_jobs, so adding seeds later
+    only runs the new ones. Writes tasks/robustness.md and .json."""
+    jobs = []
+    for surface in sorted(surfaces, key=lambda s: not s.startswith("sphere")):          # slow sphere runs first
+        train = "sphere5" if surface.startswith("sphere") else surface
+        geom(surface).eigenbasis(600)
+        for name, p in sorted(TASKS.items(), key=lambda kv: kv[0] != "spots"):
+            for sd in seeds:
+                jobs.append((run_ai, (surface, p.F, p.k, sd, t_max, str(OUT / train / "model.joblib"), False,
+                                      surface.startswith("sphere"))))
+    pool_map(jobs, workers, log, checkpoint=OUT / "tasks" / "robustness_jobs")
+    import pickle
+    rows = [pickle.loads(f.read_bytes()) for f in sorted((OUT / "tasks" / "robustness_jobs").glob("*.pkl"))]
+    lines = ["# 任务结果的多种子稳健性", "",
+             "- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。",
+             "- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。", "",
+             "| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |",
+             "| --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
+    out = {}
+    for surface in surfaces:
+        for name, p in TASKS.items():
+            rs = [r for r in rows if r.get("surface") == surface and abs(r["F"] - p.F) < 1e-9 and abs(r["k"] - p.k) < 1e-9
+                  and not r.get("error")]
+            f0 = OUT / "tasks" / f"{surface}_{name}" / "summary.json"
+            if f0.exists():
+                r0 = json.loads(f0.read_text()); r0.setdefault("seed", 0); rs = [r0] + [r for r in rs if r["seed"] != 0]
+            if not rs:
+                continue
+            ok = [r for r in rs if r.get("stable")]
+            lam = [r["max_re_lambda"] for r in ok if r.get("max_re_lambda") is not None]
+            nc = [r["n_components"] for r in rs]
+            wl = [r["wavelength"] for r in rs]
+            res = [r.get("rel_residual_rot", r["rel_residual"]) if surface.startswith("sphere") else r["rel_residual"] for r in rs]
+            types = sorted({r["type"] for r in rs})
+            key = f"{surface}_{name}"
+            out[key] = {"seeds": [r["seed"] for r in rs], "stable": len(ok), "n_components": nc, "wavelength": wl,
+                        "residual": res, "max_re_lambda": lam, "types": types}
+            lines.append(f"| {surface} · {name} | {len(rs)} | {len(ok)}/{len(rs)} | {'/'.join(types)} | {min(nc)}–{max(nc)} | "
+                         f"{min(wl):.3f}–{max(wl):.3f} | {max(res):.1e} | "
+                         f"{(f'{min(lam):.1e} … {max(lam):.1e}') if lam else '—'} | "
+                         f"{float(np.median([r.get('solve_s', r.get('total_s', 0)) for r in rs])):.0f} |")
+    (OUT / "tasks" / "robustness.json").write_text(json.dumps(out, indent=1, default=float))
+    (OUT / "tasks" / "robustness.md").write_text("\n".join(lines) + "\n")
+    log("\n".join(lines))
+
+
 def main():
     global OUT
     ap = argparse.ArgumentParser()
-    ap.add_argument("stage", choices=["all", "dataset", "train", "evaluate", "summarize", "generate"])
+    ap.add_argument("stage", choices=["all", "dataset", "train", "evaluate", "summarize", "generate", "robustness"])
     ap.add_argument("--surfaces", nargs="+", default=["frog", "sphere5"])
     ap.add_argument("--eval-surfaces", nargs="+", default=None,
                     help="surfaces to evaluate (default: --surfaces, plus sphere6 task points if sphere5 is there); "
                          "lets two machines split the evaluation, merged later with `summarize`")
     ap.add_argument("--generate-surfaces", nargs="+", default=["frog", "sphere6"])
     ap.add_argument("--generate-t-max", type=float, default=200000.0, help="time limit of each task run")
+    ap.add_argument("--robust-seeds", type=int, nargs="+", default=[1, 2, 3, 4], help="extra seeds for `robustness`")
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--eval-workers", type=int, default=4)
     ap.add_argument("--t-max", type=float, default=200000.0, help="time limit of each evaluation run")
@@ -534,6 +583,8 @@ def main():
         stage_summarize(log)
     if args.stage in ("all", "generate"):
         stage_generate(log, args.generate_surfaces, t_max=args.generate_t_max)
+    if args.stage == "robustness":
+        stage_robustness(log, args.generate_surfaces, args.robust_seeds, args.workers, t_max=args.generate_t_max)
 
 
 if __name__ == "__main__":

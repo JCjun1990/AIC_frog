@@ -1,0 +1,26 @@
+09:43:49 resuming: 8 finished jobs loaded from /Users/jcjun1990/Desktop/turing/results/ai_generation/tasks/robustness_jobs, 16 to run
+09:56:10 [1/24] ai sphere6 F=0.0280 k=0.0620 seed=11: spots n=45 converged=True t=69000 737s
+10:00:20 [2/24] ai sphere6 F=0.0280 k=0.0620 seed=5: spots n=45 converged=True t=69000 987s
+10:00:45 [3/24] ai sphere6 F=0.0280 k=0.0620 seed=12: spots n=45 converged=True t=101000 1013s
+10:06:40 [4/24] ai sphere6 F=0.0280 k=0.0620 seed=6: spots n=45 converged=False t=200000 1368s
+10:07:18 [5/24] ai sphere6 F=0.0280 k=0.0620 seed=7: spots n=45 converged=False t=200000 1406s
+10:08:06 [6/24] ai sphere6 F=0.0540 k=0.0630 seed=5: stripes_or_maze n=6 converged=True t=48500 716s
+10:09:08 [7/24] ai sphere6 F=0.0280 k=0.0620 seed=8: spots n=45 converged=True t=149500 1516s
+10:09:38 [8/24] ai sphere6 F=0.0280 k=0.0620 seed=10: spots n=45 converged=True t=187000 1546s
+10:20:18 [9/24] ai sphere6 F=0.0540 k=0.0630 seed=7: stripes_or_maze n=6 converged=True t=103500 1172s
+10:21:19 [10/24] ai sphere6 F=0.0540 k=0.0630 seed=6: stripes_or_maze n=6 converged=True t=116500 1259s
+10:23:20 [11/24] ai sphere6 F=0.0280 k=0.0620 seed=9: spots n=45 converged=True t=134500 2368s
+10:24:26 [12/24] ai sphere6 F=0.0540 k=0.0630 seed=9: stripes_or_maze n=6 converged=True t=93500 1028s
+10:24:40 [13/24] ai sphere6 F=0.0540 k=0.0630 seed=8: stripes_or_maze n=7 converged=True t=99000 1079s
+10:25:22 [14/24] ai sphere6 F=0.0540 k=0.0630 seed=11: stripes_or_maze n=7 converged=True t=99500 974s
+10:25:45 [15/24] ai sphere6 F=0.0540 k=0.0630 seed=10: stripes_or_maze n=6 converged=True t=108500 1059s
+10:27:53 [16/24] ai sphere6 F=0.0540 k=0.0630 seed=12: stripes_or_maze n=7 converged=True t=93500 1095s
+10:27:54 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| sphere6 · spots | 13 | 11/13 | spots | 45–45 | 0.475–0.475 | 5.6e-06 | -6.8e-05 … -1.1e-05 | 1003 |
+| sphere6 · stripes | 13 | 12/13 | stripes_or_maze | 6–7 | 0.471–0.486 | 3.9e-06 | -4.8e-05 … -4.6e-05 | 1001 |

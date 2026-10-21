@@ -449,3 +449,198 @@
 | sphere5 | task_spots | 是 | 1.3% | 3.4% | 0.9% |
 | sphere5 | task_stripes | — | — | — | — |
 00:15:37 task sphere6/stripes: stripes_or_maze n=6 residual 8.0e-15, rotation-corrected 2.6e-15 max Re lambda -4.60980887333018e-05 total 513s
+08:30:59 [1/8] ai frog F=0.0280 k=0.0620 seed=1: spots n=22 converged=True t=14500 42s
+08:31:47 [2/8] ai frog F=0.0280 k=0.0620 seed=4: spots n=20 converged=True t=36500 90s
+08:32:11 [3/8] ai frog F=0.0280 k=0.0620 seed=2: spots n=21 converged=True t=45000 114s
+08:32:28 [4/8] ai frog F=0.0280 k=0.0620 seed=3: spots n=23 converged=True t=57500 131s
+08:33:13 [5/8] ai frog F=0.0540 k=0.0630 seed=4: stripes_or_maze n=6 converged=True t=37500 86s
+08:34:16 [6/8] ai frog F=0.0540 k=0.0630 seed=2: stripes_or_maze n=6 converged=True t=122000 239s
+08:34:16 [7/8] ai frog F=0.0540 k=0.0630 seed=1: spots n=9 converged=True t=110000 239s
+08:34:41 [8/8] ai frog F=0.0540 k=0.0630 seed=3: stripes_or_maze n=8 converged=True t=108500 222s
+08:34:42 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frog · spots | 5 | 5/5 | spots | 20–23 | 0.464–0.468 | 2.3e-12 | -2.1e-04 … -1.0e-04 | 112 |
+| frog · stripes | 5 | 5/5 | spots/stripes_or_maze | 5–9 | 0.474–0.486 | 4.5e-12 | -2.9e-04 … -4.6e-05 | 224 |
+08:34:57 resuming: 8 finished jobs loaded from /Users/jcjun1990/Desktop/turing/results/ai_generation/tasks/robustness_jobs, 8 to run
+08:35:56 [1/16] ai frog F=0.0280 k=0.0620 seed=8: spots n=21 converged=True t=12000 53s
+08:37:21 [2/16] ai frog F=0.0540 k=0.0630 seed=5: stripes_or_maze n=6 converged=True t=43000 138s
+08:37:23 [3/16] ai frog F=0.0280 k=0.0620 seed=7: spots n=21 converged=True t=39500 141s
+08:37:28 [4/16] ai frog F=0.0540 k=0.0630 seed=6: stripes_or_maze n=5 converged=True t=49500 145s
+08:37:29 [5/16] ai frog F=0.0540 k=0.0630 seed=7: stripes_or_maze n=7 converged=True t=27000 93s
+08:38:49 [6/16] ai frog F=0.0280 k=0.0620 seed=5: spots n=19 converged=True t=80500 227s
+08:40:09 [7/16] ai frog F=0.0540 k=0.0630 seed=8: stripes_or_maze n=5 converged=True t=72000 168s
+08:40:34 [8/16] ai frog F=0.0280 k=0.0620 seed=6: spots n=24 converged=True t=143000 331s
+08:40:35 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frog · spots | 9 | 9/9 | spots | 19–24 | 0.463–0.477 | 7.1e-12 | -2.1e-04 … -1.0e-04 | 130 |
+| frog · stripes | 9 | 9/9 | spots/stripes_or_maze | 5–9 | 0.471–0.501 | 4.5e-12 | -3.3e-04 … -4.6e-05 | 167 |
+08:45:52 [1/4] ai sphere6 F=0.0280 k=0.0620 seed=2: spots n=45 converged=True t=155000 937s
+08:46:03 [2/4] ai sphere6 F=0.0280 k=0.0620 seed=1: spots n=45 converged=True t=146500 949s
+08:46:48 [3/4] ai sphere6 F=0.0540 k=0.0630 seed=1: stripes_or_maze n=7 converged=False t=200000 994s
+08:46:58 [4/4] ai sphere6 F=0.0540 k=0.0630 seed=2: stripes_or_maze n=7 converged=True t=122000 1003s
+08:46:58 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| sphere6 · spots | 3 | 3/3 | spots | 45–45 | 0.475–0.475 | 1.6e-13 | -5.9e-05 … -4.9e-05 | 945 |
+| sphere6 · stripes | 3 | 2/3 | stripes_or_maze | 6–7 | 0.471–0.486 | 3.9e-06 | -4.8e-05 … -4.6e-05 | 994 |
+08:54:35 resuming: 4 finished jobs loaded from /Users/jcjun1990/Desktop/turing/results/ai_generation/tasks/robustness_jobs, 4 to run
+08:54:37 resuming: 16 finished jobs loaded from /Users/jcjun1990/Desktop/turing/results/ai_generation/tasks/robustness_jobs, 16 to run
+08:55:46 [1/32] ai frog F=0.0280 k=0.0620 seed=10: spots n=21 converged=True t=26000 66s
+08:55:51 [2/32] ai frog F=0.0280 k=0.0620 seed=14: spots n=24 converged=True t=25500 70s
+08:56:38 [3/32] ai frog F=0.0280 k=0.0620 seed=11: spots n=22 converged=True t=43500 118s
+08:56:45 [4/32] ai frog F=0.0280 k=0.0620 seed=12: spots n=23 converged=True t=53500 125s
+08:56:59 [5/32] ai frog F=0.0280 k=0.0620 seed=9: spots n=23 converged=True t=60500 139s
+08:57:02 [6/32] ai frog F=0.0280 k=0.0620 seed=13: spots n=22 converged=True t=64000 142s
+08:57:06 [7/32] ai frog F=0.0280 k=0.0620 seed=16: spots n=21 converged=True t=21500 75s
+08:57:48 [8/32] ai frog F=0.0280 k=0.0620 seed=15: spots n=21 converged=True t=41000 122s
+08:58:51 [9/32] ai frog F=0.0540 k=0.0630 seed=9: stripes_or_maze n=7 converged=True t=44500 133s
+08:59:05 [10/32] ai frog F=0.0540 k=0.0630 seed=11: stripes_or_maze n=3 converged=True t=36500 126s
+08:59:36 [11/32] ai frog F=0.0540 k=0.0630 seed=10: stripes_or_maze n=5 converged=True t=52000 171s
+09:01:17 [12/32] ai frog F=0.0540 k=0.0630 seed=16: stripes_or_maze n=7 converged=True t=46500 131s
+09:01:41 [13/32] ai frog F=0.0540 k=0.0630 seed=13: stripes_or_maze n=6 converged=True t=95500 275s
+09:01:52 [14/32] ai frog F=0.0540 k=0.0630 seed=12: stripes_or_maze n=6 converged=True t=107500 290s
+09:03:07 [15/32] ai frog F=0.0540 k=0.0630 seed=14: stripes_or_maze n=5 converged=True t=115500 319s
+09:05:29 [16/32] ai frog F=0.0540 k=0.0630 seed=15: stripes_or_maze n=5 converged=True t=187500 397s
+09:05:30 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frog · spots | 17 | 17/17 | spots | 19–24 | 0.463–0.477 | 7.1e-12 | -2.1e-04 … -7.0e-05 | 120 |
+| frog · stripes | 17 | 17/17 | spots/stripes_or_maze | 3–9 | 0.471–0.501 | 8.0e-12 | -4.2e-04 … -4.6e-05 | 169 |
+09:06:52 [1/8] ai sphere6 F=0.0280 k=0.0620 seed=4: spots n=45 converged=True t=64500 734s
+09:07:32 [2/8] ai sphere6 F=0.0540 k=0.0630 seed=4: stripes_or_maze n=6 converged=True t=106500 773s
+09:10:06 [3/8] ai sphere6 F=0.0540 k=0.0630 seed=3: stripes_or_maze n=7 converged=True t=175500 928s
+09:10:26 [4/8] ai sphere6 F=0.0280 k=0.0620 seed=3: spots n=45 converged=True t=172000 948s
+09:10:27 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| sphere6 · spots | 5 | 5/5 | spots | 45–45 | 0.475–0.475 | 1.6e-13 | -6.8e-05 … -4.9e-05 | 945 |
+| sphere6 · stripes | 5 | 4/5 | stripes_or_maze | 6–7 | 0.471–0.486 | 3.9e-06 | -4.8e-05 … -4.6e-05 | 925 |
+09:43:49 resuming: 8 finished jobs loaded from /Users/jcjun1990/Desktop/turing/results/ai_generation/tasks/robustness_jobs, 16 to run
+09:43:51 resuming: 32 finished jobs loaded from /Users/jcjun1990/Desktop/turing/results/ai_generation/tasks/robustness_jobs, 32 to run
+09:45:30 [1/64] ai frog F=0.0280 k=0.0620 seed=18: spots n=24 converged=True t=37500 95s
+09:46:49 [2/64] ai frog F=0.0280 k=0.0620 seed=19: spots n=22 converged=True t=30000 78s
+09:48:06 [3/64] ai frog F=0.0280 k=0.0620 seed=20: spots n=22 converged=True t=27500 77s
+09:49:09 [4/64] ai frog F=0.0280 k=0.0620 seed=21: spots n=22 converged=True t=16500 62s
+09:49:43 [5/64] ai frog F=0.0280 k=0.0620 seed=17: spots n=22 converged=True t=146000 348s
+09:51:18 [6/64] ai frog F=0.0280 k=0.0620 seed=22: spots n=23 converged=True t=43000 130s
+09:52:58 [7/64] ai frog F=0.0280 k=0.0620 seed=23: spots n=23 converged=True t=70500 195s
+09:56:10 [1/24] ai sphere6 F=0.0280 k=0.0620 seed=11: spots n=45 converged=True t=69000 737s
+09:59:02 [8/64] ai frog F=0.0280 k=0.0620 seed=24: spots n=23 converged=True t=174500 463s
+09:59:58 [9/64] ai frog F=0.0280 k=0.0620 seed=26: spots n=21 converged=True t=12000 56s
+10:00:20 [2/24] ai sphere6 F=0.0280 k=0.0620 seed=5: spots n=45 converged=True t=69000 987s
+10:00:45 [3/24] ai sphere6 F=0.0280 k=0.0620 seed=12: spots n=45 converged=True t=101000 1013s
+10:01:15 [10/64] ai frog F=0.0280 k=0.0620 seed=25: spots n=23 converged=False t=200000 497s
+10:02:34 [11/64] ai frog F=0.0280 k=0.0620 seed=28: spots n=21 converged=True t=20000 79s
+10:04:08 [12/64] ai frog F=0.0280 k=0.0620 seed=29: spots n=23 converged=True t=25000 93s
+10:04:36 [13/64] ai frog F=0.0280 k=0.0620 seed=27: spots n=22 converged=True t=81500 278s
+10:05:38 [14/64] ai frog F=0.0280 k=0.0620 seed=31: spots n=18 converged=True t=10500 61s
+10:06:40 [4/24] ai sphere6 F=0.0280 k=0.0620 seed=6: spots n=45 converged=False t=200000 1368s
+10:07:18 [5/24] ai sphere6 F=0.0280 k=0.0620 seed=7: spots n=45 converged=False t=200000 1406s
+10:08:06 [6/24] ai sphere6 F=0.0540 k=0.0630 seed=5: stripes_or_maze n=6 converged=True t=48500 716s
+10:08:58 [15/64] ai frog F=0.0280 k=0.0620 seed=30: spots n=25 converged=True t=89000 291s
+10:09:08 [7/24] ai sphere6 F=0.0280 k=0.0620 seed=8: spots n=45 converged=True t=149500 1516s
+10:09:38 [8/24] ai sphere6 F=0.0280 k=0.0620 seed=10: spots n=45 converged=True t=187000 1546s
+10:09:42 [16/64] ai frog F=0.0280 k=0.0620 seed=32: spots n=22 converged=True t=73000 244s
+10:14:10 [17/64] ai frog F=0.0540 k=0.0630 seed=18: stripes_or_maze n=5 converged=True t=69000 267s
+10:15:36 [18/64] ai frog F=0.0540 k=0.0630 seed=19: stripes_or_maze n=7 converged=True t=17000 86s
+10:17:10 [19/64] ai frog F=0.0540 k=0.0630 seed=20: stripes_or_maze n=6 converged=True t=24500 93s
+10:18:37 [20/64] ai frog F=0.0540 k=0.0630 seed=17: stripes_or_maze n=5 converged=True t=192500 578s
+10:19:01 [21/64] ai frog F=0.0540 k=0.0630 seed=21: spots n=10 converged=True t=28000 111s
+10:19:50 [22/64] ai frog F=0.0540 k=0.0630 seed=23: stripes_or_maze n=7 converged=True t=9000 49s
+10:20:18 [9/24] ai sphere6 F=0.0540 k=0.0630 seed=7: stripes_or_maze n=6 converged=True t=103500 1172s
+10:21:19 [10/24] ai sphere6 F=0.0540 k=0.0630 seed=6: stripes_or_maze n=6 converged=True t=116500 1259s
+10:22:05 [23/64] ai frog F=0.0540 k=0.0630 seed=24: stripes_or_maze n=5 converged=True t=44500 135s
+10:23:20 [11/24] ai sphere6 F=0.0280 k=0.0620 seed=9: spots n=45 converged=True t=134500 2368s
+10:23:52 [24/64] ai frog F=0.0540 k=0.0630 seed=22: stripes_or_maze n=6 converged=True t=104500 315s
+10:24:12 [25/64] ai frog F=0.0540 k=0.0630 seed=25: stripes_or_maze n=7 converged=True t=45000 127s
+10:24:26 [12/24] ai sphere6 F=0.0540 k=0.0630 seed=9: stripes_or_maze n=6 converged=True t=93500 1028s
+10:24:40 [13/24] ai sphere6 F=0.0540 k=0.0630 seed=8: stripes_or_maze n=7 converged=True t=99000 1079s
+10:24:52 [26/64] ai frog F=0.0540 k=0.0630 seed=27: stripes_or_maze n=7 converged=True t=12500 40s
+10:25:22 [14/24] ai sphere6 F=0.0540 k=0.0630 seed=11: stripes_or_maze n=7 converged=True t=99500 974s
+10:25:45 [15/24] ai sphere6 F=0.0540 k=0.0630 seed=10: stripes_or_maze n=6 converged=True t=108500 1059s
+10:26:30 [27/64] ai frog F=0.0540 k=0.0630 seed=26: stripes_or_maze n=4 converged=True t=83500 158s
+10:27:17 [28/64] ai frog F=0.0540 k=0.0630 seed=29: stripes_or_maze n=5 converged=True t=32000 47s
+10:27:53 [16/24] ai sphere6 F=0.0540 k=0.0630 seed=12: stripes_or_maze n=7 converged=True t=93500 1095s
+10:27:54 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| sphere6 · spots | 13 | 11/13 | spots | 45–45 | 0.475–0.475 | 5.6e-06 | -6.8e-05 … -1.1e-05 | 1003 |
+| sphere6 · stripes | 13 | 12/13 | stripes_or_maze | 6–7 | 0.471–0.486 | 3.9e-06 | -4.8e-05 … -4.6e-05 | 1001 |
+10:27:58 resuming: 24 finished jobs loaded from /Users/jcjun1990/Desktop/turing/results/ai_generation/tasks/robustness_jobs, 16 to run
+10:27:59 [29/64] ai frog F=0.0540 k=0.0630 seed=30: stripes_or_maze n=6 converged=True t=21000 42s
+10:28:56 [30/64] ai frog F=0.0540 k=0.0630 seed=31: stripes_or_maze n=5 converged=True t=9500 57s
+10:30:04 [31/64] ai frog F=0.0540 k=0.0630 seed=28: stripes_or_maze n=3 converged=True t=172000 312s
+10:31:13 [32/64] ai frog F=0.0540 k=0.0630 seed=32: stripes_or_maze n=5 converged=True t=29500 137s
+10:31:14 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frog · spots | 33 | 31/33 | spots | 18–25 | 0.461–0.477 | 3.9e-03 | -3.1e-04 … -3.5e-05 | 120 |
+| frog · stripes | 33 | 33/33 | spots/stripes_or_maze | 3–10 | 0.467–0.511 | 9.7e-12 | -4.2e-04 … -4.6e-05 | 137 |
+10:46:37 [1/40] ai sphere6 F=0.0280 k=0.0620 seed=16: spots n=45 converged=True t=68000 1113s
+10:49:36 [1/4] ai sphere6 F=0.0280 k=0.0620 seed=21: spots n=45 converged=True t=69000 1059s
+10:52:04 [2/4] ai sphere6 F=0.0540 k=0.0630 seed=21: stripes_or_maze n=6 converged=True t=2000 148s
+10:54:31 [2/40] ai sphere6 F=0.0280 k=0.0620 seed=14: spots n=45 converged=True t=96500 1586s
+10:57:38 [3/40] ai sphere6 F=0.0280 k=0.0620 seed=15: spots n=45 converged=False t=200000 1774s
+10:57:55 [4/40] ai sphere6 F=0.0280 k=0.0620 seed=18: spots n=45 converged=False t=200000 1791s
+10:59:24 [5/40] ai sphere6 F=0.0280 k=0.0620 seed=17: spots n=45 converged=False t=200000 1879s
+11:01:04 [6/40] ai sphere6 F=0.0280 k=0.0620 seed=20: spots n=45 converged=False t=200000 1980s
+11:03:57 [3/4] ai sphere6 F=0.0280 k=0.0620 seed=22: spots n=45 converged=True t=157000 1920s
+11:03:58 [7/40] ai sphere6 F=0.0540 k=0.0630 seed=13: stripes_or_maze n=6 converged=True t=69000 1040s
+11:04:47 [8/40] ai sphere6 F=0.0280 k=0.0620 seed=13: spots n=45 converged=True t=111500 2202s
+11:13:05 [9/40] ai sphere6 F=0.0540 k=0.0630 seed=14: stripes_or_maze n=6 converged=True t=82500 1115s
+11:13:17 [10/40] ai sphere6 F=0.0540 k=0.0630 seed=20: stripes_or_maze n=7 converged=True t=27000 510s
+11:13:26 [11/40] ai sphere6 F=0.0540 k=0.0630 seed=15: stripes_or_maze n=6 converged=True t=67500 947s
+11:14:08 [4/4] ai sphere6 F=0.0540 k=0.0630 seed=22: stripes_or_maze n=7 converged=True t=110500 1323s
+11:14:09 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| sphere6 · spots | 22 | 16/22 | spots | 45–45 | 0.475–0.475 | 9.3e-06 | -6.9e-05 … -1.1e-05 | 1456 |
+| sphere6 · stripes | 19 | 18/19 | stripes_or_maze | 6–7 | 0.471–0.486 | 3.9e-06 | -4.8e-05 … -4.6e-05 | 1001 |
+11:14:12 [12/40] ai sphere6 F=0.0540 k=0.0630 seed=17: stripes_or_maze n=6 converged=True t=66500 888s
+11:14:47 [13/40] ai sphere6 F=0.0280 k=0.0620 seed=19: spots n=45 converged=True t=187500 2803s
+11:16:27 [14/40] ai sphere6 F=0.0540 k=0.0630 seed=16: stripes_or_maze n=6 converged=True t=112000 1112s
+11:17:19 [15/40] ai sphere6 F=0.0540 k=0.0630 seed=19: stripes_or_maze n=7 converged=True t=100000 802s
+11:17:39 [16/40] ai sphere6 F=0.0540 k=0.0630 seed=18: stripes_or_maze n=7 converged=True t=123000 994s
+11:17:40 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| sphere6 · spots | 23 | 17/23 | spots | 45–45 | 0.475–0.475 | 9.3e-06 | -6.9e-05 … -1.1e-05 | 1506 |
+| sphere6 · stripes | 23 | 22/23 | stripes_or_maze | 6–7 | 0.471–0.486 | 3.9e-06 | -4.8e-05 … -4.6e-05 | 994 |

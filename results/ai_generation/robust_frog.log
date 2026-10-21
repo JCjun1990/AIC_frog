@@ -1,0 +1,17 @@
+08:30:59 [1/8] ai frog F=0.0280 k=0.0620 seed=1: spots n=22 converged=True t=14500 42s
+08:31:47 [2/8] ai frog F=0.0280 k=0.0620 seed=4: spots n=20 converged=True t=36500 90s
+08:32:11 [3/8] ai frog F=0.0280 k=0.0620 seed=2: spots n=21 converged=True t=45000 114s
+08:32:28 [4/8] ai frog F=0.0280 k=0.0620 seed=3: spots n=23 converged=True t=57500 131s
+08:33:13 [5/8] ai frog F=0.0540 k=0.0630 seed=4: stripes_or_maze n=6 converged=True t=37500 86s
+08:34:16 [6/8] ai frog F=0.0540 k=0.0630 seed=2: stripes_or_maze n=6 converged=True t=122000 239s
+08:34:16 [7/8] ai frog F=0.0540 k=0.0630 seed=1: spots n=9 converged=True t=110000 239s
+08:34:41 [8/8] ai frog F=0.0540 k=0.0630 seed=3: stripes_or_maze n=8 converged=True t=108500 222s
+08:34:42 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frog · spots | 5 | 5/5 | spots | 20–23 | 0.464–0.468 | 2.3e-12 | -2.1e-04 … -1.0e-04 | 112 |
+| frog · stripes | 5 | 5/5 | spots/stripes_or_maze | 5–9 | 0.474–0.486 | 4.5e-12 | -2.9e-04 … -4.6e-05 | 224 |

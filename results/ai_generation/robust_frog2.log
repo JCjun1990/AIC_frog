@@ -1,0 +1,18 @@
+08:34:57 resuming: 8 finished jobs loaded from /Users/jcjun1990/Desktop/turing/results/ai_generation/tasks/robustness_jobs, 8 to run
+08:35:56 [1/16] ai frog F=0.0280 k=0.0620 seed=8: spots n=21 converged=True t=12000 53s
+08:37:21 [2/16] ai frog F=0.0540 k=0.0630 seed=5: stripes_or_maze n=6 converged=True t=43000 138s
+08:37:23 [3/16] ai frog F=0.0280 k=0.0620 seed=7: spots n=21 converged=True t=39500 141s
+08:37:28 [4/16] ai frog F=0.0540 k=0.0630 seed=6: stripes_or_maze n=5 converged=True t=49500 145s
+08:37:29 [5/16] ai frog F=0.0540 k=0.0630 seed=7: stripes_or_maze n=7 converged=True t=27000 93s
+08:38:49 [6/16] ai frog F=0.0280 k=0.0620 seed=5: spots n=19 converged=True t=80500 227s
+08:40:09 [7/16] ai frog F=0.0540 k=0.0630 seed=8: stripes_or_maze n=5 converged=True t=72000 168s
+08:40:34 [8/16] ai frog F=0.0280 k=0.0620 seed=6: spots n=24 converged=True t=143000 331s
+08:40:35 # 任务结果的多种子稳健性
+
+- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。
+- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。
+
+| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frog · spots | 9 | 9/9 | spots | 19–24 | 0.463–0.477 | 7.1e-12 | -2.1e-04 … -1.0e-04 | 130 |
+| frog · stripes | 9 | 9/9 | spots/stripes_or_maze | 5–9 | 0.471–0.501 | 4.5e-12 | -3.3e-04 … -4.6e-05 | 167 |
