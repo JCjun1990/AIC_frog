@@ -101,6 +101,23 @@ def synthesize(geom: Geometry, s: dict, seed: int, mode: str = "spots", n_modes:
     return np.clip(u, 0.0, 1.0), np.maximum(v, 0.0)
 
 
+def bands(geom: Geometry, s: dict, phase: float = 0.0, axis=(0.0, 0.0, 1.0)):
+    """Stripes as latitude bands about `axis` with the statistics s (period 2 pi / kappa0, amplitudes
+    mapped onto q_v, u = g_u(v)), the defect-free stripe arrangement a sphere allows.
+
+    Used for stripes on the sphere: random mazes there keep rearranging (non-rigid motion with a
+    residual ~1e-4 for > 10^5 time units), while the bands settle to a steady state."""
+    a = np.asarray(axis, float) / np.linalg.norm(axis)
+    polar = np.arccos(np.clip(geom.V @ a / np.linalg.norm(geom.V, axis=1), -1.0, 1.0))
+    z = -np.abs(np.cos(0.5 * s["kappa0"] * polar + phase))
+    order, cp = _weighted_sort(geom, z)
+    prob = np.empty(geom.n)
+    prob[order] = cp
+    v = np.interp(prob, PROBS, s["qv"])
+    u = np.interp(v, s["qv"], s["gu"])
+    return np.clip(u, 0.0, 1.0), np.maximum(v, 0.0)
+
+
 # ---------------------------------------------------------------------------------------------
 # spot patterns: learned radial profile on evenly spaced centres
 # ---------------------------------------------------------------------------------------------

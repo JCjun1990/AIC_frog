@@ -75,9 +75,24 @@ def readme(team: str, round_: str) -> str:
     def row(task, key, label):
         r = t[key]
         stab = f"稳定，max Re λ = {r['max_re_lambda']:.1e}" if r["stable"] else "残差未达标，未判定"
-        n = f"{r['n_components']} 个斑点" if r["type"] == "spots" else f"迷宫（{r['n_components']} 段）"
+        n = f"{r['n_components']} 个斑点" if r["type"] == "spots" else f"条纹 / 迷宫（{r['n_components']} 段）"
         return (f"| {task} | {label}（F = {r['F']}, k = {r['k']}） | {n} | {e(r['rel_residual'])} | {stab} | "
                 f"{r['total_s'] / 60:.0f} 分钟 |")
+
+    def sphere_section():
+        sp, st = t["sphere6_spots"], t["sphere6_stripes"]
+        if all(r["rel_residual"] <= 1e-11 and r["stable"] for r in (sp, st)):
+            return (f"""## 单位球面：转动修正 Newton
+
+- 球面的转动对称只被网格轻微打破，图案会整体极慢地刚体转动，普通 Newton 很难一步转到网格偏好的方向。
+- 做法：加入 3 个转动生成元和相位条件，求相对平衡态；再跟随慢转动到网格偏好的朝向，用普通 Newton 精修成离散系统的真稳态。
+- 结果：斑点相对残差 {e(sp['rel_residual'])}（扣除转动后 {e(sp.get('rel_residual_rot'))}），条纹 {e(st['rel_residual'])}（扣除转动后 {e(st.get('rel_residual_rot'))}）；线性稳定性已在排除转动模后验证。
+- 对照：只用求解器的基线停在 {e(b['sphere_spots']['final_residual']['steady_rel'])}（斑点）和 {e(b['sphere_stripes']['final_residual']['steady_rel'])}（条纹），见 `task1_sphere/baseline_*`。""")
+        return (f"""## 单位球面结果尚未完全收敛（如实说明）
+
+- 球面两组的相对残差为 {e(sp['rel_residual'])}（斑点）和 {e(st['rel_residual'])}（条纹），没有达到 1e-11，所以没有给出线性稳定性结论。
+- 原因：球面的转动对称只被网格轻微打破，图案会整体极慢地刚体转动；Newton 很难一步转到网格偏好的方向。
+- 只用求解器的基线同样停在 {e(b['sphere_spots']['final_residual']['steady_rel'])}（斑点）和 {e(b['sphere_stripes']['final_residual']['steady_rel'])}（条纹），见 `task1_sphere/baseline_*`。""")
 
     def pct(x, x0):
         return f"{(x - x0) / x0 * 100:+.1f}%"
@@ -117,12 +132,7 @@ def readme(team: str, round_: str) -> str:
 - AI 初值 + Newton：24/24 收敛且稳定；普通初值 + 时间积分：22/24。求解时间中位数 673 s 对 1159 s，约快 1.7 倍。
 - 网络的留一法泛化误差（`task*/ai_model/cv.json`）：青蛙类型准确率 {cv['frog']['type_accuracy']:.0%}、波长相对误差中位数 {cv['frog']['kappa0_rel_median']:.1%}；单位球 {cv['sphere5']['type_accuracy']:.0%}、{cv['sphere5']['kappa0_rel_median']:.1%}。
 
-## 单位球面结果尚未完全收敛（如实说明）
-
-- 球面两组的相对残差为 {e(t['sphere6_spots']['rel_residual'])}（斑点）和 {e(t['sphere6_stripes']['rel_residual'])}（条纹），没有达到 1e-11，所以没有给出线性稳定性结论。
-- 原因：球面的转动对称只被网格轻微打破，图案会整体极慢地刚体转动；Newton 很难一步转到网格偏好的方向。
-- 只用求解器的基线同样停在 {e(b['sphere_spots']['final_residual']['steady_rel'])}（斑点）和 {e(b['sphere_stripes']['final_residual']['steady_rel'])}（条纹），见 `task1_sphere/baseline_*`。
-- 改进方向（复赛）：加入 3 个转动生成元和相位条件的「转动修正」Newton，求相对平衡态，并报告扣除刚体转动后的残差。
+{sphere_section()}
 
 ## 目录
 

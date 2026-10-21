@@ -65,17 +65,40 @@ def jacobian(geom: Geometry, p: GSParams, u, v):
                     [sp.diags(gu), p.Dv * D + sp.diags(gv)]]).tocsc()
 
 
-def linear_stability(geom: Geometry, p: GSParams, u, v, k: int = 8, sigma: float = 1e-3) -> dict:
+def linear_stability(geom: Geometry, p: GSParams, u, v, k: int = 8, sigma: float = 1e-3,
+                     rotations=None) -> dict:
     """Eigenvalues of J closest to `sigma` (shift-invert ARPACK).
 
     A stable steady pattern has max Re(lambda) <= 0. On the sphere, three eigenvalues ~ 0 are
     expected: rigid rotations of the pattern (a check that the solver respects the symmetry).
+    With `rotations` = [T_1, T_2, T_3] (steady.rotation_generators), k + r eigenpairs are computed
+    (r = number of rotations that move the pattern: 3, 2 if axisymmetric, 0 if uniform); the eigenvectors
+    closest to span{T_i U} (M-weighted projection >= 0.5, at most r) are reported separately as the
+    rotation modes, and max_real is the largest real part of the remaining eigenvalues.
     """
     J = jacobian(geom, p, u, v)
-    lam = spla.eigs(J, k=k, sigma=sigma, which="LM", return_eigenvectors=False, maxiter=5000, tol=1e-10)
-    lam = lam[np.argsort(-lam.real)]
-    return {"eigenvalues": [[float(z.real), float(z.imag)] for z in lam],
-            "max_real": float(lam.real.max()), "sigma": sigma}
+    if rotations is None:
+        lam = spla.eigs(J, k=k, sigma=sigma, which="LM", return_eigenvectors=False, maxiter=5000, tol=1e-10)
+        lam = lam[np.argsort(-lam.real)]
+        return {"eigenvalues": [[float(z.real), float(z.imag)] for z in lam],
+                "max_real": float(lam.real.max()), "sigma": sigma}
+    u, v = _np(u), _np(v)
+    Mf = np.concatenate([geom.M, geom.M])
+    B = np.sqrt(Mf)[:, None] * np.stack([np.concatenate([Ti @ u, Ti @ v]) for Ti in rotations], axis=1)
+    Q, sv, _ = np.linalg.svd(B, full_matrices=False)               # M-orthonormal basis of the orbit tangent
+    U = np.sqrt(Mf) * np.concatenate([u, v])
+    r = int((sv > 1e-3 * max(sv[0], 1e-6 * np.linalg.norm(U))).sum())   # 0 (uniform), 2 (axisymmetric) or 3
+    lam, W = spla.eigs(J, k=k + r, sigma=sigma, which="LM", maxiter=5000, tol=1e-10)
+    Ws = np.sqrt(Mf)[:, None] * W
+    overlap = np.linalg.norm(Q[:, :r].T @ Ws, axis=0) / np.linalg.norm(Ws, axis=0)
+    rot = [i for i in np.argsort(-overlap)[:r] if overlap[i] >= 0.5]  # e.g. 2 for an axisymmetric pattern
+    rest = np.setdiff1d(np.arange(len(lam)), rot)
+    order = rest[np.argsort(-lam[rest].real)]
+    return {"eigenvalues": [[float(lam[i].real), float(lam[i].imag)] for i in order],
+            "rotation_eigenvalues": [[float(lam[i].real), float(lam[i].imag)] for i in rot],
+            "rotation_overlap": [float(overlap[i]) for i in rot],
+            "max_overlap_other": float(overlap[rest].max()),
+            "max_real": float(lam[rest].real.max()), "max_real_all": float(lam.real.max()), "sigma": sigma}
 
 
 # ---------------------------------------------------------------------------------------------

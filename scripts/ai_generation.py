@@ -14,9 +14,13 @@ Pipeline (turing_rd/ai_init.py, turing_rd/steady.py):
             (F, k) -> spot density + radial spot profile u(r), v(r), or -> spectral ring + amplitude
             quantiles + u-v relation for non-spot patterns.
   3. guess  Spots: N = density x area centres placed by Lloyd (centroidal Voronoi) iterations, each
-            carrying the predicted profile. Stripes: nodal-line maze with the predicted statistics.
+            carrying the predicted profile. Stripes: nodal-line maze with the predicted statistics;
+            on the sphere latitude bands with the predicted period and amplitudes instead (a maze
+            there keeps rearranging for > 10^5 time units, the bands settle).
   4. PDE    The same relax + Newton routine as the ordinary pipeline (steady.relax_polish) drives the
             guess to a steady state with relative residual <= 1e-11; linear stability is checked.
+            On the sphere the Newton step is rotation-aware (steady.rotation_newton: relative equilibrium,
+            residual <= 1e-11 after removing the rigid rotation; stability without the 3 rotation modes).
 The given task parameter points are never in the training grid, so every task result is a
 generalization test. Outputs: results/ai_generation/.
 """
@@ -43,7 +47,7 @@ from turing_rd import Geometry, GSParams, SPOTS, STRIPES, icosphere, load_frog  
 from turing_rd import ai_init  # noqa: E402
 from turing_rd.diagnostics import linear_stability, pattern_stats  # noqa: E402
 from turing_rd.initial import perturbed_ic  # noqa: E402
-from turing_rd.steady import relax_polish  # noqa: E402
+from turing_rd.steady import relax_polish, rotation_generators  # noqa: E402
 
 warnings.filterwarnings("ignore")
 OUT = ROOT / "results" / "ai_generation"
@@ -56,6 +60,7 @@ TOL = 1e-11
 PDE_SCHEDULE = lambda t_max: ((1.0, 20000.0), (4.0, t_max))        # noqa: E731  baseline protocol
 AI_SCHEDULE = lambda t_max: ((1.0, 2000.0), (4.0, t_max))          # noqa: E731
 _GEOM: dict = {}
+_ROT: dict = {}
 
 
 def geom(surface: str) -> Geometry:
@@ -63,6 +68,15 @@ def geom(surface: str) -> Geometry:
         mesh = load_frog(ROOT / "frog.mat") if surface == "frog" else icosphere(int(surface[-1]))
         _GEOM[surface] = Geometry(mesh, cache_dir=ROOT / "results" / "cache")
     return _GEOM[surface]
+
+
+def rotations(surface: str):
+    """Rotation generators T_1..3 on the sphere (rotation-aware Newton, steady.rotation_newton), else None."""
+    if not surface.startswith("sphere"):
+        return None
+    if surface not in _ROT:
+        _ROT[surface] = rotation_generators(geom(surface))
+    return _ROT[surface]
 
 
 def held_out_points():
@@ -75,17 +89,28 @@ def held_out_points():
     return pts
 
 
-def analyse(g: Geometry, p: GSParams, u, v, info: dict | None = None) -> dict:
+def analyse(g: Geometry, p: GSParams, u, v, info: dict | None = None, rot=None) -> dict:
+    """Pattern statistics; with `info` also convergence and linear stability. On the sphere (`rot` given)
+    converged means a relative equilibrium (rotation-corrected residual <= TOL), and stability is judged
+    with the 3 near-zero rigid-rotation modes excluded (they are reported separately)."""
     st = pattern_stats(g, v)
     out = {"type": st.get("type"), "n_components": st.get("n_components"), "wavelength": st.get("wavelength"),
            "v_max": float(v.max()), "v_min": float(v.min())}
     if info is not None:
         out.update(converged=info["converged"], rel_residual=info["rel_residual"], relax_time=info["relax_time"],
                    relax_steps=info["relax_steps"], newton_tries=len(info["newton"]), wall_s=info["wall_s"])
+        if rot is not None:
+            out.update(rel_residual_rot=info["rel_residual_rot"], omega=info["omega"], steady=info["steady"])
+            if "orient" in info:
+                out["orient"] = info["orient"]
         out["max_re_lambda"] = None
         if info["converged"]:
             try:
-                out["max_re_lambda"] = linear_stability(g, p, u, v)["max_real"]
+                ls = linear_stability(g, p, u, v, rotations=rot)
+                out["max_re_lambda"] = ls["max_real"]
+                if rot is not None:
+                    out.update(rotation_eigenvalues=[z[0] for z in ls["rotation_eigenvalues"]],
+                               rotation_overlap=ls["rotation_overlap"])
             except Exception as e:          # e.g. ARPACK not converging: record it, do not crash
                 out["stability_error"] = repr(e)[:200]
         out["stable"] = bool(out["max_re_lambda"] is not None and out["max_re_lambda"] < 1e-6)
@@ -110,9 +135,10 @@ def run_pde(surface, F, k, seed, t_max, keep_state=False):
     g, p = geom(surface), GSParams(F, k)
     t0 = time.time()
     u0, v0 = perturbed_ic(g, eps=0.05, seed=seed, mode="seeded", normalize_z=True)
-    u, v, info = relax_polish(g, p, u0, v0, schedule=PDE_SCHEDULE(t_max), check_every=1000.0, tol=TOL)
+    rot = rotations(surface)
+    u, v, info = relax_polish(g, p, u0, v0, schedule=PDE_SCHEDULE(t_max), check_every=1000.0, tol=TOL, rotations=rot)
     res = {"pipeline": "pde", "surface": surface, "F": F, "k": k, "seed": seed, "setup_s": 0.0}
-    res.update(analyse(g, p, u, v, info))
+    res.update(analyse(g, p, u, v, info, rot))
     res["solve_s"] = res["setup_s"] + res["wall_s"]
     res["total_s"] = time.time() - t0
     if keep_state:
@@ -130,22 +156,28 @@ def ai_initial_state(g: Geometry, model: dict, F: float, k: float, seed: int):
         n = max(1, int(round(pred["density"] * g.area)))
         u0, v0 = ai_init.place_spots(g, ai_init.cvt_centres(g, n, seed), pred)
         pred["n_centres"] = n
+    elif kind == "stripes_or_maze" and g.name.startswith("sphere"):
+        # latitude bands (seed -> phase of the bands): a random maze on the sphere keeps rearranging
+        u0, v0 = ai_init.bands(g, pred["stats"], phase=0.0 if seed == 0 else float(np.random.default_rng(seed).uniform(0, np.pi)))
+        pred["layout"] = "bands"
     else:
         u0, v0 = ai_init.synthesize(g, pred["stats"], seed, mode="stripes" if kind == "stripes_or_maze" else "spots")
     return u0, v0, pred
 
 
-def run_ai(surface, F, k, seed, t_max, model_path, keep_state=False):
+def run_ai(surface, F, k, seed, t_max, model_path, keep_state=False, orient=False):
     import joblib
     g, p = geom(surface), GSParams(F, k)
+    rot = rotations(surface)
     model = joblib.load(model_path)
     t0 = time.time()
     u0, v0, pred = ai_initial_state(g, model, F, k, seed)
     setup = time.time() - t0
-    u, v, info = relax_polish(g, p, u0, v0, schedule=AI_SCHEDULE(t_max), check_every=500.0, tol=TOL)
+    u, v, info = relax_polish(g, p, u0, v0, schedule=AI_SCHEDULE(t_max), check_every=500.0, tol=TOL,
+                              rotations=rot, orient=orient)
     res = {"pipeline": "ai", "surface": surface, "F": F, "k": k, "seed": seed, "setup_s": setup,
            "predicted_type": pred["type"], "n_centres": pred.get("n_centres")}
-    res.update(analyse(g, p, u, v, info))
+    res.update(analyse(g, p, u, v, info, rot))
     res["solve_s"] = res["setup_s"] + res["wall_s"]
     res["total_s"] = time.time() - t0
     if keep_state:
@@ -383,19 +415,24 @@ def write_summary(rows, log):
         return dict(sorted(out.items()))
 
     ok = lambda rs: [r for r in rs if r.get("stable")]  # noqa: E731
+    corr = lambda r: r.get("rel_residual_rot", r.get("rel_residual")) or 1  # noqa: E731
     lines = ["# AI 初值 + Newton 精修 vs 普通初值 + 时间积分", "",
              "- 成功：相对残差 ≤ 1e-11，且线性稳定（max Re λ < 1e-6）。",
-             "- 求解时间：AI 推断与合成 + 积分与 Newton 的墙钟，不含稳定性分析。4 进程并行，两条流程交错运行。",
+             "- 球面：图案会整体缓慢转动（网格对转动的约束很弱），所以用转动修正 Newton（steady.rotation_newton）"
+             "求相对平衡态。成功指扣除刚体转动后的残差 ≤ 1e-11，且排除 3 个转动模后线性稳定；"
+             "「末残差」列是完整残差，其中就是转动漂移本身。",
+             "- 求解时间：AI 推断与合成 + 积分与 Newton 的墙钟，不含稳定性分析。两条流程交错并行运行。",
              "- 未成功的运行按上限 t = 200 000 计时，计入中位数。", "",
-             "- 「≤1e-6」列：相对残差 ≤ 1e-6 的运行数。球面上图案会整体缓慢转动，网格对转动的约束很弱，严格的 1e-11 很难达到。",
+             "- 「≤1e-6」列：（球面上为扣除转动后的）相对残差 ≤ 1e-6 的运行数。",
              "",
-             "| 曲面 | 参数点 | 流程 | 成功 | ≤1e-6 | 末残差中位数 | 求解时间中位数 s | 积分时间中位数 | 类型 | 斑点数 | 波长 |",
-             "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
+             "| 曲面 | 参数点 | 流程 | 成功 | ≤1e-6 | 末残差中位数 | 扣除转动后中位数 | 求解时间中位数 s | 积分时间中位数 | 类型 | 斑点数 | 波长 |",
+             "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
     for (surf, point, pipe), rs in group("surface", "point", "pipeline").items():
         good = ok(rs)
-        loose = [r for r in rs if (r.get("rel_residual") or 1) <= 1e-6]
+        loose = [r for r in rs if corr(r) <= 1e-6]
         lines.append(f"| {surf} | {point} (F={rs[0]['F']}, k={rs[0]['k']}) | {pipe} | {len(good)}/{len(rs)} | "
                      f"{len(loose)}/{len(rs)} | {med([r.get('rel_residual') for r in rs]):.1e} | "
+                     f"{med([corr(r) for r in rs]):.1e} | "
                      f"{med([r['solve_s'] for r in rs]):.0f} | {med([r['relax_time'] for r in rs]):.0f} | "
                      f"{'/'.join(sorted({r['type'] for r in good})) or '—'} | "
                      f"{med([r['n_components'] for r in good]):.0f} | {med([r['wavelength'] for r in good]):.3f} |")
@@ -405,8 +442,8 @@ def write_summary(rows, log):
     for (surf,), rs in group("surface").items():
         a = [r for r in rs if r["pipeline"] == "ai"]
         b = [r for r in rs if r["pipeline"] == "pde"]
-        la = sum((r.get("rel_residual") or 1) <= 1e-6 for r in a)
-        lb = sum((r.get("rel_residual") or 1) <= 1e-6 for r in b)
+        la = sum(corr(r) <= 1e-6 for r in a)
+        lb = sum(corr(r) <= 1e-6 for r in b)
         ta, tb = med([r["solve_s"] for r in a]), med([r["solve_s"] for r in b])
         hosts = "/".join(sorted({str(r.get("host", "?")) for r in rs}))
         lines.append(f"| {surf} | {hosts} | {len(ok(a))}/{len(a)} | {len(ok(b))}/{len(b)} | {la}/{len(a)} | {lb}/{len(b)} | "
@@ -428,8 +465,9 @@ def write_summary(rows, log):
     log("\n".join(lines))
 
 
-def stage_generate(log, surfaces=("frog", "sphere6")):
-    """Task results: given spot / stripe parameters on the frog and the unit sphere (L6)."""
+def stage_generate(log, surfaces=("frog", "sphere6"), t_max=200000.0):
+    """Task results: given spot / stripe parameters on the frog and the unit sphere (L6). On the sphere a
+    converged relative equilibrium is then followed to the mesh-preferred orientation (orient=True)."""
     from turing_rd.viz import render_field
     import scipy.io as sio
     for surface in surfaces:
@@ -437,7 +475,8 @@ def stage_generate(log, surfaces=("frog", "sphere6")):
         g = geom(surface)
         g.eigenbasis(600)
         for name, p in TASKS.items():
-            r = run_ai(surface, p.F, p.k, 0, 200000.0, str(OUT / train / "model.joblib"), keep_state=True)
+            r = run_ai(surface, p.F, p.k, 0, t_max, str(OUT / train / "model.joblib"), keep_state=True,
+                       orient=surface.startswith("sphere"))
             d = OUT / "tasks" / f"{surface}_{name}"
             d.mkdir(parents=True, exist_ok=True)
             u, v = (x.astype(float) for x in r.pop("state"))
@@ -445,9 +484,11 @@ def stage_generate(log, surfaces=("frog", "sphere6")):
             np.savez_compressed(d / "final.npz", u=u, v=v, u0=u0, v0=v0)
             sio.savemat(d / "solution.mat", {"Solution": {"u": u[:, None], "v": v[:, None]}})
             render_field(g, v0, d / "ai_initial_v.png", title=f"{surface} {name}: AI initial state (v)")
-            render_field(g, v, d / "final_v.png", title=f"{surface} {name}: after Newton, residual {r['rel_residual']:.1e}")
+            rot_note = f", rotation-corrected {r['rel_residual_rot']:.1e}" if "rel_residual_rot" in r else ""
+            render_field(g, v, d / "final_v.png",
+                         title=f"{surface} {name}: after Newton, residual {r['rel_residual']:.1e}{rot_note}")
             (d / "summary.json").write_text(json.dumps(r, indent=1, default=float))
-            log(f"task {surface}/{name}: {r['type']} n={r['n_components']} residual {r['rel_residual']:.1e} "
+            log(f"task {surface}/{name}: {r['type']} n={r['n_components']} residual {r['rel_residual']:.1e}{rot_note} "
                 f"max Re lambda {r['max_re_lambda']} total {r['total_s']:.0f}s")
 
 
@@ -460,6 +501,7 @@ def main():
                     help="surfaces to evaluate (default: --surfaces, plus sphere6 task points if sphere5 is there); "
                          "lets two machines split the evaluation, merged later with `summarize`")
     ap.add_argument("--generate-surfaces", nargs="+", default=["frog", "sphere6"])
+    ap.add_argument("--generate-t-max", type=float, default=200000.0, help="time limit of each task run")
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--eval-workers", type=int, default=4)
     ap.add_argument("--t-max", type=float, default=200000.0, help="time limit of each evaluation run")
@@ -468,6 +510,9 @@ def main():
     ap.add_argument("--grid", choices=sorted(GRIDS), default="coarse", help="training grid: coarse 9x5 or fine 17x9")
     ap.add_argument("--seeds-per-point", type=int, default=1, help="random initial states per training grid point")
     args = ap.parse_args()
+    if sys.platform == "win32":     # keep Windows from sleeping while this job runs; released when it exits
+        import ctypes
+        ctypes.windll.kernel32.SetThreadExecutionState(0x80000000 | 0x00000001)   # ES_CONTINUOUS | ES_SYSTEM_REQUIRED
     OUT = Path(args.out)
     OUT.mkdir(parents=True, exist_ok=True)
     logf = open(OUT / "run.log", "a")
@@ -488,7 +533,7 @@ def main():
     if args.stage in ("all", "evaluate", "summarize"):
         stage_summarize(log)
     if args.stage in ("all", "generate"):
-        stage_generate(log, args.generate_surfaces)
+        stage_generate(log, args.generate_surfaces, t_max=args.generate_t_max)
 
 
 if __name__ == "__main__":

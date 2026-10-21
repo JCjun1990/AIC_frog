@@ -328,3 +328,124 @@
 | sphere5 | task_spots | 是 | 1.3% | 3.4% | 0.9% |
 | sphere5 | task_stripes | — | — | — | — |
 21:49:44 task sphere6/stripes: stripes_or_maze n=4 residual 1.9e-04 max Re lambda None total 1204s
+23:43:25 [1/48] ai sphere5 F=0.0280 k=0.0620 seed=1: spots n=45 converged=True t=53000 114s
+23:43:56 [2/48] ai sphere5 F=0.0540 k=0.0630 seed=2: stripes_or_maze n=7 converged=True t=4500 30s
+23:44:41 [3/48] ai sphere5 F=0.0540 k=0.0630 seed=1: stripes_or_maze n=7 converged=True t=88000 190s
+23:44:49 [4/48] pde sphere5 F=0.0280 k=0.0620 seed=2: spots n=43 converged=True t=49000 200s
+23:44:55 [5/48] pde sphere5 F=0.0280 k=0.0620 seed=1: spots n=43 converged=True t=53000 206s
+23:45:53 [6/48] ai sphere5 F=0.0280 k=0.0620 seed=2: spots n=44 converged=True t=135000 261s
+23:46:51 [7/48] ai sphere5 F=0.0280 k=0.0620 seed=3: spots n=45 converged=True t=181000 320s
+23:47:11 [8/48] ai sphere5 F=0.0540 k=0.0630 seed=3: stripes_or_maze n=7 converged=True t=75000 150s
+23:47:36 [9/48] ai sphere5 F=0.0284 k=0.0620 seed=1: spots n=45 converged=True t=78000 158s
+23:47:54 [10/48] pde sphere5 F=0.0280 k=0.0620 seed=3: spots n=44 converged=True t=176000 385s
+23:48:00 [11/48] pde sphere5 F=0.0540 k=0.0630 seed=1: stripes_or_maze n=4 converged=False t=200000 391s
+23:50:17 [12/48] pde sphere5 F=0.0540 k=0.0630 seed=2: stripes_or_maze n=6 converged=False t=200000 382s
+23:50:30 [13/48] pde sphere5 F=0.0284 k=0.0620 seed=2: spots n=46 converged=True t=71000 199s
+23:51:10 [14/48] pde sphere5 F=0.0540 k=0.0630 seed=3: stripes_or_maze n=3 converged=False t=200000 380s
+23:51:14 [15/48] pde sphere5 F=0.0284 k=0.0620 seed=3: spots n=44 converged=True t=67000 200s
+23:51:37 [16/48] ai sphere5 F=0.0284 k=0.0620 seed=2: spots n=46 converged=True t=171500 286s
+23:51:42 [17/48] pde sphere5 F=0.0284 k=0.0620 seed=1: spots n=45 converged=True t=165000 350s
+23:51:51 [18/48] ai sphere5 F=0.0284 k=0.0620 seed=3: spots n=47 converged=True t=153500 255s
+23:52:54 [19/48] ai sphere5 F=0.0388 k=0.0601 seed=1: stripes_or_maze n=1 converged=False t=200000 291s
+23:54:29 [20/48] ai sphere5 F=0.0388 k=0.0601 seed=3: stripes_or_maze n=1 converged=True t=118500 193s
+23:55:20 [21/48] ai sphere5 F=0.0388 k=0.0601 seed=2: stripes_or_maze n=2 converged=False t=200000 290s
+23:56:28 [22/48] pde sphere5 F=0.0388 k=0.0601 seed=1: stripes_or_maze n=1 converged=False t=200000 371s
+23:56:56 [23/48] ai sphere5 F=0.0568 k=0.0639 seed=1: stripes_or_maze n=6 converged=False t=200000 314s
+23:57:23 [24/48] pde sphere5 F=0.0388 k=0.0601 seed=2: stripes_or_maze n=3 converged=False t=200000 373s
+23:57:29 [25/48] pde sphere5 F=0.0388 k=0.0601 seed=3: stripes_or_maze n=1 converged=False t=200000 352s
+23:57:54 [26/48] pde sphere5 F=0.0568 k=0.0639 seed=1: stripes_or_maze n=8 converged=False t=200000 363s
+23:58:11 [27/48] ai sphere5 F=0.0568 k=0.0639 seed=2: stripes_or_maze n=6 converged=False t=200000 317s
+00:00:44 [28/48] pde sphere5 F=0.0568 k=0.0639 seed=2: stripes_or_maze n=9 converged=False t=200000 375s
+00:01:04 [29/48] ai sphere5 F=0.0568 k=0.0639 seed=3: stripes_or_maze n=6 converged=False t=200000 344s
+00:02:01 [30/48] ai sphere5 F=0.0381 k=0.0599 seed=1: stripes_or_maze n=4 converged=False t=200000 304s
+00:02:45 [31/48] pde sphere5 F=0.0568 k=0.0639 seed=3: stripes_or_maze n=7 converged=False t=200000 377s
+00:02:46 [32/48] ai sphere5 F=0.0381 k=0.0599 seed=2: holes n=1 converged=False t=200000 316s
+00:03:36 [33/48] pde sphere5 F=0.0381 k=0.0599 seed=1: stripes_or_maze n=1 converged=False t=200000 372s
+00:03:40 [34/48] ai sphere5 F=0.0381 k=0.0599 seed=3: stripes_or_maze n=1 converged=False t=200000 328s
+00:04:10 [35/48] pde sphere5 F=0.0381 k=0.0599 seed=2: holes n=1 converged=False t=200000 376s
+00:05:06 [36/48] ai sphere5 F=0.0381 k=0.0601 seed=2: stripes_or_maze n=7 converged=True t=64000 141s
+00:05:37 [37/48] ai sphere5 F=0.0381 k=0.0601 seed=1: stripes_or_maze n=7 converged=True t=145000 273s
+00:05:57 [38/48] ai sphere5 F=0.0381 k=0.0601 seed=3: stripes_or_maze n=7 converged=True t=61000 139s
+00:07:00 [39/48] pde sphere5 F=0.0381 k=0.0599 seed=3: stripes_or_maze n=1 converged=False t=200000 376s
+00:07:03 task sphere6/spots: spots n=45 residual 4.3e-12, rotation-corrected 5.5e-15 max Re lambda -5.906734447357477e-05 total 1528s
+00:08:27 [40/48] pde sphere5 F=0.0381 k=0.0601 seed=1: stripes_or_maze n=2 converged=False t=200000 386s
+00:09:35 [41/48] pde sphere5 F=0.0381 k=0.0601 seed=2: stripes_or_maze n=4 converged=True t=192000 409s
+00:09:40 [42/48] ai sphere5 F=0.0377 k=0.0596 seed=1: holes n=1 converged=False t=200000 330s
+00:10:05 [43/48] pde sphere5 F=0.0381 k=0.0601 seed=3: stripes_or_maze n=1 converged=False t=200000 386s
+00:10:44 [44/48] ai sphere5 F=0.0377 k=0.0596 seed=2: holes n=1 converged=False t=200000 307s
+00:11:07 [45/48] pde sphere5 F=0.0377 k=0.0596 seed=1: holes n=1 converged=False t=200000 361s
+00:11:32 [46/48] ai sphere5 F=0.0377 k=0.0596 seed=3: stripes_or_maze n=1 converged=False t=200000 271s
+00:11:34 [47/48] pde sphere5 F=0.0377 k=0.0596 seed=2: stripes_or_maze n=2 converged=False t=200000 336s
+00:12:26 [48/48] pde sphere5 F=0.0377 k=0.0596 seed=3: holes n=2 converged=False t=200000 239s
+00:12:26 # AI 初值 + Newton 精修 vs 普通初值 + 时间积分
+
+- 成功：相对残差 ≤ 1e-11，且线性稳定（max Re λ < 1e-6）。
+- 球面：图案会整体缓慢转动（网格对转动的约束很弱），所以用转动修正 Newton（steady.rotation_newton）求相对平衡态。成功指扣除刚体转动后的残差 ≤ 1e-11，且排除 3 个转动模后线性稳定；「末残差」列是完整残差，其中就是转动漂移本身。
+- 求解时间：AI 推断与合成 + 积分与 Newton 的墙钟，不含稳定性分析。两条流程交错并行运行。
+- 未成功的运行按上限 t = 200 000 计时，计入中位数。
+
+- 「≤1e-6」列：（球面上为扣除转动后的）相对残差 ≤ 1e-6 的运行数。
+
+| 曲面 | 参数点 | 流程 | 成功 | ≤1e-6 | 末残差中位数 | 扣除转动后中位数 | 求解时间中位数 s | 积分时间中位数 | 类型 | 斑点数 | 波长 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frog | random1 (F=0.0284, k=0.062) | ai | 3/3 | 3/3 | 3.8e-14 | 3.8e-14 | 424 | 26000 | spots | 22 | 0.468 |
+| frog | random1 (F=0.0284, k=0.062) | pde | 1/3 | 2/3 | 9.7e-12 | 9.7e-12 | 1189 | 49000 | spots | 23 | 0.471 |
+| frog | random2 (F=0.0388, k=0.0601) | ai | 3/3 | 3/3 | 1.3e-14 | 1.3e-14 | 559 | 36000 | holes/stripes_or_maze | 11 | 0.480 |
+| frog | random2 (F=0.0388, k=0.0601) | pde | 3/3 | 3/3 | 1.9e-12 | 1.9e-12 | 1941 | 115000 | holes | 2 | 0.485 |
+| frog | random3 (F=0.0568, k=0.0639) | ai | 3/3 | 3/3 | 1.1e-14 | 1.1e-14 | 1166 | 88500 | spots/stripes_or_maze | 10 | 0.478 |
+| frog | random3 (F=0.0568, k=0.0639) | pde | 3/3 | 3/3 | 4.7e-14 | 4.7e-14 | 1158 | 43000 | stripes_or_maze | 6 | 0.511 |
+| frog | random4 (F=0.0381, k=0.0599) | ai | 3/3 | 3/3 | 5.6e-13 | 5.6e-13 | 778 | 58500 | holes/stripes_or_maze | 13 | 0.483 |
+| frog | random4 (F=0.0381, k=0.0599) | pde | 3/3 | 3/3 | 1.6e-14 | 1.6e-14 | 1678 | 93000 | holes | 2 | 0.485 |
+| frog | random5 (F=0.0381, k=0.0601) | ai | 3/3 | 3/3 | 3.4e-14 | 3.4e-14 | 843 | 65000 | holes/stripes_or_maze | 13 | 0.481 |
+| frog | random5 (F=0.0381, k=0.0601) | pde | 3/3 | 3/3 | 1.3e-14 | 1.3e-14 | 956 | 29000 | holes | 3 | 0.486 |
+| frog | random6 (F=0.0377, k=0.0596) | ai | 3/3 | 3/3 | 1.3e-14 | 1.3e-14 | 556 | 51000 | holes/stripes_or_maze | 11 | 0.484 |
+| frog | random6 (F=0.0377, k=0.0596) | pde | 3/3 | 3/3 | 1.3e-14 | 1.3e-14 | 1133 | 37000 | holes | 2 | 0.489 |
+| frog | task_spots (F=0.028, k=0.062) | ai | 3/3 | 3/3 | 1.9e-12 | 1.9e-12 | 648 | 45000 | spots | 22 | 0.465 |
+| frog | task_spots (F=0.028, k=0.062) | pde | 3/3 | 3/3 | 2.1e-14 | 2.1e-14 | 1228 | 50000 | spots | 22 | 0.467 |
+| frog | task_stripes (F=0.054, k=0.063) | ai | 3/3 | 3/3 | 2.8e-12 | 2.8e-12 | 1454 | 110000 | spots/stripes_or_maze | 8 | 0.482 |
+| frog | task_stripes (F=0.054, k=0.063) | pde | 3/3 | 3/3 | 1.1e-14 | 1.1e-14 | 1071 | 37000 | stripes_or_maze | 4 | 0.484 |
+| sphere5 | random1 (F=0.0284, k=0.062) | ai | 3/3 | 3/3 | 4.3e-06 | 6.0e-13 | 253 | 153500 | spots | 46 | 0.472 |
+| sphere5 | random1 (F=0.0284, k=0.062) | pde | 3/3 | 3/3 | 1.3e-05 | 4.4e-14 | 198 | 71000 | spots | 45 | 0.476 |
+| sphere5 | random2 (F=0.0388, k=0.0601) | ai | 1/3 | 1/3 | 2.1e-04 | 1.6e-04 | 290 | 200000 | stripes_or_maze | 1 | 0.470 |
+| sphere5 | random2 (F=0.0388, k=0.0601) | pde | 0/3 | 0/3 | 2.0e-04 | 6.1e-05 | 371 | 200000 | — | nan | nan |
+| sphere5 | random3 (F=0.0568, k=0.0639) | ai | 0/3 | 1/3 | 1.2e-05 | 7.3e-06 | 317 | 200000 | — | nan | nan |
+| sphere5 | random3 (F=0.0568, k=0.0639) | pde | 0/3 | 0/3 | 1.6e-04 | 1.0e-04 | 375 | 200000 | — | nan | nan |
+| sphere5 | random4 (F=0.0381, k=0.0599) | ai | 0/3 | 0/3 | 8.0e-05 | 4.0e-05 | 316 | 200000 | — | nan | nan |
+| sphere5 | random4 (F=0.0381, k=0.0599) | pde | 0/3 | 0/3 | 2.1e-04 | 2.1e-04 | 376 | 200000 | — | nan | nan |
+| sphere5 | random5 (F=0.0381, k=0.0601) | ai | 3/3 | 3/3 | 1.1e-07 | 1.6e-14 | 139 | 64000 | stripes_or_maze | 7 | 0.467 |
+| sphere5 | random5 (F=0.0381, k=0.0601) | pde | 1/3 | 1/3 | 1.3e-04 | 1.0e-04 | 386 | 200000 | stripes_or_maze | 4 | 0.466 |
+| sphere5 | random6 (F=0.0377, k=0.0596) | ai | 0/3 | 0/3 | 2.3e-04 | 7.0e-05 | 307 | 200000 | — | nan | nan |
+| sphere5 | random6 (F=0.0377, k=0.0596) | pde | 0/3 | 0/3 | 1.7e-04 | 9.9e-05 | 336 | 200000 | — | nan | nan |
+| sphere5 | task_spots (F=0.028, k=0.062) | ai | 3/3 | 3/3 | 8.9e-06 | 2.9e-12 | 260 | 135000 | spots | 45 | 0.476 |
+| sphere5 | task_spots (F=0.028, k=0.062) | pde | 2/3 | 3/3 | 9.9e-06 | 6.7e-14 | 204 | 53000 | spots | 44 | 0.482 |
+| sphere5 | task_stripes (F=0.054, k=0.063) | ai | 2/3 | 3/3 | 1.9e-08 | 7.7e-14 | 148 | 75000 | stripes_or_maze | 7 | 0.469 |
+| sphere5 | task_stripes (F=0.054, k=0.063) | pde | 0/3 | 0/3 | 1.9e-04 | 7.3e-05 | 381 | 200000 | — | nan | nan |
+
+## 每个曲面的汇总
+
+| 曲面 | 机器 | AI 成功率 | 普通成功率 | AI ≤1e-6 | 普通 ≤1e-6 | AI 求解时间中位数 s | 普通求解时间中位数 s | 加速比 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frog | JCnoLAPTOP | 24/24 | 22/24 | 24/24 | 23/24 | 673 | 1159 | 1.7x |
+| sphere5 | TorinoUta19.local | 12/24 | 6/24 | 14/24 | 7/24 | 278 | 373 | 1.3x |
+
+## 端到端泛化误差（留出参数点上，AI 结果相对普通流程结果的特征差，各取成功运行的中位数）
+
+| 曲面 | 参数点 | 类型一致 | 波长相对差 | 斑点数相对差 | v 峰值相对差 |
+| --- | --- | --- | --- | --- | --- |
+| frog | random1 | 是 | 0.7% | 4.3% | 2.8% |
+| frog | random2 | 否 | 1.0% | 450.0% | 0.7% |
+| frog | random3 | 否 | 6.6% | 66.7% | 3.1% |
+| frog | random4 | 否 | 0.4% | 550.0% | 3.7% |
+| frog | random5 | 否 | 1.0% | 333.3% | 2.6% |
+| frog | random6 | 否 | 1.1% | 450.0% | 1.6% |
+| frog | task_spots | 是 | 0.5% | 0.0% | 0.1% |
+| frog | task_stripes | 是 | 0.4% | 100.0% | 0.0% |
+| sphere5 | random1 | 是 | 0.9% | 2.2% | 1.1% |
+| sphere5 | random2 | — | — | — | — |
+| sphere5 | random3 | — | — | — | — |
+| sphere5 | random4 | — | — | — | — |
+| sphere5 | random5 | 是 | 0.2% | 75.0% | 0.4% |
+| sphere5 | random6 | — | — | — | — |
+| sphere5 | task_spots | 是 | 1.3% | 3.4% | 0.9% |
+| sphere5 | task_stripes | — | — | — | — |
+00:15:37 task sphere6/stripes: stripes_or_maze n=6 residual 8.0e-15, rotation-corrected 2.6e-15 max Re lambda -4.60980887333018e-05 total 513s
