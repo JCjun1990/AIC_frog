@@ -21,13 +21,15 @@ import argparse
 import csv
 import datetime
 import hashlib
+import importlib.util
+import stat
 import json
 import re
 import shutil
 import sys
 import tempfile
 import zipfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 
 ROOT = Path(__file__).resolve().parents[1]
 TASKS = {
@@ -51,11 +53,11 @@ REQUIRED = [
     "task2_frog/ai_model/dataset.json", "task2_frog/ai_model/cv.json",
     "task3_inversion/summary.md", "task3_inversion/summary.json",
     "task3_inversion/solution.mat", "task3_inversion/final_vs_target.png",
-    "code/requirements.txt", "code/frog.mat", "code/Solution.mat",
+    "code/requirements.txt", "code/frog.mat", "code/Solution.mat", "code/scripts/submission_workflow.py",
     "code/turing_rd/__init__.py", "code/scripts/ai_generation.py", "code/scripts/invert_target.py",
 ]
 TEXT_SUFFIXES = {".py", ".md", ".json", ".csv", ".txt"}
-PATH_PATTERN = re.compile(r"(?<![A-Za-z])[A-Za-z]:[\\/]|/Users/|/home/")
+PATH_PATTERN = re.compile(r"(?<![A-Za-z])[A-Za-z]:[\\/]|/(?:Users|home)/[A-Za-z0-9_.-]+/")
 SECRET_PATTERN = re.compile(r"(?i)(api[_-]?key\s*[:=]|secret\s*[:=]|password\s*[:=]|"
                             r"BEGIN [A-Z ]*PRIVATE KEY|access[_-]?token\s*[:=])")
 CHECKS = []
@@ -75,7 +77,27 @@ def check(name, passed, detail=""):
     return bool(passed)
 
 
+def unsafe_zip_members(archive):
+    """Reject ambiguous or escaping paths before extracting any archive byte."""
+    bad, seen = [], set()
+    for info in archive.infolist():
+        name = info.orig_filename
+        parts = PurePosixPath(name).parts
+        key = name.rstrip('/').casefold()
+        unsafe = (not name or name.startswith('/') or '..' in parts or chr(92) in name
+                  or ':' in name or PureWindowsPath(name).drive or key in seen
+                  or stat.S_ISLNK(info.external_attr >> 16)
+                  or any(part.endswith((' ', '.')) for part in parts)
+                  or info.file_size > 1024**3)
+        if unsafe: bad.append(name)
+        seen.add(key)
+    if sum(i.file_size for i in archive.infolist()) > 2 * 1024**3:
+        bad.append('archive_uncompressed_size_limit')
+    return bad
+
+
 def main():
+    CHECKS.clear()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--zip", type=Path, required=True)
     parser.add_argument("--out", type=Path, default=ROOT / "results" / "i03_delivery" / "acceptance")
@@ -98,13 +120,13 @@ def main():
             check("zip_crc", bad is None, f"{len(names)} entries" + (f", bad={bad}" if bad else ""))
             check("zip_root_layout", "README_提交.md" in names and "PACKAGE_MANIFEST.json" in names,
                   "README and manifest at the archive root")
-            unsafe = [name for name in names
-                      if name.startswith("/") or ".." in Path(name).parts or "\\" in name]
+            unsafe = unsafe_zip_members(archive)
             check("zip_relative_posix_names", not unsafe, f"unsafe={unsafe[:3]}")
+            if unsafe:
+                return write_report(args, extracted, work, ref=None)
             archive.extractall(extracted)
     except Exception as exc:                              # corrupt zip
         check("zip_open", False, repr(exc))
-        work.cleanup()
         return write_report(args, extracted, work, ref=None)
 
     files = sorted(path for path in extracted.rglob("*") if path.is_file())
@@ -156,11 +178,14 @@ def main():
         import numpy as np
         from turing_rd import Geometry, GSParams, icosphere, load_frog
         from turing_rd.diagnostics import full_steady_residual, pattern_stats
-        from turing_rd.result_io import file_sha256, read_mat_fields
+        from turing_rd.result_io import file_sha256, read_mat_fields, validate_certificate
         from turing_rd import geometry as geometry_module
         imported_from_package = str(Path(geometry_module.__file__).resolve()).startswith(str(code_dir.resolve()))
         check("packaged_code_imports", imported_from_package,
               f"turing_rd loaded from {Path(geometry_module.__file__).parent}")
+        spec = importlib.util.spec_from_file_location("packaged_submission_workflow", code_dir / "scripts/submission_workflow.py")
+        workflow = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(workflow)
         geometries = {}
         candidate_failures = []
         for key, spec in TASKS.items():
@@ -172,6 +197,8 @@ def main():
                 mesh = load_frog(code_dir / "frog.mat") if spec["surface"] == "frog" else icosphere(6)
                 geometries[spec["surface"]] = Geometry(mesh, laplacian="robust", cache_dir=None)
             geom = geometries[spec["surface"]]
+            fresh = validate_certificate(mat, certificate, expected_params=params,
+                                         expected_seed=summary["seed"], expected_geometry=geom)
             u, v = read_mat_fields(mat, geom.n)
             dtype_ok = u.dtype == np.float64 and v.dtype == np.float64
             finite = bool(np.isfinite(u).all() and np.isfinite(v).all())
@@ -189,10 +216,13 @@ def main():
             bound = stability["input"]["mat_sha256"]
             decision = stability["decision"]
             status = decision["status"]
-            sample_ok = (len(stability.get("configurations", stability.get("spectra", []))) == 3
-                         and stability.get("mathematical_full_spectrum_proof") is False)
+            spectral_evidence = workflow.validate_spectral_record(stability, sha(mat))
+            sample_ok = spectral_evidence["status"] == "numerical_check_passed"
+            precision_ok = fresh["precision"]["passed"]
+            full_residual_ok = residual <= 1e-11
+
             ok = all((dtype_ok, finite, ranges, hash_ok, manifest_ok, near, params_ok,
-                      bound == sha(mat), status == "numerical_check_passed", sample_ok))
+                      bound == sha(mat), status == "numerical_check_passed", sample_ok, precision_ok, full_residual_ok))
             if not ok:
                 candidate_failures.append({"task": key, "dtype": dtype_ok, "finite": finite, "range": ranges,
                                            "hash": hash_ok, "manifest": manifest_ok,

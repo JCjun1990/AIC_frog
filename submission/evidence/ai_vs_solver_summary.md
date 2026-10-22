@@ -1,3 +1,15 @@
+# Legacy Evaluation：AI 初值与普通积分的历史对照
+
+> 当前 I04 统一口径见 [EVALUATION_PROTOCOL.md](EVALUATION_PROTOCOL.md)。
+> 以下原始表格、数字与历史判据原样保留，来源 `evaluation.csv`（96 条）。
+> 球面 12/24 等只是在相对平衡态和排除转动模态口径下的旧标记，
+> **不是完整离散稳态或当前数值谱验收的成功率**。
+> 缺少逐样本 MAT 不能补发证书；新旧采样密度的 LOO 不作为同难度提升，
+> 不同负载的墙钟不作为直接加速结论。
+> 自动重建见 `legacy_metrics.csv`；下面原始“成功”均应读作“Legacy success”。
+
+---
+
 # AI 初值 + Newton 精修 vs 普通初值 + 时间积分
 
 - 成功：相对残差 ≤ 1e-11，且线性稳定（max Re λ < 1e-6）。

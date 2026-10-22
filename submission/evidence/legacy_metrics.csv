@@ -1,0 +1,5 @@
+surface,pipeline,denominator,legacy_converged,legacy_stable,recorded_unprojected_residual_le_1e_11,shape_match,mat_readback,solve_s_median,protocol
+frog,ai,24,24,24,24,not_reconstructible,not_available,673.4965558052063,historical_csv_not_current_mat_acceptance
+frog,pde,24,23,22,23,not_reconstructible,not_available,1158.5261244773865,historical_csv_not_current_mat_acceptance
+sphere5,ai,24,13,12,0,not_reconstructible,not_available,278.10087645053864,historical_csv_not_current_mat_acceptance
+sphere5,pde,24,7,6,0,not_reconstructible,not_available,372.6366294622421,historical_csv_not_current_mat_acceptance

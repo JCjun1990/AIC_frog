@@ -1,0 +1,75 @@
+{
+  "schema_version": "delivery-format-audit-v1",
+  "strict_json_files": [
+    "PACKAGE_MANIFEST.json",
+    "evidence/verification/geometry.json",
+    "evidence/verification/solver.json",
+    "task1_sphere/ai_model/cv.json",
+    "task1_sphere/spots/stability_certificate.json",
+    "task1_sphere/spots/summary.json",
+    "task1_sphere/stripes/stability_certificate.json",
+    "task1_sphere/stripes/summary.json",
+    "task2_frog/ai_model/cv.json",
+    "task2_frog/spots/stability_certificate.json",
+    "task2_frog/spots/summary.json",
+    "task2_frog/stripes/stability_certificate.json",
+    "task2_frog/stripes/summary.json"
+  ],
+  "legacy_nonstandard_json": [
+    {
+      "path": "task3_inversion/summary.json",
+      "sha256": "d975a6094a8859c1b58602bfa17d371cb03a92478017446a20dea2338853469b",
+      "nonfinite_tokens": {
+        "NaN": 61
+      },
+      "status": "preserved_legacy_python_json_extension",
+      "parameters_or_model_changed": false
+    },
+    {
+      "path": "task1_sphere/ai_model/dataset.json",
+      "sha256": "4157f250928e0c0ee7ad8976ef76f2f4a915b84b36b15f5a1a0146aa9da9a4f6",
+      "nonfinite_tokens": {
+        "Infinity": 14
+      },
+      "status": "preserved_legacy_python_json_extension",
+      "parameters_or_model_changed": false
+    },
+    {
+      "path": "task2_frog/ai_model/dataset.json",
+      "sha256": "ee19eb9e949faa7cdf62883e2c609ec4464b4b836ed19c11eb6d0d4ffa1165bf",
+      "nonfinite_tokens": {
+        "Infinity": 10
+      },
+      "status": "preserved_legacy_python_json_extension",
+      "parameters_or_model_changed": false
+    }
+  ],
+  "csv_schema_checks": [
+    {
+      "path": "evidence/evaluation.csv",
+      "rows": 96,
+      "columns": 30
+    },
+    {
+      "path": "evidence/legacy_metrics.csv",
+      "rows": 4,
+      "columns": 10
+    },
+    {
+      "path": "task3_inversion/cutoff_curve.csv",
+      "rows": 36,
+      "columns": 12
+    },
+    {
+      "path": "task3_inversion/grid_points.csv",
+      "rows": 49,
+      "columns": 9
+    },
+    {
+      "path": "task3_inversion/type_map.csv",
+      "rows": 169,
+      "columns": 8
+    }
+  ],
+  "policy": "Formal legacy inputs remain byte-identical; Python json supports these NaN/Infinity tokens. Strict RFC JSON consumers require an explicit nonfinite adapter. No unknown exception is allowed."
+}

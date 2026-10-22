@@ -212,6 +212,7 @@ class EvaluationRecord:
     input_hash: str | None = None
     result_hash: str | None = None
     target_pattern: str | None = None
+    pattern: str | None = None          # observed morphology of this record (alias kept explicit)
     parameters: dict = field(default_factory=dict)
     seed: int | None = None
     model_id: str = "none"
@@ -249,6 +250,8 @@ class EvaluationRecord:
                 self.full_residual, self.rotation_removed_residual)
         if self.shape_match is None and self.observed_pattern is not None:
             self.shape_match = shape_matches(self.observed_pattern, self.target_pattern)
+        if self.pattern is None:
+            self.pattern = self.observed_pattern
         self.end_to_end_success = bool(task_success(self))
         self.failure_reason = failure_reason(self)
         return self

@@ -1,0 +1,190 @@
+{
+  "schema_version": "aic-frog-engineering-delivery-20261022",
+  "base_main": "37a4d25f0aa30cb30be47059715130add0aac5d4",
+  "engineering_status": "PASS",
+  "upload_ready": false,
+  "upload_blocker": "team name pending; named report/package require final check",
+  "unit_tests": {
+    "before": 83,
+    "after": 89,
+    "passed": true
+  },
+  "independent_zip_acceptance": {
+    "passed": true,
+    "checks": 21,
+    "check_names": [
+      "zip_crc",
+      "zip_root_layout",
+      "zip_relative_posix_names",
+      "required_deliverables_present",
+      "manifest_present",
+      "manifest_hashes_match",
+      "zip_files_all_listed",
+      "every_file_has_reason_and_source",
+      "no_absolute_local_paths",
+      "no_secret_material",
+      "no_task4_material",
+      "packaged_code_imports",
+      "four_mat_acceptance",
+      "inversion_parameters_present",
+      "inversion_mat_is_steady",
+      "inversion_report_has_errors",
+      "inversion_visuals_present",
+      "report_page_limit",
+      "report_numbers_match_package",
+      "zip_name_matches_manifest",
+      "draft_status_recorded"
+    ],
+    "zip": "submission/drafts/待填_初赛_AI-MECH-2026-002_result.zip",
+    "zip_sha256": "f70c64347c34c5c43eceba06ae15aab0da41567782c86c9efb49a51e3d214be6",
+    "report": "submission/report/初赛技术报告_交付草稿_v2.pdf",
+    "report_sha256": "cff3892478dea1fdc38442f3d541d296809862bbd61b965ac938b6429f905eae",
+    "report_pages": 2
+  },
+  "historical_zip_preserved": {
+    "path": "submission/待填_初赛_AI-MECH-2026-002_result.zip",
+    "sha256": "b6fcd50e9bf5fb88287eec5e434cd02b3ea12919f4cfe45736791325ca7939dd"
+  },
+  "formal_mat_readback": {
+    "status": "PASS",
+    "tasks": {
+      "task1_sphere/spots": {
+        "mat_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+        "full_residual": 8.422602727722893e-15,
+        "float64_accepted": true,
+        "spectrum": {
+          "status": "numerical_check_passed",
+          "checked_pairs": 40,
+          "sampled_max_real": -6.231004404613164e-06,
+          "max_absolute_pair_residual": 1.7287113905760838e-13,
+          "max_relative_pair_residual": 7.551918127315448e-10,
+          "evidence": "saved metadata checked; eigenvectors are not bundled",
+          "mathematical_full_spectrum_proof": false
+        }
+      },
+      "task1_sphere/stripes": {
+        "mat_sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
+        "full_residual": 2.4366269654958772e-14,
+        "float64_accepted": true,
+        "spectrum": {
+          "status": "numerical_check_passed",
+          "checked_pairs": 40,
+          "sampled_max_real": -1.4777975565754154e-06,
+          "max_absolute_pair_residual": 1.4283866417741944e-14,
+          "max_relative_pair_residual": 2.3296503863459255e-09,
+          "evidence": "saved metadata checked; eigenvectors are not bundled",
+          "mathematical_full_spectrum_proof": false
+        }
+      },
+      "task2_frog/spots": {
+        "mat_sha256": "19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb",
+        "full_residual": 2.1711302588470847e-14,
+        "float64_accepted": true,
+        "spectrum": {
+          "status": "numerical_check_passed",
+          "checked_pairs": 40,
+          "sampled_max_real": -0.00010348974019058204,
+          "max_absolute_pair_residual": 1.503716635453165e-14,
+          "max_relative_pair_residual": 9.550663303918817e-12,
+          "evidence": "saved metadata checked; eigenvectors are not bundled",
+          "mathematical_full_spectrum_proof": false
+        }
+      },
+      "task2_frog/stripes": {
+        "mat_sha256": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
+        "full_residual": 1.0056589446857191e-14,
+        "float64_accepted": true,
+        "spectrum": {
+          "status": "numerical_check_passed",
+          "checked_pairs": 40,
+          "sampled_max_real": -0.0001548304287718098,
+          "max_absolute_pair_residual": 5.020027371746558e-15,
+          "max_relative_pair_residual": 9.035325539183106e-12,
+          "evidence": "saved metadata checked; eigenvectors are not bundled",
+          "mathematical_full_spectrum_proof": false
+        }
+      }
+    },
+    "manifest_files": 80
+  },
+  "model_loading_smoke": [
+    {
+      "surface": "frog",
+      "sha256": "9a29124ab1eb2ab82948378f75372095514f0afe033e0a50693fb969e3989038",
+      "prediction_type": "spots",
+      "warnings": {
+        "InconsistentVersionWarning_count": 110
+      }
+    },
+    {
+      "surface": "sphere5",
+      "sha256": "bf05b8ac78ded38a59dc52c415102f08825c3f866e5c8e16f3b4d7fdd59d17da",
+      "prediction_type": "spots",
+      "warnings": {
+        "InconsistentVersionWarning_count": 110
+      }
+    }
+  ],
+  "json_schema": "strict new outputs; 3 immutable legacy NaN/Infinity input files explicitly listed in submission/evidence/json_schema_audit.json",
+  "spectral_scope": "saved three-configuration eigenpair metadata audited; full spectra not recomputed/proven; frog unshifted LR failures preserved",
+  "linux_runtime": "not_run",
+  "expensive_training_and_generation": "not_run",
+  "removed_scripts": [
+    {
+      "path": "scripts/windows/setup_ssh.ps1",
+      "sha256": "529aadb22e3fd69d86725a46645dd864eb106752cb66c88aa26faab4361d701b",
+      "contains_personal_path": false,
+      "contains_ip": false,
+      "reason": "unreferenced host/network/remote-maintenance utility; never executed"
+    },
+    {
+      "path": "scripts/windows/reset_amcache.ps1",
+      "sha256": "091346a57ff8326dcf3e8f093ce565e3602c32416a6797cea805a931050c42bc",
+      "contains_personal_path": false,
+      "contains_ip": false,
+      "reason": "unreferenced host/network/remote-maintenance utility; never executed"
+    },
+    {
+      "path": "scripts/windows/reset_amcache.bat",
+      "sha256": "0cf76d1b9688ed7bba6509d1e735f00d836b14c388154fb1684135bc1510d426",
+      "contains_personal_path": false,
+      "contains_ip": false,
+      "reason": "unreferenced host/network/remote-maintenance utility; never executed"
+    },
+    {
+      "path": "scripts/windows/open_firewall.bat",
+      "sha256": "4dbb52628964d78658b54dda28bb41f76dd928dbc1103b86b90a20446f0df427",
+      "contains_personal_path": false,
+      "contains_ip": false,
+      "reason": "unreferenced host/network/remote-maintenance utility; never executed"
+    },
+    {
+      "path": "scripts/windows/net_diag.ps1",
+      "sha256": "31d71fb20bc56390b011505e0b4bf7a48d886d83655d57f3064b8b9f8168dfce",
+      "contains_personal_path": false,
+      "contains_ip": true,
+      "reason": "unreferenced host/network/remote-maintenance utility; never executed"
+    },
+    {
+      "path": "scripts/windows/crash_info.ps1",
+      "sha256": "f579b64c4af82eb9e3e9374a190b84e3a42bea9cce8f095b334c5658051b690f",
+      "contains_personal_path": false,
+      "contains_ip": false,
+      "reason": "unreferenced host/network/remote-maintenance utility; never executed"
+    },
+    {
+      "path": "scripts/windows/push_from_mac.sh",
+      "sha256": "316754fb85bd3a7c83a03fa9cf15d1114d20a51e0505b8724cc11e8b06c37bab",
+      "contains_personal_path": true,
+      "contains_ip": false,
+      "reason": "unreferenced host/network/remote-maintenance utility; never executed"
+    },
+    {
+      "path": "scripts/windows/stop_jobs.bat",
+      "sha256": "c8c032170c13ac0cdae73dba1999cc41628e4cf76b7c8a945cac93e819add612",
+      "contains_personal_path": false,
+      "contains_ip": false,
+      "reason": "unreferenced host/network/remote-maintenance utility; never executed"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+# Optional delivery/PDF validation tools; PDE core dependencies stay in requirements.txt.
+PyMuPDF>=1.24,<2

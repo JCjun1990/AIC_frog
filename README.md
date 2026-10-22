@@ -15,8 +15,9 @@ submission/
   task3_inversion/              反演参数、目标—生成对比、误差指标
   evidence/                     评测与校核证据
   code/                         可复现代码 + 两个组委会附件
-  report/初赛技术报告.pdf        两页技术报告（单独提交用）
-  待填_初赛_AI-MECH-2026-002_result.zip   完整提交包（ZIP）
+  report/初赛技术报告_交付草稿_v2.pdf        两页技术报告（单独提交用）
+  drafts/待填_初赛_AI-MECH-2026-002_result.zip   当前一致性草稿 ZIP
+  待填_初赛_AI-MECH-2026-002_result.zip   历史旧草稿（不要上传）
 ```
 
 根目录的 `turing_rd/`、`scripts/`、`tests/` 是开发版代码与回归测试；
@@ -24,11 +25,11 @@ submission/
 
 ## 状态与注意
 
-- 提交包与报告已完成工程验收（21/21 独立解包检查）。
+- 提交包与报告已完成工程验收（历史基准；本次验收见 `submission/VALIDATION.md`）。
 - **队名仍为“待填”**：ZIP 名、报告队伍行均为占位符；补齐队名并重新生成后方可上传。
 - 正式候选（MAT SHA256 前缀）：球面斑点 `44f5931a`、球面条纹 `ef132d82`、
   青蛙斑点 `19a92c65`、青蛙条纹 `aa99f137`。
-- 完整残差阈值 1e-11；球面两组有三配置有限谱检查，青蛙两组为 `not_checked`；
+- 完整残差阈值 1e-11；四组均有三配置有限数值谱证书；青蛙最大已采样实部分别约 −1.0349e-4、−1.5483e-4；
   有限谱检查不是数学全谱证明。
 - 研究阶段（adaptive v1/v2）没有超过既有 A2 基线，未合并进本提交版本。
 
@@ -37,10 +38,12 @@ submission/
 ```bash
 python3.11 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-python -m unittest discover -s tests        # 83 项
+python -m unittest discover -s tests
 python scripts/verify_solver.py
 python scripts/verify_geometry.py
 ```
+
+当前 ZIP 位于 `submission/drafts/`，已按当前证据重新构建；根下旧 ZIP 原样保留，仅作历史草稿。队名仍未确定。
 
 完整提交包已包含 `submission/code/`，可直接在解压目录中查看/复算；
 `submission/README_提交.md` 给出逐任务复现命令与口径说明。

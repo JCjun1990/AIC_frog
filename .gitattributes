@@ -1,2 +1,10 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Stable hashes on Windows/Linux; repository policy only.
+* text=auto eol=lf
+*.mat binary
+*.joblib binary
+*.zip binary
+*.pdf binary
+*.png binary
+
+# Frozen payload bytes are certificate-bound, including their original line endings.
+submission/** -text whitespace=cr-at-eol
