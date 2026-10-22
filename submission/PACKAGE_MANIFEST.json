@@ -1,0 +1,844 @@
+{
+ "schema_version": "aic-frog-i03-package-v1",
+ "generated_utc": "2026-10-21T13:49:17.278595+00:00",
+ "problem": "AI-MECH-2026-002",
+ "round": "初赛",
+ "team": "待填",
+ "delivery_status": "draft: team name pending; regenerate before upload",
+ "formal_candidates": {
+  "task1_sphere_spots": {
+   "mat": "results\\i01_float64_verified\\tasks\\sphere6_spots\\solution.mat",
+   "mat_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+   "summary": "results\\i01_float64_verified\\tasks\\sphere6_spots\\summary.json",
+   "summary_sha256": "0aecee7d420d0ee77ba4ae02c5a7add2555a35fb755e9317401a2375441004a9",
+   "stability_certificate": "results\\i02_stability\\certificates\\spots\\stability_certificate.json",
+   "stability_certificate_sha256": "05680c9548b499ec0f54aba24326065f88f6c4e4b10e3c94a99fedd5615fd6a9",
+   "full_residual": 8.422602727722895e-15,
+   "spectral_status": "numerical_check_passed",
+   "spectral_max_real": -6.231004404613164e-06
+  },
+  "task1_sphere_stripes": {
+   "mat": "results\\i02_stability\\candidates\\seed2_v2\\solution.mat",
+   "mat_sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
+   "summary": "results\\i02_stability\\candidates\\seed2_v2\\summary.json",
+   "summary_sha256": "47e2289b72af678776068ff743b20a5ea577dc77905e086c24d1981451958b98",
+   "stability_certificate": "results\\i02_stability\\certificates\\seed2\\stability_certificate.json",
+   "stability_certificate_sha256": "da6381fe8cdc71c02c3686a3f55ae89c0c4b07b38356c25d6ac5222dfb6331df",
+   "full_residual": 2.436626965495878e-14,
+   "spectral_status": "numerical_check_passed",
+   "spectral_max_real": -1.4777975565754154e-06
+  },
+  "task2_frog_spots": {
+   "mat": "results\\i01_float64_verified\\tasks\\frog_spots\\solution.mat",
+   "mat_sha256": "19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb",
+   "summary": "results\\i01_float64_verified\\tasks\\frog_spots\\summary.json",
+   "summary_sha256": "8a73cb7f41861809267c86725596f5722b2d6fd0601ec1acd09154920c0bc59d",
+   "stability_certificate": "results\\i03_delivery\\frog_stability_v2\\frog_spots\\frog_stability_certificate.json",
+   "stability_certificate_sha256": "3ea6afe851176c8b39e60cc8d48c214ea9b61213730c9d3dbc96fa775acd6887",
+   "full_residual": 2.1711302588470844e-14,
+   "spectral_status": "numerical_check_passed",
+   "spectral_max_real": -0.00010348974019060739
+  },
+  "task2_frog_stripes": {
+   "mat": "results\\i01_float64_verified\\tasks\\frog_stripes\\solution.mat",
+   "mat_sha256": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
+   "summary": "results\\i01_float64_verified\\tasks\\frog_stripes\\summary.json",
+   "summary_sha256": "2dc9360e2a23a16c383d8da37007a11cc266da827ce8c2ee03540e58474c4964",
+   "stability_certificate": "results\\i03_delivery\\frog_stability_v2\\frog_stripes\\frog_stability_certificate.json",
+   "stability_certificate_sha256": "b6f527be86202d24969fa237cbfe0240b5692cebee6d0e70db85c9af89965de7",
+   "full_residual": 1.0056589446857193e-14,
+   "spectral_status": "numerical_check_passed",
+   "spectral_max_real": -0.00015483042877182372
+  }
+ },
+ "inversion": {
+  "estimate": {
+   "F": 0.027712399999999998,
+   "k": 0.0600398,
+   "J": 1.7483049050723682,
+   "band_threshold": 1.8767319236508624,
+   "band_F": [
+    0.026712399999999997,
+    0.0287124
+   ],
+   "band_k": [
+    0.0598398,
+    0.06133979999999999
+   ],
+   "bootstrap_F": [
+    0.027712399999999998,
+    0.027712399999999998,
+    0.027812399999999998,
+    0.027812399999999998,
+    0.027812399999999998
+   ],
+   "bootstrap_k": [
+    0.059989799999999996,
+    0.059989799999999996,
+    0.059989799999999996,
+    0.0600398,
+    0.0600398
+   ],
+   "cutoff_sensitivity": {
+    "16.0": {
+     "F": 0.027212399999999998,
+     "k": 0.0602898,
+     "F_features": 0.031512399999999996,
+     "k_features": 0.059939799999999994,
+     "closed_form": [
+      0.026768898543142985,
+      0.058413360051882954
+     ]
+    },
+    "25.0": {
+     "F": 0.0282124,
+     "k": 0.05988979999999999,
+     "F_features": 0.0288124,
+     "k_features": 0.0597898,
+     "closed_form": [
+      0.028057464762669942,
+      0.06044300744111597
+     ]
+    }
+   }
+  },
+  "given": {
+   "F": 0.028,
+   "k": 0.062,
+   "Du": 0.000278,
+   "Dv": 0.000139
+  }
+ },
+ "files": [
+  {
+   "path": "task1_sphere/spots/solution.mat",
+   "source": "results\\i01_float64_verified\\tasks\\sphere6_spots\\solution.mat",
+   "source_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+   "sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+   "bytes": 655704,
+   "reason": "正式生成解（float64，Solution.u/v，与附件同格式）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task1_sphere/spots/summary.json",
+   "source": "results\\i01_float64_verified\\tasks\\sphere6_spots\\summary.json",
+   "source_sha256": "0aecee7d420d0ee77ba4ae02c5a7add2555a35fb755e9317401a2375441004a9",
+   "sha256": "f31626dd2f98753412f174f33a4cac694eae64ad9351eb9a971b81dfd2b3cab1",
+   "bytes": 12958,
+   "reason": "I01 MAT 证书：结构、精度、物理范围、完整残差、SHA256",
+   "sanitized": true,
+   "transformations": [
+    "repository absolute paths rewritten as relative POSIX paths"
+   ]
+  },
+  {
+   "path": "task1_sphere/spots/stability_certificate.json",
+   "source": "results\\i02_stability\\certificates\\spots\\stability_certificate.json",
+   "source_sha256": "05680c9548b499ec0f54aba24326065f88f6c4e4b10e3c94a99fedd5615fd6a9",
+   "sha256": "941b44b69a75cd6edf96926c22644f1de7595066be9d3ab087230b3e43b3f96f",
+   "bytes": 40130,
+   "reason": "数值稳定性证书（有限谱采样，绑定同一 MAT 的 SHA256）",
+   "sanitized": true,
+   "transformations": [
+    "repository absolute paths rewritten as relative POSIX paths"
+   ]
+  },
+  {
+   "path": "task1_sphere/spots/final_v.png",
+   "source": "results\\i03_delivery\\figures\\task1_sphere_spots.png",
+   "source_sha256": "438531726910f862da39a988e18d5244a09665747831becd1692e843c34ab0ea",
+   "sha256": "438531726910f862da39a988e18d5244a09665747831becd1692e843c34ab0ea",
+   "bytes": 170944,
+   "reason": "终态可视化：由提交 MAT 直接渲染（三视角）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task1_sphere/stripes/solution.mat",
+   "source": "results\\i02_stability\\candidates\\seed2_v2\\solution.mat",
+   "source_sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
+   "sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
+   "bytes": 655704,
+   "reason": "正式生成解（float64，Solution.u/v，与附件同格式）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task1_sphere/stripes/summary.json",
+   "source": "results\\i02_stability\\candidates\\seed2_v2\\summary.json",
+   "source_sha256": "47e2289b72af678776068ff743b20a5ea577dc77905e086c24d1981451958b98",
+   "sha256": "47e2289b72af678776068ff743b20a5ea577dc77905e086c24d1981451958b98",
+   "bytes": 19527,
+   "reason": "I01 MAT 证书：结构、精度、物理范围、完整残差、SHA256",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task1_sphere/stripes/stability_certificate.json",
+   "source": "results\\i02_stability\\certificates\\seed2\\stability_certificate.json",
+   "source_sha256": "da6381fe8cdc71c02c3686a3f55ae89c0c4b07b38356c25d6ac5222dfb6331df",
+   "sha256": "025d675ace800e8752f7e6d2f4eadb9822c02e7d765b22fa8fbe8d8769685678",
+   "bytes": 40452,
+   "reason": "数值稳定性证书（有限谱采样，绑定同一 MAT 的 SHA256）",
+   "sanitized": true,
+   "transformations": [
+    "repository absolute paths rewritten as relative POSIX paths"
+   ]
+  },
+  {
+   "path": "task1_sphere/stripes/final_v.png",
+   "source": "results\\i03_delivery\\figures\\task1_sphere_stripes.png",
+   "source_sha256": "b7ff6320515843a6b58e6b8b44e4a4452dffe443b584cebd0a9458b441b5f0b5",
+   "sha256": "b7ff6320515843a6b58e6b8b44e4a4452dffe443b584cebd0a9458b441b5f0b5",
+   "bytes": 176349,
+   "reason": "终态可视化：由提交 MAT 直接渲染（三视角）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task2_frog/spots/solution.mat",
+   "source": "results\\i01_float64_verified\\tasks\\frog_spots\\solution.mat",
+   "source_sha256": "19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb",
+   "sha256": "19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb",
+   "bytes": 464472,
+   "reason": "正式生成解（float64，Solution.u/v，与附件同格式）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task2_frog/spots/summary.json",
+   "source": "results\\i01_float64_verified\\tasks\\frog_spots\\summary.json",
+   "source_sha256": "8a73cb7f41861809267c86725596f5722b2d6fd0601ec1acd09154920c0bc59d",
+   "sha256": "3a42fc48f9a3eb57b7ea379b4b9e83825a8edd232e2a2ed7d1c0373bd61933d6",
+   "bytes": 12725,
+   "reason": "I01 MAT 证书：结构、精度、物理范围、完整残差、SHA256",
+   "sanitized": true,
+   "transformations": [
+    "repository absolute paths rewritten as relative POSIX paths"
+   ]
+  },
+  {
+   "path": "task2_frog/spots/stability_certificate.json",
+   "source": "results\\i03_delivery\\frog_stability_v2\\frog_spots\\frog_stability_certificate.json",
+   "source_sha256": "3ea6afe851176c8b39e60cc8d48c214ea9b61213730c9d3dbc96fa775acd6887",
+   "sha256": "3ea6afe851176c8b39e60cc8d48c214ea9b61213730c9d3dbc96fa775acd6887",
+   "bytes": 30542,
+   "reason": "数值稳定性证书（有限谱采样，绑定同一 MAT 的 SHA256）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task2_frog/spots/final_v.png",
+   "source": "results\\i03_delivery\\figures\\task2_frog_spots.png",
+   "source_sha256": "f52ee8106ca633f7442a300714bc4e6ba6e5bb6ca8de4b8eeddb03e2219f5bdd",
+   "sha256": "f52ee8106ca633f7442a300714bc4e6ba6e5bb6ca8de4b8eeddb03e2219f5bdd",
+   "bytes": 162916,
+   "reason": "终态可视化：由提交 MAT 直接渲染（三视角）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task2_frog/stripes/solution.mat",
+   "source": "results\\i01_float64_verified\\tasks\\frog_stripes\\solution.mat",
+   "source_sha256": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
+   "sha256": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
+   "bytes": 464472,
+   "reason": "正式生成解（float64，Solution.u/v，与附件同格式）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task2_frog/stripes/summary.json",
+   "source": "results\\i01_float64_verified\\tasks\\frog_stripes\\summary.json",
+   "source_sha256": "2dc9360e2a23a16c383d8da37007a11cc266da827ce8c2ee03540e58474c4964",
+   "sha256": "9bd4bf61f79a5361366dfc573def8ab7aaeb62be8d210067fcf038b0399a12c8",
+   "bytes": 12748,
+   "reason": "I01 MAT 证书：结构、精度、物理范围、完整残差、SHA256",
+   "sanitized": true,
+   "transformations": [
+    "repository absolute paths rewritten as relative POSIX paths"
+   ]
+  },
+  {
+   "path": "task2_frog/stripes/stability_certificate.json",
+   "source": "results\\i03_delivery\\frog_stability_v2\\frog_stripes\\frog_stability_certificate.json",
+   "source_sha256": "b6f527be86202d24969fa237cbfe0240b5692cebee6d0e70db85c9af89965de7",
+   "sha256": "b6f527be86202d24969fa237cbfe0240b5692cebee6d0e70db85c9af89965de7",
+   "bytes": 30595,
+   "reason": "数值稳定性证书（有限谱采样，绑定同一 MAT 的 SHA256）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task2_frog/stripes/final_v.png",
+   "source": "results\\i03_delivery\\figures\\task2_frog_stripes.png",
+   "source_sha256": "9bf02f7dbae1c5cce7100ab06ab2288ed3a5250c9dddfc2ddbedfcaace18e1b2",
+   "sha256": "9bf02f7dbae1c5cce7100ab06ab2288ed3a5250c9dddfc2ddbedfcaace18e1b2",
+   "bytes": 167489,
+   "reason": "终态可视化：由提交 MAT 直接渲染（三视角）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task1_sphere/ai_model/model.joblib",
+   "source": "results\\ai_generation\\sphere5\\model.joblib",
+   "source_sha256": "bf05b8ac78ded38a59dc52c415102f08825c3f866e5c8e16f3b4d7fdd59d17da",
+   "sha256": "bf05b8ac78ded38a59dc52c415102f08825c3f866e5c8e16f3b4d7fdd59d17da",
+   "bytes": 3718373,
+   "reason": "训练好的小型 MLP（scikit-learn）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task1_sphere/ai_model/dataset.json",
+   "source": "results\\ai_generation\\sphere5\\dataset.json",
+   "source_sha256": "4157f250928e0c0ee7ad8976ef76f2f4a915b84b36b15f5a1a0146aa9da9a4f6",
+   "sha256": "4157f250928e0c0ee7ad8976ef76f2f4a915b84b36b15f5a1a0146aa9da9a4f6",
+   "bytes": 98759,
+   "reason": "自生成训练标签（9×5 网格、每点 1 个初值）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task1_sphere/ai_model/cv.json",
+   "source": "results\\ai_generation\\sphere5\\cv.json",
+   "source_sha256": "acdaf62049991e26b919e56bbeb2b92ae34e570f212db3c6daf6f57ccf2ed8c8",
+   "sha256": "acdaf62049991e26b919e56bbeb2b92ae34e570f212db3c6daf6f57ccf2ed8c8",
+   "bytes": 3515,
+   "reason": "留一法泛化记录与逐点误差",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task2_frog/ai_model/model.joblib",
+   "source": "results\\ai_generation\\frog\\model.joblib",
+   "source_sha256": "9a29124ab1eb2ab82948378f75372095514f0afe033e0a50693fb969e3989038",
+   "sha256": "9a29124ab1eb2ab82948378f75372095514f0afe033e0a50693fb969e3989038",
+   "bytes": 3613989,
+   "reason": "训练好的小型 MLP（scikit-learn）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task2_frog/ai_model/dataset.json",
+   "source": "results\\ai_generation\\frog\\dataset.json",
+   "source_sha256": "ee19eb9e949faa7cdf62883e2c609ec4464b4b836ed19c11eb6d0d4ffa1165bf",
+   "sha256": "ee19eb9e949faa7cdf62883e2c609ec4464b4b836ed19c11eb6d0d4ffa1165bf",
+   "bytes": 100481,
+   "reason": "自生成训练标签（9×5 网格、每点 1 个初值）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task2_frog/ai_model/cv.json",
+   "source": "results\\ai_generation\\frog\\cv.json",
+   "source_sha256": "654322175033402e9c44ed05594a460910d05ffaf8ef3aa2a12259c002c295a0",
+   "sha256": "654322175033402e9c44ed05594a460910d05ffaf8ef3aa2a12259c002c295a0",
+   "bytes": 3496,
+   "reason": "留一法泛化记录与逐点误差",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task3_inversion/summary.md",
+   "source": "results\\inversion\\summary.md",
+   "source_sha256": "5ba7646ddd0a125691179d59745e2c8b3aba01d8ec61b78fa73e9f83e874ce92",
+   "sha256": "5ba7646ddd0a125691179d59745e2c8b3aba01d8ec61b78fa73e9f83e874ce92",
+   "bytes": 5135,
+   "reason": "反演方法、参数表、不确定带与特征对照",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task3_inversion/summary.json",
+   "source": "results\\inversion\\summary.json",
+   "source_sha256": "d975a6094a8859c1b58602bfa17d371cb03a92478017446a20dea2338853469b",
+   "sha256": "d975a6094a8859c1b58602bfa17d371cb03a92478017446a20dea2338853469b",
+   "bytes": 119612,
+   "reason": "反演全过程结构化记录（网格、代理、最终解）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task3_inversion/solution.mat",
+   "source": "results\\inversion\\solution.mat",
+   "source_sha256": "6dda0fcdee688cbd9c5d7ec50f94e61f8a99ee69f3befc64fd05bad761ca20b7",
+   "sha256": "6dda0fcdee688cbd9c5d7ec50f94e61f8a99ee69f3befc64fd05bad761ca20b7",
+   "bytes": 464472,
+   "reason": "最终估计参数下的代表解（Solution.u / Solution.v）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task3_inversion/final_vs_target.png",
+   "source": "results\\inversion\\final_vs_target.png",
+   "source_sha256": "91e746e7d75d14a2fa6758d8b106979dcd469359207d9c661a510598a08d8746",
+   "sha256": "91e746e7d75d14a2fa6758d8b106979dcd469359207d9c661a510598a08d8746",
+   "bytes": 475451,
+   "reason": "目标与生成斑图对比（原始、去噪、估计、题给参数）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task3_inversion/criteria.png",
+   "source": "results\\inversion\\criteria.png",
+   "source_sha256": "36b2f075f5fb0b3c94bbf94c23f36a7cdacc0b36a103a8c822f7a8a3d7096c69",
+   "sha256": "36b2f075f5fb0b3c94bbf94c23f36a7cdacc0b36a103a8c822f7a8a3d7096c69",
+   "bytes": 61575,
+   "reason": "三类判据在 (F, k) 网格上的分布",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task3_inversion/landscape.png",
+   "source": "results\\inversion\\landscape.png",
+   "source_sha256": "5bd0ad104338b5896d62aecc3eb2c139094cba2e9029b2a13afa6520e3ea199c",
+   "sha256": "5bd0ad104338b5896d62aecc3eb2c139094cba2e9029b2a13afa6520e3ea199c",
+   "bytes": 132692,
+   "reason": "GP 代理目标函数地形",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task3_inversion/cutoff.png",
+   "source": "results\\inversion\\cutoff.png",
+   "source_sha256": "6dd4e14cf674a6d43fbc46dcee8bc26006a8c80d71e47b6566f109bfa16036d6",
+   "sha256": "6dd4e14cf674a6d43fbc46dcee8bc26006a8c80d71e47b6566f109bfa16036d6",
+   "bytes": 67632,
+   "reason": "热核低通截断 κ½ 的选择",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task3_inversion/grid_points.csv",
+   "source": "results\\inversion\\grid_points.csv",
+   "source_sha256": "9f3450f747860c9ce773c64aae5715a7d24350f57d6280e1317857bdca2f748d",
+   "sha256": "9f3450f747860c9ce773c64aae5715a7d24350f57d6280e1317857bdca2f748d",
+   "bytes": 3688,
+   "reason": "7×7 网格与每点得分记录",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task3_inversion/type_map.csv",
+   "source": "results\\inversion\\type_map.csv",
+   "source_sha256": "141d7279b745d68ee7f20c9795addbbc5bc44cab9e980e23dd8d39a3f67c7c6a",
+   "sha256": "141d7279b745d68ee7f20c9795addbbc5bc44cab9e980e23dd8d39a3f67c7c6a",
+   "bytes": 12896,
+   "reason": "网格上斑图类型分布",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "task3_inversion/cutoff_curve.csv",
+   "source": "results\\inversion\\cutoff_curve.csv",
+   "source_sha256": "4db74b01b64b648125221ef9c328803d4c5638ade1db8721f8700b882763e9bf",
+   "sha256": "4db74b01b64b648125221ef9c328803d4c5638ade1db8721f8700b882763e9bf",
+   "bytes": 8157,
+   "reason": "κ½ 扫描曲线",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "evidence/ai_vs_solver_summary.md",
+   "source": "results\\ai_generation\\summary.md",
+   "source_sha256": "aee91313687f78a726c6f2ec89dce7649666f4ec6f7bec1c9b9262bf24dddaa0",
+   "sha256": "aee91313687f78a726c6f2ec89dce7649666f4ec6f7bec1c9b9262bf24dddaa0",
+   "bytes": 6238,
+   "reason": "历史 AI 初值 vs 纯积分评测汇总（8 个留出点 × 3 种子）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "evidence/evaluation.csv",
+   "source": "results\\ai_generation\\evaluation.csv",
+   "source_sha256": "a308df6b0649f2276938abb95f4673c52ba8c0f3a452898b7a1e0f12825fc746",
+   "sha256": "a308df6b0649f2276938abb95f4673c52ba8c0f3a452898b7a1e0f12825fc746",
+   "bytes": 33442,
+   "reason": "上述 96 次评测的逐次记录",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "evidence/baseline_summary.md",
+   "source": "results\\baseline\\summary.md",
+   "source_sha256": "ebbc8da366058472629251b9af6e8a26f4ed6021b7e0454461accba3f96cecca",
+   "sha256": "ebbc8da366058472629251b9af6e8a26f4ed6021b7e0454461accba3f96cecca",
+   "bytes": 538,
+   "reason": "四组纯 PDE 基线汇总",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "evidence/stability_comparison.md",
+   "source": "results\\i02_stability\\comparison\\comparison.md",
+   "source_sha256": "c6cde5e64d96ceb2fc23eaf8a4a864151e430d41c1cd1f56b4c92d050540bbf3",
+   "sha256": "c6cde5e64d96ceb2fc23eaf8a4a864151e430d41c1cd1f56b4c92d050540bbf3",
+   "bytes": 4029,
+   "reason": "三份稳定性证书的横向比较（六条带判不稳定，斑点/七条带通过）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "evidence/verification/geometry.json",
+   "source": "results\\verification\\geometry.json",
+   "source_sha256": "4af02500e56b2026342560626c100d8730b86f0f20674ee35856345b21523144",
+   "sha256": "4af02500e56b2026342560626c100d8730b86f0f20674ee35856345b21523144",
+   "bytes": 5073,
+   "reason": "几何/LB 校核记录",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "evidence/verification/solver.json",
+   "source": "results\\verification\\solver.json",
+   "source_sha256": "d2d80db2be47d02824b4d3238b6323852888043529acc36fd49c46a96cf089bf",
+   "sha256": "d2d80db2be47d02824b4d3238b6323852888043529acc36fd49c46a96cf089bf",
+   "bytes": 497,
+   "reason": "求解器与梯度校核记录",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "evidence/verification/time_order.png",
+   "source": "results\\verification\\time_order.png",
+   "source_sha256": "f61e1b7675990dc60c41f7c3c7758a70bd16ddfaed7ac97621d9d385bbd94856",
+   "sha256": "f61e1b7675990dc60c41f7c3c7758a70bd16ddfaed7ac97621d9d385bbd94856",
+   "bytes": 37656,
+   "reason": "时间收敛阶校核图",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "evidence/verification/geometry_convergence.png",
+   "source": "results\\verification\\geometry_convergence.png",
+   "source_sha256": "7b02a5931d2fc3013f0c4dc8f7d8820c818d433476fdfa621fb97205cbfbb82c",
+   "sha256": "7b02a5931d2fc3013f0c4dc8f7d8820c818d433476fdfa621fb97205cbfbb82c",
+   "bytes": 52081,
+   "reason": "LB 算子网格收敛校核图",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/requirements.txt",
+   "source": "requirements.txt",
+   "source_sha256": "bc49d234ad155d743dc062d1192278698b305029e688bacabdb60f473484be7e",
+   "sha256": "bc49d234ad155d743dc062d1192278698b305029e688bacabdb60f473484be7e",
+   "bytes": 475,
+   "reason": "依赖与测试版本",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/frog.mat",
+   "source": "frog.mat",
+   "source_sha256": "6ba3bad43b2733803be148a6744c1b695f270cf0f8a3ba6fbd1b8afd2751d755",
+   "sha256": "6ba3bad43b2733803be148a6744c1b695f270cf0f8a3ba6fbd1b8afd2751d755",
+   "bytes": 758693,
+   "reason": "组委会附件：青蛙曲面网格（原样）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/Solution.mat",
+   "source": "Solution.mat",
+   "source_sha256": "a8a552991cfcd329a5c991c45ecc64c564a03c214988c3bd2fff2473d787d582",
+   "sha256": "a8a552991cfcd329a5c991c45ecc64c564a03c214988c3bd2fff2473d787d582",
+   "bytes": 439637,
+   "reason": "组委会附件：目标斑图（原样）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/__init__.py",
+   "source": "turing_rd\\__init__.py",
+   "source_sha256": "8a6eefe220d6e091af4f758e05f68b1c823b5ab3b1815a3603e2edecbb854483",
+   "sha256": "8a6eefe220d6e091af4f758e05f68b1c823b5ab3b1815a3603e2edecbb854483",
+   "bytes": 774,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/ai_init.py",
+   "source": "turing_rd\\ai_init.py",
+   "source_sha256": "9dc04c1e99f9f1afa66c47b08583df07c3ca7cc27686dd6f3297eb071619b41e",
+   "sha256": "9dc04c1e99f9f1afa66c47b08583df07c3ca7cc27686dd6f3297eb071619b41e",
+   "bytes": 9039,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/batch.py",
+   "source": "turing_rd\\batch.py",
+   "source_sha256": "662d65faa9b2ba68aab5c85592731d0ff37dedccf4b3616114e27207cbfa6f29",
+   "sha256": "662d65faa9b2ba68aab5c85592731d0ff37dedccf4b3616114e27207cbfa6f29",
+   "bytes": 2828,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/diagnostics.py",
+   "source": "turing_rd\\diagnostics.py",
+   "source_sha256": "a7b2d36349dd1ec7d7ccaaeddd4d6b0bf04d3c19f302d7b3c7ed38a1adf661b9",
+   "sha256": "a7b2d36349dd1ec7d7ccaaeddd4d6b0bf04d3c19f302d7b3c7ed38a1adf661b9",
+   "bytes": 13361,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/evaluation.py",
+   "source": "turing_rd\\evaluation.py",
+   "source_sha256": "50575ac6840791d2704ac303027cfc8a84e9534b33ff85d845d515b74f2b6b80",
+   "sha256": "50575ac6840791d2704ac303027cfc8a84e9534b33ff85d845d515b74f2b6b80",
+   "bytes": 17619,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/features.py",
+   "source": "turing_rd\\features.py",
+   "source_sha256": "ac81121104e0f6ea3f9fcf7a73bb336e91aa5e40443cb2228a8d35a63262a10f",
+   "sha256": "ac81121104e0f6ea3f9fcf7a73bb336e91aa5e40443cb2228a8d35a63262a10f",
+   "bytes": 19852,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/geometry.py",
+   "source": "turing_rd\\geometry.py",
+   "source_sha256": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+   "sha256": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+   "bytes": 7319,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/initial.py",
+   "source": "turing_rd\\initial.py",
+   "source_sha256": "8f720fec488feb6be0c9c831a3f574a55271fd1000b7a73b1f09bb3117b5ac6e",
+   "sha256": "8f720fec488feb6be0c9c831a3f574a55271fd1000b7a73b1f09bb3117b5ac6e",
+   "bytes": 2907,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/inverse.py",
+   "source": "turing_rd\\inverse.py",
+   "source_sha256": "efe97e3ec9facb293a215f581f624695c653b0917c5373bd4fd1ab5d1f0246eb",
+   "sha256": "efe97e3ec9facb293a215f581f624695c653b0917c5373bd4fd1ab5d1f0246eb",
+   "bytes": 7604,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/mesh.py",
+   "source": "turing_rd\\mesh.py",
+   "source_sha256": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+   "sha256": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+   "bytes": 4306,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/preprocess.py",
+   "source": "turing_rd\\preprocess.py",
+   "source_sha256": "f016f2ae849c45b257dbcfb9ee2b6d1cf239a74ee8f0cbc6128313d075e262df",
+   "sha256": "f016f2ae849c45b257dbcfb9ee2b6d1cf239a74ee8f0cbc6128313d075e262df",
+   "bytes": 5782,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/result_io.py",
+   "source": "turing_rd\\result_io.py",
+   "source_sha256": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c",
+   "sha256": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c",
+   "bytes": 13596,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/solver.py",
+   "source": "turing_rd\\solver.py",
+   "source_sha256": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166",
+   "sha256": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166",
+   "bytes": 11580,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/stability.py",
+   "source": "turing_rd\\stability.py",
+   "source_sha256": "7b9a6856c7902a33b3721bd6aeefeeaf7d17d525863984dea8cb3f4ba7e7c4c0",
+   "sha256": "7b9a6856c7902a33b3721bd6aeefeeaf7d17d525863984dea8cb3f4ba7e7c4c0",
+   "bytes": 12391,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/steady.py",
+   "source": "turing_rd\\steady.py",
+   "source_sha256": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+   "sha256": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+   "bytes": 23647,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/turing_rd/viz.py",
+   "source": "turing_rd\\viz.py",
+   "source_sha256": "368df32737874f90882fb61beb8087267c4619da2ac981ec8f0a0ec79c9c8469",
+   "sha256": "368df32737874f90882fb61beb8087267c4619da2ac981ec8f0a0ec79c9c8469",
+   "bytes": 3745,
+   "reason": "核心包：网格、LB 算子、求解器、Newton、AI、反演、诊断",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/scripts/ai_generation.py",
+   "source": "scripts\\ai_generation.py",
+   "source_sha256": "81cd5b7d0a9bc510e6f299ecb50fb10146ee917a3d3740559d8fcf8b3726211a",
+   "sha256": "81cd5b7d0a9bc510e6f299ecb50fb10146ee917a3d3740559d8fcf8b3726211a",
+   "bytes": 36857,
+   "reason": "AI 初值生成、训练与评测一键脚本（任务 1、2）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/scripts/invert_target.py",
+   "source": "scripts\\invert_target.py",
+   "source_sha256": "e8d05fc154f9e75d67cc59f9a0cefbf704817c2738500aee55aca99b1cdfa3b4",
+   "sha256": "e8d05fc154f9e75d67cc59f9a0cefbf704817c2738500aee55aca99b1cdfa3b4",
+   "bytes": 38288,
+   "reason": "任务 3 反演一键脚本（去噪、闭式初值、网格打分、GP 极小）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/scripts/run_baseline.py",
+   "source": "scripts\\run_baseline.py",
+   "source_sha256": "f38fd080d502cce01b11f8128086a063aa689107061478c578e72b958c33fc63",
+   "sha256": "f38fd080d502cce01b11f8128086a063aa689107061478c578e72b958c33fc63",
+   "bytes": 12097,
+   "reason": "纯 PDE 基线（对照组）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/scripts/report_baselines.py",
+   "source": "scripts\\report_baselines.py",
+   "source_sha256": "18c1e35709d9495ba7f6eb606a624669cb74a76b1fc5357a16a50af4c694d2a5",
+   "sha256": "18c1e35709d9495ba7f6eb606a624669cb74a76b1fc5357a16a50af4c694d2a5",
+   "bytes": 2590,
+   "reason": "基线汇总",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/scripts/verify_solver.py",
+   "source": "scripts\\verify_solver.py",
+   "source_sha256": "cff9978c389910dfffae6437b05a86c38b56032ebd0790a37bbe8f5e9225ee5d",
+   "sha256": "cff9978c389910dfffae6437b05a86c38b56032ebd0790a37bbe8f5e9225ee5d",
+   "bytes": 9240,
+   "reason": "求解器校核：时间收敛阶、梯度检查、后端一致性",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/scripts/verify_geometry.py",
+   "source": "scripts\\verify_geometry.py",
+   "source_sha256": "9a035ce70c730c77c2164b7ed9280d49d9a836396e021b984c111520bfa6e474",
+   "sha256": "9a035ce70c730c77c2164b7ed9280d49d9a836396e021b984c111520bfa6e474",
+   "bytes": 3268,
+   "reason": "几何校核：LB 算子与曲率的网格收敛",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/scripts/recover_float64_results.py",
+   "source": "scripts\\recover_float64_results.py",
+   "source_sha256": "36d36ace89057985d92668b942211aa17d165f1562f54f341cedde0bd1155980",
+   "sha256": "36d36ace89057985d92668b942211aa17d165f1562f54f341cedde0bd1155980",
+   "bytes": 12449,
+   "reason": "I01 float64 MAT 恢复与证书生成",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/scripts/i02_stability.py",
+   "source": "scripts\\i02_stability.py",
+   "source_sha256": "9466fea71535763ac291ce0a4dc88ccf78293997b97145f7f7ab701b15b9c65f",
+   "sha256": "9466fea71535763ac291ce0a4dc88ccf78293997b97145f7f7ab701b15b9c65f",
+   "bytes": 23188,
+   "reason": "I02 球面多配置稳定性检查",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/scripts/i03_frog_stability.py",
+   "source": "scripts\\i03_frog_stability.py",
+   "source_sha256": "2f7f54e879d0057a74710966e96f5cc0ce8eac55153b03512b97fa3327271d94",
+   "sha256": "2f7f54e879d0057a74710966e96f5cc0ce8eac55153b03512b97fa3327271d94",
+   "bytes": 17539,
+   "reason": "I03 青蛙两组的独立谱检查",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/scripts/i04_evaluate.py",
+   "source": "scripts\\i04_evaluate.py",
+   "source_sha256": "a24df17a79f7e7eb74e36d4868a64c348a19b3967bb4b8398fcf5fddaca34e29",
+   "sha256": "a24df17a79f7e7eb74e36d4868a64c348a19b3967bb4b8398fcf5fddaca34e29",
+   "bytes": 78810,
+   "reason": "I04 统一评测与统计重算",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "code/scripts/json_safe.py",
+   "source": "scripts\\json_safe.py",
+   "source_sha256": "a199b039bdc53366a9538457341b4aa24eb3e83df1b6ad52b1411367bd4b831c",
+   "sha256": "a199b039bdc53366a9538457341b4aa24eb3e83df1b6ad52b1411367bd4b831c",
+   "bytes": 3445,
+   "reason": "严格 JSON 写出（I02/I03/I04 共用）",
+   "sanitized": false,
+   "transformations": []
+  },
+  {
+   "path": "README_提交.md",
+   "source": "generated by scripts/i03_package.py",
+   "source_sha256": null,
+   "sha256": "c145ee4edd23998bbdcc2f823445af36a01a66660cffde7eab8e038baa7af086",
+   "bytes": 7884,
+   "reason": "提交说明：结果、反演、复现命令、口径与未包含内容",
+   "sanitized": false,
+   "transformations": []
+  }
+ ],
+ "exclusions": [
+  "results/ai_generation_fine (unused new model)",
+  "process logs",
+  "superseded candidates",
+  "full I04 record set",
+  "history reports and outline",
+  "environment/caches/git",
+  "absolute local paths and personal configuration",
+  "task 4 (not in preliminary round)"
+ ]
+}

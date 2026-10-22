@@ -1,0 +1,358 @@
+{
+ "pipeline": "i01_bounded_newton_recovery",
+ "surface": "frog",
+ "pattern": "stripes",
+ "F": 0.054,
+ "k": 0.063,
+ "Du": 0.000278,
+ "Dv": 0.000139,
+ "seed": 0,
+ "mat_certificate": {
+  "schema_version": "aic-frog-mat-v1",
+  "diagnostic_version": "full-steady-joint-rms-over-F-v1",
+  "acceptance_scope": "float64_structure_and_full_steady_residual_only",
+  "created_utc": "2026-10-21T10:07:08.889064+00:00",
+  "mat_file": "solution.mat",
+  "mat_sha256": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
+  "parameters": {
+   "F": 0.054,
+   "k": 0.063,
+   "Du": 0.000278,
+   "Dv": 0.000139
+  },
+  "seed": 0,
+  "geometry": {
+   "name": "frog",
+   "n_vertices": 29010,
+   "n_faces": 58016,
+   "laplacian": "robust",
+   "mesh_sha256": "bd33638ba90d00a2828a2f73bda3c8714fbf48c802c1ca9221cb7422e9bae09f",
+   "actual_L_M_sha256": "df9eec723e710c6c38e1944719230bf3d0279b640b2472eda6e3a3c3a946ab8c",
+   "mass_sum": 6.95524597217705
+  },
+  "runtime": {
+   "python": "3.12.5",
+   "numpy": "2.3.2",
+   "scipy": "1.17.0",
+   "robust_laplacian": "1.1.0"
+  },
+  "provenance": {
+   "audit_base": "065396591aef328c3484cb47e196cf5f8be71b6c",
+   "entrypoint": "scripts/recover_float64_results.py",
+   "source_mat": "results/ai_generation/tasks/frog_stripes/solution.mat",
+   "source_mat_sha256": "258ac244745066a3729d1c28fcdc2d59c992d21cef96fd8a42c0704a7cdad19e",
+   "source_summary_sha256": "6a0470d0d80d53430b849a21c97a4e39dd35da6e596db865f696c88140fefd71",
+   "source_initial_image_sha256": "65be67a3f4c3e0c05307b5054a672df4829da76ea026ced29e679d73027bccf7",
+   "frog_input_sha256": "6ba3bad43b2733803be148a6744c1b695f270cf0f8a3ba6fbd1b8afd2751d755",
+   "code_sha256": {
+    "scripts/recover_float64_results.py": "36d36ace89057985d92668b942211aa17d165f1562f54f341cedde0bd1155980",
+    "turing_rd/result_io.py": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c",
+    "turing_rd/steady.py": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+    "turing_rd/diagnostics.py": "a66ff3fabf59296d59742c65eb8f772eabf399c00be6a574316d86a0802becdc",
+    "turing_rd/geometry.py": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+    "turing_rd/mesh.py": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+    "turing_rd/solver.py": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166"
+   },
+   "method": "bounded_newton_from_quantized_mat",
+   "max_newton_iterations": 6,
+   "task_wall_limit_seconds": 120.0,
+   "operator": "robust",
+   "robust_mollify_factor": 1e-05,
+   "threads": 1,
+   "time_integration_steps": 0,
+   "precision_recovery": "newton_correction; dtype conversion alone is not recovery",
+   "environment": {
+    "python": "3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]",
+    "platform": "win32",
+    "packages": {
+     "numpy": "2.3.2",
+     "scipy": "1.17.0",
+     "torch": "2.14.1+cpu",
+     "robust-laplacian": "1.1.0",
+     "matplotlib": "3.10.5"
+    }
+   },
+   "newton_iterations": 1,
+   "max_abs_newton_correction_u": 2.980215596526392e-08,
+   "max_abs_newton_correction_v": 1.4897620526088673e-08
+  },
+  "structure": {
+   "passed": true,
+   "solution_shape": [
+    1,
+    1
+   ],
+   "u_shape": [
+    29010,
+    1
+   ],
+   "v_shape": [
+    29010,
+    1
+   ],
+   "u_dtype": "float64",
+   "v_dtype": "float64",
+   "finite": true
+  },
+  "precision": {
+   "passed": true,
+   "storage_dtype": "float64",
+   "u_float32_roundtrip_exact": false,
+   "v_float32_roundtrip_exact": false,
+   "exact_constant_field": false,
+   "value_precision_origin": "not_entirely_float32_representable",
+   "source_dtype": {
+    "u": "float64",
+    "v": "float64"
+   },
+   "source_values_preserved": true
+  },
+  "physical_range": {
+   "passed": true,
+   "bounds": {
+    "u": [
+     0.0,
+     1.0
+    ],
+    "v_min": 0.0
+   },
+   "u_min": 0.29767648063729857,
+   "u_max": 0.9724358671643367,
+   "v_min": 0.00047557100820501646,
+   "v_max": 0.4275737166475203
+  },
+  "residual": {
+   "formula": "sqrt((RMS_M(Ru)^2 + RMS_M(Rv)^2)/2)/F; RMS_M(a)=sqrt(sum(M*a^2)/sum(M)); Ru=(Du*L*u+M*(-u*v^2+F*(1-u)))/M; Rv=(Dv*L*v+M*(u*v^2-(F+k)*v))/M",
+   "normalization": "F",
+   "rotation_projection": false,
+   "value": 1.0056589446857191e-14,
+   "tolerance": 1e-11,
+   "passed": true,
+   "Ru_rms": 7.547777739105462e-16,
+   "Rv_rms": 1.4187946041493622e-16
+  },
+  "stability_status": "not_evaluated_by_i01",
+  "accepted": true,
+  "failure_reasons": []
+ },
+ "mat_readback_accepted": true,
+ "rel_residual": 1.0056589446857191e-14,
+ "residual_formula": "sqrt((RMS_M(Ru)^2 + RMS_M(Rv)^2)/2)/F; RMS_M(a)=sqrt(sum(M*a^2)/sum(M)); Ru=(Du*L*u+M*(-u*v^2+F*(1-u)))/M; Rv=(Dv*L*v+M*(u*v^2-(F+k)*v))/M",
+ "before_mat_validation": {
+  "schema_version": "aic-frog-mat-v1",
+  "diagnostic_version": "full-steady-joint-rms-over-F-v1",
+  "acceptance_scope": "float64_structure_and_full_steady_residual_only",
+  "created_utc": "2026-10-21T10:07:08.537295+00:00",
+  "mat_file": "solution.mat",
+  "mat_sha256": "258ac244745066a3729d1c28fcdc2d59c992d21cef96fd8a42c0704a7cdad19e",
+  "parameters": {
+   "F": 0.054,
+   "k": 0.063,
+   "Du": 0.000278,
+   "Dv": 0.000139
+  },
+  "seed": 0,
+  "geometry": {
+   "name": "frog",
+   "n_vertices": 29010,
+   "n_faces": 58016,
+   "laplacian": "robust",
+   "mesh_sha256": "bd33638ba90d00a2828a2f73bda3c8714fbf48c802c1ca9221cb7422e9bae09f",
+   "actual_L_M_sha256": "df9eec723e710c6c38e1944719230bf3d0279b640b2472eda6e3a3c3a946ab8c",
+   "mass_sum": 6.95524597217705
+  },
+  "runtime": {
+   "python": "3.12.5",
+   "numpy": "2.3.2",
+   "scipy": "1.17.0",
+   "robust_laplacian": "1.1.0"
+  },
+  "provenance": {
+   "audit_base": "065396591aef328c3484cb47e196cf5f8be71b6c",
+   "entrypoint": "scripts/recover_float64_results.py",
+   "source_mat": "results/ai_generation/tasks/frog_stripes/solution.mat",
+   "source_mat_sha256": "258ac244745066a3729d1c28fcdc2d59c992d21cef96fd8a42c0704a7cdad19e",
+   "source_summary_sha256": "6a0470d0d80d53430b849a21c97a4e39dd35da6e596db865f696c88140fefd71",
+   "source_initial_image_sha256": "65be67a3f4c3e0c05307b5054a672df4829da76ea026ced29e679d73027bccf7",
+   "frog_input_sha256": "6ba3bad43b2733803be148a6744c1b695f270cf0f8a3ba6fbd1b8afd2751d755",
+   "code_sha256": {
+    "scripts/recover_float64_results.py": "36d36ace89057985d92668b942211aa17d165f1562f54f341cedde0bd1155980",
+    "turing_rd/result_io.py": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c",
+    "turing_rd/steady.py": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+    "turing_rd/diagnostics.py": "a66ff3fabf59296d59742c65eb8f772eabf399c00be6a574316d86a0802becdc",
+    "turing_rd/geometry.py": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+    "turing_rd/mesh.py": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+    "turing_rd/solver.py": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166"
+   },
+   "method": "bounded_newton_from_quantized_mat",
+   "max_newton_iterations": 6,
+   "task_wall_limit_seconds": 120.0,
+   "operator": "robust",
+   "robust_mollify_factor": 1e-05,
+   "threads": 1,
+   "time_integration_steps": 0,
+   "precision_recovery": "newton_correction; dtype conversion alone is not recovery",
+   "environment": {
+    "python": "3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]",
+    "platform": "win32",
+    "packages": {
+     "numpy": "2.3.2",
+     "scipy": "1.17.0",
+     "torch": "2.14.1+cpu",
+     "robust-laplacian": "1.1.0",
+     "matplotlib": "3.10.5"
+    }
+   }
+  },
+  "structure": {
+   "passed": true,
+   "solution_shape": [
+    1,
+    1
+   ],
+   "u_shape": [
+    29010,
+    1
+   ],
+   "v_shape": [
+    29010,
+    1
+   ],
+   "u_dtype": "float64",
+   "v_dtype": "float64",
+   "finite": true
+  },
+  "precision": {
+   "passed": false,
+   "storage_dtype": "float64",
+   "u_float32_roundtrip_exact": true,
+   "v_float32_roundtrip_exact": true,
+   "exact_constant_field": false,
+   "value_precision_origin": "float32_quantized_nonuniform"
+  },
+  "physical_range": {
+   "passed": true,
+   "bounds": {
+    "u": [
+     0.0,
+     1.0
+    ],
+    "v_min": 0.0
+   },
+   "u_min": 0.2976764738559723,
+   "u_max": 0.9724358916282654,
+   "v_min": 0.0004755709960591048,
+   "v_max": 0.42757371068000793
+  },
+  "residual": {
+   "formula": "sqrt((RMS_M(Ru)^2 + RMS_M(Rv)^2)/2)/F; RMS_M(a)=sqrt(sum(M*a^2)/sum(M)); Ru=(Du*L*u+M*(-u*v^2+F*(1-u)))/M; Rv=(Dv*L*v+M*(u*v^2-(F+k)*v))/M",
+   "normalization": "F",
+   "rotation_projection": false,
+   "value": 2.392993887003308e-06,
+   "tolerance": 1e-11,
+   "passed": false,
+   "Ru_rms": 1.7929067559364998e-07,
+   "Rv_rms": 3.537419381018105e-08
+  },
+  "stability_status": "not_evaluated_by_i01",
+  "accepted": false,
+  "failure_reasons": [
+   "float32_quantized_nonuniform_field",
+   "full_residual_above_tolerance"
+  ]
+ },
+ "newton_history": [
+  {
+   "iter": 0,
+   "step": 0.0,
+   "rel_residual": 2.392993887003308e-06,
+   "wall_s": 0.0
+  },
+  {
+   "iter": 1,
+   "step": 1.0,
+   "rel_residual": 1.0056589446857191e-14,
+   "wall_s": 0.3148679733276367
+  }
+ ],
+ "pattern_before": {
+  "v_min": 0.0004755709960591048,
+  "v_max": 0.42757371068000793,
+  "contrast": 0.36334852543659507,
+  "wavelength": 0.482884923344634,
+  "type": "stripes_or_maze",
+  "threshold": 0.1880923317512497,
+  "n_components": 5,
+  "n_low_components": 13,
+  "area_fraction": 0.46664529672281785,
+  "euler": -7,
+  "perimeter": 27.920006402790555,
+  "compactness": 0.2616063175897186,
+  "mean_component_area": 0.6491265640933486
+ },
+ "pattern_after": {
+  "v_min": 0.00047557100820501646,
+  "v_max": 0.4275737166475203,
+  "contrast": 0.36334852592188277,
+  "wavelength": 0.4828849233088944,
+  "type": "stripes_or_maze",
+  "threshold": 0.18809233200088046,
+  "n_components": 5,
+  "n_low_components": 13,
+  "area_fraction": 0.46664529672281785,
+  "euler": -7,
+  "perimeter": 27.92000639821613,
+  "compactness": 0.26160631767544196,
+  "mean_component_area": 0.6491265640933486
+ },
+ "shape_preserved": true,
+ "stability_status": "not_recomputed_I01_only",
+ "full_discrete_stability": "not_certified_by_I01",
+ "source_stability_record": {
+  "stable": true,
+  "max_re_lambda": -0.00015483042877324142
+ },
+ "legacy_residual_before_quantization": 7.760235064727349e-15,
+ "provenance": {
+  "audit_base": "065396591aef328c3484cb47e196cf5f8be71b6c",
+  "entrypoint": "scripts/recover_float64_results.py",
+  "source_mat": "results/ai_generation/tasks/frog_stripes/solution.mat",
+  "source_mat_sha256": "258ac244745066a3729d1c28fcdc2d59c992d21cef96fd8a42c0704a7cdad19e",
+  "source_summary_sha256": "6a0470d0d80d53430b849a21c97a4e39dd35da6e596db865f696c88140fefd71",
+  "source_initial_image_sha256": "65be67a3f4c3e0c05307b5054a672df4829da76ea026ced29e679d73027bccf7",
+  "frog_input_sha256": "6ba3bad43b2733803be148a6744c1b695f270cf0f8a3ba6fbd1b8afd2751d755",
+  "code_sha256": {
+   "scripts/recover_float64_results.py": "36d36ace89057985d92668b942211aa17d165f1562f54f341cedde0bd1155980",
+   "turing_rd/result_io.py": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c",
+   "turing_rd/steady.py": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+   "turing_rd/diagnostics.py": "a66ff3fabf59296d59742c65eb8f772eabf399c00be6a574316d86a0802becdc",
+   "turing_rd/geometry.py": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+   "turing_rd/mesh.py": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+   "turing_rd/solver.py": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166"
+  },
+  "method": "bounded_newton_from_quantized_mat",
+  "max_newton_iterations": 6,
+  "task_wall_limit_seconds": 120.0,
+  "operator": "robust",
+  "robust_mollify_factor": 1e-05,
+  "threads": 1,
+  "time_integration_steps": 0,
+  "precision_recovery": "newton_correction; dtype conversion alone is not recovery",
+  "environment": {
+   "python": "3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]",
+   "platform": "win32",
+   "packages": {
+    "numpy": "2.3.2",
+    "scipy": "1.17.0",
+    "torch": "2.14.1+cpu",
+    "robust-laplacian": "1.1.0",
+    "matplotlib": "3.10.5"
+   }
+  },
+  "newton_iterations": 1,
+  "max_abs_newton_correction_u": 2.980215596526392e-08,
+  "max_abs_newton_correction_v": 1.4897620526088673e-08
+ },
+ "note": "I01 acceptance covers MAT structure, precision and full PDE residual only; no new stability claim.",
+ "wall_seconds": 6.171999999991385
+}

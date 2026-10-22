@@ -1,9 +1,0 @@
-{
-  "worker_launcher_pid": 105008,
-  "parent_pid": 95792,
-  "stage": "finish",
-  "started_unix": 1792585259.1896513,
-  "timeout_seconds": 1800.0,
-  "entrypoint_snapshot_sha256": "e1cf67ea240df419258ea2f155bf7072b35d4d1eaa7101744c5f3a2b7df0a0ac",
-  "windows_timeout_policy": "taskkill of this Popen PID and its descendants only"
-}

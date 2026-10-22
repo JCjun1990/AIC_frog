@@ -1,2 +1,0 @@
-Solving LR, sigma=0.001, k=8, ncv=96
-{"solver_converged": true, "returned_k": 8, "full_max_real": 1.6654278901900703e-06, "all_pairs_validated": true, "found_reliable_positive": true}

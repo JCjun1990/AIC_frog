@@ -1,7 +1,0 @@
-Building sphere6 robust geometry and loading unchanged historical model
-Starting single seed2 relaxation; physical time cap=200000; parent stage timeout active
-  t=6500: Newton 7.80e-05 -> 8.82e-07
-  t=9000: Newton 2.07e-05 -> 1.53e-05
-  t=11500: Newton 6.44e-06 -> 5.94e-06
-  t=92500: Newton 2.05e-06 -> 9.56e-15
-{"stage": "relax", "converged_relative_equilibrium": true, "relax_time": 92500.0, "rel_residual_rot": 9.558881669876461e-15, "cost": {"relax_wall_seconds": 625.7190000000119, "relax_cpu_seconds": 621.09375, "stage_wall_seconds": 629.75, "stage_cpu_seconds": 624.171875}}
