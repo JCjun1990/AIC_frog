@@ -1,0 +1,140 @@
+{
+  "surface": "sphere",
+  "pattern": "stripes",
+  "params": {
+    "F": 0.054,
+    "k": 0.063,
+    "Du": 0.000278,
+    "Dv": 0.000139
+  },
+  "mesh": {
+    "name": "sphere_L6",
+    "laplacian": "robust",
+    "vertices": 40962,
+    "triangles": 81920,
+    "area": 12.56543114247639,
+    "euler_characteristic": 2,
+    "edge_min": 0.01729898300810681,
+    "edge_median": 0.018876085595518514,
+    "edge_max": 0.02067304414009293,
+    "negative_weight_fraction": 0.0,
+    "bbox_extent": [
+      2.0,
+      2.0,
+      2.0
+    ]
+  },
+  "args": {
+    "surface": "sphere",
+    "pattern": "stripes",
+    "level": 6,
+    "frog": "/Users/jcjun1990/Desktop/turing/frog.mat",
+    "laplacian": "robust",
+    "ic": "seeded",
+    "no_normalize_z": false,
+    "eps": 0.05,
+    "noise_length": 0.05,
+    "seed": 0,
+    "scheme": "sbdf2",
+    "dt": 1.0,
+    "t_switch": 20000,
+    "dt_late": 4.0,
+    "t_max": 400000,
+    "t_min": 2000,
+    "tol": 1e-07,
+    "polish_tol": 1e-11,
+    "log_every": 500,
+    "backend": "lu",
+    "device": "cpu",
+    "no_stability": false,
+    "out": "/Users/jcjun1990/Desktop/turing/results/baseline"
+  },
+  "scales": {
+    "diffusion_length_ell": 0.07175059684872417,
+    "reaction_time_tau": 18.51851851851852,
+    "equivalent_radius": 0.9999626189028167,
+    "radius_over_ell": 13.936645307788787,
+    "h_median_over_ell": 0.2630791439312488,
+    "explicit_dt_limit": 0.2691140405708347,
+    "dt_over_tau": 0.054,
+    "diffusion_number_median": 0.7802269007058314,
+    "uniform_equilibrium_exists": false
+  },
+  "time": {
+    "t_final": 400000.0,
+    "steps": 115000,
+    "wall_seconds_time_integration": 1264.9260189533234,
+    "wall_seconds_total": 1268.0165967941284,
+    "device": "cpu",
+    "backend": "lu",
+    "torch": "2.14.1"
+  },
+  "converged_time_integration": false,
+  "final_rates": {
+    "dudt_rms": 6.145836543954146e-06,
+    "dvdt_rms": 4.555840147413067e-06
+  },
+  "polish": null,
+  "final_residual": {
+    "Ru_rms": 6.145790897375853e-06,
+    "Rv_rms": 4.5558098631764145e-06,
+    "steady_Ru_rms": 6.145790897375853e-06,
+    "steady_Rv_rms": 4.5558098631764145e-06,
+    "reaction_scale": 0.013113416591072615,
+    "steady_rel": 0.00019817779186207904
+  },
+  "final_pattern": {
+    "v_min": 0.009730924701672862,
+    "v_max": 0.4297053978572004,
+    "contrast": 0.3540442480547916,
+    "wavelength": 0.4671883971915292,
+    "type": "stripes_or_maze",
+    "threshold": 0.19592219578062076,
+    "n_components": 3,
+    "n_low_components": 1,
+    "area_fraction": 0.45978624471771185,
+    "euler": 3,
+    "perimeter": 52.73960803397739,
+    "compactness": 0.0783052160811823,
+    "mean_component_area": 1.9258041327527355
+  },
+  "linear_stability": {
+    "eigenvalues": [
+      [
+        3.938377786932802e-06,
+        0.0
+      ],
+      [
+        -1.6702962112877598e-06,
+        0.0
+      ],
+      [
+        -3.4885273864015357e-06,
+        0.0
+      ],
+      [
+        -0.00011500902279301282,
+        0.0
+      ],
+      [
+        -0.0001594400757140512,
+        0.0
+      ],
+      [
+        -0.00018480149663543748,
+        0.0
+      ],
+      [
+        -0.0002397232660762917,
+        0.0
+      ],
+      [
+        -0.00029846001720612494,
+        0.0
+      ]
+    ],
+    "max_real": 3.938377786932802e-06,
+    "sigma": 0.001,
+    "seconds": 3.074842929840088
+  }
+}
