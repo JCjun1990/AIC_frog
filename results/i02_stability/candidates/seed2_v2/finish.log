@@ -1,0 +1,23 @@
+Following the relative-equilibrium family to zero drift (orient_polish)
+  orient  1: dt 6.02e+04, rotated 5.000e-02 rad, |omega| 8.304e-07, full residual 3.375e-06
+  orient  2: dt 5.82e+04, rotated 5.000e-02 rad, |omega| 8.586e-07, full residual 3.484e-06
+  orient  3: dt 6.56e+04, rotated 4.754e-02 rad, |omega| 7.617e-07, full residual 3.085e-06
+  orient  4: dt 8.19e+04, rotated 4.173e-02 rad, |omega| 6.109e-07, full residual 2.470e-06
+  orient  5: dt 1.10e+05, rotated 3.760e-02 rad, |omega| 4.541e-07, full residual 1.833e-06
+  orient  6: dt 1.57e+05, rotated 3.430e-02 rad, |omega| 3.179e-07, full residual 1.281e-06
+  orient  7: dt 2.34e+05, rotated 3.169e-02 rad, |omega| 2.133e-07, full residual 8.576e-07
+  orient  8: dt 3.55e+05, rotated 2.991e-02 rad, |omega| 1.408e-07, full residual 5.653e-07
+  orient  9: dt 5.21e+05, rotated 2.950e-02 rad, |omega| 9.600e-08, full residual 3.846e-07
+  orient 10: dt 6.76e+05, rotated 3.188e-02 rad, |omega| 7.397e-08, full residual 2.958e-07
+  orient 11: dt 6.68e+05, rotated 4.101e-02 rad, |omega| 7.490e-08, full residual 2.989e-07
+  orient 12: dt 5.10e+05, rotated 5.000e-02 rad, |omega| 9.803e-08, full residual 3.902e-07
+  orient 13: dt 4.13e+05, rotated 5.000e-02 rad, |omega| 1.212e-07, full residual 4.814e-07
+  orient 14: dt 4.02e+05, rotated 5.000e-02 rad, |omega| 1.243e-07, full residual 4.931e-07
+  orient 15: dt 5.07e+05, rotated 4.559e-02 rad, |omega| 9.870e-08, full residual 3.910e-07
+  orient 16: dt 8.21e+05, rotated 3.459e-02 rad, |omega| 6.089e-08, full residual 2.411e-07
+  orient 17: dt 1.82e+06, rotated 2.440e-02 rad, |omega| 2.745e-08, full residual 1.087e-07
+  orient 18: dt 6.89e+06, rotated 1.379e-02 rad, |omega| 7.261e-09, full residual 2.875e-08
+  orient 19: dt 6.89e+07, rotated 4.473e-03 rad, |omega| 6.416e-10, full residual 2.541e-09
+  orient 20: dt 6.89e+08, rotated 4.290e-04 rad, |omega| 6.225e-12, full residual 2.465e-11
+  orient 21: dt 6.89e+09, rotated 4.199e-06 rad, |omega| 6.099e-15, full residual 2.437e-14
+{"candidate_generation_accepted": true, "residual": 2.436626965495878e-14, "n_components": 7, "rel_residual_rot_relax": 9.558881669876461e-15, "cost": {"solve_wall_seconds": 881.0310000000172, "solve_cpu_seconds": 875.59375, "orient_wall_seconds": 251.61829161643982, "finish_wall_seconds": 255.31200000000536, "finish_cpu_seconds": 254.5, "relax_wall_seconds": 625.7190000000119, "total_worker_wall_seconds": 255.43700000000536, "note": "finish-stage process wall time; relax wall time comes from the relax stage"}}

@@ -1,0 +1,221 @@
+{
+ "generated_utc": "2026-10-21T13:01:24.868363+00:00",
+ "candidates": {
+  "task1_sphere_spots": {
+   "mat_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+   "full_residual": 8.422602727722895e-15,
+   "pattern": {
+    "type": "spots",
+    "n_components": 45,
+    "n_low_components": 1,
+    "wavelength": 0.4749382998589481,
+    "area_fraction": 0.24051129970743174,
+    "compactness": 1.0058064619169023,
+    "v_max": 0.3640467480146301,
+    "v_min": 0.0028957918901565192
+   },
+   "spectral": {
+    "status": "numerical_check_passed",
+    "max_real": -6.231004404613164e-06,
+    "positive_eigenvalues": [],
+    "evidence_level": "i02_unprojected_three_configuration_k12_k20_k8_with_eigenpair_residuals",
+    "scope": "sphere6 finite sample; rotation-labelled modes included in the decision",
+    "certificate": "results\\i02_stability\\certificates\\spots\\stability_certificate.json",
+    "certificate_sha256": "05680c9548b499ec0f54aba24326065f88f6c4e4b10e3c94a99fedd5615fd6a9",
+    "mathematical_full_spectrum_proof": false
+   }
+  },
+  "task1_sphere_stripes": {
+   "mat_sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
+   "full_residual": 2.436626965495878e-14,
+   "pattern": {
+    "type": "stripes_or_maze",
+    "n_components": 7,
+    "n_low_components": 6,
+    "wavelength": 0.47140546455773763,
+    "area_fraction": 0.4594491240112421,
+    "compactness": 0.1861942567308401,
+    "v_max": 0.42768825570683455,
+    "v_min": 0.01210521190773715
+   },
+   "spectral": {
+    "status": "numerical_check_passed",
+    "max_real": -1.4777975565754154e-06,
+    "positive_eigenvalues": [],
+    "evidence_level": "i02_unprojected_three_configuration_k12_k20_k8_with_eigenpair_residuals",
+    "scope": "sphere6 finite sample; rotation-labelled modes included in the decision",
+    "certificate": "results\\i02_stability\\certificates\\seed2\\stability_certificate.json",
+    "certificate_sha256": "da6381fe8cdc71c02c3686a3f55ae89c0c4b07b38356c25d6ac5222dfb6331df",
+    "mathematical_full_spectrum_proof": false
+   }
+  },
+  "task2_frog_spots": {
+   "mat_sha256": "19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb",
+   "full_residual": 2.1711302588470844e-14,
+   "pattern": {
+    "type": "spots",
+    "n_components": 22,
+    "n_low_components": 3,
+    "wavelength": 0.4639390304308712,
+    "area_fraction": 0.24808761754335662,
+    "compactness": 0.867874946705608,
+    "v_max": 0.38018620601496056,
+    "v_min": 0.0002907946259743183
+   },
+   "spectral": {
+    "status": "numerical_check_passed",
+    "max_real": -0.00010348974019060739,
+    "positive_eigenvalues": [],
+    "evidence_level": "i03_frog_three_shift_invert_bracketing_no_rotation_label",
+    "scope": "frog finite sample; no rotation symmetry; three shift-invert configurations; no perturbation test; unshifted LR not usable",
+    "certificate": "results\\i03_delivery\\frog_stability_v2\\frog_spots\\frog_stability_certificate.json",
+    "certificate_sha256": "3ea6afe851176c8b39e60cc8d48c214ea9b61213730c9d3dbc96fa775acd6887",
+    "mathematical_full_spectrum_proof": false
+   }
+  },
+  "task2_frog_stripes": {
+   "mat_sha256": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
+   "full_residual": 1.0056589446857193e-14,
+   "pattern": {
+    "type": "stripes_or_maze",
+    "n_components": 5,
+    "n_low_components": 13,
+    "wavelength": 0.48288492330889443,
+    "area_fraction": 0.46664529672281785,
+    "compactness": 0.26160631767544196,
+    "v_max": 0.4275737166475203,
+    "v_min": 0.00047557100820501646
+   },
+   "spectral": {
+    "status": "numerical_check_passed",
+    "max_real": -0.00015483042877182372,
+    "positive_eigenvalues": [],
+    "evidence_level": "i03_frog_three_shift_invert_bracketing_no_rotation_label",
+    "scope": "frog finite sample; no rotation symmetry; three shift-invert configurations; no perturbation test; unshifted LR not usable",
+    "certificate": "results\\i03_delivery\\frog_stability_v2\\frog_stripes\\frog_stability_certificate.json",
+    "certificate_sha256": "b6f527be86202d24969fa237cbfe0240b5692cebee6d0e70db85c9af89965de7",
+    "mathematical_full_spectrum_proof": false
+   }
+  }
+ },
+ "inversion": {
+  "F": 0.027712399999999998,
+  "k": 0.0600398,
+  "given_F": 0.028,
+  "given_k": 0.062,
+  "band_F": [
+   0.026712399999999997,
+   0.0287124
+  ],
+  "band_k": [
+   0.0598398,
+   0.06133979999999999
+  ],
+  "n_final_ok": 5,
+  "final_runs": 6,
+  "wavelength": 0.49134336414574853,
+  "target_wavelength": 0.547401021868085,
+  "kappa_v": 12.634999242330881,
+  "target_kappa_v": 10.579829355603355,
+  "defect_fraction": 0.2857142857142857,
+  "target_defect_fraction": 0.6,
+  "residual_seed2000": 8.736330813094862e-14,
+  "n_spots": 21.0
+ },
+ "robustness": {
+  "robustness:frog_spots": {
+   "planned": 33,
+   "executed": 33,
+   "missing": 0,
+   "error": 0,
+   "valid": 33,
+   "steady_full": 32,
+   "spectral_passed": 31,
+   "spectral_positive": 1,
+   "shape_match": 33,
+   "within_budget": 32,
+   "legacy_success": 31,
+   "strict_success": 31
+  },
+  "robustness:frog_stripes": {
+   "planned": 33,
+   "executed": 33,
+   "missing": 0,
+   "error": 0,
+   "valid": 33,
+   "steady_full": 33,
+   "spectral_passed": 33,
+   "spectral_positive": 0,
+   "shape_match": 31,
+   "within_budget": 33,
+   "legacy_success": 33,
+   "strict_success": 31
+  },
+  "robustness:sphere6_spots": {
+   "planned": 23,
+   "executed": 23,
+   "missing": 0,
+   "error": 0,
+   "valid": 23,
+   "steady_full": 17,
+   "spectral_passed": 14,
+   "spectral_positive": 3,
+   "shape_match": 23,
+   "within_budget": 17,
+   "legacy_success": 17,
+   "strict_success": 14
+  },
+  "robustness:sphere6_stripes": {
+   "planned": 23,
+   "executed": 23,
+   "missing": 0,
+   "error": 0,
+   "valid": 23,
+   "steady_full": 22,
+   "spectral_passed": 9,
+   "spectral_positive": 13,
+   "shape_match": 23,
+   "within_budget": 22,
+   "legacy_success": 22,
+   "strict_success": 9
+  }
+ },
+ "cv": {
+  "frog": {
+   "n_samples": 45,
+   "fit_s": 8.174434185028076,
+   "type_accuracy": 0.6444444444444445,
+   "kappa0_rel_median": 0.04525598667808928,
+   "qv_rmse_median": 0.011278508778762032,
+   "density_rel_median": 0.17332188311814867,
+   "n_spots_rel_median": 0.1875,
+   "pv_rmse_median": 0.05659863378677354,
+   "kappa0_rel_p90": 0.11583348244319787,
+   "qv_rmse_p90": 0.07598783948449361,
+   "density_rel_p90": 0.4274562812354501,
+   "n_spots_rel_p90": 0.41666666666666674,
+   "pv_rmse_p90": 0.14692111538565739
+  },
+  "sphere5": {
+   "n_samples": 45,
+   "fit_s": 4.922187805175781,
+   "type_accuracy": 0.8888888888888888,
+   "kappa0_rel_median": 0.054139398926906224,
+   "qv_rmse_median": 0.010562794723648482,
+   "density_rel_median": 0.2266730405109063,
+   "n_spots_rel_median": 0.2272727272727273,
+   "pv_rmse_median": 0.024900716393000098,
+   "kappa0_rel_p90": 0.18676063643961882,
+   "qv_rmse_p90": 0.044906583385982704,
+   "density_rel_p90": 0.7075076632548107,
+   "n_spots_rel_p90": 0.7077922077922079,
+   "pv_rmse_p90": 0.05876836902538057
+  }
+ },
+ "generation_wall_s": {
+  "frog_spots": 334.61969208717346,
+  "frog_stripes": 223.957337141037,
+  "sphere6_spots": 1517.015098810196,
+  "sphere6_stripes": 510.51260113716125
+ }
+}

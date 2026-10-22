@@ -1,0 +1,57 @@
+{
+  "diagnostic_version": "i03-frog-unprojected-spectrum-v1",
+  "requested_k": 8,
+  "returned_k": 2,
+  "solver_converged": false,
+  "solver_error": "ARPACK error -1: No convergence (3001 iterations, 2/8 eigenvectors converged)",
+  "method": "mass_similarity_arpack_direct",
+  "which": "LR",
+  "sigma": null,
+  "ncv": 48,
+  "arpack_tolerance": 1e-10,
+  "arpack_maxiter": 3000,
+  "v0_seed": 2026,
+  "similarity": "B=sqrt(Mfull)*J*invsqrt(Mfull); J=Mfull^-1*weak_J",
+  "rotation_labelling": "none: the frog mesh has no continuous rotation symmetry",
+  "pairs": [
+    {
+      "eigenvalue": [
+        -0.000825807772449776,
+        0.035025427115343455
+      ],
+      "residual_absolute_M": 6.677242876655528e-13,
+      "residual_relative_M": 9.529345227458081e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 6.677242876655528e-12
+    },
+    {
+      "eigenvalue": [
+        -0.000825807772449776,
+        -0.035025427115343455
+      ],
+      "residual_absolute_M": 6.677242876655528e-13,
+      "residual_relative_M": 9.529345227458081e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 6.677242876655528e-12
+    }
+  ],
+  "full_max_real": -0.000825807772449776,
+  "nonrotation_max_real": -0.000825807772449776,
+  "all_pairs_validated": true,
+  "found_reliable_positive": false,
+  "max_residual_absolute_M": 6.677242876655528e-13,
+  "pair_absolute_tolerance": 1e-09,
+  "pair_relative_tolerance": 1e-07,
+  "wall_seconds": 234.72999389999313,
+  "limitation": "Finite eigenpair sampling with multiple shifts and direct largest-real-part ARPACK is a numerical check, not a mathematical full-spectrum proof. Rotational overlap is descriptive and never suppresses a positive mode.",
+  "eigenpairs_file": "eigenpairs_direct_LR_k8.npz",
+  "eigenpairs_sha256": "d1b9bfe65a24f54ae28658e8701aadbe1e2618c4e1089ba3a5e455af33fea65e"
+}

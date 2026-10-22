@@ -1,0 +1,579 @@
+{
+  "pipeline": "i02_historical_seed2_reproduction",
+  "surface": "sphere6",
+  "seed": 2,
+  "F": 0.054,
+  "k": 0.063,
+  "Du": 0.000278,
+  "Dv": 0.000139,
+  "mat_certificate": {
+    "schema_version": "aic-frog-mat-v1",
+    "diagnostic_version": "full-steady-joint-rms-over-F-v1",
+    "acceptance_scope": "float64_structure_and_full_steady_residual_only",
+    "created_utc": "2026-10-21T12:25:19.647823+00:00",
+    "mat_file": "solution.mat",
+    "mat_sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
+    "parameters": {
+      "F": 0.054,
+      "k": 0.063,
+      "Du": 0.000278,
+      "Dv": 0.000139
+    },
+    "seed": 2,
+    "geometry": {
+      "name": "sphere_L6",
+      "n_vertices": 40962,
+      "n_faces": 81920,
+      "laplacian": "robust",
+      "mesh_sha256": "9a4e4f22b09c05d7921f9969f62576ac017123c7cd98ce4c5652e6020572f95f",
+      "actual_L_M_sha256": "b164cb85b4491be8ffc99513ac31fca2fcaff7238853868076e2f9a1fa2c075a",
+      "mass_sum": 12.56543114247639
+    },
+    "runtime": {
+      "python": "3.12.5",
+      "numpy": "2.3.2",
+      "scipy": "1.17.0",
+      "robust_laplacian": "1.1.0"
+    },
+    "provenance": {
+      "entrypoint": "scripts/i02_generate_candidate.py --seed2",
+      "method": "historical_AI_initial_state_then_original_relax_polish",
+      "stages": {
+        "requested": "relax",
+        "relax": "AI initial state + original relax loop, rotation-corrected residual",
+        "finish": "orient_polish along the relative-equilibrium family + newton_polish"
+      },
+      "seed": 2,
+      "phase_radians": 0.8218787590475991,
+      "parameters": {
+        "F": 0.054,
+        "k": 0.063,
+        "Du": 0.000278,
+        "Dv": 0.000139
+      },
+      "surface": "sphere6",
+      "laplacian": "robust",
+      "robust_mollify_factor": 1e-05,
+      "schedule": [
+        [
+          1.0,
+          2000.0
+        ],
+        [
+          4.0,
+          200000.0
+        ]
+      ],
+      "check_every": 500.0,
+      "tol": 1e-11,
+      "orient": true,
+      "threads": 1,
+      "hard_timeout_seconds": 1500.0,
+      "model_path": "results\\ai_generation\\sphere5\\model.joblib",
+      "model_sha256": "bf05b8ac78ded38a59dc52c415102f08825c3f866e5c8e16f3b4d7fdd59d17da",
+      "historical_diagnostic_cache": "results\\ai_generation\\tasks\\robustness_jobs\\ai_sphere6_0.0540_0.0630_2.pkl",
+      "historical_diagnostic_cache_sha256": "7b8514580ce53ddb764e9085be5723424c32adc0280470ba68154d21a94843d7",
+      "historical_cache_contains_fields": false,
+      "code_sha256": {
+        "scripts/i02_generate_candidate.py": "e1cf67ea240df419258ea2f155bf7072b35d4d1eaa7101744c5f3a2b7df0a0ac",
+        "scripts/json_safe.py": "a199b039bdc53366a9538457341b4aa24eb3e83df1b6ad52b1411367bd4b831c",
+        "scripts/ai_generation.py": "81cd5b7d0a9bc510e6f299ecb50fb10146ee917a3d3740559d8fcf8b3726211a",
+        "turing_rd/ai_init.py": "9dc04c1e99f9f1afa66c47b08583df07c3ca7cc27686dd6f3297eb071619b41e",
+        "turing_rd/steady.py": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+        "turing_rd/solver.py": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166",
+        "turing_rd/geometry.py": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+        "turing_rd/mesh.py": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+        "turing_rd/result_io.py": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c",
+        "turing_rd/diagnostics.py": "a7b2d36349dd1ec7d7ccaaeddd4d6b0bf04d3c19f302d7b3c7ed38a1adf661b9"
+      },
+      "packages": {
+        "numpy": "2.3.2",
+        "scipy": "1.17.0",
+        "torch": "2.14.1+cpu",
+        "robust-laplacian": "1.1.0",
+        "scikit-learn": "1.7.1",
+        "joblib": "1.5.3"
+      },
+      "python": "3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]",
+      "model_environment_caveat": "Model stores sklearn 1.9.1 estimators; current runtime version recorded above. No model is modified or retrained.",
+      "stability_scope": "not_evaluated_by_candidate_generator",
+      "solver_cost": {
+        "orient_wall_seconds": 251.61829161643982,
+        "finish_wall_seconds": 255.31200000000536,
+        "finish_cpu_seconds": 254.5,
+        "relax_wall_seconds": 625.7190000000119
+      },
+      "actual_relax_time": 92500.0,
+      "actual_relax_steps": 24625,
+      "rel_residual_rot_relax": 9.558881669876461e-15
+    },
+    "structure": {
+      "passed": true,
+      "solution_shape": [
+        1,
+        1
+      ],
+      "u_shape": [
+        40962,
+        1
+      ],
+      "v_shape": [
+        40962,
+        1
+      ],
+      "u_dtype": "float64",
+      "v_dtype": "float64",
+      "finite": true
+    },
+    "precision": {
+      "passed": true,
+      "storage_dtype": "float64",
+      "u_float32_roundtrip_exact": false,
+      "v_float32_roundtrip_exact": false,
+      "exact_constant_field": false,
+      "value_precision_origin": "not_entirely_float32_representable",
+      "source_dtype": {
+        "u": "float64",
+        "v": "float64"
+      },
+      "source_values_preserved": true
+    },
+    "physical_range": {
+      "passed": true,
+      "bounds": {
+        "u": [
+          0.0,
+          1.0
+        ],
+        "v_min": 0.0
+      },
+      "u_min": 0.29316539082789916,
+      "u_max": 0.8674552728242615,
+      "v_min": 0.01210521190773715,
+      "v_max": 0.42768825570683455
+    },
+    "residual": {
+      "formula": "sqrt((RMS_M(Ru)^2 + RMS_M(Rv)^2)/2)/F; RMS_M(a)=sqrt(sum(M*a^2)/sum(M)); Ru=(Du*L*u+M*(-u*v^2+F*(1-u)))/M; Rv=(Dv*L*v+M*(u*v^2-(F+k)*v))/M",
+      "normalization": "F",
+      "rotation_projection": false,
+      "value": 2.436626965495878e-14,
+      "tolerance": 1e-11,
+      "passed": true,
+      "Ru_rms": 1.496374170765757e-15,
+      "Rv_rms": 1.1060790144357639e-15
+    },
+    "stability_status": "not_evaluated_by_i01",
+    "accepted": true,
+    "failure_reasons": []
+  },
+  "mat_readback_accepted": true,
+  "rel_residual": 2.436626965495878e-14,
+  "pattern": {
+    "v_min": 0.01210521190773715,
+    "v_max": 0.42768825570683455,
+    "contrast": 0.35407440722918027,
+    "wavelength": 0.47140546455773763,
+    "type": "stripes_or_maze",
+    "threshold": 0.19587602402919274,
+    "n_components": 7,
+    "n_low_components": 6,
+    "area_fraction": 0.4594491240112421,
+    "euler": 2,
+    "perimeter": 52.2249728460518,
+    "compactness": 0.1861942567308401,
+    "mean_component_area": 0.8247394758906227
+  },
+  "candidate_generation_accepted": true,
+  "solver_info": {
+    "relax_time": 92500.0,
+    "relax_steps": 24625,
+    "rel_residual_relax": 2.6334897738100684e-06,
+    "rel_residual_rot_relax": 9.558881669876461e-15,
+    "rel_residual": 2.4366269654958772e-14,
+    "rel_residual_rot": 3.2016234164950475e-15,
+    "omega": [
+      3.9858668000585317e-19,
+      4.9530767069579485e-19,
+      6.100272583767448e-15
+    ],
+    "steady": true,
+    "converged": true,
+    "orient": {
+      "steps": 21,
+      "rotated_rad": 0.6984420923700022,
+      "from": 2.6334897738100675e-06,
+      "to": 2.436626965495878e-14,
+      "newton_to": 2.436626965495878e-14,
+      "wall_s": 251.61829161643982,
+      "history": [
+        {
+          "step": 0,
+          "dt": 0.0,
+          "rel_residual": 2.6334897738100675e-06,
+          "omega": [
+            -2.3930461585517804e-13,
+            1.4509316928404672e-13,
+            6.474919158695293e-07
+          ],
+          "theta": 0.0,
+          "wall_s": 0.0
+        },
+        {
+          "step": 1,
+          "dt": 60211.01460357502,
+          "rel_residual": 3.374501525711102e-06,
+          "omega": [
+            -7.841388214920009e-14,
+            4.521564216348803e-14,
+            8.304128460414778e-07
+          ],
+          "theta": 0.05,
+          "wall_s": 16.16088104248047
+        },
+        {
+          "step": 2,
+          "dt": 58236.71497095926,
+          "rel_residual": 3.484121434397793e-06,
+          "omega": [
+            8.720139522755914e-14,
+            -4.245277777390979e-14,
+            8.585649108974132e-07
+          ],
+          "theta": 0.05,
+          "wall_s": 30.229063987731934
+        },
+        {
+          "step": 3,
+          "dt": 65645.84218910763,
+          "rel_residual": 3.0854409092595946e-06,
+          "omega": [
+            1.7525398614025433e-13,
+            -8.490974894255352e-14,
+            7.616628613882677e-07
+          ],
+          "theta": 0.047543154375018964,
+          "wall_s": 44.25825619697571
+        },
+        {
+          "step": 4,
+          "dt": 81850.47360181957,
+          "rel_residual": 2.4699323516987835e-06,
+          "omega": [
+            1.744168373876814e-13,
+            -8.46039441064549e-14,
+            6.108700145491397e-07
+          ],
+          "theta": 0.0417280091809236,
+          "wall_s": 57.83184289932251
+        },
+        {
+          "step": 5,
+          "dt": 110107.79616720279,
+          "rel_residual": 1.8325317328159455e-06,
+          "omega": [
+            1.2851402543097877e-13,
+            -6.367453565670697e-14,
+            4.5410045192504496e-07
+          ],
+          "theta": 0.03759796157198099,
+          "wall_s": 68.85503458976746
+        },
+        {
+          "step": 6,
+          "dt": 157272.6954524193,
+          "rel_residual": 1.2805282675923418e-06,
+          "omega": [
+            7.565017192553412e-14,
+            -3.88912462136276e-14,
+            3.1791913946769626e-07
+          ],
+          "theta": 0.034303092274270176,
+          "wall_s": 79.55806612968445
+        },
+        {
+          "step": 7,
+          "dt": 234400.087439017,
+          "rel_residual": 8.576007610858284e-07,
+          "omega": [
+            3.6114362914731615e-14,
+            -1.955501621220893e-14,
+            2.1331050063284381e-07
+          ],
+          "theta": 0.031689662587365726,
+          "wall_s": 90.44688248634338
+        },
+        {
+          "step": 8,
+          "dt": 355003.56436342036,
+          "rel_residual": 5.652513752615075e-07,
+          "omega": [
+            1.3845441073598611e-14,
+            -8.310323944959977e-15,
+            1.4084365628738937e-07
+          ],
+          "theta": 0.029909832602341566,
+          "wall_s": 101.22996425628662
+        },
+        {
+          "step": 9,
+          "dt": 520843.56308332336,
+          "rel_residual": 3.8460225560601376e-07,
+          "omega": [
+            3.988256521664032e-15,
+            -3.6151442088611766e-15,
+            9.599811448951524e-08
+          ],
+          "theta": 0.029496680525981353,
+          "wall_s": 112.30794072151184
+        },
+        {
+          "step": 10,
+          "dt": 675906.3628275286,
+          "rel_residual": 2.9582554830611233e-07,
+          "omega": [
+            3.145692422868348e-16,
+            -2.635240381291543e-15,
+            7.397474376603629e-08
+          ],
+          "theta": 0.031884352452864397,
+          "wall_s": 123.99503803253174
+        },
+        {
+          "step": 11,
+          "dt": 667565.3405529223,
+          "rel_residual": 2.988521845393778e-07,
+          "omega": [
+            -7.104979967682961e-16,
+            -2.6225680255601073e-15,
+            7.489903528931958e-08
+          ],
+          "theta": 0.04101361399873123,
+          "wall_s": 135.17309260368347
+        },
+        {
+          "step": 12,
+          "dt": 510029.69754380925,
+          "rel_residual": 3.902008883900881e-07,
+          "omega": [
+            -3.3275055910926025e-16,
+            -1.7978739381788123e-15,
+            9.803350714828764e-08
+          ],
+          "theta": 0.05,
+          "wall_s": 148.91598200798035
+        },
+        {
+          "step": 13,
+          "dt": 412541.6352717752,
+          "rel_residual": 4.814198624896058e-07,
+          "omega": [
+            -7.041328729596258e-17,
+            -1.0221897358471212e-15,
+            1.2119988802357099e-07
+          ],
+          "theta": 0.05,
+          "wall_s": 163.2928020954132
+        },
+        {
+          "step": 14,
+          "dt": 402167.5335463755,
+          "rel_residual": 4.930666005593533e-07,
+          "omega": [
+            3.3160314035484557e-17,
+            -4.300839413782891e-16,
+            1.2432629645434647e-07
+          ],
+          "theta": 0.05,
+          "wall_s": 179.9588017463684
+        },
+        {
+          "step": 15,
+          "dt": 506605.48843890865,
+          "rel_residual": 3.9104473632840565e-07,
+          "omega": [
+            2.613754201186555e-17,
+            -1.214501556687852e-16,
+            9.869612773851638e-08
+          ],
+          "theta": 0.04558885319023888,
+          "wall_s": 195.08652997016907
+        },
+        {
+          "step": 16,
+          "dt": 821208.7484047869,
+          "rel_residual": 2.4113277983199267e-07,
+          "omega": [
+            7.042457374268304e-18,
+            -2.727213151290605e-17,
+            6.088585892092106e-08
+          ],
+          "theta": 0.034591834977993355,
+          "wall_s": 207.45266389846802
+        },
+        {
+          "step": 17,
+          "dt": 1821790.2848169934,
+          "rel_residual": 1.0867881903684457e-07,
+          "omega": [
+            1.3056792785203975e-18,
+            -4.003940272307595e-18,
+            2.7445530046298787e-08
+          ],
+          "theta": 0.0243993904580139,
+          "wall_s": 218.91779613494873
+        },
+        {
+          "step": 18,
+          "dt": 6885748.163914749,
+          "rel_residual": 2.8752649087014735e-08,
+          "omega": [
+            -2.0952131414798394e-19,
+            2.129468385634465e-19,
+            7.2613750619037396e-09
+          ],
+          "theta": 0.013789613701488937,
+          "wall_s": 231.10661602020264
+        },
+        {
+          "step": 19,
+          "dt": 68857481.63914749,
+          "rel_residual": 2.5405791940010907e-09,
+          "omega": [
+            1.229906956454578e-18,
+            -8.248035116747306e-21,
+            6.41615416741817e-10
+          ],
+          "theta": 0.004472802080996755,
+          "wall_s": 240.2725465297699
+        },
+        {
+          "step": 20,
+          "dt": 688574816.391475,
+          "rel_residual": 2.4647293100702995e-11,
+          "omega": [
+            -5.32107077769787e-19,
+            -9.60020144492084e-20,
+            6.22459014618993e-12
+          ],
+          "theta": 0.0004290394547438666,
+          "wall_s": 246.07387518882751
+        },
+        {
+          "step": 21,
+          "dt": 6885748163.914749,
+          "rel_residual": 2.436626965495878e-14,
+          "omega": [
+            2.2946966667788316e-19,
+            1.6892946222275933e-19,
+            6.099311057650323e-15
+          ],
+          "theta": 4.1989370484837484e-06,
+          "wall_s": 251.61829161643982,
+          "reduced_eigenvalues": [
+            -6.7068103781951395e-06,
+            -5.72293016391942e-06,
+            -1.4809681582820776e-06
+          ]
+        }
+      ]
+    },
+    "newton": [],
+    "newton_after_orient": [
+      {
+        "iter": 0,
+        "step": 0.0,
+        "rel_residual": 2.436626965495878e-14,
+        "wall_s": 0.0
+      }
+    ]
+  },
+  "cost": {
+    "solve_wall_seconds": 881.0310000000172,
+    "solve_cpu_seconds": 875.59375,
+    "orient_wall_seconds": 251.61829161643982,
+    "finish_wall_seconds": 255.31200000000536,
+    "finish_cpu_seconds": 254.5,
+    "relax_wall_seconds": 625.7190000000119,
+    "total_worker_wall_seconds": 255.43700000000536,
+    "note": "finish-stage process wall time; relax wall time comes from the relax stage"
+  },
+  "provenance": {
+    "entrypoint": "scripts/i02_generate_candidate.py --seed2",
+    "method": "historical_AI_initial_state_then_original_relax_polish",
+    "stages": {
+      "requested": "relax",
+      "relax": "AI initial state + original relax loop, rotation-corrected residual",
+      "finish": "orient_polish along the relative-equilibrium family + newton_polish"
+    },
+    "seed": 2,
+    "phase_radians": 0.8218787590475991,
+    "parameters": {
+      "F": 0.054,
+      "k": 0.063,
+      "Du": 0.000278,
+      "Dv": 0.000139
+    },
+    "surface": "sphere6",
+    "laplacian": "robust",
+    "robust_mollify_factor": 1e-05,
+    "schedule": [
+      [
+        1.0,
+        2000.0
+      ],
+      [
+        4.0,
+        200000.0
+      ]
+    ],
+    "check_every": 500.0,
+    "tol": 1e-11,
+    "orient": true,
+    "threads": 1,
+    "hard_timeout_seconds": 1500.0,
+    "model_path": "results\\ai_generation\\sphere5\\model.joblib",
+    "model_sha256": "bf05b8ac78ded38a59dc52c415102f08825c3f866e5c8e16f3b4d7fdd59d17da",
+    "historical_diagnostic_cache": "results\\ai_generation\\tasks\\robustness_jobs\\ai_sphere6_0.0540_0.0630_2.pkl",
+    "historical_diagnostic_cache_sha256": "7b8514580ce53ddb764e9085be5723424c32adc0280470ba68154d21a94843d7",
+    "historical_cache_contains_fields": false,
+    "code_sha256": {
+      "scripts/i02_generate_candidate.py": "e1cf67ea240df419258ea2f155bf7072b35d4d1eaa7101744c5f3a2b7df0a0ac",
+      "scripts/json_safe.py": "a199b039bdc53366a9538457341b4aa24eb3e83df1b6ad52b1411367bd4b831c",
+      "scripts/ai_generation.py": "81cd5b7d0a9bc510e6f299ecb50fb10146ee917a3d3740559d8fcf8b3726211a",
+      "turing_rd/ai_init.py": "9dc04c1e99f9f1afa66c47b08583df07c3ca7cc27686dd6f3297eb071619b41e",
+      "turing_rd/steady.py": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+      "turing_rd/solver.py": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166",
+      "turing_rd/geometry.py": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+      "turing_rd/mesh.py": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+      "turing_rd/result_io.py": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c",
+      "turing_rd/diagnostics.py": "a7b2d36349dd1ec7d7ccaaeddd4d6b0bf04d3c19f302d7b3c7ed38a1adf661b9"
+    },
+    "packages": {
+      "numpy": "2.3.2",
+      "scipy": "1.17.0",
+      "torch": "2.14.1+cpu",
+      "robust-laplacian": "1.1.0",
+      "scikit-learn": "1.7.1",
+      "joblib": "1.5.3"
+    },
+    "python": "3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]",
+    "model_environment_caveat": "Model stores sklearn 1.9.1 estimators; current runtime version recorded above. No model is modified or retrained.",
+    "stability_scope": "not_evaluated_by_candidate_generator",
+    "solver_cost": {
+      "orient_wall_seconds": 251.61829161643982,
+      "finish_wall_seconds": 255.31200000000536,
+      "finish_cpu_seconds": 254.5,
+      "relax_wall_seconds": 625.7190000000119
+    },
+    "actual_relax_time": 92500.0,
+    "actual_relax_steps": 24625,
+    "rel_residual_rot_relax": 9.558881669876461e-15
+  },
+  "stages": {
+    "relax": "stage_relax.json",
+    "checkpoint": "checkpoint_relative_equilibrium.npz",
+    "checkpoint_sha256": "0848d92489f9a744068850b5d2d460957c875435ea6a16272db9d754961c1dc4"
+  },
+  "full_discrete_stability": "not_yet_evaluated",
+  "note": "Generation acceptance is I01 full-residual/structure/precision plus seven-band shape; no stability assertion."
+}

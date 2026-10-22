@@ -1,0 +1,17 @@
+{
+  "command": [
+    "D:\\Code\\AIC_frog\\.venv\\Scripts\\python.exe",
+    "-B",
+    "D:\\Code\\AIC_frog\\scripts\\i02_stability.py",
+    "lowres",
+    "--out",
+    "results\\i02_stability\\timeout_smoke",
+    "--timeout",
+    "0.01"
+  ],
+  "hard_timeout_seconds": 0.01,
+  "status": "timeout",
+  "returncode": 124,
+  "wall_seconds": 0.5620000000053551,
+  "threads": 1
+}

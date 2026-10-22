@@ -1,0 +1,9 @@
+{
+  "worker_launcher_pid": 100232,
+  "parent_pid": 105824,
+  "stage": "relax",
+  "started_unix": 1792584615.0211375,
+  "timeout_seconds": 1500.0,
+  "entrypoint_snapshot_sha256": "e1cf67ea240df419258ea2f155bf7072b35d4d1eaa7101744c5f3a2b7df0a0ac",
+  "windows_timeout_policy": "taskkill of this Popen PID and its descendants only"
+}

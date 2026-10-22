@@ -1,0 +1,368 @@
+{
+  "pipeline": "i01_bounded_newton_recovery",
+  "surface": "sphere6",
+  "pattern": "spots",
+  "F": 0.028,
+  "k": 0.062,
+  "Du": 0.000278,
+  "Dv": 0.000139,
+  "seed": 0,
+  "mat_certificate": {
+    "schema_version": "aic-frog-mat-v1",
+    "diagnostic_version": "full-steady-joint-rms-over-F-v1",
+    "acceptance_scope": "float64_structure_and_full_steady_residual_only",
+    "created_utc": "2026-10-21T10:07:23.179196+00:00",
+    "mat_file": "solution.mat",
+    "mat_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+    "parameters": {
+      "F": 0.028,
+      "k": 0.062,
+      "Du": 0.000278,
+      "Dv": 0.000139
+    },
+    "seed": 0,
+    "geometry": {
+      "name": "sphere_L6",
+      "n_vertices": 40962,
+      "n_faces": 81920,
+      "laplacian": "robust",
+      "mesh_sha256": "9a4e4f22b09c05d7921f9969f62576ac017123c7cd98ce4c5652e6020572f95f",
+      "actual_L_M_sha256": "b164cb85b4491be8ffc99513ac31fca2fcaff7238853868076e2f9a1fa2c075a",
+      "mass_sum": 12.56543114247639
+    },
+    "runtime": {
+      "python": "3.12.5",
+      "numpy": "2.3.2",
+      "scipy": "1.17.0",
+      "robust_laplacian": "1.1.0"
+    },
+    "provenance": {
+      "audit_base": "065396591aef328c3484cb47e196cf5f8be71b6c",
+      "entrypoint": "scripts/recover_float64_results.py",
+      "source_mat": "D:\\Code\\AIC_frog\\results\\ai_generation\\tasks\\sphere6_spots\\solution.mat",
+      "source_mat_sha256": "cce71e2057ca61cbda28459a4343f6c324e5bc9eaa6a98bd1fda4a40fb9f00cd",
+      "source_summary_sha256": "92dfabdad4dc27af49c848e4e50275263ffd19bbd29cf20273ebf5ffb0360330",
+      "source_initial_image_sha256": "9548164c35a6408dd0288d3e3f4a3ccc5764c2443a191021f55202006c40f95b",
+      "frog_input_sha256": "6ba3bad43b2733803be148a6744c1b695f270cf0f8a3ba6fbd1b8afd2751d755",
+      "code_sha256": {
+        "scripts/recover_float64_results.py": "36d36ace89057985d92668b942211aa17d165f1562f54f341cedde0bd1155980",
+        "turing_rd/result_io.py": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c",
+        "turing_rd/steady.py": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+        "turing_rd/diagnostics.py": "a66ff3fabf59296d59742c65eb8f772eabf399c00be6a574316d86a0802becdc",
+        "turing_rd/geometry.py": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+        "turing_rd/mesh.py": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+        "turing_rd/solver.py": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166"
+      },
+      "method": "bounded_newton_from_quantized_mat",
+      "max_newton_iterations": 6,
+      "task_wall_limit_seconds": 120.0,
+      "operator": "robust",
+      "robust_mollify_factor": 1e-05,
+      "threads": 1,
+      "time_integration_steps": 0,
+      "precision_recovery": "newton_correction; dtype conversion alone is not recovery",
+      "environment": {
+        "python": "3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]",
+        "platform": "win32",
+        "packages": {
+          "numpy": "2.3.2",
+          "scipy": "1.17.0",
+          "torch": "2.14.1+cpu",
+          "robust-laplacian": "1.1.0",
+          "matplotlib": "3.10.5"
+        }
+      },
+      "newton_iterations": 1,
+      "max_abs_newton_correction_u": 9.314194693299527e-08,
+      "max_abs_newton_correction_v": 5.7727179203492796e-08
+    },
+    "structure": {
+      "passed": true,
+      "solution_shape": [
+        1,
+        1
+      ],
+      "u_shape": [
+        40962,
+        1
+      ],
+      "v_shape": [
+        40962,
+        1
+      ],
+      "u_dtype": "float64",
+      "v_dtype": "float64",
+      "finite": true
+    },
+    "precision": {
+      "passed": true,
+      "storage_dtype": "float64",
+      "u_float32_roundtrip_exact": false,
+      "v_float32_roundtrip_exact": false,
+      "exact_constant_field": false,
+      "value_precision_origin": "not_entirely_float32_representable",
+      "source_dtype": {
+        "u": "float64",
+        "v": "float64"
+      },
+      "source_values_preserved": true
+    },
+    "physical_range": {
+      "passed": true,
+      "bounds": {
+        "u": [
+          0.0,
+          1.0
+        ],
+        "v_min": 0.0
+      },
+      "u_min": 0.26083845270594025,
+      "u_max": 0.879293764254056,
+      "v_min": 0.0028957918901565192,
+      "v_max": 0.3640467480146301
+    },
+    "residual": {
+      "formula": "sqrt((RMS_M(Ru)^2 + RMS_M(Rv)^2)/2)/F; RMS_M(a)=sqrt(sum(M*a^2)/sum(M)); Ru=(Du*L*u+M*(-u*v^2+F*(1-u)))/M; Rv=(Dv*L*v+M*(u*v^2-(F+k)*v))/M",
+      "normalization": "F",
+      "rotation_projection": false,
+      "value": 8.422602727722893e-15,
+      "tolerance": 1e-11,
+      "passed": true,
+      "Ru_rms": 2.995873368756267e-16,
+      "Rv_rms": 1.4656643116195648e-16
+    },
+    "stability_status": "not_evaluated_by_i01",
+    "accepted": true,
+    "failure_reasons": []
+  },
+  "mat_readback_accepted": true,
+  "rel_residual": 8.422602727722893e-15,
+  "residual_formula": "sqrt((RMS_M(Ru)^2 + RMS_M(Rv)^2)/2)/F; RMS_M(a)=sqrt(sum(M*a^2)/sum(M)); Ru=(Du*L*u+M*(-u*v^2+F*(1-u)))/M; Rv=(Dv*L*v+M*(u*v^2-(F+k)*v))/M",
+  "before_mat_validation": {
+    "schema_version": "aic-frog-mat-v1",
+    "diagnostic_version": "full-steady-joint-rms-over-F-v1",
+    "acceptance_scope": "float64_structure_and_full_steady_residual_only",
+    "created_utc": "2026-10-21T10:07:20.940265+00:00",
+    "mat_file": "solution.mat",
+    "mat_sha256": "cce71e2057ca61cbda28459a4343f6c324e5bc9eaa6a98bd1fda4a40fb9f00cd",
+    "parameters": {
+      "F": 0.028,
+      "k": 0.062,
+      "Du": 0.000278,
+      "Dv": 0.000139
+    },
+    "seed": 0,
+    "geometry": {
+      "name": "sphere_L6",
+      "n_vertices": 40962,
+      "n_faces": 81920,
+      "laplacian": "robust",
+      "mesh_sha256": "9a4e4f22b09c05d7921f9969f62576ac017123c7cd98ce4c5652e6020572f95f",
+      "actual_L_M_sha256": "b164cb85b4491be8ffc99513ac31fca2fcaff7238853868076e2f9a1fa2c075a",
+      "mass_sum": 12.56543114247639
+    },
+    "runtime": {
+      "python": "3.12.5",
+      "numpy": "2.3.2",
+      "scipy": "1.17.0",
+      "robust_laplacian": "1.1.0"
+    },
+    "provenance": {
+      "audit_base": "065396591aef328c3484cb47e196cf5f8be71b6c",
+      "entrypoint": "scripts/recover_float64_results.py",
+      "source_mat": "D:\\Code\\AIC_frog\\results\\ai_generation\\tasks\\sphere6_spots\\solution.mat",
+      "source_mat_sha256": "cce71e2057ca61cbda28459a4343f6c324e5bc9eaa6a98bd1fda4a40fb9f00cd",
+      "source_summary_sha256": "92dfabdad4dc27af49c848e4e50275263ffd19bbd29cf20273ebf5ffb0360330",
+      "source_initial_image_sha256": "9548164c35a6408dd0288d3e3f4a3ccc5764c2443a191021f55202006c40f95b",
+      "frog_input_sha256": "6ba3bad43b2733803be148a6744c1b695f270cf0f8a3ba6fbd1b8afd2751d755",
+      "code_sha256": {
+        "scripts/recover_float64_results.py": "36d36ace89057985d92668b942211aa17d165f1562f54f341cedde0bd1155980",
+        "turing_rd/result_io.py": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c",
+        "turing_rd/steady.py": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+        "turing_rd/diagnostics.py": "a66ff3fabf59296d59742c65eb8f772eabf399c00be6a574316d86a0802becdc",
+        "turing_rd/geometry.py": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+        "turing_rd/mesh.py": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+        "turing_rd/solver.py": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166"
+      },
+      "method": "bounded_newton_from_quantized_mat",
+      "max_newton_iterations": 6,
+      "task_wall_limit_seconds": 120.0,
+      "operator": "robust",
+      "robust_mollify_factor": 1e-05,
+      "threads": 1,
+      "time_integration_steps": 0,
+      "precision_recovery": "newton_correction; dtype conversion alone is not recovery",
+      "environment": {
+        "python": "3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]",
+        "platform": "win32",
+        "packages": {
+          "numpy": "2.3.2",
+          "scipy": "1.17.0",
+          "torch": "2.14.1+cpu",
+          "robust-laplacian": "1.1.0",
+          "matplotlib": "3.10.5"
+        }
+      }
+    },
+    "structure": {
+      "passed": true,
+      "solution_shape": [
+        1,
+        1
+      ],
+      "u_shape": [
+        40962,
+        1
+      ],
+      "v_shape": [
+        40962,
+        1
+      ],
+      "u_dtype": "float64",
+      "v_dtype": "float64",
+      "finite": true
+    },
+    "precision": {
+      "passed": false,
+      "storage_dtype": "float64",
+      "u_float32_roundtrip_exact": true,
+      "v_float32_roundtrip_exact": true,
+      "exact_constant_field": false,
+      "value_precision_origin": "float32_quantized_nonuniform"
+    },
+    "physical_range": {
+      "passed": true,
+      "bounds": {
+        "u": [
+          0.0,
+          1.0
+        ],
+        "v_min": 0.0
+      },
+      "u_min": 0.26083844900131226,
+      "u_max": 0.8792937397956848,
+      "v_min": 0.002895791782066226,
+      "v_max": 0.36404675245285034
+    },
+    "residual": {
+      "formula": "sqrt((RMS_M(Ru)^2 + RMS_M(Rv)^2)/2)/F; RMS_M(a)=sqrt(sum(M*a^2)/sum(M)); Ru=(Du*L*u+M*(-u*v^2+F*(1-u)))/M; Rv=(Dv*L*v+M*(u*v^2-(F+k)*v))/M",
+      "normalization": "F",
+      "rotation_projection": false,
+      "value": 1.419010211441211e-06,
+      "tolerance": 1e-11,
+      "passed": false,
+      "Ru_rms": 5.5831695410219054e-08,
+      "Rv_rms": 6.334893569274232e-09
+    },
+    "stability_status": "not_evaluated_by_i01",
+    "accepted": false,
+    "failure_reasons": [
+      "float32_quantized_nonuniform_field",
+      "full_residual_above_tolerance"
+    ]
+  },
+  "newton_history": [
+    {
+      "iter": 0,
+      "step": 0.0,
+      "rel_residual": 1.419010211441211e-06,
+      "wall_s": 0.0
+    },
+    {
+      "iter": 1,
+      "step": 1.0,
+      "rel_residual": 8.422602727722893e-15,
+      "wall_s": 2.2049200534820557
+    }
+  ],
+  "pattern_before": {
+    "v_min": 0.002895791782066226,
+    "v_max": 0.36404675245285034,
+    "contrast": 0.3301680948585271,
+    "wavelength": 0.4749382998386061,
+    "type": "spots",
+    "threshold": 0.1729874016717076,
+    "n_components": 45,
+    "n_low_components": 1,
+    "area_fraction": 0.24051129970743174,
+    "euler": 45,
+    "perimeter": 41.22023063262215,
+    "compactness": 1.0058064651345924,
+    "mean_component_area": 0.06715840389913856
+  },
+  "pattern_after": {
+    "v_min": 0.0028957918901565192,
+    "v_max": 0.3640467480146301,
+    "contrast": 0.33016809617919923,
+    "wavelength": 0.4749382998589482,
+    "type": "spots",
+    "threshold": 0.17298740099573648,
+    "n_components": 45,
+    "n_low_components": 1,
+    "area_fraction": 0.24051129970743174,
+    "euler": 45,
+    "perimeter": 41.220230698556264,
+    "compactness": 1.0058064619169023,
+    "mean_component_area": 0.06715840389913856
+  },
+  "shape_preserved": true,
+  "stability_status": "not_recomputed_I01_only",
+  "full_discrete_stability": "not_certified_by_I01",
+  "source_stability_record": {
+    "stable": true,
+    "max_re_lambda": -5.906734447357477e-05,
+    "rotation_eigenvalues": [
+      -1.355333614106672e-05,
+      -1.0245932946646025e-05,
+      -6.231008550835375e-06
+    ],
+    "rotation_overlap": [
+      0.9991480802556593,
+      0.9984184013457572,
+      0.998142459561194
+    ]
+  },
+  "legacy_residual_before_quantization": 4.259652445814605e-12,
+  "provenance": {
+    "audit_base": "065396591aef328c3484cb47e196cf5f8be71b6c",
+    "entrypoint": "scripts/recover_float64_results.py",
+    "source_mat": "D:\\Code\\AIC_frog\\results\\ai_generation\\tasks\\sphere6_spots\\solution.mat",
+    "source_mat_sha256": "cce71e2057ca61cbda28459a4343f6c324e5bc9eaa6a98bd1fda4a40fb9f00cd",
+    "source_summary_sha256": "92dfabdad4dc27af49c848e4e50275263ffd19bbd29cf20273ebf5ffb0360330",
+    "source_initial_image_sha256": "9548164c35a6408dd0288d3e3f4a3ccc5764c2443a191021f55202006c40f95b",
+    "frog_input_sha256": "6ba3bad43b2733803be148a6744c1b695f270cf0f8a3ba6fbd1b8afd2751d755",
+    "code_sha256": {
+      "scripts/recover_float64_results.py": "36d36ace89057985d92668b942211aa17d165f1562f54f341cedde0bd1155980",
+      "turing_rd/result_io.py": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c",
+      "turing_rd/steady.py": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+      "turing_rd/diagnostics.py": "a66ff3fabf59296d59742c65eb8f772eabf399c00be6a574316d86a0802becdc",
+      "turing_rd/geometry.py": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+      "turing_rd/mesh.py": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+      "turing_rd/solver.py": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166"
+    },
+    "method": "bounded_newton_from_quantized_mat",
+    "max_newton_iterations": 6,
+    "task_wall_limit_seconds": 120.0,
+    "operator": "robust",
+    "robust_mollify_factor": 1e-05,
+    "threads": 1,
+    "time_integration_steps": 0,
+    "precision_recovery": "newton_correction; dtype conversion alone is not recovery",
+    "environment": {
+      "python": "3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]",
+      "platform": "win32",
+      "packages": {
+        "numpy": "2.3.2",
+        "scipy": "1.17.0",
+        "torch": "2.14.1+cpu",
+        "robust-laplacian": "1.1.0",
+        "matplotlib": "3.10.5"
+      }
+    },
+    "newton_iterations": 1,
+    "max_abs_newton_correction_u": 9.314194693299527e-08,
+    "max_abs_newton_correction_v": 5.7727179203492796e-08
+  },
+  "note": "I01 acceptance covers MAT structure, precision and full PDE residual only; no new stability claim.",
+  "wall_seconds": 17.921999999991385
+}

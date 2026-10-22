@@ -23,6 +23,35 @@ def _np(x):
 # ---------------------------------------------------------------------------------------------
 # PDE residual
 # ---------------------------------------------------------------------------------------------
+FULL_STEADY_RESIDUAL_VERSION = "full-steady-joint-rms-over-F-v1"
+FULL_STEADY_RESIDUAL_FORMULA = "sqrt((RMS_M(Ru)^2 + RMS_M(Rv)^2)/2)/F; RMS_M(a)=sqrt(sum(M*a^2)/sum(M)); Ru=(Du*L*u+M*(-u*v^2+F*(1-u)))/M; Rv=(Dv*L*v+M*(u*v^2-(F+k)*v))/M"
+
+
+def full_steady_residual(geom: Geometry, p: GSParams, u, v) -> dict:
+    """Complete stationary RHS residual using the actual L/M, without rotation projection.
+
+    This is the single formal-field acceptance metric. Weak residuals are divided
+    by M before the area-weighted joint RMS, matching the polishing equations.
+    No temporal difference is subtracted, including for moving/rotating states.
+    """
+    u, v = _np(u), _np(v)
+    if u.shape == (geom.n, 1):
+        u = u[:, 0]
+    if v.shape == (geom.n, 1):
+        v = v[:, 0]
+    if u.shape != (geom.n,) or v.shape != (geom.n,):
+        raise ValueError("Full steady residual requires one u/v value per vertex")
+    if not np.isfinite(p.F) or p.F <= 0:
+        raise ValueError("Full steady residual normalization requires positive finite F")
+    r = u * v * v
+    Ru = (p.Du * (geom.L @ u) + geom.M * (-r + p.F * (1 - u))) / geom.M
+    Rv = (p.Dv * (geom.L @ v) + geom.M * (r - (p.F + p.k) * v)) / geom.M
+    a, b = geom.rms(Ru), geom.rms(Rv)
+    joint = float(np.sqrt((a * a + b * b) / 2.0))
+    return {"Ru_rms": a, "Rv_rms": b, "joint_rms": joint,
+            "full_joint_rms_over_F": joint / p.F}
+
+
 def pde_residual(geom: Geometry, p: GSParams, u, v, u_prev=None, v_prev=None, dt: float | None = None) -> dict:
     """Continuous-in-time residual of both equations at state (u, v).
 
@@ -48,6 +77,12 @@ def pde_residual(geom: Geometry, p: GSParams, u, v, u_prev=None, v_prev=None, dt
                reaction_scale=geom.rms(np.abs(fu)) + geom.rms(np.abs(fv)) + 1e-30)
     # relative to the reaction terms, floored at the feed rate F so the trivial state (1, 0) is not 0/0
     out["steady_rel"] = (out["steady_Ru_rms"] + out["steady_Rv_rms"]) / max(out["reaction_scale"], p.F)
+    # Keep steady_rel for historical reports; formal MAT acceptance uses this explicitly named metric.
+    full = full_steady_residual(geom, p, u, v)
+    out.update(full_joint_rms_over_F=full["full_joint_rms_over_F"],
+               full_steady_Ru_rms=full["Ru_rms"], full_steady_Rv_rms=full["Rv_rms"],
+               full_residual_formula=FULL_STEADY_RESIDUAL_FORMULA,
+               full_residual_version=FULL_STEADY_RESIDUAL_VERSION)
     return out
 
 
@@ -67,38 +102,41 @@ def jacobian(geom: Geometry, p: GSParams, u, v):
 
 def linear_stability(geom: Geometry, p: GSParams, u, v, k: int = 8, sigma: float = 1e-3,
                      rotations=None) -> dict:
-    """Eigenvalues of J closest to `sigma` (shift-invert ARPACK).
+    """One finite spectral sample, with independently verified eigenpair residuals.
 
-    A stable steady pattern has max Re(lambda) <= 0. On the sphere, three eigenvalues ~ 0 are
-    expected: rigid rotations of the pattern (a check that the solver respects the symmetry).
-    With `rotations` = [T_1, T_2, T_3] (steady.rotation_generators), k + r eigenpairs are computed
-    (r = number of rotations that move the pattern: 3, 2 if axisymmetric, 0 if uniform); the eigenvectors
-    closest to span{T_i U} (M-weighted projection >= 0.5, at most r) are reported separately as the
-    rotation modes, and max_real is the largest real part of the remaining eigenvalues.
+    ``max_real`` now ALWAYS includes rotation-like modes. The historical filtered
+    value is available as ``nonrotation_max_real`` for comparison only. A single
+    shift cannot award the separate I02 multi-method stability certificate.
     """
-    J = jacobian(geom, p, u, v)
-    if rotations is None:
-        lam = spla.eigs(J, k=k, sigma=sigma, which="LM", return_eigenvectors=False, maxiter=5000, tol=1e-10)
-        lam = lam[np.argsort(-lam.real)]
-        return {"eigenvalues": [[float(z.real), float(z.imag)] for z in lam],
-                "max_real": float(lam.real.max()), "sigma": sigma}
-    u, v = _np(u), _np(v)
-    Mf = np.concatenate([geom.M, geom.M])
-    B = np.sqrt(Mf)[:, None] * np.stack([np.concatenate([Ti @ u, Ti @ v]) for Ti in rotations], axis=1)
-    Q, sv, _ = np.linalg.svd(B, full_matrices=False)               # M-orthonormal basis of the orbit tangent
-    U = np.sqrt(Mf) * np.concatenate([u, v])
-    r = int((sv > 1e-3 * max(sv[0], 1e-6 * np.linalg.norm(U))).sum())   # 0 (uniform), 2 (axisymmetric) or 3
-    lam, W = spla.eigs(J, k=k + r, sigma=sigma, which="LM", maxiter=5000, tol=1e-10)
-    Ws = np.sqrt(Mf)[:, None] * W
-    overlap = np.linalg.norm(Q[:, :r].T @ Ws, axis=0) / np.linalg.norm(Ws, axis=0)
-    rot = [i for i in np.argsort(-overlap)[:r] if overlap[i] >= 0.5]  # e.g. 2 for an axisymmetric pattern
-    rest = np.setdiff1d(np.arange(len(lam)), rot)
-    order = rest[np.argsort(-lam[rest].real)]
-    return {"eigenvalues": [[float(lam[i].real), float(lam[i].imag)] for i in order],
-            "rotation_eigenvalues": [[float(lam[i].real), float(lam[i].imag)] for i in rot],
-            "rotation_overlap": [float(overlap[i]) for i in rot],
-            "max_overlap_other": float(overlap[rest].max()),
-            "max_real": float(lam[rest].real.max()), "max_real_all": float(lam.real.max()), "sigma": sigma}
+    # Lazy import avoids the diagnostics/stability Jacobian dependency cycle.
+    from .stability import solve_spectrum, rotation_subspace, eigenpair_diagnostics
+    count = k
+    if rotations is not None:
+        Q, orbit = rotation_subspace(geom, _np(u), _np(v), rotations)
+        count += orbit["rank"]
+    report, W = solve_spectrum(geom, p, u, v, k=count, sigma=sigma, maxiter=5000)
+    pairs = report["pairs"]
+    if rotations is not None:
+        values = np.array([complex(*q["eigenvalue"]) for q in pairs])
+        pairs = eigenpair_diagnostics(jacobian(geom,p,u,v), values, W,
+                                     np.tile(geom.M,2), Q)
+    rotation = [q for q in pairs if rotations is not None and q["rotation_like"]]
+    other = [q for q in pairs if q not in rotation]
+    full_max = report["full_max_real"]
+    negative = bool(report["solver_converged"] and report["all_pairs_validated"] and
+                    pairs and all(q["negative_resolved"] for q in pairs))
+    return {"eigenvalues": [q["eigenvalue"] for q in pairs],
+            "rotation_eigenvalues": [q["eigenvalue"] for q in rotation],
+            "rotation_overlap": [q["rotation_overlap"] for q in rotation],
+            "max_overlap_other": max((q["rotation_overlap"] for q in other),default=0.0),
+            "max_real": full_max, "max_real_all": full_max,
+            "nonrotation_max_real": max((q["eigenvalue"][0] for q in other),default=None),
+            "sigma": sigma, "pairs": pairs, "solver_converged": report["solver_converged"],
+            "all_pairs_validated": report["all_pairs_validated"],
+            "found_reliable_positive": report["found_reliable_positive"],
+            "sampled_signs_resolved_negative": negative,
+            "stability_scope": "single_shift_unprojected_sample",
+            "full_discrete_stability_certified": False}
 
 
 # ---------------------------------------------------------------------------------------------

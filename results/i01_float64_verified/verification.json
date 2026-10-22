@@ -1,0 +1,109 @@
+{
+  "scope": "I01_structure_float64_same_robust_full_residual_only",
+  "audit_base": "065396591aef328c3484cb47e196cf5f8be71b6c",
+  "unit_tests": {
+    "count": 26,
+    "passed": true,
+    "log": "tests.log"
+  },
+  "packaging_smoke": {
+    "passed": true,
+    "zip_members": 83,
+    "zip_bytes": 14017002,
+    "crc_ok": true,
+    "task_mat_and_summary_bytes_equal": true,
+    "temporary_package_removed_on_exit": true
+  },
+  "readback_checks": [
+    {
+      "task": "frog_spots",
+      "code_hashes_match_final_sources": true,
+      "npz_equal_mat": true,
+      "both_components_not_float32_roundtrip": true
+    },
+    {
+      "task": "frog_stripes",
+      "code_hashes_match_final_sources": true,
+      "npz_equal_mat": true,
+      "both_components_not_float32_roundtrip": true
+    },
+    {
+      "task": "sphere6_spots",
+      "code_hashes_match_final_sources": true,
+      "npz_equal_mat": true,
+      "both_components_not_float32_roundtrip": true
+    },
+    {
+      "task": "sphere6_stripes",
+      "code_hashes_match_final_sources": true,
+      "npz_equal_mat": true,
+      "both_components_not_float32_roundtrip": true
+    }
+  ],
+  "protected_tracked_files_unchanged": true,
+  "formal_dist_created": false,
+  "stability_recomputed": false,
+  "I02_started": false,
+  "rows": [
+    {
+      "task": "frog_spots",
+      "vertices": 29010,
+      "before_full_residual": 4.904960605218097e-06,
+      "after_full_residual": 2.1711302588470847e-14,
+      "newton_iterations": 1,
+      "u_min": 0.24684681879602846,
+      "u_max": 0.9551286698427834,
+      "v_min": 0.0002907946259743183,
+      "v_max": 0.38018620601496056,
+      "dtype": "float64",
+      "sha256": "19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb",
+      "I01_accepted": true,
+      "shape_preserved": true
+    },
+    {
+      "task": "frog_stripes",
+      "vertices": 29010,
+      "before_full_residual": 2.392993887003308e-06,
+      "after_full_residual": 1.0056589446857191e-14,
+      "newton_iterations": 1,
+      "u_min": 0.29767648063729857,
+      "u_max": 0.9724358671643367,
+      "v_min": 0.00047557100820501646,
+      "v_max": 0.4275737166475203,
+      "dtype": "float64",
+      "sha256": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
+      "I01_accepted": true,
+      "shape_preserved": true
+    },
+    {
+      "task": "sphere6_spots",
+      "vertices": 40962,
+      "before_full_residual": 1.419010211441211e-06,
+      "after_full_residual": 8.422602727722893e-15,
+      "newton_iterations": 1,
+      "u_min": 0.26083845270594025,
+      "u_max": 0.879293764254056,
+      "v_min": 0.0028957918901565192,
+      "v_max": 0.3640467480146301,
+      "dtype": "float64",
+      "sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+      "I01_accepted": true,
+      "shape_preserved": true
+    },
+    {
+      "task": "sphere6_stripes",
+      "vertices": 40962,
+      "before_full_residual": 6.940924672388264e-07,
+      "after_full_residual": 3.2888133853309544e-15,
+      "newton_iterations": 1,
+      "u_min": 0.3325054865061192,
+      "u_max": 0.890942998777777,
+      "v_min": 0.005475822318161872,
+      "v_max": 0.37373373630609646,
+      "dtype": "float64",
+      "sha256": "1a903c837104ace41886816fb53e8004f065c8709be7cb21e2771be89730ee00",
+      "I01_accepted": true,
+      "shape_preserved": true
+    }
+  ]
+}

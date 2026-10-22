@@ -1,0 +1,27 @@
+{
+  "command": [
+    "D:\\Code\\AIC_frog\\.venv\\Scripts\\python.exe",
+    "-B",
+    "D:\\Code\\AIC_frog\\scripts\\i02_stability.py",
+    "certificate",
+    "--mat",
+    "results\\i01_float64_verified\\tasks\\sphere6_spots\\solution.mat",
+    "--summary",
+    "results\\i01_float64_verified\\tasks\\sphere6_spots\\summary.json",
+    "--runs",
+    "results\\i02_stability\\spots\\shift_1e3_k12",
+    "results\\i02_stability\\spots\\shift_0_k20",
+    "results\\i02_stability\\spots\\direct_LR_k8",
+    "--perturbation",
+    "results\\i02_stability\\spots\\perturb_rerun\\perturbation.json",
+    "--out",
+    "results\\i02_stability\\certificates\\spots",
+    "--timeout",
+    "300"
+  ],
+  "hard_timeout_seconds": 300.0,
+  "status": "completed",
+  "returncode": 0,
+  "wall_seconds": 7.312000000005355,
+  "threads": 1
+}

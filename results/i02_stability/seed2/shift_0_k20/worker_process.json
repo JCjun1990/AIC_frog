@@ -1,0 +1,26 @@
+{
+  "pid": 82448,
+  "command": [
+    "D:\\Code\\AIC_frog\\.venv\\Scripts\\python.exe",
+    "-B",
+    "D:\\Code\\AIC_frog\\scripts\\i02_stability.py",
+    "spectrum",
+    "--mat",
+    "results\\i02_stability\\candidates\\seed2_v2\\solution.mat",
+    "--summary",
+    "results\\i02_stability\\candidates\\seed2_v2\\summary.json",
+    "--k",
+    "20",
+    "--sigma",
+    "0",
+    "--which",
+    "LM",
+    "--out",
+    "results\\i02_stability\\seed2\\shift_0_k20",
+    "--timeout",
+    "300",
+    "--worker"
+  ],
+  "parent_pid": 103412,
+  "timeout_seconds": 300.0
+}

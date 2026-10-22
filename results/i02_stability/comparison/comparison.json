@@ -1,0 +1,442 @@
+{
+  "schema_version": "aic-frog-i02-comparison-v1",
+  "certificates": [
+    "results\\i02_stability\\certificates\\seed2\\stability_certificate.json",
+    "results\\i02_stability\\certificates\\six_bands\\stability_certificate.json",
+    "results\\i02_stability\\certificates\\spots\\stability_certificate.json"
+  ],
+  "candidates": [
+    {
+      "label": "sphere6 seed2 seven-band candidate",
+      "certificate": "results\\i02_stability\\certificates\\seed2\\stability_certificate.json",
+      "certificate_sha256": "da6381fe8cdc71c02c3686a3f55ae89c0c4b07b38356c25d6ac5222dfb6331df",
+      "mat_sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
+      "geometry": {
+        "name": "sphere_L6",
+        "vertices": 40962
+      },
+      "parameters": {
+        "F": 0.054,
+        "k": 0.063,
+        "Du": 0.000278,
+        "Dv": 0.000139
+      },
+      "seed": 2,
+      "i01_full_residual": 2.4366269654958772e-14,
+      "i01_accepted": true,
+      "pattern": {
+        "type": "stripes_or_maze",
+        "n_components": 7,
+        "wavelength": 0.47140546455773763,
+        "v_min": 0.01210521190773715,
+        "v_max": 0.42768825570683455
+      },
+      "rotation_rank": 3,
+      "rotation_singular_values": [
+        7.476694113809216,
+        7.467768466788753,
+        1.0719027708949818
+      ],
+      "spectra": [
+        {
+          "directory": "results\\i02_stability\\seed2\\shift_1e3_k12",
+          "method": "mass_similarity_arpack_shift_invert",
+          "which": "LM",
+          "sigma": 0.001,
+          "requested_k": 12,
+          "solver_converged": true,
+          "all_pairs_validated": true,
+          "full_max_real": -1.4777975565754154e-06,
+          "nonrotation_max_real": -4.7684443213677876e-05,
+          "max_residual_absolute_M": 1.4850482986982579e-15,
+          "rotation_eigenvalues": [
+            -1.4777975565754154e-06,
+            -5.709484906870526e-06,
+            -6.689595745200611e-06
+          ],
+          "rotation_overlaps": [
+            0.9997056023028764,
+            0.9998194782160504,
+            0.9996522962421173
+          ],
+          "found_reliable_positive": false,
+          "wall_seconds": 6.133687399997143
+        },
+        {
+          "directory": "results\\i02_stability\\seed2\\shift_0_k20",
+          "method": "mass_similarity_arpack_shift_invert",
+          "which": "LM",
+          "sigma": 0.0,
+          "requested_k": 20,
+          "solver_converged": true,
+          "all_pairs_validated": true,
+          "full_max_real": -1.477797556702631e-06,
+          "nonrotation_max_real": -4.7684443213799496e-05,
+          "max_residual_absolute_M": 1.4283866417741944e-14,
+          "rotation_eigenvalues": [
+            -1.477797556702631e-06,
+            -5.709484907001946e-06,
+            -6.689595745315812e-06
+          ],
+          "rotation_overlaps": [
+            0.9997056023028752,
+            0.9998194782160497,
+            0.9996522962421152
+          ],
+          "found_reliable_positive": false,
+          "wall_seconds": 5.2549870000220835
+        },
+        {
+          "directory": "results\\i02_stability\\seed2\\direct_LR_k8",
+          "method": "mass_similarity_arpack_direct",
+          "which": "LR",
+          "sigma": null,
+          "requested_k": 8,
+          "solver_converged": true,
+          "all_pairs_validated": true,
+          "full_max_real": -1.4777975570061386e-06,
+          "nonrotation_max_real": -4.7684443213122724e-05,
+          "max_residual_absolute_M": 1.207126064295523e-14,
+          "rotation_eigenvalues": [
+            -1.4777975570061386e-06,
+            -5.709484906592712e-06,
+            -6.689595745259935e-06
+          ],
+          "rotation_overlaps": [
+            0.9997056023028642,
+            0.9998194782160381,
+            0.9996522962421132
+          ],
+          "found_reliable_positive": false,
+          "wall_seconds": 24.866456299991114
+        }
+      ],
+      "perturbation": {
+        "file": "results\\i02_stability\\seed2\\perturb\\perturbation.json",
+        "sha256": "d0c30c0ff18e0d96128e231ff470bced9c20b9a7493c07df361f11760be6071d",
+        "passed": true,
+        "nonlinear_rate_dt1000_mean": -1.4767064861351867e-06,
+        "linear_rates": {
+          "2000.0": -1.475617964677646e-06,
+          "1000.0": -1.4767066884671138e-06
+        },
+        "half_dt_rate_difference": 1.0891075270402664e-09
+      },
+      "decision": {
+        "status": "numerical_check_passed",
+        "numerical_check_passed": true,
+        "found_reliable_positive": false,
+        "reliable_positive_eigenvalues": [],
+        "distinct_valid_shifts": [
+          0.0,
+          0.001
+        ],
+        "sampled_maxima_agree": true,
+        "all_checked_signs_resolved_negative": true,
+        "failure_reasons": [],
+        "mathematical_full_spectrum_proof": false
+      },
+      "legacy_crosscheck": {
+        "legacy_record": "results\\ai_generation\\tasks\\robustness_jobs\\ai_sphere6_0.0540_0.0630_2.pkl",
+        "legacy_record_sha256": "7b8514580ce53ddb764e9085be5723424c32adc0280470ba68154d21a94843d7",
+        "legacy_n_components": 7,
+        "new_n_components": 7,
+        "legacy_wavelength": 0.47140546455774024,
+        "new_wavelength": 0.47140546455773763,
+        "wavelength_relative_difference": 5.534564836487064e-15,
+        "rotation_eigenvalues_legacy": [
+          -6.689595745209718e-06,
+          -5.709484906898715e-06,
+          -1.4777975565511293e-06
+        ],
+        "rotation_eigenvalues_new": [
+          -6.689595745200611e-06,
+          -5.709484906870526e-06,
+          -1.4777975565754154e-06
+        ],
+        "rotation_relative_difference_max": 1.64340024491271e-11,
+        "nonrotation_max_legacy": -4.7684443213707366e-05,
+        "nonrotation_max_new": -4.7684443213677876e-05,
+        "nonrotation_relative_difference": 6.184469630784835e-13,
+        "legacy_stable_flag": true,
+        "legacy_max_re_lambda_equals_nonrotation_max": true,
+        "note": "The regenerated field reproduces the historical record's pattern and its rotation-block eigenvalues. The historical `max_re_lambda` numerically equals the new NON-rotation maximum (not the full maximum), i.e. the legacy stability flag ignored the rotation block entirely; for this candidate that block was negative anyway."
+      }
+    },
+    {
+      "label": "sphere6 six bands (I01 seed 0)",
+      "certificate": "results\\i02_stability\\certificates\\six_bands\\stability_certificate.json",
+      "certificate_sha256": "ff72fc9fa47d9885e5e7a37fcefc4af91ece50a0acc4fed5aee04f724e6e24a4",
+      "mat_sha256": "1a903c837104ace41886816fb53e8004f065c8709be7cb21e2771be89730ee00",
+      "geometry": {
+        "name": "sphere_L6",
+        "vertices": 40962
+      },
+      "parameters": {
+        "F": 0.054,
+        "k": 0.063,
+        "Du": 0.000278,
+        "Dv": 0.000139
+      },
+      "seed": 0,
+      "i01_full_residual": 3.2888133853309544e-15,
+      "i01_accepted": true,
+      "pattern": {
+        "type": "stripes_or_maze",
+        "n_components": 6,
+        "wavelength": 0.4859691163884228,
+        "v_min": 0.005475822318161872,
+        "v_max": 0.37373373630609646
+      },
+      "rotation_rank": 3,
+      "rotation_singular_values": [
+        7.436819328985112,
+        7.43236674253309,
+        0.011427880204410407
+      ],
+      "spectra": [
+        {
+          "directory": "results\\i02_stability\\six_bands\\shift_1e3_k12",
+          "method": "mass_similarity_arpack_shift_invert",
+          "which": "LM",
+          "sigma": 0.001,
+          "requested_k": 12,
+          "solver_converged": true,
+          "all_pairs_validated": true,
+          "full_max_real": 1.6654278916247798e-06,
+          "nonrotation_max_real": -4.60980887331808e-05,
+          "max_residual_absolute_M": 1.4564582851630145e-15,
+          "rotation_eigenvalues": [
+            1.6654278916247798e-06,
+            -8.752507066329789e-07
+          ],
+          "rotation_overlaps": [
+            0.9999069511666145,
+            0.9999248873804604
+          ],
+          "found_reliable_positive": true,
+          "wall_seconds": 7.571251099987421
+        },
+        {
+          "directory": "results\\i02_stability\\six_bands\\shift_0_k20",
+          "method": "mass_similarity_arpack_shift_invert",
+          "which": "LM",
+          "sigma": 0.0,
+          "requested_k": 20,
+          "solver_converged": true,
+          "all_pairs_validated": true,
+          "full_max_real": 1.6654278914995047e-06,
+          "nonrotation_max_real": -4.60980887333042e-05,
+          "max_residual_absolute_M": 6.6810615193162196e-15,
+          "rotation_eigenvalues": [
+            1.6654278914995047e-06,
+            -8.752507067515352e-07
+          ],
+          "rotation_overlaps": [
+            0.9999069511666149,
+            0.9999248873804611
+          ],
+          "found_reliable_positive": true,
+          "wall_seconds": 8.14466559997527
+        },
+        {
+          "directory": "results\\i02_stability\\six_bands\\direct_LR_k8",
+          "method": "mass_similarity_arpack_direct",
+          "which": "LR",
+          "sigma": null,
+          "requested_k": 8,
+          "solver_converged": true,
+          "all_pairs_validated": true,
+          "full_max_real": 1.6654278901900703e-06,
+          "nonrotation_max_real": -4.6098088732400264e-05,
+          "max_residual_absolute_M": 1.1231329846330759e-13,
+          "rotation_eigenvalues": [
+            1.6654278901900703e-06,
+            -8.752507061176267e-07
+          ],
+          "rotation_overlaps": [
+            0.9999069511666182,
+            0.999924887380447
+          ],
+          "found_reliable_positive": true,
+          "wall_seconds": 56.0060916999937
+        }
+      ],
+      "perturbation": {
+        "file": "results\\i02_stability\\six_bands\\perturb_rerun\\perturbation.json",
+        "sha256": "92bbcef9c5cfd60f96bb7fc44b9bcb247b2996fc8f16ef953b1a2b9889e985ca",
+        "passed": true,
+        "nonlinear_rate_dt1000_mean": 1.6668139531785192e-06,
+        "linear_rates": {
+          "2000.0": 1.668207716079254e-06,
+          "1000.0": 1.6668162582410647e-06
+        },
+        "half_dt_rate_difference": 1.3914706874202556e-09
+      },
+      "decision": {
+        "status": "unstable_positive_mode",
+        "numerical_check_passed": false,
+        "found_reliable_positive": true,
+        "reliable_positive_eigenvalues": [
+          [
+            1.6654278916247798e-06,
+            0.0
+          ],
+          [
+            1.6654278914995047e-06,
+            0.0
+          ],
+          [
+            1.6654278901900703e-06,
+            0.0
+          ]
+        ],
+        "distinct_valid_shifts": [
+          0.0,
+          0.001
+        ],
+        "sampled_maxima_agree": true,
+        "all_checked_signs_resolved_negative": false,
+        "failure_reasons": [
+          "reliable_positive_full_jacobian_eigenvalue"
+        ],
+        "mathematical_full_spectrum_proof": false
+      },
+      "legacy_crosscheck": null
+    },
+    {
+      "label": "sphere6 spots (I01 seed 0)",
+      "certificate": "results\\i02_stability\\certificates\\spots\\stability_certificate.json",
+      "certificate_sha256": "05680c9548b499ec0f54aba24326065f88f6c4e4b10e3c94a99fedd5615fd6a9",
+      "mat_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+      "geometry": {
+        "name": "sphere_L6",
+        "vertices": 40962
+      },
+      "parameters": {
+        "F": 0.028,
+        "k": 0.062,
+        "Du": 0.000278,
+        "Dv": 0.000139
+      },
+      "seed": 0,
+      "i01_full_residual": 8.422602727722893e-15,
+      "i01_accepted": true,
+      "pattern": {
+        "type": "spots",
+        "n_components": 45,
+        "wavelength": 0.4749382998589482,
+        "v_min": 0.0028957918901565192,
+        "v_max": 0.3640467480146301
+      },
+      "rotation_rank": 3,
+      "rotation_singular_values": [
+        5.277206109476931,
+        5.276544121695152,
+        5.270650091387072
+      ],
+      "spectra": [
+        {
+          "directory": "results\\i02_stability\\spots\\shift_1e3_k12",
+          "method": "mass_similarity_arpack_shift_invert",
+          "which": "LM",
+          "sigma": 0.001,
+          "requested_k": 12,
+          "solver_converged": true,
+          "all_pairs_validated": true,
+          "full_max_real": -6.231004404613164e-06,
+          "nonrotation_max_real": -5.9067345303712594e-05,
+          "max_residual_absolute_M": 1.7132167453253119e-15,
+          "rotation_eigenvalues": [
+            -6.231004404613164e-06,
+            -1.0245933730220402e-05,
+            -1.3553335814843297e-05
+          ],
+          "rotation_overlaps": [
+            0.998142458884343,
+            0.9984184001206086,
+            0.9991480824709887
+          ],
+          "found_reliable_positive": false,
+          "wall_seconds": 7.399723499984248
+        },
+        {
+          "directory": "results\\i02_stability\\spots\\shift_0_k20",
+          "method": "mass_similarity_arpack_shift_invert",
+          "which": "LM",
+          "sigma": 0.0,
+          "requested_k": 20,
+          "solver_converged": true,
+          "all_pairs_validated": true,
+          "full_max_real": -6.231004404742845e-06,
+          "nonrotation_max_real": -5.906734530384379e-05,
+          "max_residual_absolute_M": 8.923095962555304e-15,
+          "rotation_eigenvalues": [
+            -6.231004404742845e-06,
+            -1.0245933730349063e-05,
+            -1.3553335814966449e-05
+          ],
+          "rotation_overlaps": [
+            0.9981424588843206,
+            0.998418400120596,
+            0.999148082470989
+          ],
+          "found_reliable_positive": false,
+          "wall_seconds": 6.568019300000742
+        },
+        {
+          "directory": "results\\i02_stability\\spots\\direct_LR_k8",
+          "method": "mass_similarity_arpack_direct",
+          "which": "LR",
+          "sigma": null,
+          "requested_k": 8,
+          "solver_converged": true,
+          "all_pairs_validated": true,
+          "full_max_real": -6.231004405896853e-06,
+          "nonrotation_max_real": -5.9067345303307034e-05,
+          "max_residual_absolute_M": 1.7287113905760838e-13,
+          "rotation_eigenvalues": [
+            -6.231004405896853e-06,
+            -1.024593372942356e-05,
+            -1.3553335816786993e-05
+          ],
+          "rotation_overlaps": [
+            0.9981424588851276,
+            0.9984184001200247,
+            0.9991480824711827
+          ],
+          "found_reliable_positive": false,
+          "wall_seconds": 81.8935930999869
+        }
+      ],
+      "perturbation": {
+        "file": "results\\i02_stability\\spots\\perturb_rerun\\perturbation.json",
+        "sha256": "88c566e53ce6e3d1e25d4bf1c06eedab2e17c3cc2d21b3c672a1f5549f7f46e4",
+        "passed": true,
+        "nonlinear_rate_dt1000_mean": -6.211671992286896e-06,
+        "linear_rates": {
+          "2000.0": -6.192498565556604e-06,
+          "1000.0": -6.211671962274535e-06
+        },
+        "half_dt_rate_difference": 1.9174878766669312e-08
+      },
+      "decision": {
+        "status": "numerical_check_passed",
+        "numerical_check_passed": true,
+        "found_reliable_positive": false,
+        "reliable_positive_eigenvalues": [],
+        "distinct_valid_shifts": [
+          0.0,
+          0.001
+        ],
+        "sampled_maxima_agree": true,
+        "all_checked_signs_resolved_negative": true,
+        "failure_reasons": [],
+        "mathematical_full_spectrum_proof": false
+      },
+      "legacy_crosscheck": null
+    }
+  ],
+  "mathematical_full_spectrum_proof": false,
+  "limitation": "Finite Krylov sampling plus local perturbation evidence; not a full-spectrum or nonlinear-stability proof."
+}

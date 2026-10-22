@@ -20,6 +20,7 @@ import scipy.sparse.linalg as spla
 
 from .geometry import Geometry
 from .solver import GSParams
+from .diagnostics import full_steady_residual
 
 
 def weak_residual(geom: Geometry, p: GSParams, u, v):
@@ -36,10 +37,8 @@ def weak_jacobian(geom: Geometry, p: GSParams, u, v):
 
 
 def rel_residual(geom: Geometry, p: GSParams, u, v) -> float:
-    """rms of the strong residual (R / M) relative to F, the convergence measure of ptc_polish."""
-    Mfull = np.concatenate([geom.M, geom.M])
-    s = weak_residual(geom, p, u, v) / Mfull
-    return float(np.sqrt(Mfull @ (s * s) / (2 * geom.area))) / p.F
+    """Complete joint area-weighted RMS/F; shared with formal MAT read-back acceptance."""
+    return full_steady_residual(geom, p, u, v)["full_joint_rms_over_F"]
 
 
 def newton_polish(geom: Geometry, p: GSParams, u, v, tol: float = 1e-11, max_iter: int = 15,

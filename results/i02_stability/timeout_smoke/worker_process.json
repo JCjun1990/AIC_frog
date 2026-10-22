@@ -1,0 +1,16 @@
+{
+  "pid": 95768,
+  "command": [
+    "D:\\Code\\AIC_frog\\.venv\\Scripts\\python.exe",
+    "-B",
+    "D:\\Code\\AIC_frog\\scripts\\i02_stability.py",
+    "lowres",
+    "--out",
+    "results\\i02_stability\\timeout_smoke",
+    "--timeout",
+    "0.01",
+    "--worker"
+  ],
+  "parent_pid": 96720,
+  "timeout_seconds": 0.01
+}

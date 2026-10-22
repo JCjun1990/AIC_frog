@@ -1,0 +1,6 @@
+task=frog_spots
+mat=results\i01_float64_verified\tasks\frog_spots\solution.mat
+mat_sha256=19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb
+full_residual=2.171130258847e-14
+decision=stability_not_closed
+configs=3

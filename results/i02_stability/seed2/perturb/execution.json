@@ -1,0 +1,27 @@
+{
+  "command": [
+    "D:\\Code\\AIC_frog\\.venv\\Scripts\\python.exe",
+    "-B",
+    "D:\\Code\\AIC_frog\\scripts\\i02_stability.py",
+    "perturb",
+    "--mat",
+    "results\\i02_stability\\candidates\\seed2_v2\\solution.mat",
+    "--summary",
+    "results\\i02_stability\\candidates\\seed2_v2\\summary.json",
+    "--spectrum",
+    "results\\i02_stability\\seed2\\shift_1e3_k12",
+    "--out",
+    "results\\i02_stability\\seed2\\perturb",
+    "--time",
+    "600000",
+    "--dt",
+    "2000",
+    "--timeout",
+    "600"
+  ],
+  "hard_timeout_seconds": 600.0,
+  "status": "completed",
+  "returncode": 0,
+  "wall_seconds": 108.17199999999139,
+  "threads": 1
+}

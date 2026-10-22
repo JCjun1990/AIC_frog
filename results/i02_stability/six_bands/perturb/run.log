@@ -1,0 +1,24 @@
+dt=2000.0, linear rate=1.668207716e-06, nonlinear rates=[1.6682076257536124e-06, 1.6682076455603314e-06, 1.6681987502901434e-06, 1.6681987561366915e-06]
+dt=1000.0, linear rate=1.666816258e-06, nonlinear rates=[1.6668161550661922e-06, 1.666816208853437e-06, 1.6668117222397398e-06, 1.6668117265547077e-06]
+Traceback (most recent call last):
+  File "D:\Code\AIC_frog\scripts\i02_stability.py", line 359, in <module>
+    main()
+  File "D:\Code\AIC_frog\scripts\i02_stability.py", line 355, in main
+    globals()[args.command](args)
+  File "D:\Code\AIC_frog\scripts\i02_stability.py", line 218, in perturb
+    write_json(args.out/"perturbation.json",{"input":meta,"source_spectrum":str(args.spectrum),
+  File "D:\Code\AIC_frog\scripts\i02_stability.py", line 28, in write_json
+    json.dump(obj, f, indent=2, allow_nan=False)
+  File "C:\Users\ZhouShuolei\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 179, in dump
+    for chunk in iterable:
+                 ^^^^^^^^
+  File "C:\Users\ZhouShuolei\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\ZhouShuolei\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\ZhouShuolei\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "C:\Users\ZhouShuolei\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool is not JSON serializable

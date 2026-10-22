@@ -1,0 +1,373 @@
+{
+  "diagnostic_version": "unprojected-mass-spectrum-v1",
+  "requested_k": 20,
+  "returned_k": 20,
+  "solver_converged": true,
+  "solver_error": null,
+  "method": "mass_similarity_arpack_shift_invert",
+  "similarity": "B=sqrt(Mfull)*J*invsqrt(Mfull); J=Mfull^-1*weak_J",
+  "which": "LM",
+  "sigma": 0.0,
+  "arpack_tolerance": 1e-10,
+  "arpack_maxiter": 3000,
+  "ncv": 48,
+  "v0_seed": 2026,
+  "pairs": [
+    {
+      "eigenvalue": [
+        -1.477797556702631e-06,
+        0.0
+      ],
+      "residual_absolute_M": 9.947565853648713e-16,
+      "residual_relative_M": 3.365672723064856e-10,
+      "residual_passed": true,
+      "rotation_overlap": 0.9997056023028752,
+      "rotation_like": true,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -5.709484907001946e-06,
+        0.0
+      ],
+      "residual_absolute_M": 1.6305604265819552e-15,
+      "residual_relative_M": 1.4279400446281114e-10,
+      "residual_passed": true,
+      "rotation_overlap": 0.9998194782160497,
+      "rotation_like": true,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -6.689595745315812e-06,
+        0.0
+      ],
+      "residual_absolute_M": 1.4365949766222891e-15,
+      "residual_relative_M": 1.0737532067084713e-10,
+      "residual_passed": true,
+      "rotation_overlap": 0.9996522962421152,
+      "rotation_like": true,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -4.7684443213799496e-05,
+        0.0
+      ],
+      "residual_absolute_M": 3.6483937515571004e-15,
+      "residual_relative_M": 3.825559769250029e-11,
+      "residual_passed": true,
+      "rotation_overlap": 1.1009343104444432e-10,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.00016798636508118662,
+        0.0
+      ],
+      "residual_absolute_M": 3.6769212976673726e-15,
+      "residual_relative_M": 1.0944106374020986e-11,
+      "residual_passed": true,
+      "rotation_overlap": 6.194494852541706e-10,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.00028208053010325994,
+        0.0
+      ],
+      "residual_absolute_M": 1.826352888701681e-15,
+      "residual_relative_M": 3.2372898761092728e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.017804641134987493,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.00028432582375853826,
+        0.0
+      ],
+      "residual_absolute_M": 4.029250935481831e-15,
+      "residual_relative_M": 7.08562254778436e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.04380191585970629,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.00028485628746752277,
+        0.0
+      ],
+      "residual_absolute_M": 4.780347569826672e-15,
+      "residual_relative_M": 8.3908057854813e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.04826448543726332,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0004697287893330108,
+        0.0
+      ],
+      "residual_absolute_M": 3.819206460578701e-15,
+      "residual_relative_M": 4.065331471381345e-12,
+      "residual_passed": true,
+      "rotation_overlap": 8.061562141270397e-11,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0005163331173689778,
+        0.0
+      ],
+      "residual_absolute_M": 3.2225189918308226e-15,
+      "residual_relative_M": 3.1205813489665707e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.01775143522274226,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0005167966662369605,
+        0.0
+      ],
+      "residual_absolute_M": 4.285772328434852e-15,
+      "residual_relative_M": 4.146478304167101e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.015971693321027592,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0005693834270659268,
+        0.0
+      ],
+      "residual_absolute_M": 3.6067869267239215e-15,
+      "residual_relative_M": 3.1672742437463677e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.006045633336108841,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0007106962948116799,
+        0.0
+      ],
+      "residual_absolute_M": 4.535404388636011e-15,
+      "residual_relative_M": 3.1908175276456347e-12,
+      "residual_passed": true,
+      "rotation_overlap": 3.0765036084105323e-10,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0007267088620290814,
+        0.0
+      ],
+      "residual_absolute_M": 3.271833005195136e-15,
+      "residual_relative_M": 2.251130525682374e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.014501521856691008,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.000735524673164515,
+        0.0
+      ],
+      "residual_absolute_M": 4.58914203580118e-15,
+      "residual_relative_M": 3.119638404553306e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.01798519822135836,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0009106894718531632,
+        0.0
+      ],
+      "residual_absolute_M": 1.4283866417741944e-14,
+      "residual_relative_M": 7.842336416098299e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.03692933012096563,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0009595213771902383,
+        0.0
+      ],
+      "residual_absolute_M": 7.247454025558473e-15,
+      "residual_relative_M": 3.7765985197646695e-12,
+      "residual_passed": true,
+      "rotation_overlap": 1.9626101027678785e-10,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0010946691377952853,
+        0.0
+      ],
+      "residual_absolute_M": 4.1787668184905545e-15,
+      "residual_relative_M": 1.9086894268832674e-12,
+      "residual_passed": true,
+      "rotation_overlap": 4.690919898225261e-10,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0011364244444103774,
+        0.0
+      ],
+      "residual_absolute_M": 7.371725492337778e-15,
+      "residual_relative_M": 3.243385659555391e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.019215114287905077,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0011681998519426572,
+        0.0
+      ],
+      "residual_absolute_M": 1.2022205491126875e-14,
+      "residual_relative_M": 5.14561163106394e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.026754005355674945,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    }
+  ],
+  "full_max_real": -1.477797556702631e-06,
+  "nonrotation_max_real": -4.7684443213799496e-05,
+  "rotation": {
+    "rank": 3,
+    "singular_values": [
+      7.476694113809216,
+      7.467768466788753,
+      1.0719027708949818
+    ],
+    "rank_relative_threshold": 0.001,
+    "basis_coordinates": "sqrt(Mfull)*[T_i*u;T_i*v]",
+    "used_to_project_jacobian": false,
+    "overlap_label_threshold": 0.5,
+    "interpretation": "near-rotation tangent; finite mesh need not have exact SO(3) zero modes"
+  },
+  "all_pairs_validated": true,
+  "found_reliable_positive": false,
+  "pair_absolute_tolerance": 1e-09,
+  "pair_relative_tolerance": 1e-07,
+  "absolute_residual_definition": "norm_M(J*w-lambda*w)/norm_M(w)",
+  "relative_residual_definition": "norm_M(J*w-lambda*w)/(norm_M(J*w)+abs(lambda)*norm_M(w))",
+  "wall_seconds": 5.2549870000220835,
+  "limitation": "Finite eigenpair sampling with multiple shifts and direct largest-real-part ARPACK is a numerical check, not a mathematical full-spectrum proof. Rotational overlap is descriptive and never suppresses a positive mode.",
+  "input": {
+    "mat_file": "D:\\Code\\AIC_frog\\results\\i02_stability\\candidates\\seed2_v2\\solution.mat",
+    "mat_sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
+    "summary_sha256": "47e2289b72af678776068ff743b20a5ea577dc77905e086c24d1981451958b98",
+    "parameters": {
+      "F": 0.054,
+      "k": 0.063,
+      "Du": 0.000278,
+      "Dv": 0.000139
+    },
+    "seed": 2,
+    "geometry": {
+      "name": "sphere_L6",
+      "n_vertices": 40962,
+      "n_faces": 81920,
+      "laplacian": "robust",
+      "mesh_sha256": "9a4e4f22b09c05d7921f9969f62576ac017123c7cd98ce4c5652e6020572f95f",
+      "actual_L_M_sha256": "b164cb85b4491be8ffc99513ac31fca2fcaff7238853868076e2f9a1fa2c075a",
+      "mass_sum": 12.56543114247639
+    },
+    "full_steady_residual": {
+      "formula": "sqrt((RMS_M(Ru)^2 + RMS_M(Rv)^2)/2)/F; RMS_M(a)=sqrt(sum(M*a^2)/sum(M)); Ru=(Du*L*u+M*(-u*v^2+F*(1-u)))/M; Rv=(Dv*L*v+M*(u*v^2-(F+k)*v))/M",
+      "normalization": "F",
+      "rotation_projection": false,
+      "value": 2.4366269654958772e-14,
+      "tolerance": 1e-11,
+      "passed": true,
+      "Ru_rms": 1.4963741707657569e-15,
+      "Rv_rms": 1.1060790144357637e-15
+    },
+    "I01_accepted": true,
+    "timestamp_utc": "2026-10-21T12:25:47.082252+00:00",
+    "code_sha256": {
+      "scripts/i02_stability.py": "9466fea71535763ac291ce0a4dc88ccf78293997b97145f7f7ab701b15b9c65f",
+      "scripts/json_safe.py": "a199b039bdc53366a9538457341b4aa24eb3e83df1b6ad52b1411367bd4b831c",
+      "turing_rd/stability.py": "7b9a6856c7902a33b3721bd6aeefeeaf7d17d525863984dea8cb3f4ba7e7c4c0",
+      "turing_rd/diagnostics.py": "a7b2d36349dd1ec7d7ccaaeddd4d6b0bf04d3c19f302d7b3c7ed38a1adf661b9",
+      "turing_rd/steady.py": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+      "turing_rd/geometry.py": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+      "turing_rd/mesh.py": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+      "turing_rd/solver.py": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166",
+      "turing_rd/result_io.py": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c"
+    },
+    "runtime": {
+      "python": "3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]",
+      "numpy": "2.3.2",
+      "scipy": "1.17.0",
+      "robust-laplacian": "1.1.0"
+    },
+    "mass_convention": "J=Mfull^-1*weak_J; B=sqrt(Mfull)*J/sqrt(Mfull), same eigenvalues",
+    "rotation_projection": false
+  },
+  "eigenpairs_sha256": "2ce157f900f6be3de28aef037c953abeeedf60b8b78eecfe02c049979983ee96"
+}

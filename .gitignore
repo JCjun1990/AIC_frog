@@ -6,3 +6,9 @@ __pycache__/
 results/cache/
 results/**/*.npz
 dist/
+
+# I03/I04: keep the delivery ZIP and summary evidence, not extracted copies or duplicate reruns
+results/i03_delivery/package/
+results/i03_delivery/package_v2/*/
+results/i04_evaluation_rerun_20261022/
+results/i01_float64/

@@ -1,0 +1,8 @@
+{
+  "worker_launcher_pid": 96916,
+  "parent_pid": 79760,
+  "started_unix": 1792580334.9636512,
+  "timeout_seconds": 0.5,
+  "entrypoint_used_sha256": "62832380bfd2f1f5df75554ca77228f32e760dec3256690d5720fb852114a341",
+  "windows_timeout_policy": "taskkill of this Popen PID and its descendants only"
+}

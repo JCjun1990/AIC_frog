@@ -1,0 +1,6 @@
+Building sphere6 robust geometry and loading unchanged historical model
+Starting single seed2; physical time cap=200000; parent hard timeout active
+  t=6500: Newton 7.80e-05 -> 8.82e-07
+  t=9000: Newton 2.07e-05 -> 1.53e-05
+  t=11500: Newton 6.44e-06 -> 5.94e-06
+  t=92500: Newton 2.05e-06 -> 9.56e-15

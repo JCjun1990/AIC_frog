@@ -1,0 +1,204 @@
+{
+  "diagnostic_version": "unprojected-mass-spectrum-v1",
+  "requested_k": 8,
+  "returned_k": 8,
+  "solver_converged": true,
+  "solver_error": null,
+  "method": "mass_similarity_arpack_direct",
+  "similarity": "B=sqrt(Mfull)*J*invsqrt(Mfull); J=Mfull^-1*weak_J",
+  "which": "LR",
+  "sigma": null,
+  "arpack_tolerance": 1e-09,
+  "arpack_maxiter": 6000,
+  "ncv": 96,
+  "v0_seed": 2026,
+  "pairs": [
+    {
+      "eigenvalue": [
+        -6.231004405896853e-06,
+        0.0
+      ],
+      "residual_absolute_M": 9.411207024036364e-15,
+      "residual_relative_M": 7.551918127315448e-10,
+      "residual_passed": true,
+      "rotation_overlap": 0.9981424588851276,
+      "rotation_like": true,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -1.024593372942356e-05,
+        0.0
+      ],
+      "residual_absolute_M": 1.0807775031911296e-14,
+      "residual_relative_M": 5.274177696608727e-10,
+      "residual_passed": true,
+      "rotation_overlap": 0.9984184001200247,
+      "rotation_like": true,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -1.3553335816786993e-05,
+        0.0
+      ],
+      "residual_absolute_M": 9.084271725512271e-15,
+      "residual_relative_M": 3.35130474479546e-10,
+      "residual_passed": true,
+      "rotation_overlap": 0.9991480824711827,
+      "rotation_like": true,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -5.9067345303307034e-05,
+        0.0
+      ],
+      "residual_absolute_M": 1.0436027019375952e-14,
+      "residual_relative_M": 8.834007153817562e-11,
+      "residual_passed": true,
+      "rotation_overlap": 0.056612235820945066,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -8.491027804878655e-05,
+        0.0
+      ],
+      "residual_absolute_M": 9.613549206521317e-15,
+      "residual_relative_M": 5.661004431708471e-11,
+      "residual_passed": true,
+      "rotation_overlap": 0.0602369897403318,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0001567146738826588,
+        0.0
+      ],
+      "residual_absolute_M": 1.533016117235519e-14,
+      "residual_relative_M": 4.8911058525180356e-11,
+      "residual_passed": true,
+      "rotation_overlap": 0.018144201986054456,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.00021351496012560209,
+        0.0
+      ],
+      "residual_absolute_M": 1.4834210648627586e-14,
+      "residual_relative_M": 3.473810603199605e-11,
+      "residual_passed": true,
+      "rotation_overlap": 0.013121529265658077,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.00023130896395193577,
+        0.0
+      ],
+      "residual_absolute_M": 1.7287113905760838e-13,
+      "residual_relative_M": 3.73680155113568e-10,
+      "residual_passed": true,
+      "rotation_overlap": 0.04268662515566238,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1.7287113905760838e-12
+    }
+  ],
+  "full_max_real": -6.231004405896853e-06,
+  "nonrotation_max_real": -5.9067345303307034e-05,
+  "rotation": {
+    "rank": 3,
+    "singular_values": [
+      5.277206109476931,
+      5.276544121695152,
+      5.270650091387072
+    ],
+    "rank_relative_threshold": 0.001,
+    "basis_coordinates": "sqrt(Mfull)*[T_i*u;T_i*v]",
+    "used_to_project_jacobian": false,
+    "overlap_label_threshold": 0.5,
+    "interpretation": "near-rotation tangent; finite mesh need not have exact SO(3) zero modes"
+  },
+  "all_pairs_validated": true,
+  "found_reliable_positive": false,
+  "pair_absolute_tolerance": 1e-09,
+  "pair_relative_tolerance": 1e-07,
+  "absolute_residual_definition": "norm_M(J*w-lambda*w)/norm_M(w)",
+  "relative_residual_definition": "norm_M(J*w-lambda*w)/(norm_M(J*w)+abs(lambda)*norm_M(w))",
+  "wall_seconds": 81.8935930999869,
+  "limitation": "Finite eigenpair sampling with multiple shifts and direct largest-real-part ARPACK is a numerical check, not a mathematical full-spectrum proof. Rotational overlap is descriptive and never suppresses a positive mode.",
+  "input": {
+    "mat_file": "D:\\Code\\AIC_frog\\results\\i01_float64_verified\\tasks\\sphere6_spots\\solution.mat",
+    "mat_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+    "summary_sha256": "0aecee7d420d0ee77ba4ae02c5a7add2555a35fb755e9317401a2375441004a9",
+    "parameters": {
+      "F": 0.028,
+      "k": 0.062,
+      "Du": 0.000278,
+      "Dv": 0.000139
+    },
+    "seed": 0,
+    "geometry": {
+      "name": "sphere_L6",
+      "n_vertices": 40962,
+      "n_faces": 81920,
+      "laplacian": "robust",
+      "mesh_sha256": "9a4e4f22b09c05d7921f9969f62576ac017123c7cd98ce4c5652e6020572f95f",
+      "actual_L_M_sha256": "b164cb85b4491be8ffc99513ac31fca2fcaff7238853868076e2f9a1fa2c075a",
+      "mass_sum": 12.56543114247639
+    },
+    "full_steady_residual": {
+      "formula": "sqrt((RMS_M(Ru)^2 + RMS_M(Rv)^2)/2)/F; RMS_M(a)=sqrt(sum(M*a^2)/sum(M)); Ru=(Du*L*u+M*(-u*v^2+F*(1-u)))/M; Rv=(Dv*L*v+M*(u*v^2-(F+k)*v))/M",
+      "normalization": "F",
+      "rotation_projection": false,
+      "value": 8.422602727722893e-15,
+      "tolerance": 1e-11,
+      "passed": true,
+      "Ru_rms": 2.995873368756267e-16,
+      "Rv_rms": 1.4656643116195648e-16
+    },
+    "I01_accepted": true,
+    "timestamp_utc": "2026-10-21T10:55:10.209861+00:00",
+    "code_sha256": {
+      "scripts/i02_stability.py": "1240a80c305063226704b1bca8aa7cb2ee43c181d7082b71bbadabe9473ed565",
+      "turing_rd/stability.py": "7b9a6856c7902a33b3721bd6aeefeeaf7d17d525863984dea8cb3f4ba7e7c4c0",
+      "turing_rd/diagnostics.py": "a7b2d36349dd1ec7d7ccaaeddd4d6b0bf04d3c19f302d7b3c7ed38a1adf661b9",
+      "turing_rd/steady.py": "7dc7df81f3ea9a739068b449fa10bd29dc926f329f73324aff84a7ee7046246f",
+      "turing_rd/geometry.py": "7bc9a167231d8d2555c44a067c54f17df96283628e4f1098b3867865fe5e02a1",
+      "turing_rd/mesh.py": "335226912c456b42fc01421ab9736bf4ca9270628df82d7d375cbbc98d4f8650",
+      "turing_rd/solver.py": "d09e4e3e3f807bd2c65e653648d0c6d0274faf3577b19ba2e3125c8508ff2166",
+      "turing_rd/result_io.py": "944898bd6ff02b92e6cefc7d878fb7c84c02daf09bdf7ee145cf0dcb93be287c"
+    },
+    "runtime": {
+      "python": "3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]",
+      "numpy": "2.3.2",
+      "scipy": "1.17.0",
+      "robust-laplacian": "1.1.0"
+    },
+    "mass_convention": "J=Mfull^-1*weak_J; B=sqrt(Mfull)*J/sqrt(Mfull), same eigenvalues",
+    "rotation_projection": false
+  },
+  "eigenpairs_sha256": "cc634816b27dabf81999087b18c7408749d4c38f523021cc9378bb21ddf8c712"
+}
