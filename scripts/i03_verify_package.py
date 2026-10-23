@@ -245,6 +245,13 @@ def main():
               f"F={estimate['F']:.6f} k={estimate['k']:.6f}")
         check("inversion_mat_is_steady", inv_residual <= 1e-11,
               f"residual={inv_residual:.3e}, pattern={inv_shape['type']}/{inv_shape['n_components']}")
+        best = extracted / "task3_inversion/best_match/solution_best_match.mat"
+        if best.is_file():                      # generated pattern closest to the target (inversion_best_match.py)
+            ub, vb = read_mat_fields(best, geometries["frog"].n)
+            best_residual = full_steady_residual(geometries["frog"], params, ub, vb)["full_joint_rms_over_F"]
+            best_shape = pattern_stats(geometries["frog"], vb)
+            check("inversion_best_match_is_steady", best_residual <= 1e-11,
+                  f"residual={best_residual:.3e}, pattern={best_shape['type']}/{best_shape['n_components']}")
         md = (extracted / "task3_inversion/summary.md").read_text(encoding="utf-8")
         check("inversion_report_has_errors", ("误差" in md) and ("波长" in md or "wavelength" in md))
         pngs = [extracted / "task3_inversion" / name for name in
@@ -289,7 +296,8 @@ def main():
     manifest_team = manifest.get("team")
     expected_name = f"{manifest_team}_{manifest.get('round')}_{manifest.get('problem')}_result.zip"
     check("zip_name_matches_manifest", args.zip.name == expected_name, expected_name)
-    check("draft_status_recorded", manifest.get("delivery_status", "").startswith("draft"),
+    status_prefix = "draft" if manifest_team == "待填" else "named"     # a named build must not claim draft status
+    check("delivery_status_recorded", manifest.get("delivery_status", "").startswith(status_prefix),
           manifest.get("delivery_status", ""))
     return write_report(args, extracted, work, ref={
         "zip": args.zip.name, "zip_bytes": args.zip.stat().st_size, "files": len(names),

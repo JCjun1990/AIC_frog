@@ -12,3 +12,15 @@ results/i03_delivery/package/
 results/i03_delivery/package_v2/*/
 results/i04_evaluation_rerun_20261022/
 results/i01_float64/
+
+# v2p (physics-feature) networks: not the recommended model; refit with scripts/generalization_eval.py train
+results/generalization/*.joblib
+# active-learning PDE pickles (labels and states) and the unused v3 network; summaries stay
+results/active_learning/jobs/
+results/active_learning/model_*.joblib
+# raw copies with machine names; the sanitized versions are in submission/evidence/generalization/
+results/generalization/testset.json
+results/ai_generation_fine/*/dataset.json
+# process logs of the 2026-10-22/23 runs (summaries are kept)
+results/generalization/*.log
+results/active_learning/*.log

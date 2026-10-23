@@ -1,0 +1,232 @@
+{
+ "summary": {
+  "pde (legacy)": {
+   "runs": 24,
+   "complete": 22,
+   "median_steps": 25875.0,
+   "median_steps_complete": 25875.0
+  },
+  "ai v1 (legacy)": {
+   "runs": 24,
+   "complete": 24,
+   "median_steps": 15062.5,
+   "median_steps_complete": 15062.5
+  },
+  "ai v2": {
+   "runs": 24,
+   "complete": 23,
+   "median_steps": 10875.0,
+   "median_steps_complete": 10875.0
+  }
+ },
+ "per_point": {
+  "random3": [
+   {
+    "seed": 1,
+    "type": "stripes_or_maze",
+    "predicted": "stripes_or_maze",
+    "steps": 6125,
+    "residual": 8.935113396319911e-12,
+    "stable": true
+   },
+   {
+    "seed": 3,
+    "type": "spots",
+    "predicted": "stripes_or_maze",
+    "steps": 9500,
+    "residual": 1.0609397580189067e-12,
+    "stable": true
+   },
+   {
+    "seed": 2,
+    "type": "stripes_or_maze",
+    "predicted": "stripes_or_maze",
+    "steps": 15250,
+    "residual": 6.510895825285587e-12,
+    "stable": true
+   }
+  ],
+  "random4": [
+   {
+    "seed": 3,
+    "type": "stripes_or_maze",
+    "predicted": "holes",
+    "steps": 9250,
+    "residual": 2.8434996911571626e-12,
+    "stable": true
+   },
+   {
+    "seed": 1,
+    "type": "holes",
+    "predicted": "holes",
+    "steps": 10750,
+    "residual": 7.23068475544456e-14,
+    "stable": true
+   },
+   {
+    "seed": 2,
+    "type": "holes",
+    "predicted": "holes",
+    "steps": 17000,
+    "residual": 1.3199101962195475e-14,
+    "stable": true
+   }
+  ],
+  "random2": [
+   {
+    "seed": 3,
+    "type": "stripes_or_maze",
+    "predicted": "holes",
+    "steps": 9250,
+    "residual": 8.853762911402311e-12,
+    "stable": true
+   },
+   {
+    "seed": 2,
+    "type": "holes",
+    "predicted": "holes",
+    "steps": 10875,
+    "residual": 3.694908847900983e-12,
+    "stable": true
+   },
+   {
+    "seed": 1,
+    "type": "holes",
+    "predicted": "holes",
+    "steps": 10875,
+    "residual": 9.850200742923125e-14,
+    "stable": true
+   }
+  ],
+  "task_spots": [
+   {
+    "seed": 3,
+    "type": "spots",
+    "predicted": "spots",
+    "steps": 9125,
+    "residual": 3.860884437213921e-14,
+    "stable": true
+   },
+   {
+    "seed": 1,
+    "type": "spots",
+    "predicted": "spots",
+    "steps": 9875,
+    "residual": 2.0785351064605095e-14,
+    "stable": true
+   },
+   {
+    "seed": 2,
+    "type": "spots",
+    "predicted": "spots",
+    "steps": 51500,
+    "residual": 1.70646737835326e-05,
+    "stable": false
+   }
+  ],
+  "random5": [
+   {
+    "seed": 2,
+    "type": "holes",
+    "predicted": "holes",
+    "steps": 10750,
+    "residual": 1.2967715189391892e-14,
+    "stable": true
+   },
+   {
+    "seed": 1,
+    "type": "holes",
+    "predicted": "holes",
+    "steps": 18500,
+    "residual": 9.428247035064854e-13,
+    "stable": true
+   },
+   {
+    "seed": 3,
+    "type": "stripes_or_maze",
+    "predicted": "holes",
+    "steps": 20875,
+    "residual": 1.3185225972170798e-14,
+    "stable": true
+   }
+  ],
+  "task_stripes": [
+   {
+    "seed": 3,
+    "type": "stripes_or_maze",
+    "predicted": "stripes_or_maze",
+    "steps": 10875,
+    "residual": 4.5680389153088115e-12,
+    "stable": true
+   },
+   {
+    "seed": 1,
+    "type": "stripes_or_maze",
+    "predicted": "stripes_or_maze",
+    "steps": 26875,
+    "residual": 1.0423284660129318e-14,
+    "stable": true
+   },
+   {
+    "seed": 2,
+    "type": "stripes_or_maze",
+    "predicted": "stripes_or_maze",
+    "steps": 33375,
+    "residual": 1.1106636702899995e-14,
+    "stable": true
+   }
+  ],
+  "random6": [
+   {
+    "seed": 2,
+    "type": "holes",
+    "predicted": "holes",
+    "steps": 9125,
+    "residual": 5.3893544462103116e-14,
+    "stable": true
+   },
+   {
+    "seed": 3,
+    "type": "holes",
+    "predicted": "holes",
+    "steps": 5875,
+    "residual": 1.284468827338917e-14,
+    "stable": true
+   },
+   {
+    "seed": 1,
+    "type": "holes",
+    "predicted": "holes",
+    "steps": 16500,
+    "residual": 1.2311531004777768e-14,
+    "stable": true
+   }
+  ],
+  "random1": [
+   {
+    "seed": 2,
+    "type": "spots",
+    "predicted": "spots",
+    "steps": 15875,
+    "residual": 2.192357368381035e-14,
+    "stable": true
+   },
+   {
+    "seed": 3,
+    "type": "spots",
+    "predicted": "spots",
+    "steps": 20875,
+    "residual": 2.1406956299150822e-14,
+    "stable": true
+   },
+   {
+    "seed": 1,
+    "type": "spots",
+    "predicted": "spots",
+    "steps": 28000,
+    "residual": 2.061263248508623e-14,
+    "stable": true
+   }
+  ]
+ }
+}

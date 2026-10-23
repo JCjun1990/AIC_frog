@@ -69,7 +69,7 @@
   "task 4 (not in preliminary round)"
  ],
  "schema_version": "aic-frog-i03-package-v2",
- "generated_utc": "2026-10-22T05:57:04.972781+00:00",
+ "generated_utc": "2026-10-23T13:35:53.990191+00:00",
  "round": "初赛",
  "team": "待填",
  "delivery_status": "draft: team name pending; do not upload",
@@ -176,11 +176,33 @@
    "historical_provenance": {}
   },
   {
+   "path": "code/scripts/active_learning.py",
+   "source": "scripts/active_learning.py",
+   "source_sha256": "6835fc112e5ed726efe7fafd50097b3aa527e1f8f601b50c5e22ccd67092fe5c",
+   "sha256": "6835fc112e5ed726efe7fafd50097b3aa527e1f8f601b50c5e22ccd67092fe5c",
+   "bytes": 14237,
+   "reason": "portable reproduction/verification entry point",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
    "path": "code/scripts/ai_generation.py",
    "source": "scripts/ai_generation.py",
    "source_sha256": "81cd5b7d0a9bc510e6f299ecb50fb10146ee917a3d3740559d8fcf8b3726211a",
    "sha256": "81cd5b7d0a9bc510e6f299ecb50fb10146ee917a3d3740559d8fcf8b3726211a",
    "bytes": 36857,
+   "reason": "portable reproduction/verification entry point",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "code/scripts/generalization_eval.py",
+   "source": "scripts/generalization_eval.py",
+   "source_sha256": "789a2d9d8a62c994115dc8befa569354799006e3795d13aca8ee95e8a1ed649a",
+   "sha256": "789a2d9d8a62c994115dc8befa569354799006e3795d13aca8ee95e8a1ed649a",
+   "bytes": 17844,
    "reason": "portable reproduction/verification entry point",
    "sanitized": false,
    "transformations": [],
@@ -222,9 +244,9 @@
   {
    "path": "code/scripts/i03_verify_package.py",
    "source": "scripts/i03_verify_package.py",
-   "source_sha256": "d9675876f49e97f3e2799f183efcd70e6f724a5cce18f9fd54fc5f2d3453aa3b",
-   "sha256": "d9675876f49e97f3e2799f183efcd70e6f724a5cce18f9fd54fc5f2d3453aa3b",
-   "bytes": 18369,
+   "source_sha256": "00ebd935773c373877002aeb840895566abc66f2582439298b8d57c3cb6686d0",
+   "sha256": "00ebd935773c373877002aeb840895566abc66f2582439298b8d57c3cb6686d0",
+   "bytes": 19116,
    "reason": "portable reproduction/verification entry point",
    "sanitized": false,
    "transformations": [],
@@ -236,6 +258,17 @@
    "source_sha256": "a24df17a79f7e7eb74e36d4868a64c348a19b3967bb4b8398fcf5fddaca34e29",
    "sha256": "a24df17a79f7e7eb74e36d4868a64c348a19b3967bb4b8398fcf5fddaca34e29",
    "bytes": 78810,
+   "reason": "portable reproduction/verification entry point",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "code/scripts/inversion_best_match.py",
+   "source": "scripts/inversion_best_match.py",
+   "source_sha256": "76cc392ccf647b4d6774775677d0449cd64eac379721bdca72359168aa2627d8",
+   "sha256": "76cc392ccf647b4d6774775677d0449cd64eac379721bdca72359168aa2627d8",
+   "bytes": 21837,
    "reason": "portable reproduction/verification entry point",
    "sanitized": false,
    "transformations": [],
@@ -308,11 +341,33 @@
    "historical_provenance": {}
   },
   {
+   "path": "code/scripts/sphere_bandcount.py",
+   "source": "scripts/sphere_bandcount.py",
+   "source_sha256": "72821fa9a49826f8720e3fee7def03b242ee6cdbe45c31b8a828b3fd40e23832",
+   "sha256": "72821fa9a49826f8720e3fee7def03b242ee6cdbe45c31b8a828b3fd40e23832",
+   "bytes": 9984,
+   "reason": "portable reproduction/verification entry point",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "code/scripts/sphere_spots_layout.py",
+   "source": "scripts/sphere_spots_layout.py",
+   "source_sha256": "3674c792fd673f452fce283ae875b023e3f2c5f95ab19668c56f41c4b030ecb8",
+   "sha256": "3674c792fd673f452fce283ae875b023e3f2c5f95ab19668c56f41c4b030ecb8",
+   "bytes": 6928,
+   "reason": "portable reproduction/verification entry point",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
    "path": "code/scripts/submission_workflow.py",
    "source": "scripts/submission_workflow.py",
-   "source_sha256": "9ec667f002bf5007fb157bccf6e09251c6d735283d953c7acb01a9779c9fea69",
-   "sha256": "9ec667f002bf5007fb157bccf6e09251c6d735283d953c7acb01a9779c9fea69",
-   "bytes": 9063,
+   "source_sha256": "b023092fb1933d409245a832fc88391d6212e0179409a4d61cb06d482694cf0f",
+   "sha256": "b023092fb1933d409245a832fc88391d6212e0179409a4d61cb06d482694cf0f",
+   "bytes": 11292,
    "reason": "portable reproduction/verification entry point",
    "sanitized": false,
    "transformations": [],
@@ -528,6 +583,28 @@
    "historical_provenance": {}
   },
   {
+   "path": "evidence/active_learning/summary.json",
+   "source": "submission/evidence/active_learning/summary.json",
+   "source_sha256": "362ac19135c9e923d52282a5e38450f23710e0bb1f2387670e79c951a6713b1b",
+   "sha256": "362ac19135c9e923d52282a5e38450f23710e0bb1f2387670e79c951a6713b1b",
+   "bytes": 17454,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/active_learning/summary.md",
+   "source": "submission/evidence/active_learning/summary.md",
+   "source_sha256": "37123d37e560196ea5f9ad9578a960aae99d78950e46fe8f8bc1b739ba0e696d",
+   "sha256": "37123d37e560196ea5f9ad9578a960aae99d78950e46fe8f8bc1b739ba0e696d",
+   "bytes": 1025,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
    "path": "evidence/ai_vs_solver_summary.md",
    "source": "submission/evidence/ai_vs_solver_summary.md",
    "source_sha256": "edfbeefa24a7f9329075b25bfa66d876c7473e0f2d177b1c86f8e7087792e98b",
@@ -550,11 +627,88 @@
    "historical_provenance": {}
   },
   {
+   "path": "evidence/best_match_search/summary.md",
+   "source": "submission/evidence/best_match_search/summary.md",
+   "source_sha256": "64178a6b405eb6fb429d26ee4ff3f0499d823ddf5fca063196328079caeb3087",
+   "sha256": "64178a6b405eb6fb429d26ee4ff3f0499d823ddf5fca063196328079caeb3087",
+   "bytes": 845,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
    "path": "evidence/evaluation.csv",
    "source": "submission/evidence/evaluation.csv",
    "source_sha256": "a308df6b0649f2276938abb95f4673c52ba8c0f3a452898b7a1e0f12825fc746",
    "sha256": "a308df6b0649f2276938abb95f4673c52ba8c0f3a452898b7a1e0f12825fc746",
    "bytes": 33442,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/generalization/dense_dataset_frog.json",
+   "source": "submission/evidence/generalization/dense_dataset_frog.json",
+   "source_sha256": "98a7b7879cef2e45539710f0acf30f17982431207f49e5d3e804ffd22e318930",
+   "sha256": "98a7b7879cef2e45539710f0acf30f17982431207f49e5d3e804ffd22e318930",
+   "bytes": 835014,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/generalization/dense_dataset_sphere5.json",
+   "source": "submission/evidence/generalization/dense_dataset_sphere5.json",
+   "source_sha256": "80d627eb08a41965628273808369613992130882b821b2d129b71fa6f18e22c8",
+   "sha256": "80d627eb08a41965628273808369613992130882b821b2d129b71fa6f18e22c8",
+   "bytes": 825579,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/generalization/summary.json",
+   "source": "submission/evidence/generalization/summary.json",
+   "source_sha256": "99887800fb098917b92c8c3c9c8615eaaef32dc8ce740ac2ce5b90ca1c1abd30",
+   "sha256": "99887800fb098917b92c8c3c9c8615eaaef32dc8ce740ac2ce5b90ca1c1abd30",
+   "bytes": 1980,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/generalization/summary.md",
+   "source": "submission/evidence/generalization/summary.md",
+   "source_sha256": "9b0ba57a7e114c5814b0d94c695329cb32c0ba1d771037ba254899e4252da911",
+   "sha256": "9b0ba57a7e114c5814b0d94c695329cb32c0ba1d771037ba254899e4252da911",
+   "bytes": 1297,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/generalization/testset.json",
+   "source": "submission/evidence/generalization/testset.json",
+   "source_sha256": "e59571edd6c093bdc65bad9b1cbd86553ebd31240e5f62e6c3e257d3d813a83e",
+   "sha256": "e59571edd6c093bdc65bad9b1cbd86553ebd31240e5f62e6c3e257d3d813a83e",
+   "bytes": 774774,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/generalization/type_maps.png",
+   "source": "submission/evidence/generalization/type_maps.png",
+   "source_sha256": "47ae3af616890078754ce7670ce3c99bbeb754fdc7cfec3bdb9369cf3911854c",
+   "sha256": "47ae3af616890078754ce7670ce3c99bbeb754fdc7cfec3bdb9369cf3911854c",
+   "bytes": 124475,
    "reason": "evaluation and numerical verification evidence",
    "sanitized": false,
    "transformations": [],
@@ -577,6 +731,61 @@
    "source_sha256": "7dd01850e0cc75ed6f86f78fa38fd72aca8658633d8bd7cf60dca43391eab472",
    "sha256": "7dd01850e0cc75ed6f86f78fa38fd72aca8658633d8bd7cf60dca43391eab472",
    "bytes": 610,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/sphere_bandcount/bands_6_vs_7.png",
+   "source": "submission/evidence/sphere_bandcount/bands_6_vs_7.png",
+   "source_sha256": "207bd55d6a39cd743fe35f5514415246fdecd027267a55ccb78b70c4efc3becf",
+   "sha256": "207bd55d6a39cd743fe35f5514415246fdecd027267a55ccb78b70c4efc3becf",
+   "bytes": 188506,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/sphere_bandcount/summary.json",
+   "source": "submission/evidence/sphere_bandcount/summary.json",
+   "source_sha256": "7168699a0986fc72c4bf28046c136c6fabcbe6d09135f983fc294f043f56a4d9",
+   "sha256": "7168699a0986fc72c4bf28046c136c6fabcbe6d09135f983fc294f043f56a4d9",
+   "bytes": 17485,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/sphere_bandcount/summary.md",
+   "source": "submission/evidence/sphere_bandcount/summary.md",
+   "source_sha256": "f4abb8421a93e9b6724a83c96460c8ac8c7652e67d48fa524344f3f1902cdcd9",
+   "sha256": "f4abb8421a93e9b6724a83c96460c8ac8c7652e67d48fa524344f3f1902cdcd9",
+   "bytes": 1402,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/sphere_spots_layout/summary.json",
+   "source": "submission/evidence/sphere_spots_layout/summary.json",
+   "source_sha256": "c3617312ade6cbb11f9146b72a6735f6cd04ff00c54224465ac3cddf3f475306",
+   "sha256": "c3617312ade6cbb11f9146b72a6735f6cd04ff00c54224465ac3cddf3f475306",
+   "bytes": 13595,
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {}
+  },
+  {
+   "path": "evidence/sphere_spots_layout/summary.md",
+   "source": "submission/evidence/sphere_spots_layout/summary.md",
+   "source_sha256": "e0005a59791dfc7e8223913a56a277fc54d3864bf53e3b6a03f44d7f6b04d53c",
+   "sha256": "e0005a59791dfc7e8223913a56a277fc54d3864bf53e3b6a03f44d7f6b04d53c",
+   "bytes": 857,
    "reason": "evaluation and numerical verification evidence",
    "sanitized": false,
    "transformations": [],
@@ -647,7 +856,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\ai_generation\\sphere5\\cv.json",
+    "source": "submission/task1_sphere/ai_model/cv.json",
     "source_sha256": "acdaf62049991e26b919e56bbeb2b92ae34e570f212db3c6daf6f57ccf2ed8c8",
     "sanitized": false,
     "transformations": []
@@ -663,7 +872,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\ai_generation\\sphere5\\dataset.json",
+    "source": "submission/task1_sphere/ai_model/dataset.json",
     "source_sha256": "4157f250928e0c0ee7ad8976ef76f2f4a915b84b36b15f5a1a0146aa9da9a4f6",
     "sanitized": false,
     "transformations": []
@@ -679,7 +888,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\ai_generation\\sphere5\\model.joblib",
+    "source": "submission/task1_sphere/ai_model/model.joblib",
     "source_sha256": "bf05b8ac78ded38a59dc52c415102f08825c3f866e5c8e16f3b4d7fdd59d17da",
     "sanitized": false,
     "transformations": []
@@ -695,7 +904,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i03_delivery\\figures\\task1_sphere_spots.png",
+    "source": "submission/task1_sphere/spots/final_v.png",
     "source_sha256": "438531726910f862da39a988e18d5244a09665747831becd1692e843c34ab0ea",
     "sanitized": false,
     "transformations": []
@@ -711,7 +920,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i01_float64_verified\\tasks\\sphere6_spots\\solution.mat",
+    "source": "submission/task1_sphere/spots/solution.mat",
     "source_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
     "sanitized": false,
     "transformations": []
@@ -727,12 +936,10 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i02_stability\\certificates\\spots\\stability_certificate.json",
-    "source_sha256": "05680c9548b499ec0f54aba24326065f88f6c4e4b10e3c94a99fedd5615fd6a9",
-    "sanitized": true,
-    "transformations": [
-     "repository absolute paths rewritten as relative POSIX paths"
-    ]
+    "source": "submission/task1_sphere/spots/stability_certificate.json",
+    "source_sha256": "941b44b69a75cd6edf96926c22644f1de7595066be9d3ab087230b3e43b3f96f",
+    "sanitized": false,
+    "transformations": []
    }
   },
   {
@@ -745,12 +952,10 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i01_float64_verified\\tasks\\sphere6_spots\\summary.json",
-    "source_sha256": "0aecee7d420d0ee77ba4ae02c5a7add2555a35fb755e9317401a2375441004a9",
-    "sanitized": true,
-    "transformations": [
-     "repository absolute paths rewritten as relative POSIX paths"
-    ]
+    "source": "submission/task1_sphere/spots/summary.json",
+    "source_sha256": "f31626dd2f98753412f174f33a4cac694eae64ad9351eb9a971b81dfd2b3cab1",
+    "sanitized": false,
+    "transformations": []
    }
   },
   {
@@ -763,7 +968,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i03_delivery\\figures\\task1_sphere_stripes.png",
+    "source": "submission/task1_sphere/stripes/final_v.png",
     "source_sha256": "b7ff6320515843a6b58e6b8b44e4a4452dffe443b584cebd0a9458b441b5f0b5",
     "sanitized": false,
     "transformations": []
@@ -779,7 +984,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i02_stability\\candidates\\seed2_v2\\solution.mat",
+    "source": "submission/task1_sphere/stripes/solution.mat",
     "source_sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
     "sanitized": false,
     "transformations": []
@@ -795,12 +1000,10 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i02_stability\\certificates\\seed2\\stability_certificate.json",
-    "source_sha256": "da6381fe8cdc71c02c3686a3f55ae89c0c4b07b38356c25d6ac5222dfb6331df",
-    "sanitized": true,
-    "transformations": [
-     "repository absolute paths rewritten as relative POSIX paths"
-    ]
+    "source": "submission/task1_sphere/stripes/stability_certificate.json",
+    "source_sha256": "025d675ace800e8752f7e6d2f4eadb9822c02e7d765b22fa8fbe8d8769685678",
+    "sanitized": false,
+    "transformations": []
    }
   },
   {
@@ -813,7 +1016,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i02_stability\\candidates\\seed2_v2\\summary.json",
+    "source": "submission/task1_sphere/stripes/summary.json",
     "source_sha256": "47e2289b72af678776068ff743b20a5ea577dc77905e086c24d1981451958b98",
     "sanitized": false,
     "transformations": []
@@ -829,7 +1032,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\ai_generation\\frog\\cv.json",
+    "source": "submission/task2_frog/ai_model/cv.json",
     "source_sha256": "654322175033402e9c44ed05594a460910d05ffaf8ef3aa2a12259c002c295a0",
     "sanitized": false,
     "transformations": []
@@ -845,7 +1048,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\ai_generation\\frog\\dataset.json",
+    "source": "submission/task2_frog/ai_model/dataset.json",
     "source_sha256": "ee19eb9e949faa7cdf62883e2c609ec4464b4b836ed19c11eb6d0d4ffa1165bf",
     "sanitized": false,
     "transformations": []
@@ -861,7 +1064,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\ai_generation\\frog\\model.joblib",
+    "source": "submission/task2_frog/ai_model/model.joblib",
     "source_sha256": "9a29124ab1eb2ab82948378f75372095514f0afe033e0a50693fb969e3989038",
     "sanitized": false,
     "transformations": []
@@ -877,7 +1080,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i03_delivery\\figures\\task2_frog_spots.png",
+    "source": "submission/task2_frog/spots/final_v.png",
     "source_sha256": "f52ee8106ca633f7442a300714bc4e6ba6e5bb6ca8de4b8eeddb03e2219f5bdd",
     "sanitized": false,
     "transformations": []
@@ -893,7 +1096,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i01_float64_verified\\tasks\\frog_spots\\solution.mat",
+    "source": "submission/task2_frog/spots/solution.mat",
     "source_sha256": "19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb",
     "sanitized": false,
     "transformations": []
@@ -909,7 +1112,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i03_delivery\\frog_stability_v2\\frog_spots\\frog_stability_certificate.json",
+    "source": "submission/task2_frog/spots/stability_certificate.json",
     "source_sha256": "3ea6afe851176c8b39e60cc8d48c214ea9b61213730c9d3dbc96fa775acd6887",
     "sanitized": false,
     "transformations": []
@@ -925,12 +1128,10 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i01_float64_verified\\tasks\\frog_spots\\summary.json",
-    "source_sha256": "8a73cb7f41861809267c86725596f5722b2d6fd0601ec1acd09154920c0bc59d",
-    "sanitized": true,
-    "transformations": [
-     "repository absolute paths rewritten as relative POSIX paths"
-    ]
+    "source": "submission/task2_frog/spots/summary.json",
+    "source_sha256": "3a42fc48f9a3eb57b7ea379b4b9e83825a8edd232e2a2ed7d1c0373bd61933d6",
+    "sanitized": false,
+    "transformations": []
    }
   },
   {
@@ -943,7 +1144,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i03_delivery\\figures\\task2_frog_stripes.png",
+    "source": "submission/task2_frog/stripes/final_v.png",
     "source_sha256": "9bf02f7dbae1c5cce7100ab06ab2288ed3a5250c9dddfc2ddbedfcaace18e1b2",
     "sanitized": false,
     "transformations": []
@@ -959,7 +1160,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i01_float64_verified\\tasks\\frog_stripes\\solution.mat",
+    "source": "submission/task2_frog/stripes/solution.mat",
     "source_sha256": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
     "sanitized": false,
     "transformations": []
@@ -975,7 +1176,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i03_delivery\\frog_stability_v2\\frog_stripes\\frog_stability_certificate.json",
+    "source": "submission/task2_frog/stripes/stability_certificate.json",
     "source_sha256": "b6f527be86202d24969fa237cbfe0240b5692cebee6d0e70db85c9af89965de7",
     "sanitized": false,
     "transformations": []
@@ -991,12 +1192,106 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\i01_float64_verified\\tasks\\frog_stripes\\summary.json",
-    "source_sha256": "2dc9360e2a23a16c383d8da37007a11cc266da827ce8c2ee03540e58474c4964",
-    "sanitized": true,
-    "transformations": [
-     "repository absolute paths rewritten as relative POSIX paths"
-    ]
+    "source": "submission/task2_frog/stripes/summary.json",
+    "source_sha256": "9bd4bf61f79a5361366dfc573def8ab7aaeb62be8d210067fcf038b0399a12c8",
+    "sanitized": false,
+    "transformations": []
+   }
+  },
+  {
+   "path": "task3_inversion/best_match/best_match_vs_target.png",
+   "source": "submission/task3_inversion/best_match/best_match_vs_target.png",
+   "source_sha256": "76dc7bb19c293cd4aa6d959a271ab8a3b5815f107a000206b010d03fb6c4670d",
+   "sha256": "76dc7bb19c293cd4aa6d959a271ab8a3b5815f107a000206b010d03fb6c4670d",
+   "bytes": 473375,
+   "reason": "目标与生成斑图对比（多视角）",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {
+    "source": "submission/task3_inversion/best_match/best_match_vs_target.png",
+    "source_sha256": "76dc7bb19c293cd4aa6d959a271ab8a3b5815f107a000206b010d03fb6c4670d",
+    "sanitized": false,
+    "transformations": []
+   }
+  },
+  {
+   "path": "task3_inversion/best_match/candidates.csv",
+   "source": "submission/task3_inversion/best_match/candidates.csv",
+   "source_sha256": "6879b61ba0072f467c3087ea73ca22d054723c5074d3384d23b3638d4441e3b5",
+   "sha256": "6879b61ba0072f467c3087ea73ca22d054723c5074d3384d23b3638d4441e3b5",
+   "bytes": 21947,
+   "reason": "全部 AI 初值的收敛、稳定与特征距离",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {
+    "source": "submission/task3_inversion/best_match/candidates.csv",
+    "source_sha256": "6879b61ba0072f467c3087ea73ca22d054723c5074d3384d23b3638d4441e3b5",
+    "sanitized": false,
+    "transformations": []
+   }
+  },
+  {
+   "path": "task3_inversion/best_match/report_panel.png",
+   "source": "submission/task3_inversion/best_match/report_panel.png",
+   "source_sha256": "5a1ec07ba16e3185a3732828e66259716b33436296ddf9b23bbcbe07e6b2f0ce",
+   "sha256": "5a1ec07ba16e3185a3732828e66259716b33436296ddf9b23bbcbe07e6b2f0ce",
+   "bytes": 188474,
+   "reason": "目标与生成斑图对比（报告用）",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {
+    "source": "submission/task3_inversion/best_match/report_panel.png",
+    "source_sha256": "5a1ec07ba16e3185a3732828e66259716b33436296ddf9b23bbcbe07e6b2f0ce",
+    "sanitized": false,
+    "transformations": []
+   }
+  },
+  {
+   "path": "task3_inversion/best_match/solution_best_match.mat",
+   "source": "submission/task3_inversion/best_match/solution_best_match.mat",
+   "source_sha256": "4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c",
+   "sha256": "4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c",
+   "bytes": 464472,
+   "reason": "任务 3 生成斑图：反演参数下最接近目标的完整稳态（float64）",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {
+    "source": "submission/task3_inversion/best_match/solution_best_match.mat",
+    "source_sha256": "4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c",
+    "sanitized": false,
+    "transformations": []
+   }
+  },
+  {
+   "path": "task3_inversion/best_match/summary.json",
+   "source": "submission/task3_inversion/best_match/summary.json",
+   "source_sha256": "8db05e2eecd17c884ffc18201e7a69e70ed25743c37deac139593031b4566439",
+   "sha256": "8db05e2eecd17c884ffc18201e7a69e70ed25743c37deac139593031b4566439",
+   "bytes": 12552,
+   "reason": "最接近目标稳态的选择记录、特征、MAT 证书与三组谱检查",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {
+    "source": "submission/task3_inversion/best_match/summary.json",
+    "source_sha256": "8db05e2eecd17c884ffc18201e7a69e70ed25743c37deac139593031b4566439",
+    "sanitized": false,
+    "transformations": []
+   }
+  },
+  {
+   "path": "task3_inversion/best_match/summary.md",
+   "source": "submission/task3_inversion/best_match/summary.md",
+   "source_sha256": "94d29bf98d22e2a2a2c11de76b6612e2b923d95fe03236fd0a0aa327bc41d711",
+   "sha256": "94d29bf98d22e2a2a2c11de76b6612e2b923d95fe03236fd0a0aa327bc41d711",
+   "bytes": 1220,
+   "reason": "目标 / 新生成 / 旧代表解的特征对照表",
+   "sanitized": false,
+   "transformations": [],
+   "historical_provenance": {
+    "source": "submission/task3_inversion/best_match/summary.md",
+    "source_sha256": "94d29bf98d22e2a2a2c11de76b6612e2b923d95fe03236fd0a0aa327bc41d711",
+    "sanitized": false,
+    "transformations": []
    }
   },
   {
@@ -1009,7 +1304,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\inversion\\criteria.png",
+    "source": "submission/task3_inversion/criteria.png",
     "source_sha256": "36b2f075f5fb0b3c94bbf94c23f36a7cdacc0b36a103a8c822f7a8a3d7096c69",
     "sanitized": false,
     "transformations": []
@@ -1025,7 +1320,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\inversion\\cutoff.png",
+    "source": "submission/task3_inversion/cutoff.png",
     "source_sha256": "6dd4e14cf674a6d43fbc46dcee8bc26006a8c80d71e47b6566f109bfa16036d6",
     "sanitized": false,
     "transformations": []
@@ -1041,7 +1336,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\inversion\\cutoff_curve.csv",
+    "source": "submission/task3_inversion/cutoff_curve.csv",
     "source_sha256": "4db74b01b64b648125221ef9c328803d4c5638ade1db8721f8700b882763e9bf",
     "sanitized": false,
     "transformations": []
@@ -1057,7 +1352,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\inversion\\final_vs_target.png",
+    "source": "submission/task3_inversion/final_vs_target.png",
     "source_sha256": "91e746e7d75d14a2fa6758d8b106979dcd469359207d9c661a510598a08d8746",
     "sanitized": false,
     "transformations": []
@@ -1073,7 +1368,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\inversion\\grid_points.csv",
+    "source": "submission/task3_inversion/grid_points.csv",
     "source_sha256": "9f3450f747860c9ce773c64aae5715a7d24350f57d6280e1317857bdca2f748d",
     "sanitized": false,
     "transformations": []
@@ -1089,7 +1384,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\inversion\\landscape.png",
+    "source": "submission/task3_inversion/landscape.png",
     "source_sha256": "5bd0ad104338b5896d62aecc3eb2c139094cba2e9029b2a13afa6520e3ea199c",
     "sanitized": false,
     "transformations": []
@@ -1105,7 +1400,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\inversion\\solution.mat",
+    "source": "submission/task3_inversion/solution.mat",
     "source_sha256": "6dda0fcdee688cbd9c5d7ec50f94e61f8a99ee69f3befc64fd05bad761ca20b7",
     "sanitized": false,
     "transformations": []
@@ -1121,7 +1416,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\inversion\\summary.json",
+    "source": "submission/task3_inversion/summary.json",
     "source_sha256": "d975a6094a8859c1b58602bfa17d371cb03a92478017446a20dea2338853469b",
     "sanitized": false,
     "transformations": []
@@ -1137,7 +1432,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\inversion\\summary.md",
+    "source": "submission/task3_inversion/summary.md",
     "source_sha256": "5ba7646ddd0a125691179d59745e2c8b3aba01d8ec61b78fa73e9f83e874ce92",
     "sanitized": false,
     "transformations": []
@@ -1153,7 +1448,7 @@
    "sanitized": false,
    "transformations": [],
    "historical_provenance": {
-    "source": "results\\inversion\\type_map.csv",
+    "source": "submission/task3_inversion/type_map.csv",
     "source_sha256": "141d7279b745d68ee7f20c9795addbbc5bc44cab9e980e23dd8d39a3f67c7c6a",
     "sanitized": false,
     "transformations": []
@@ -1162,9 +1457,9 @@
   {
    "path": "README_提交.md",
    "source": "submission/README_提交.md",
-   "source_sha256": "392d237bda9d2febc1f7895027f07883ce586f6cc3695c9b39a0e0f6dc0baf14",
-   "sha256": "392d237bda9d2febc1f7895027f07883ce586f6cc3695c9b39a0e0f6dc0baf14",
-   "bytes": 9478,
+   "source_sha256": "69399e71fe7c03c59bd6289d3fab7600432cdb4b2950c07e990d16c1ebf63b78",
+   "sha256": "69399e71fe7c03c59bd6289d3fab7600432cdb4b2950c07e990d16c1ebf63b78",
+   "bytes": 13544,
    "reason": "current portable instructions and evidence limits",
    "sanitized": false,
    "transformations": []

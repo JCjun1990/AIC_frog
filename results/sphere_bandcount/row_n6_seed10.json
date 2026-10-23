@@ -1,0 +1,35 @@
+{
+ "n_init": 6,
+ "seed": 10,
+ "axis": [
+  -0.7190908482924668,
+  -0.47252824736405885,
+  -0.5095345006425683
+ ],
+ "kappa0_pred": 12.905515162767733,
+ "type": "stripes_or_maze",
+ "n_bands": 6,
+ "full_residual": 3.2609884574986517e-12,
+ "relax_time": 4000.0,
+ "wall_s": 280.1925859451294,
+ "spectra": [
+  {
+   "sigma": 0.0,
+   "k": 12,
+   "converged": true,
+   "validated": true,
+   "max_real": -5.442106976644368e-06,
+   "positive_reliable": false
+  },
+  {
+   "sigma": 0.001,
+   "k": 12,
+   "converged": true,
+   "validated": true,
+   "max_real": -5.442106976507981e-06,
+   "positive_reliable": false
+  }
+ ],
+ "max_real": -5.442106976507981e-06,
+ "stable": true
+}

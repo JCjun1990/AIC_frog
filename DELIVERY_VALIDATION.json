@@ -1,17 +1,17 @@
 {
   "schema_version": "aic-frog-engineering-delivery-20261022",
-  "base_main": "37a4d25f0aa30cb30be47059715130add0aac5d4",
+  "base_main": "c89c2ca",
   "engineering_status": "PASS",
   "upload_ready": false,
   "upload_blocker": "team name pending; named report/package require final check",
   "unit_tests": {
-    "before": 83,
-    "after": 89,
+    "before": 89,
+    "after": 95,
     "passed": true
   },
   "independent_zip_acceptance": {
     "passed": true,
-    "checks": 21,
+    "checks": 22,
     "check_names": [
       "zip_crc",
       "zip_root_layout",
@@ -28,18 +28,20 @@
       "four_mat_acceptance",
       "inversion_parameters_present",
       "inversion_mat_is_steady",
+      "inversion_best_match_is_steady",
       "inversion_report_has_errors",
       "inversion_visuals_present",
       "report_page_limit",
       "report_numbers_match_package",
       "zip_name_matches_manifest",
-      "draft_status_recorded"
+      "delivery_status_recorded"
     ],
     "zip": "submission/drafts/待填_初赛_AI-MECH-2026-002_result.zip",
-    "zip_sha256": "f70c64347c34c5c43eceba06ae15aab0da41567782c86c9efb49a51e3d214be6",
-    "report": "submission/report/初赛技术报告_交付草稿_v2.pdf",
-    "report_sha256": "cff3892478dea1fdc38442f3d541d296809862bbd61b965ac938b6429f905eae",
-    "report_pages": 2
+    "zip_sha256": "465b629af4d241a5350f48bcce1722830348d42c53404d954913bdb6d3c198df",
+    "report": "submission/report/初赛技术报告_v3.pdf",
+    "report_sha256": "2df2cb75cfdde18c0cee474e6b8e4cf997d3faad999f10d412183c6549bdf332",
+    "report_pages": 2,
+    "runtime": "Windows 11 CPU, Python 3.13 venv (rtx4080 laptop)"
   },
   "historical_zip_preserved": {
     "path": "submission/待填_初赛_AI-MECH-2026-002_result.zip",
@@ -105,7 +107,7 @@
         }
       }
     },
-    "manifest_files": 80
+    "manifest_files": 105
   },
   "model_loading_smoke": [
     {
@@ -186,5 +188,69 @@
       "contains_ip": false,
       "reason": "unreferenced host/network/remote-maintenance utility; never executed"
     }
-  ]
+  ],
+  "task3_best_match": {
+    "script": "scripts/inversion_best_match.py",
+    "files": "submission/task3_inversion/best_match/",
+    "candidates": 66,
+    "selected": "cvt_3, 20 initial spots, seed 2003 -> 16 spots",
+    "J": 1.554,
+    "J_previous_representative": 1.95,
+    "full_residual": 2.03e-14,
+    "spectral_status": "numerical_check_passed (three shift-invert configurations)",
+    "cross_platform": "Windows and Mac select the same initial state; J equal to 6 digits"
+  },
+  "portable_verify": "submission_workflow.py verify: strict on bit-identical operators (Windows x86); on other CPUs only the L/M bit fingerprint may differ -> mesh hash, mass and full residual rechecked",
+  "named_build": "i03_package.py --team <name>: draft notice/section removed, VALIDATION.md not packaged; acceptance PASS with a test name",
+  "generalization": {
+    "script": "scripts/generalization_eval.py",
+    "evidence": "submission/evidence/generalization/",
+    "test_set": "32 Sobol (F, k) points x 2 seeds per surface, 128 PDE steady states (Windows laptop)",
+    "type_accuracy_v1": {
+      "frog": 0.688,
+      "sphere5": 0.891
+    },
+    "type_accuracy_v2": {
+      "frog": 0.922,
+      "sphere5": 0.953
+    },
+    "kappa0_rel_median_v1": {
+      "frog": 0.034,
+      "sphere5": 0.022
+    },
+    "kappa0_rel_median_v2": {
+      "frog": 0.027,
+      "sphere5": 0.017
+    },
+    "physics_features_v2p": "no additional gain",
+    "formal_results_changed": false
+  },
+  "sphere_stripes_bandcount": {
+    "script": "scripts/sphere_bandcount.py",
+    "evidence": "submission/evidence/sphere_bandcount/",
+    "axes": 10,
+    "stable_6_bands": 10,
+    "stable_7_bands": 0,
+    "lr_check": "seeds 1, 5 agree",
+    "previous_random_phase": "9/23 without positive mode",
+    "formal_results_changed": false
+  },
+  "active_learning_and_end_to_end": {
+    "script": "scripts/active_learning.py",
+    "evidence": "submission/evidence/active_learning/",
+    "v3_adopted": false,
+    "reason": "boundary uncertainty is multistability; no reliable gain on validation, lower on test",
+    "end_to_end_frog_heldout": {
+      "pde": "22/24, median steps 25875",
+      "ai_v1": "24/24, 15062",
+      "ai_v2": "23/24, 10875 (about 2.4x)"
+    },
+    "final_network": "v2 (dense self-generated data)",
+    "formal_results_changed": false
+  },
+  "review_2026_10_23": {
+    "task3_extra_candidates": "180 more (246 total); best stays the submitted 16-spot state, J 1.554",
+    "sphere_spots_thomson_layout": "11/23 complete and stable vs CVT 14/23; not adopted",
+    "formal_results_changed": false
+  }
 }

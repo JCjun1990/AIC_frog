@@ -1,0 +1,30 @@
+{
+ "frog": {
+  "none": {
+   "dense_grid_loo_type_accuracy": 0.8627450980392157,
+   "n_extra": 0
+  },
+  "all": {
+   "dense_grid_loo_type_accuracy": 0.8627450980392157,
+   "n_extra": 96
+  },
+  "consistent": {
+   "dense_grid_loo_type_accuracy": 0.869281045751634,
+   "n_extra": 74
+  }
+ },
+ "sphere5": {
+  "none": {
+   "dense_grid_loo_type_accuracy": 0.9281045751633987,
+   "n_extra": 0
+  },
+  "all": {
+   "dense_grid_loo_type_accuracy": 0.9379084967320261,
+   "n_extra": 96
+  },
+  "consistent": {
+   "dense_grid_loo_type_accuracy": 0.934640522875817,
+   "n_extra": 62
+  }
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "frog": {
+  "v1": {
+   "type_accuracy_states": 0.6875,
+   "type_accuracy_points": 0.6875,
+   "kappa0_rel_median": 0.03407649284100733,
+   "spot_density_rel_median": 0.08213974647327715,
+   "n_states": 64,
+   "n_points": 32
+  },
+  "v2": {
+   "type_accuracy_states": 0.921875,
+   "type_accuracy_points": 0.9375,
+   "kappa0_rel_median": 0.026956346660146124,
+   "spot_density_rel_median": 0.058030257313657185,
+   "n_states": 64,
+   "n_points": 32
+  },
+  "v2p": {
+   "type_accuracy_states": 0.921875,
+   "type_accuracy_points": 0.9375,
+   "kappa0_rel_median": 0.027919704232255205,
+   "spot_density_rel_median": 0.07198512886202946,
+   "n_states": 64,
+   "n_points": 32
+  },
+  "test_types": {
+   "uniform": 13,
+   "holes": 14,
+   "spots": 17,
+   "stripes_or_maze": 20
+  },
+  "loo_v2p": {
+   "type_accuracy": 0.8594771241830066,
+   "kappa0_rel_median": 0.034916384936742983,
+   "n": 306
+  }
+ },
+ "sphere5": {
+  "v1": {
+   "type_accuracy_states": 0.890625,
+   "type_accuracy_points": 0.9375,
+   "kappa0_rel_median": 0.021838896799698082,
+   "spot_density_rel_median": 0.13201311945499739,
+   "n_states": 64,
+   "n_points": 32
+  },
+  "v2": {
+   "type_accuracy_states": 0.953125,
+   "type_accuracy_points": 1.0,
+   "kappa0_rel_median": 0.01709295380410536,
+   "spot_density_rel_median": 0.052163014314423495,
+   "n_states": 64,
+   "n_points": 32
+  },
+  "v2p": {
+   "type_accuracy_states": 0.953125,
+   "type_accuracy_points": 1.0,
+   "kappa0_rel_median": 0.017732040847623698,
+   "spot_density_rel_median": 0.04413697111051085,
+   "n_states": 64,
+   "n_points": 32
+  },
+  "test_types": {
+   "uniform": 19,
+   "spots": 17,
+   "stripes_or_maze": 18,
+   "holes": 10
+  },
+  "loo_v2p": {
+   "type_accuracy": 0.9281045751633987,
+   "kappa0_rel_median": 0.021065458259927783,
+   "n": 306
+  }
+ }
+}

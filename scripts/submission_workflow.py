@@ -71,6 +71,35 @@ def validate_spectral_record(certificate, mat_sha256):
             "mathematical_full_spectrum_proof": False}
 
 
+def portable_acceptance(mat, cert, geom, exc, tol=1e-11, abs_agree=1e-12):
+    """Fallback when ONLY the bit-level fingerprint of the assembled L/M differs (another CPU / BLAS /
+    compiler rounds the cotangent weights differently in the last bits). Everything else is still
+    checked strictly: the MAT SHA256, parameters, seed, the input mesh hash, vertex/face counts,
+    the operator type and the total mass; the full residual is recomputed here with this machine's
+    robust operator and must be <= tol and agree with the recorded value to abs_agree."""
+    from turing_rd import GSParams
+    from turing_rd.result_io import geometry_identity, verify_mat
+    if str(exc) != "MAT certificate geometry mismatch":
+        raise exc
+    mine, rec = geometry_identity(geom), cert.get("geometry", {})
+    for field in ("name", "n_vertices", "n_faces", "laplacian", "mesh_sha256"):
+        if rec.get(field) != mine[field]:
+            raise ValueError(f"MAT certificate geometry.{field} mismatch") from exc
+    if not math.isclose(rec.get("mass_sum", float("nan")), mine["mass_sum"], rel_tol=1e-12):
+        raise ValueError("MAT certificate geometry.mass_sum mismatch") from exc
+    if cert.get("mat_sha256") != sha(mat):
+        raise ValueError("MAT certificate mat_sha256 mismatch") from exc
+    params = GSParams(**cert["parameters"])
+    fresh = verify_mat(mat, geom, params, seed=cert["seed"], tol=tol, provenance=cert.get("provenance"))
+    recorded = cert.get("residual", {}).get("value")
+    value = fresh["residual"]["value"]
+    if not (fresh["accepted"] and cert.get("accepted") and recorded is not None and recorded <= tol
+            and abs(value - recorded) <= abs_agree):
+        raise ValueError("portable read-back acceptance failed: " + ", ".join(fresh["failure_reasons"])) from exc
+    fresh["verification_mode"] = "portable: L/M bit fingerprint differs (floating-point rounding); mesh, mass and full residual rechecked"
+    return fresh
+
+
 def verify(submission):
     from turing_rd import Geometry, GSParams, icosphere, load_frog
     from turing_rd.result_io import validate_certificate
@@ -93,11 +122,16 @@ def verify(submission):
             mesh = (load_frog(submission / "code/frog.mat") if surface == "task2_frog" else icosphere(6))
             geometries[surface] = Geometry(mesh, laplacian="robust", cache_dir=None)
         geom = geometries[surface]
-        fresh = validate_certificate(directory / "solution.mat", cert, expected_params=GSParams(**cert["parameters"]),
-                                     expected_seed=cert["seed"], expected_geometry=geom)
+        try:
+            fresh = validate_certificate(directory / "solution.mat", cert, expected_params=GSParams(**cert["parameters"]),
+                                         expected_seed=cert["seed"], expected_geometry=geom)
+            mode = "strict: bit-identical operator"
+        except ValueError as exc:
+            fresh = portable_acceptance(directory / "solution.mat", cert, geom, exc)
+            mode = fresh["verification_mode"]
         spectral = validate_spectral_record(load(directory / "stability_certificate.json"), sha(directory / "solution.mat"))
         results[task] = {"mat_sha256": fresh["mat_sha256"], "full_residual": fresh["residual"]["value"],
-                         "float64_accepted": fresh["accepted"], "spectrum": spectral}
+                         "float64_accepted": fresh["accepted"], "verification_mode": mode, "spectrum": spectral}
     return {"status": "PASS", "tasks": results, "manifest_files": len(listed)}
 
 

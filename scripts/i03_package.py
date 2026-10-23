@@ -15,6 +15,30 @@ def load(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
+def named_readme(readme):
+    """For a named build: drop the draft notice (leading '>' block) and the repository-only
+    '当前报告' section, which describe the unnamed draft and paths outside the ZIP."""
+    lines, out, skip, notice = readme.split("\n"), [], False, False
+    for line in lines:
+        if line.startswith("> **交付状态：草稿。**"):
+            notice = True
+        if notice:
+            if line.startswith(">"):
+                continue
+            notice = False
+        if line.startswith("## "):
+            skip = line.strip() == "## 当前报告"
+        if not skip:
+            out.append(line)
+    text = "\n".join(out).rstrip("\n") + "\n"
+    text = text.replace("本次实测环境和模型加载检查见 `VALIDATION.md`。", "")      # internal log is not packaged
+    while "\n\n\n" in text:
+        text = text.replace("\n\n\n", "\n\n")
+    if "待填" in text or "草稿" in text.split("## 1.")[0]:
+        raise ValueError("named README still contains draft placeholders")
+    return text, ["removed draft notice", "removed repository-only section '当前报告'"]
+
+
 def build(source, output, team="待填", round_="初赛"):
     """Never overwrite an existing build; formal MAT/certificates are copied byte-for-byte."""
     source, output = Path(source).resolve(), Path(output).resolve()
@@ -33,12 +57,18 @@ def build(source, output, team="待填", round_="初赛"):
         if path.is_file() and path.suffix.lower() in {".md", ".csv", ".json", ".png"}:
             relative = path.relative_to(source).as_posix()
             payload[relative] = (path, {"reason": "evaluation and numerical verification evidence"})
-    if (source / "VALIDATION.md").is_file():
+    # VALIDATION.md is the team's internal draft log ("not uploadable"); a named build leaves it out.
+    if (source / "VALIDATION.md").is_file() and team == "待填":
         payload["VALIDATION.md"] = (source / "VALIDATION.md", {"reason": "current engineering validation and explicit expensive-step limits"})
+    else:
+        payload.pop("VALIDATION.md", None)
     for path in sorted((ROOT / "turing_rd").glob("*.py")):
         payload["code/turing_rd/" + path.name] = (path, {"reason": "unchanged PDE core source"})
     old_scripts = [r["path"].split("/")[-1] for r in previous["files"] if r["path"].startswith("code/scripts/")]
-    for filename in sorted(set(old_scripts + ["submission_workflow.py", "i03_verify_package.py", "i02_generate_candidate.py", "rebuild_legacy_metrics.py"])):
+    for filename in sorted(set(old_scripts + ["submission_workflow.py", "i03_verify_package.py", "i02_generate_candidate.py", "rebuild_legacy_metrics.py",
+                                         "inversion_best_match.py", "i03_frog_stability.py", "generalization_eval.py",
+                                         "sphere_bandcount.py", "active_learning.py",
+                                         "sphere_spots_layout.py"])):
         payload["code/scripts/" + filename] = (ROOT / "scripts" / filename, {"reason": "portable reproduction/verification entry point"})
     for filename in ("requirements.txt", "requirements-delivery.txt", "frog.mat", "Solution.mat"):
         payload["code/" + filename] = (ROOT / filename, {"reason": "runtime requirements or original competition input"})
@@ -65,10 +95,13 @@ def build(source, output, team="待填", round_="初赛"):
                         "transformations": [], "historical_provenance": {k: info[k] for k in ("source", "source_sha256", "sanitized", "transformations") if k in info}})
     readme = (source / "README_提交.md").read_text(encoding="utf-8")
     readme = readme.replace("# 待填 · 初赛答案包", f"# {team} · {round_}答案包", 1)
+    transformations = []
+    if team != "待填":
+        readme, transformations = named_readme(readme)
     target = package / "README_提交.md"; target.write_text(readme, encoding="utf-8", newline="\n")
     entries.append({"path": target.name, "source": "submission/README_提交.md", "source_sha256": sha(source / target.name),
                     "sha256": sha(target), "bytes": target.stat().st_size, "reason": "current portable instructions and evidence limits",
-                    "sanitized": False, "transformations": []})
+                    "sanitized": False, "transformations": transformations})
     formal = {}
     for task in ("task1_sphere/spots", "task1_sphere/stripes", "task2_frog/spots", "task2_frog/stripes"):
         directory = package / task; summary = load(directory / "summary.json"); spectral = load(directory / "stability_certificate.json")

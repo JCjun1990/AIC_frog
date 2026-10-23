@@ -1,0 +1,46 @@
+{
+ "frog": {
+  "v2": {
+   "type_accuracy_states": 0.921875,
+   "type_accuracy_points": 0.9375,
+   "kappa0_rel_median": 0.026956346660146124,
+   "spot_density_rel_median": 0.05803025731365685,
+   "n_states": 64,
+   "n_points": 32
+  },
+  "v3": {
+   "type_accuracy_states": 0.828125,
+   "type_accuracy_points": 0.84375,
+   "kappa0_rel_median": 0.031415713793947586,
+   "spot_density_rel_median": 0.0962332553272991,
+   "n_states": 64,
+   "n_points": 32
+  },
+  "n_train_v2": 306,
+  "n_train_v3": 402,
+  "n_new": 96,
+  "fit_s": 6.798247337341309
+ },
+ "sphere5": {
+  "v2": {
+   "type_accuracy_states": 0.953125,
+   "type_accuracy_points": 1.0,
+   "kappa0_rel_median": 0.01709295380410536,
+   "spot_density_rel_median": 0.05216301431442372,
+   "n_states": 64,
+   "n_points": 32
+  },
+  "v3": {
+   "type_accuracy_states": 0.921875,
+   "type_accuracy_points": 0.96875,
+   "kappa0_rel_median": 0.02173120487382807,
+   "spot_density_rel_median": 0.04244350775034467,
+   "n_states": 64,
+   "n_points": 32
+  },
+  "n_train_v2": 306,
+  "n_train_v3": 402,
+  "n_new": 96,
+  "fit_s": 4.976296901702881
+ }
+}

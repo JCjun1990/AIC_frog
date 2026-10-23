@@ -1,0 +1,30 @@
+{
+ "seed": 16,
+ "n_centres": 45,
+ "riesz_energy": 846.1884010914118,
+ "setup_s": 1.1070098876953125,
+ "type": "spots",
+ "n_spots": 45,
+ "full_residual": 4.1737276546304515e-14,
+ "relax_time": 92000.0,
+ "relax_steps": 24500,
+ "wall_s": 2116.738425254822,
+ "spectra": [
+  {
+   "sigma": 0.0,
+   "converged": true,
+   "validated": true,
+   "max_real": -5.151286449853063e-07,
+   "positive_reliable": false
+  },
+  {
+   "sigma": 0.001,
+   "converged": true,
+   "validated": true,
+   "max_real": -5.151286448872548e-07,
+   "positive_reliable": false
+  }
+ ],
+ "max_real": -5.151286448872548e-07,
+ "stable": true
+}

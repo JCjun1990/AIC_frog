@@ -1,0 +1,14 @@
+{
+ "seed": 12,
+ "n_centres": 45,
+ "riesz_energy": 846.1884010666049,
+ "setup_s": 0.7110500335693359,
+ "type": "spots",
+ "n_spots": 45,
+ "full_residual": 6.948690820849425e-06,
+ "relax_time": 200000.0,
+ "relax_steps": 51500,
+ "wall_s": 1256.8592519760132,
+ "spectra": [],
+ "stable": false
+}
