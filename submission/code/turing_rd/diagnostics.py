@@ -115,6 +115,10 @@ def linear_stability(geom: Geometry, p: GSParams, u, v, k: int = 8, sigma: float
         Q, orbit = rotation_subspace(geom, _np(u), _np(v), rotations)
         count += orbit["rank"]
     report, W = solve_spectrum(geom, p, u, v, k=count, sigma=sigma, maxiter=5000)
+    from .spectral_policy import SpectrumConfig, evaluate_spectra
+    decision = evaluate_spectra([report], full_steady_residual(geom, p, u, v)["full_joint_rms_over_F"],
+                                configs=(SpectrumConfig(sigma, "LM", count),),
+                                scope="single_shift_preliminary_screen")
     pairs = report["pairs"]
     if rotations is not None:
         values = np.array([complex(*q["eigenvalue"]) for q in pairs])
@@ -123,8 +127,8 @@ def linear_stability(geom: Geometry, p: GSParams, u, v, k: int = 8, sigma: float
     rotation = [q for q in pairs if rotations is not None and q["rotation_like"]]
     other = [q for q in pairs if q not in rotation]
     full_max = report["full_max_real"]
-    negative = bool(report["solver_converged"] and report["all_pairs_validated"] and
-                    pairs and all(q["negative_resolved"] for q in pairs))
+    negative = bool(decision["all_requested_solves_and_pairs_validated"] and
+                    decision["all_checked_signs_resolved_negative"])
     return {"eigenvalues": [q["eigenvalue"] for q in pairs],
             "rotation_eigenvalues": [q["eigenvalue"] for q in rotation],
             "rotation_overlap": [q["rotation_overlap"] for q in rotation],
@@ -136,6 +140,7 @@ def linear_stability(geom: Geometry, p: GSParams, u, v, k: int = 8, sigma: float
             "found_reliable_positive": report["found_reliable_positive"],
             "sampled_signs_resolved_negative": negative,
             "stability_scope": "single_shift_unprojected_sample",
+            "spectral_report": report, "screen_decision": decision,
             "full_discrete_stability_certified": False}
 
 

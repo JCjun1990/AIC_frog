@@ -90,7 +90,11 @@ def inputs(X, kind):
     return np.array([physics_features(F, k) for F, k in X]) if kind == "physics" else np.asarray(X, float)
 
 
-def fit(rows, kind, n_members=5):
+def fit(rows, kind, n_members=5, quality_policy="legacy_all_endpoints"):
+    from turing_rd.quality import select_training_rows
+    rows = select_training_rows(rows, quality_policy)
+    if not rows:
+        raise ValueError(f"no training labels satisfy {quality_policy}")
     X, types, stats_y, sm, spot_y, pm = A._arrays(rows)
     model = A.fit_model(inputs(X, kind), types, stats_y, sm, spot_y, pm, n_members=n_members)
     model["inputs"] = kind
@@ -143,7 +147,7 @@ def stage_testset(workers, log):
     for r in rows:
         r.pop("state", None)
     (OUT / "testset.json").write_text(json.dumps({"rows": rows}, indent=1, default=float))
-    log(f"test set: {len(rows)} steady states")
+    log(f"test set: {len(rows)} numerical endpoints")
 
 
 def dense_rows(surface):
@@ -152,17 +156,20 @@ def dense_rows(surface):
 
 
 def model_v2(surface):
-    """The dense-data network of ai_generation.py --grid fine; refitted from its dataset when the model
-    file is not at hand (same fit_model and seeds; MLP training may differ in the last digits by platform)."""
+    """Load saved weights; inference never implicitly refits a model."""
     import joblib
     path = DENSE / surface / "model.joblib"
-    return joblib.load(path) if path.exists() else fit(dense_rows(surface), "plain")
+    if not path.is_file():
+        raise FileNotFoundError(f"saved v2 weights missing (train explicitly): {path}")
+    return joblib.load(path)
 
 
 def model_v2p(surface):
     import joblib
     path = OUT / f"model_v2p_{surface}.joblib"
-    return joblib.load(path) if path.exists() else fit(dense_rows(surface), "physics")
+    if not path.is_file():
+        raise FileNotFoundError(f"saved v2p weights missing (use explicit train stage): {path}")
+    return joblib.load(path)
 
 
 def testset_rows():
@@ -176,6 +183,9 @@ def stage_train(log, workers):
         rows = dense_rows(surface)
         t0 = time.time()
         joblib.dump(fit(rows, "physics"), OUT / f"model_v2p_{surface}.joblib")
+        A.EC.write_training_provenance(OUT / f"model_v2p_{surface}.joblib",
+            [A.EC.file_identity(_first(DENSE / surface / "dataset.json", EVIDENCE / f"dense_dataset_{surface}.json"))],
+            {"stage": "explicit generalization train", "inputs": "physics", "rows": len(rows)})
         log(f"{surface}: v2p fitted on {len(rows)} states in {time.time() - t0:.0f}s")
         # grouped leave-one-point-out of v2p (same protocol as ai_generation.stage_train)
         keys = sorted({(r["F"], r["k"]) for r in rows})
@@ -228,7 +238,7 @@ def stage_evaluate(log):
     table = {}
     for surface in SURFACES:
         rows = [r for r in rows_all if r["surface"] == surface and "labels" in r]
-        g = A.geom(surface)
+        g = None  # metrics uses saved labels, no geometry or PDE solve
         models = {"v1": joblib.load(MODELS_V1[surface] / "model.joblib"), "v2": model_v2(surface),
                   "v2p": model_v2p(surface)}
         table[surface] = {name: metrics(m, rows, g) for name, m in models.items()}
@@ -248,25 +258,34 @@ def stage_evaluate(log):
     figure(table, rows_all)
 
 
-def write_markdown(t):
-    L = ["# AI 组件泛化误差：独立测试集\n",
-         f"测试集：训练区域内 {N_POINTS} 个 Sobol 参数点 × {len(SEEDS)} 个随机初值，与训练种子不重合，"
-         "PDE 协议与训练数据相同（t ≤ 1e5，类型由稳态判定）。正式结果仍由 v1 生成，证书不变。"
-         "证据目录中的 JSON 为严格格式，非有限数值写为 null。\n",
-         "| 曲面 | 模型 | 训练数据 | 类型准确率（逐稳态） | 类型准确率（逐参数点，含多稳） | κ₀ 相对误差中位数 | 斑点密度相对误差中位数 |",
-         "| --- | --- | --- | --- | --- | --- | --- |"]
-    data = {"v1": "9×5，45 态（正式）", "v2": "17×9×2，306 态", "v2p": "306 态 + 物理特征"}
-    for surface, rows in t.items():
+def render_markdown(table, quality):
+    """Pure renderer: mixed endpoint accuracy is not per-steady accuracy."""
+    from scripts.evidence_stats import quality_markdown
+    lines = ["# AI 组件泛化：训练范围内新参数点的数值终态分类", "",
+             "正式模型为 v1，研究保留的改进模型为 v2。v2p 为历史物理特征对照。", "",
+             "| 曲面 | 模型 | 全部数值终态类型准确率 | 按参数点命中任一终态类型 | κ₀ 相对误差中位数 | 斑点密度相对误差中位数 |",
+             "|---|---|---:|---:|---:|---:|"]
+    pct = lambda v: "无样本" if v is None else f"{v:.1%}"
+    for surface in SURFACES:
         for name in ("v1", "v2", "v2p"):
-            m = rows[name]
-            dens = "—" if m["spot_density_rel_median"] is None else f"{m['spot_density_rel_median']:.1%}"
-            L.append(f"| {surface} | {name} | {data[name]} | {m['type_accuracy_states']:.1%} | "
-                     f"{m['type_accuracy_points']:.1%} | {m['kappa0_rel_median']:.1%} | {dens} |")
-    L.append("")
-    for surface, rows in t.items():
-        L.append(f"- {surface} 测试集类型分布：{rows['test_types']}"
-                 + (f"；v2p 加密网格留一法类型准确率 {rows['loo_v2p']['type_accuracy']:.1%}" if "loo_v2p" in rows else ""))
-    (OUT / "summary.md").write_text("\n".join(L) + "\n", encoding="utf-8")
+            if name not in table[surface]:
+                continue
+            m = table[surface][name]
+            if name in quality["accuracy"][surface]:
+                actual = quality["accuracy"][surface][name]["all"]
+                if m["n_states"] != actual["n"] or not np.isclose(m["type_accuracy_states"], actual["accuracy"], rtol=0, atol=1e-15):
+                    raise ValueError("stored metric contradicts direct model inference")
+            lines.append(f"| {surface} | {name} | {pct(m['type_accuracy_states'])} | {pct(m['type_accuracy_points'])} | "
+                         f"{pct(m['kappa0_rel_median'])} | {pct(m['spot_density_rel_median'])} |")
+    lines += ["", quality_markdown(quality), "κ₀/密度误差和 v2p 指标沿用历史汇总；本次类型准确率对 v1/v2 进行直接推理复算。", ""]
+    return "\n".join(lines)
+
+
+def write_markdown(table, quality=None, path=None):
+    from scripts.evidence_stats import recompute_quality
+    quality = recompute_quality(ROOT)[0] if quality is None else quality
+    path = OUT / "summary.md" if path is None else Path(path)
+    path.write_text(render_markdown(table, quality), encoding="utf-8")
 
 
 def figure(t, rows_all):
@@ -330,8 +349,8 @@ def stage_install(log):
     write_json_exclusive(dest / "testset.json", {"rows": _finite(testset_rows())})
     for surface in SURFACES:
         write_json_exclusive(dest / f"dense_dataset_{surface}.json", {"rows": _finite(dense_rows(surface))})
-    for name in ("summary.md", "type_maps.png"):
-        shutil.copy2(OUT / name, dest / name)
+    write_markdown(json.loads((dest / "summary.json").read_text(encoding="utf-8")), path=dest / "summary.md")
+    shutil.copy2(OUT / "type_maps.png", dest / "type_maps.png")
     log(f"installed into {dest.relative_to(ROOT)}: {sorted(p.name for p in dest.iterdir())}")
 
 

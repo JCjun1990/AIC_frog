@@ -24,6 +24,7 @@ from json_safe import write_json_exclusive  # noqa: E402
 
 BASE = ROOT / "results" / "i02_stability"
 CODE = ("scripts/i02_stability.py", "scripts/json_safe.py", "turing_rd/stability.py",
+        "turing_rd/spectral_policy.py",
         "turing_rd/diagnostics.py", "turing_rd/steady.py", "turing_rd/geometry.py",
         "turing_rd/mesh.py", "turing_rd/solver.py", "turing_rd/result_io.py")
 
@@ -311,6 +312,7 @@ def certificate(args):
                                     "Eigenpair residual is a backward error, not a rigorous forward eigenvalue error bound.",
                                     "No global nonlinear stability or mesh-refinement proof."]})
     print(json.dumps(decision),flush=True)
+    return decision
 
 
 def main():
@@ -383,7 +385,9 @@ def main():
         print(f"{status}: {args.out}",flush=True)
         raise SystemExit(code)
     sys.path.insert(0,str(ROOT))
-    globals()[args.command](args)
+    result = globals()[args.command](args)
+    if args.command == "certificate":
+        raise SystemExit(0 if result["numerical_check_passed"] else 2)
 
 
 if __name__=="__main__":

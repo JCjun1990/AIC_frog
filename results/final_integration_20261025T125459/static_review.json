@@ -1,0 +1,20 @@
+{
+  "compiled_python_files": 141,
+  "runtime_copies_checked": 52,
+  "git_diff_check": "PASS",
+  "unexpected_deletions": [],
+  "credential_pattern_matches": [],
+  "new_binary_files": [
+    {
+      "path": "submission/drafts/stage7_20261025T125459/待填_初赛_AI-MECH-2026-002_result.zip",
+      "bytes": 32553609,
+      "sha256": "0fd8874e67e2f1abaa00530acbe00671a36504410c46c574fc1d5999e01224ab"
+    },
+    {
+      "path": "submission/report/stage7_20261025T125459/初赛技术报告_v3_最终修订.pdf",
+      "bytes": 1100913,
+      "sha256": "d810c3c323dcf16aad30fcd8115b6001790e6a747baf17712e89c99119a24349"
+    }
+  ],
+  "binary_scope": "new spectral-vector evidence from stage6, plus the new PDF and new ZIP; prior binaries remain protected"
+}

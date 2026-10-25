@@ -1,0 +1,28 @@
+{
+  "reproduced": true,
+  "old_acceptance_expression_passed": true,
+  "current_eigenvectors_present": false,
+  "result": {
+    "available": true,
+    "pde_residual_recomputed": true,
+    "full_residual": 9.679930787775767e-18,
+    "mat_sha256": "eee14e04fe52a3880229960db460528c9a3a070ffdd2868b253d4507777dcda8",
+    "historical_spectrum_status": "insufficient_evidence",
+    "historical_spectrum_failure_reasons": [
+      "configuration_0:missing_configuration_identity",
+      "configuration_0:pair_validation_incomplete",
+      "configuration_0:untrusted_pair_absolute_tolerance",
+      "configuration_0:untrusted_pair_relative_tolerance",
+      "configuration_0:eigenpair_count_or_protocol_mismatch",
+      "configuration_0:missing_eigenpair_residuals",
+      "required_configuration_set_incomplete_or_duplicated",
+      "sampled_largest_real_parts_disagree",
+      "not_all_checked_eigenvalue_signs_resolved_negative"
+    ],
+    "saved_spectral_metadata_verified": false,
+    "eigenpair_residuals_recomputed_from_saved_vectors": false,
+    "fresh_eigensolve_in_this_verification": false,
+    "mathematical_full_spectrum_proof": false,
+    "limitation": "historical spectral summaries lack per-pair residuals/vectors; not upgraded to a strict pass"
+  }
+}

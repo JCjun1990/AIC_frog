@@ -12,10 +12,14 @@ rms dv/dt < STEADY_RATE gets a last polish attempt. A column still changing fast
 give_up_rate after give_up_after is retired as "dynamic" (persistent spot replication / drift, two
 orders of magnitude above STEADY_RATE). Columns still moving at t_max keep their last state.
 
-Steadiness (`is_steady`): polished to polish_tol, or rms dv/dt < STEADY_RATE = 1e-5 at t_max (with
+Historical steadiness (`is_steady`, legacy-rate-v1): polished to polish_tol, or rms dv/dt < STEADY_RATE = 1e-5 at t_max (with
 dt = 1 a change of 1e-5 per step, stricter than the organisers' "change between the last two steps
 < 1e-4"). The target is a steady state, so a candidate's seed whose pattern is not steady gets the
 same penalty as a wrong pattern type.
+
+New reference workflows use full-pde-v1: the complete, unprojected, dual-equation residual
+measured on the returned float64 fields must pass the fixed acceptance policy. Neither a
+small dv/dt nor a reported polish success substitutes for this measurement.
 
 Objective. Features are compared after the same measurement operator is applied to target and
 simulation: heat-kernel low-pass at the target's cut-off, then projection on the physical range
@@ -35,6 +39,7 @@ from .geometry import Geometry
 from .initial import perturbed_ic
 from .solver import GSParams
 from .steady import ptc_polish
+from .quality import full_residual_record, strict_full_steady
 
 # criterion -> feature -> (error kind, tolerance). Tolerances are of the order of the seed-to-seed
 # spread of a polished spot pattern at one parameter set (reported by scripts/invert_target.py).
@@ -46,11 +51,40 @@ OBJECTIVE = {
 }
 TYPE_PENALTY = 5.0
 STEADY_RATE = 1e-5
+LEGACY_REFERENCE_PROTOCOL = "legacy-rate-v1"
+STRICT_REFERENCE_PROTOCOL = "full-pde-v1"
 
 
 def is_steady(rec: dict) -> bool:
-    """Polished, decayed to (1, 0), or changing slower than STEADY_RATE at the end of the integration."""
+    """Historical legacy-rate-v1 only. New reference workflows use reference_usable()."""
     return bool(rec["polished"] or (rec["status"] == "moving" and rec["rate"] < STEADY_RATE))
+
+
+def reference_quality(rec):
+    """Do not infer a full residual from a rate, polish flag, or spectral summary."""
+    from .quality import finite
+    rate = rec.get("rate")
+    full = strict_full_steady(rec)
+    from .spectral_policy import INVERSION_SCREEN_CONFIGS, evaluate_spectra
+    sample = rec.get("spectral_report")
+    diagnostic = rec.get("full_steady_diagnostic")
+    decision = evaluate_spectra([sample] if isinstance(sample, dict) else [],
+        diagnostic.get("value") if isinstance(diagnostic, dict) else None, configs=INVERSION_SCREEN_CONFIGS,
+        scope="strict_reference_single_shift_finite_check")
+    return {"reference_protocol": STRICT_REFERENCE_PROTOCOL,
+            "low_rate": bool(finite(rate) and 0 <= rate < STEADY_RATE),
+            "legacy_polished_flag": rec.get("polished") is True,
+            "newton_polished": bool(rec.get("polished") is True and rec.get("status") != "uniform"),
+            "polish_scope": "reported PTC/Newton success, not proof of full stationarity or Newton iteration history",
+            "full_steady": full, "spectrally_screened": bool(full and decision["numerical_check_passed"])}
+
+
+def reference_usable(rec, protocol=STRICT_REFERENCE_PROTOCOL):
+    if protocol == STRICT_REFERENCE_PROTOCOL:
+        return strict_full_steady(rec)
+    if protocol == LEGACY_REFERENCE_PROTOCOL:
+        return is_steady(rec)
+    raise ValueError(f"unknown inversion reference protocol: {protocol}")
 
 
 def feature_errors(sim: dict, tgt: dict, objective=OBJECTIVE) -> dict:
@@ -104,6 +138,8 @@ def steady_states(geom: Geometry, F, k, seeds, Du: float, Dv: float, t_max: floa
         out[j] = {"u": np.array(u), "v": np.array(v), "t": t_fast + bi.t, "rate": float(rate), "polished": polished,
                   "residual": res, "ptc_iters": len(hist) - 1 if hist else 0, "status": kind,
                   "F": float(F[j]), "k": float(k[j]), "seed": int(seeds[j])}
+        out[j]["full_steady_diagnostic"] = full_residual_record(geom, GSParams(float(F[j]), float(k[j]), Du, Dv), u, v)
+        out[j]["reference_quality"] = reference_quality(out[j])
 
     while bi.size:
         n = int(np.ceil(min(chunk, t_max - t_fast - bi.t) / dt - 1e-9))

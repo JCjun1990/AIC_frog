@@ -98,10 +98,13 @@ def stage_run(surfaces, workers, log):
 
 
 def new_rows(surface):
-    import pickle
+    # Reconstruct the requested jobs; never sweep old rounded-key pickle caches.
+    sel = json.loads((OUT / "selected.json").read_text(encoding="utf-8"))
+    jobs = [(A.run_pde, (surface, p["F"], p["k"], 900000 + 1000 * i + s,
+                        G.T_MAX, True, "float32"))
+            for i, p in enumerate(sel[surface]) for s in SEEDS]
     rows = []
-    for p in sorted((OUT / "jobs").glob(f"pde_{surface}_*.pkl")):
-        r = pickle.loads(p.read_bytes())
+    for r in A.cached_results(jobs, OUT / "jobs"):
         if not r.get("error") and "labels" in r:
             r.pop("state", None)
             rows.append(r)
@@ -117,6 +120,12 @@ def stage_train(log):
         t0 = time.time()
         model = G.fit(rows, "plain")
         joblib.dump(model, OUT / f"model_v3_{surface}.joblib")
+        A.EC.write_training_provenance(OUT / f"model_v3_{surface}.joblib",
+            {"dense_data": A.EC.file_identity(G._first(G.DENSE / surface / "dataset.json",
+                                                     G.EVIDENCE / f"dense_dataset_{surface}.json")),
+             "selection": A.EC.file_identity(OUT / "selected.json"),
+             "new_experiments": [r["experiment_cache"] for r in rows_new]},
+            {"stage": "explicit active_learning train", "rows": len(rows)})
         test = [r for r in G.testset_rows() if r["surface"] == surface and "labels" in r]
         g = A.geom(surface)
         table[surface] = {"v2": G.metrics(G.model_v2(surface), test, g), "v3": G.metrics(model, test, g),
@@ -190,25 +199,58 @@ def stage_install(log):
         for r in new_rows(surface):
             types.setdefault((r["F"], r["k"]), set()).add(r["type"])
         disagree[surface] = (sum(len(v) > 1 for v in types.values()), len(types))
-    L = ["# 主动学习（不确定性采样）与端到端效率\n",
-         f"v2 在 4096 个候选点上按类型不确定性挑出每曲面 {N_SELECT} 个点（{len(SEEDS)} 个初值），补跑 PDE 稳态后重训为 v3。"
-         "选点不使用测试集。\n",
-         "| 曲面 | 测试集类型准确率 v2 → v3 | 加密网格留一验证：不加 / 全加 / 只加两初值一致的 | 新点中两初值类型不同 |",
-         "| --- | --- | --- | --- |"]
-    for surface in G.SURFACES:
-        t, v = summary[surface], val[surface]
-        L.append(f"| {surface} | {t['v2']['type_accuracy_states']:.1%} → {t['v3']['type_accuracy_states']:.1%} | "
-                 f"{v['none']['dense_grid_loo_type_accuracy']:.1%} / {v['all']['dense_grid_loo_type_accuracy']:.1%} / "
-                 f"{v['consistent']['dense_grid_loo_type_accuracy']:.1%} | {disagree[surface][0]}/{disagree[surface][1]} |")
-    L += ["", "结论：边界附近的不确定性主要来自多稳态（同一参数、不同初值得到不同类型），补样不能消除，验证集无明显提升、"
-          "测试集反而下降，因此不采用 v3，最终网络为 v2。"]
-    for name, d in e2e.items():
-        L += ["", f"## 端到端（{name}）：青蛙 8 个留出参数点 × 3 种子，时间步数与机器无关\n",
-              "| 流程 | 完成（完整稳态且稳定） | 步数中位数 |", "| --- | --- | --- |"]
-        for k_, v in d["summary"].items():
-            L.append(f"| {k_} | {v['complete']}/{v['runs']} | {v['median_steps']:.0f} |")
-    (dest / "summary.md").write_text("\n".join(L) + "\n", encoding="utf-8")
+    record = {"test_set": summary, "validation": val, "selected_points": sel, "end_to_end": e2e}
+    (dest / "summary.md").write_text(render_markdown(record, disagree), encoding="utf-8")
     log(f"installed {dest.relative_to(ROOT)}")
+
+
+def render_markdown(record, disagreement=None):
+    """Pure renderer; never select points, train, or solve."""
+    from scripts.evidence_stats import end_to_end_statistics
+    lines = ["# 主动学习与中位积分步数", "",
+             "主动学习补充的是 PDE 数值终态，不能全部视为完整稳态。选点未使用测试集。",
+             "正式模型为 v1；研究中保留的改进模型为 v2，v3 为未采用的对照。", "",
+             "| 曲面 | 测试集终态类型准确率 v2 → v3 | 加密网格留一：不加 / 全加 / 一致子集 | 新终态数 | 类型差异信息 |",
+             "|---|---|---|---:|---|"]
+    for surface in G.SURFACES:
+        t, v = record["test_set"][surface], record["validation"][surface]
+        n = len(record["selected_points"][surface]); total = v["all"]["n_extra"]; consistent = v["consistent"]["n_extra"]
+        if disagreement is not None and surface in disagreement:
+            different, points = disagreement[surface]
+            detail = f"原始标签统计 {different}/{points} 个参数点类型不同"
+        elif total == 2 * n and 0 <= consistent <= total and (total - consistent) % 2 == 0:
+            detail = f"按一致筛选数量推算 {(total-consistent)//2}/{n}；未重验逐新样本稳态"
+        else:
+            detail = "缺少逐新样本记录，无法判定"
+        lines.append(f"| {surface} | {t['v2']['type_accuracy_states']:.1%} → {t['v3']['type_accuracy_states']:.1%} | "
+                     f"{v['none']['dense_grid_loo_type_accuracy']:.1%} / {v['all']['dense_grid_loo_type_accuracy']:.1%} / "
+                     f"{v['consistent']['dense_grid_loo_type_accuracy']:.1%} | {total} | {detail} |")
+    lines += ["", "不同初值的终态标签存在差异；缺少严格稳态证据时，不能据此证明差异一定来自动力学多稳态。",
+              "本批主动学习记录未带来一致提升；这不证明其他补样策略必然无效。"]
+    for name, e in end_to_end_statistics(record).items():
+        lines += ["", f"## 中位积分步数（{name}）", "",
+                  "完成计数沿用历史残差和单配置谱标志，不代表当前三配置正式验收。",
+                  "| 流程 | 历史完成记录 | 中位积分步数 |", "|---|---:|---:|"]
+        for label, value in e["summary"].items():
+            lines.append(f"| {label} | {value['complete']}/{value['runs']} | {value['median_steps']:g} |")
+        lines += ["", f"纯 PDE / 新 AI 的中位积分步数比为 **{e['median_integration_step_ratio']:.2f}×**。",
+                  "该指标不是完整墙钟加速；没有包含完整初始化、Newton、求谱等流程耗时的可比逐运行记录。",
+                  "pde/v1 仅保存历史汇总，不能重算它们的逐运行耗时或把旧完成数升级为新严格证书。"]
+    return "\n".join(lines) + "\n"
+
+
+def model_path(model_name, surface):
+    """Model names resolve to saved weights, never to an implicit training fallback."""
+    paths = {"v1": G.MODELS_V1[surface] / "model.joblib",
+             "v2": G.DENSE / surface / "model.joblib",
+             "v2p": G.OUT / f"model_v2p_{surface}.joblib",
+             "v3": OUT / f"model_v3_{surface}.joblib"}
+    if model_name not in paths:
+        raise ValueError(f"unknown model: {model_name}")
+    path = paths[model_name]
+    if not path.is_file():
+        raise FileNotFoundError(f"saved {model_name} weights missing; train explicitly: {path}")
+    return path
 
 
 def stage_e2e(workers, log, model_name="v3", surface="frog"):
@@ -216,9 +258,9 @@ def stage_e2e(workers, log, model_name="v3", surface="frog"):
     seeds of the legacy evaluation; compared with that evaluation's ordinary-PDE and v1 rows by the
     machine-independent number of time steps and by completion (full residual <= 1e-11, stable)."""
     import csv
-    model_path = str(OUT / f"model_{model_name}_{surface}.joblib")
+    weights = str(model_path(model_name, surface))
     A.geom(surface).eigenbasis(600)
-    jobs = [(A.run_ai, (surface, F, k, s, 200000.0, model_path)) for F, k, _ in A.held_out_points() for s in (1, 2, 3)]
+    jobs = [(A.run_ai, (surface, F, k, s, 200000.0, weights)) for F, k, _ in A.held_out_points() for s in (1, 2, 3)]
     rows = [r for r in A.pool_map(jobs, workers, log, checkpoint=OUT / f"e2e_{model_name}_jobs") if not r.get("error")]
     legacy = [r for r in csv.DictReader(open(ROOT / "submission/evidence/evaluation.csv", encoding="utf-8"))
               if r["surface"] == surface]
@@ -247,7 +289,7 @@ def stage_e2e(workers, log, model_name="v3", surface="frog"):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("stage", choices=("select", "run", "train", "validate", "e2e", "install"))
-    ap.add_argument("--model", default="v3", help="e2e: which trained network (model_<name>_<surface>.joblib)")
+    ap.add_argument("--model", default="v3", choices=("v1", "v2", "v2p", "v3"), help="e2e: saved model version")
     ap.add_argument("--surfaces", nargs="+", default=list(G.SURFACES))
     ap.add_argument("--workers", type=int, default=8)
     args = ap.parse_args()

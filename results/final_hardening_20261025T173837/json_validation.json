@@ -1,0 +1,70 @@
+{
+  "protocol": "delivery-json-acceptance-v1",
+  "strict_json_files": [
+    "PACKAGE_MANIFEST.json",
+    "evidence/active_learning/EFFICIENCY_BREAKDOWN.json",
+    "evidence/active_learning/summary.json",
+    "evidence/generalization/QUALITY_BREAKDOWN.json",
+    "evidence/generalization/dense_dataset_frog.json",
+    "evidence/generalization/dense_dataset_sphere5.json",
+    "evidence/generalization/summary.json",
+    "evidence/generalization/testset.json",
+    "evidence/json_schema_audit.json",
+    "evidence/methodology/best_match_spectrum/certificate.json",
+    "evidence/methodology/best_match_spectrum/spectrum_0.json",
+    "evidence/methodology/best_match_spectrum/spectrum_1.json",
+    "evidence/methodology/best_match_spectrum/spectrum_2.json",
+    "evidence/methodology/methodology.json",
+    "evidence/release/code_snapshot.json",
+    "evidence/release/mat_validation.json",
+    "evidence/release/unit_tests.json",
+    "evidence/releases/stage8_20261025T173837/code_snapshot.json",
+    "evidence/releases/stage8_20261025T173837/historical_source_binding.json",
+    "evidence/releases/stage8_20261025T173837/mat_validation.json",
+    "evidence/releases/stage8_20261025T173837/unit_tests.json",
+    "evidence/sphere_bandcount/summary.json",
+    "evidence/sphere_spots_layout/summary.json",
+    "evidence/verification/geometry.json",
+    "evidence/verification/solver.json",
+    "task1_sphere/ai_model/cv.json",
+    "task1_sphere/spots/stability_certificate.json",
+    "task1_sphere/spots/summary.json",
+    "task1_sphere/stripes/stability_certificate.json",
+    "task1_sphere/stripes/summary.json",
+    "task2_frog/ai_model/cv.json",
+    "task2_frog/spots/stability_certificate.json",
+    "task2_frog/spots/summary.json",
+    "task2_frog/stripes/stability_certificate.json",
+    "task2_frog/stripes/summary.json",
+    "task3_inversion/best_match/summary.json"
+  ],
+  "legacy_nonstandard_json": [
+    {
+      "path": "task1_sphere/ai_model/dataset.json",
+      "sha256": "4157f250928e0c0ee7ad8976ef76f2f4a915b84b36b15f5a1a0146aa9da9a4f6",
+      "nonfinite_tokens": {
+        "Infinity": 14
+      },
+      "status": "preserved_legacy_python_json_extension"
+    },
+    {
+      "path": "task2_frog/ai_model/dataset.json",
+      "sha256": "ee19eb9e949faa7cdf62883e2c609ec4464b4b836ed19c11eb6d0d4ffa1165bf",
+      "nonfinite_tokens": {
+        "Infinity": 10
+      },
+      "status": "preserved_legacy_python_json_extension"
+    },
+    {
+      "path": "task3_inversion/summary.json",
+      "sha256": "d975a6094a8859c1b58602bfa17d371cb03a92478017446a20dea2338853469b",
+      "nonfinite_tokens": {
+        "NaN": 61
+      },
+      "status": "preserved_legacy_python_json_extension"
+    }
+  ],
+  "strict_count": 36,
+  "legacy_count": 3,
+  "scope": "syntax and immutable legacy compatibility; no alteration of input values"
+}

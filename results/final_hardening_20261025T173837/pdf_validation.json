@@ -1,0 +1,30 @@
+{
+  "pages": 2,
+  "tests_run": 350,
+  "font": "Arial Unicode MS, embedded subset",
+  "required_claims": [
+    "350 项",
+    "128",
+    "73",
+    "均匀态",
+    "2.38",
+    "不是完整墙钟加速",
+    "6 条带",
+    "7 条带 seed2",
+    "1.950",
+    "1.554",
+    "0.0277124",
+    "0.0600398",
+    "强制验收保存向量",
+    "历史摘要不足不能代替通过",
+    "全谱",
+    "∂",
+    "√",
+    "≤",
+    "Σ",
+    "λ",
+    "∫"
+  ],
+  "text_and_bounds": "PASS",
+  "rendering": "Poppler 130dpi; both pages visually inspected without overlap, overflow, missing symbols or garbled text"
+}

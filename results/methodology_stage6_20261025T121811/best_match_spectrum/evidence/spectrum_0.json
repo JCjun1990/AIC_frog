@@ -1,0 +1,199 @@
+{
+  "diagnostic_version": "i03-frog-unprojected-spectrum-v2",
+  "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+  "requested_k": 12,
+  "returned_k": 12,
+  "solver_converged": true,
+  "solver_error": null,
+  "method": "mass_similarity_arpack_shift_invert",
+  "which": "LM",
+  "sigma": 0.001,
+  "ncv": 48,
+  "arpack_tolerance": 1e-10,
+  "arpack_maxiter": 3000,
+  "v0_seed": 2026,
+  "similarity": "B=sqrt(Mfull)*J*invsqrt(Mfull); J=Mfull^-1*weak_J",
+  "rotation_labelling": "none: the frog mesh has no continuous rotation symmetry",
+  "pairs": [
+    {
+      "eigenvalue": [
+        -0.0001860545855782343,
+        0.0
+      ],
+      "residual_absolute_M": 2.364533680848533e-15,
+      "residual_relative_M": 6.354408501944526e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.00036361169570773796,
+        0.0
+      ],
+      "residual_absolute_M": 2.5204020454591112e-15,
+      "residual_relative_M": 3.4657879204808606e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0004554608842816659,
+        0.0
+      ],
+      "residual_absolute_M": 2.6328910561704573e-15,
+      "residual_relative_M": 2.8903591362441324e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0005899379206322603,
+        0.0
+      ],
+      "residual_absolute_M": 4.1343746296784415e-15,
+      "residual_relative_M": 3.504076009597098e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0007520876255513878,
+        0.0
+      ],
+      "residual_absolute_M": 2.563097986486906e-15,
+      "residual_relative_M": 1.7039889365336108e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0008709942796979763,
+        0.0
+      ],
+      "residual_absolute_M": 2.273488130029364e-15,
+      "residual_relative_M": 1.3051108273739843e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0010422773406405699,
+        0.0
+      ],
+      "residual_absolute_M": 2.0596367317784327e-15,
+      "residual_relative_M": 9.88046392005674e-13,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0012989287616010465,
+        0.0
+      ],
+      "residual_absolute_M": 3.497763535320136e-15,
+      "residual_relative_M": 1.3464031433905482e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0013367560698156508,
+        0.0
+      ],
+      "residual_absolute_M": 2.9810195788081e-15,
+      "residual_relative_M": 1.115020027258654e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0014677124825306456,
+        0.0
+      ],
+      "residual_absolute_M": 3.81641974960432e-15,
+      "residual_relative_M": 1.3001251249917466e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.0016680795723943175,
+        0.0
+      ],
+      "residual_absolute_M": 3.644111613755991e-15,
+      "residual_relative_M": 1.092307487623405e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    },
+    {
+      "eigenvalue": [
+        -0.001721730736761073,
+        0.0
+      ],
+      "residual_absolute_M": 3.9974552125957825e-15,
+      "residual_relative_M": 1.160882804507432e-12,
+      "residual_passed": true,
+      "rotation_overlap": 0.0,
+      "rotation_like": false,
+      "positive_reliable": false,
+      "negative_resolved": true,
+      "sign_resolution_margin": 1e-12
+    }
+  ],
+  "full_max_real": -0.0001860545855782343,
+  "all_pairs_validated": true,
+  "found_reliable_positive": false,
+  "max_residual_absolute_M": 4.1343746296784415e-15,
+  "pair_absolute_tolerance": 1e-09,
+  "pair_relative_tolerance": 1e-07,
+  "wall_seconds": 1.4556922999909148,
+  "limitation": "Finite eigenpair sampling with multiple shifts and direct largest-real-part ARPACK is a numerical check, not a mathematical full-spectrum proof. Rotational overlap is descriptive and never suppresses a positive mode.",
+  "metrics_recomputed_from_returned_vectors": true,
+  "input": {
+    "mat_sha256": "4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c"
+  }
+}

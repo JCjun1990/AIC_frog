@@ -37,6 +37,7 @@ import ai_generation as A  # noqa: E402
 from turing_rd import STRIPES, GSParams, ai_init  # noqa: E402
 from turing_rd.diagnostics import full_steady_residual, pattern_stats  # noqa: E402
 from turing_rd.stability import solve_spectrum  # noqa: E402
+from turing_rd.spectral_policy import candidate_decision, screen_candidate  # noqa: E402
 from turing_rd.steady import relax_polish  # noqa: E402
 
 OUT = ROOT / "results" / "sphere_bandcount"
@@ -72,17 +73,7 @@ def run(surface, n, seed, t_max=200000.0):
     row = {"n_init": n, "seed": seed, "axis": axis(seed).tolist(), "kappa0_pred": pred["stats"]["kappa0"],
            "type": st.get("type"), "n_bands": st.get("n_components"), "full_residual": float(full),
            "relax_time": info["relax_time"], "wall_s": time.time() - t0, "spectra": []}
-    if full <= A.TOL:
-        for sigma, k in ((0.0, 12), (1e-3, 12)):
-            rep, _ = solve_spectrum(g, p, u, v, k=k, sigma=sigma, which="LM")
-            row["spectra"].append({"sigma": sigma, "k": k, "converged": rep["solver_converged"],
-                                   "validated": rep["all_pairs_validated"], "max_real": rep["full_max_real"],
-                                   "positive_reliable": rep["found_reliable_positive"]})
-        ok = [x for x in row["spectra"] if x["converged"] and x["validated"]]
-        row["max_real"] = max(x["max_real"] for x in ok) if ok else None
-        row["stable"] = bool(ok and not any(x["positive_reliable"] for x in row["spectra"]) and row["max_real"] < 0)
-    else:
-        row["stable"] = False
+    row.update(screen_candidate(g, p, u, v, full, solve_spectrum))
     np.savez_compressed(OUT / f"state_n{n}_seed{seed}.npz", u=u, v=v)
     return row
 
@@ -102,10 +93,11 @@ def install():
     seeds = sorted({r["seed"] for r in rows})
     chosen = {}
     for sd in seeds:
-        stable = [r for r in rows if r["seed"] == sd and r["stable"]]
+        stable = [r for r in rows if r["seed"] == sd and candidate_decision(r)["numerical_check_passed"]]
         chosen[sd] = min(stable, key=lambda r: r["max_real"])["n_init"] if stable else None
     write_json_exclusive(dest / "summary.json", {"kappa0_pred": rows[0]["kappa0_pred"], "rows": rows,
-                                                 "chosen_band_count": {str(k): v for k, v in chosen.items()}})
+                                                 "chosen_band_count": {str(k): v for k, v in chosen.items()},
+                                                 "strict_reassessment": [candidate_decision(r) for r in rows]})
     L = ["# 球面条纹：AI 提出候选条带数，PDE 谱检查决定\n",
          f"网络预测 κ₀ = {rows[0]['kappa0_pred']:.2f}，候选条带数 {candidate_counts(rows[0]['kappa0_pred'])}"
          "（对称纬向条带，随机轴向由种子决定）。每个候选都由转动修正 Newton + 定向收敛到完整稳态（R ≤ 1e-11），"
@@ -173,9 +165,10 @@ def main():
     by_seed = {}
     for r in rows:
         by_seed.setdefault(r["seed"], []).append(r)
-    chosen = {sd: next((r["n_init"] for r in sorted(rs, key=lambda r: r["n_init"], reverse=True) if r["stable"]), None)
+    chosen = {sd: next((r["n_init"] for r in sorted(rs, key=lambda r: r["n_init"], reverse=True) if candidate_decision(r)["numerical_check_passed"]), None)
               for sd, rs in by_seed.items()}
-    (OUT / "summary.json").write_text(json.dumps({"kappa0_pred": kappa0, "rows": rows, "chosen_band_count": chosen},
+    (OUT / "summary.json").write_text(json.dumps({"kappa0_pred": kappa0, "rows": rows, "chosen_band_count": chosen,
+                                                 "strict_reassessment": [candidate_decision(r) for r in rows]},
                                                  indent=1))
     print("stable per (n, seed):", {(r["n_init"], r["seed"]): r["stable"] for r in rows}, flush=True)
 

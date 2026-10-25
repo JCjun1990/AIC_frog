@@ -50,6 +50,8 @@ from turing_rd.stability import (PAIR_ABSOLUTE_TOL, PAIR_RELATIVE_TOL,          
                                  SPECTRUM_LIMITATION, aggregate_spectra,
                                  eigenpair_diagnostics)
 from turing_rd.solver import GSParams                               # noqa: E402
+from turing_rd.spectral_policy import (FROG_CONFIGS, FROG_SIGN_FLOOR, POLICY_VERSION,
+                                       evaluate_spectra)             # noqa: E402
 
 I01 = ROOT / "results" / "i01_float64_verified" / "tasks"
 V1 = ROOT / "results" / "i03_delivery" / "frog_stability"
@@ -65,9 +67,10 @@ CONFIGS = (
     dict(name="sigma_1e-5_k8", sigma=1e-5, which="LM", k=8, ncv=48),
 )
 STEADY_TOL = 1e-11
-SIGN_FLOOR = 1e-9
+SIGN_FLOOR = FROG_SIGN_FLOOR
 EVIDENCE_LEVEL = "i03_frog_three_shift_invert_bracketing_no_rotation_label"
 CODE = ("scripts/i03_frog_stability.py", "scripts/json_safe.py", "turing_rd/stability.py",
+        "turing_rd/spectral_policy.py",
         "turing_rd/diagnostics.py", "turing_rd/result_io.py", "turing_rd/geometry.py",
         "turing_rd/mesh.py", "turing_rd/solver.py", "turing_rd/steady.py")
 
@@ -101,6 +104,7 @@ def solve_config(J, mass, root, cfg, tol=1e-10, maxiter=3000, seed=2026):
     absolute = [p["residual_absolute_M"] for p in pairs]
     report = {
         "diagnostic_version": "i03-frog-unprojected-spectrum-v2",
+        "acceptance_policy_version": POLICY_VERSION,
         "requested_k": cfg["k"], "returned_k": int(len(lam)),
         "solver_converged": bool(converged and len(lam) == cfg["k"]),
         "solver_error": error,
@@ -125,56 +129,11 @@ def solve_config(J, mass, root, cfg, tol=1e-10, maxiter=3000, seed=2026):
 
 def decide_frog(reports, full_residual, tol=STEADY_TOL):
     """Conservative frog decision: three validated shift-invert configurations bracketing zero."""
-    pairs = [pair for report in reports for pair in report["pairs"]]
-    positive = [pair for pair in pairs if pair["positive_reliable"]]
-    negatives = [pair for pair in pairs if pair["negative_resolved"]]
-    unresolved = [pair for pair in pairs if pair["residual_passed"]
-                  and abs(pair["eigenvalue"][0]) <= SIGN_FLOOR]
-    complete = bool(reports) and all(r["solver_converged"] and r["all_pairs_validated"] for r in reports)
-    shifts = sorted({r["sigma"] for r in reports if r["sigma"] is not None
-                     and r["solver_converged"] and r["all_pairs_validated"]})
-    maxima = [r["full_max_real"] for r in reports if r["full_max_real"] is not None and r["solver_converged"]]
-    residuals = [p["residual_absolute_M"] for p in pairs if p["residual_passed"]]
-    agreement_tolerance = max(1e-10, 100 * max(residuals, default=0.0))
-    maxima_agree = bool(maxima and (max(maxima) - min(maxima)) <= agreement_tolerance)
-    steady = bool(full_residual <= tol)
-    reasons = []
-    if not steady:
-        reasons.append("full_stationary_residual_failed")
-    if not complete:
-        reasons.append("solver_or_pair_validation_incomplete")
-    if len(shifts) < 3:
-        reasons.append("fewer_than_three_valid_distinct_shifts")
-    if not maxima_agree:
-        reasons.append("sampled_largest_real_parts_disagree")
-    if positive:
-        reasons.append("reliable_positive_full_jacobian_eigenvalue")
-    elif unresolved or len(negatives) != len(pairs):
-        reasons.append("not_all_checked_eigenvalue_signs_resolved_negative")
-    passed = bool(steady and complete and len(shifts) >= 3 and maxima_agree and
-                  not positive and not unresolved and len(negatives) == len(pairs))
-    return {
-        "diagnostic_version": "i03-frog-unprojected-spectrum-v2",
-        "rule": ("numeric pass requires a complete steady state, three distinct validated "
-                 "shift-invert configurations, agreeing sampled maxima and every sampled "
-                 "eigenvalue resolved negative; any reliable positive eigenvalue fails the check"),
-        "full_steady_state": steady,
-        "full_residual": float(full_residual), "full_residual_tolerance": tol,
-        "configurations": len(reports), "distinct_valid_shifts": shifts,
-        "sampled_maxima": maxima, "sampled_maxima_agree": maxima_agree,
-        "sampled_maxima_agreement_tolerance": agreement_tolerance,
-        "checked_eigenpairs": len(pairs),
-        "reliable_positive_eigenvalues": [p["eigenvalue"] for p in positive],
-        "unresolved_near_zero_eigenvalues": [p["eigenvalue"] for p in unresolved],
-        "all_checked_signs_resolved_negative": len(negatives) == len(pairs) and not unresolved,
-        "numerical_check_passed": passed,
-        "status": ("unstable_positive_mode" if positive else
-                   ("numerical_check_passed" if passed else "insufficient_evidence")),
-        "failure_reasons": reasons,
-        "rotation_projection": False,
-        "mathematical_full_spectrum_proof": False,
-        "limitation": SPECTRUM_LIMITATION,
-    }
+    decision = evaluate_spectra(reports, full_residual, configs=FROG_CONFIGS,
+                                scope=EVIDENCE_LEVEL, tol=tol, sign_floor=SIGN_FLOOR)
+    decision.update(diagnostic_version="i03-frog-unprojected-spectrum-v2",
+                    limitation=SPECTRUM_LIMITATION)
+    return decision
 
 
 def load_lr_attempt(task):
@@ -274,7 +233,7 @@ def run_task(task, out_root, tol=STEADY_TOL):
         "reference_i02_rule": {
             "decision": reference,
             "note": ("The I02 rule requires a converged direct largest-real-part run. Applied to these "
-                     "reports it can only say stability_not_closed; the frog rule above substitutes a "
+                     "reports it can only say insufficient_evidence; the frog rule above substitutes a "
                      "third, positive-side shift-invert configuration and records the failed attempt."),
         },
         "perturbation": None,
@@ -296,12 +255,14 @@ def run_task(task, out_root, tol=STEADY_TOL):
         f"decision={decision['status']}\nconfigs={len(reports)}\n"
         f"lr_attempt={certificate['unshifted_lr_attempt'].get('solver_converged')}\n",
         encoding="utf-8")
+    maximum = decision["full_max_real_checked"]
+    maximum_text = "n/a" if maximum is None else f"{maximum:+.12e}"
     log(f"[{task}] decision={decision['status']} "
         f"positives={len(decision['reliable_positive_eigenvalues'])} "
-        f"max Re lambda={decision['sampled_maxima'][0]:+.12e}")
+        f"max Re lambda={maximum_text}")
     return {"task": task, "mat_sha256": meta["mat_sha256"],
             "full_residual": fresh["residual"]["value"], "status": decision["status"],
-            "max_real": decision["sampled_maxima"][0], "passed": decision["numerical_check_passed"],
+            "max_real": maximum, "passed": decision["numerical_check_passed"],
             "certificate": str(out.relative_to(ROOT) / "frog_stability_certificate.json")}
 
 
@@ -321,7 +282,7 @@ def main():
                          {"schema_version": "aic-frog-i03-frog-stability-summary-v2",
                           "tasks": results, "mathematical_full_spectrum_proof": False})
     print(json.dumps(results, indent=2), flush=True)
-    return 0 if all(r["status"] in ("numerical_check_passed", "unstable_positive_mode") for r in results) else 2
+    return 0 if all(r["status"] == "numerical_check_passed" for r in results) else 2
 
 
 if __name__ == "__main__":

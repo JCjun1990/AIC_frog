@@ -36,6 +36,7 @@ import ai_generation as A  # noqa: E402
 from turing_rd import SPOTS, GSParams, ai_init  # noqa: E402
 from turing_rd.diagnostics import full_steady_residual, pattern_stats  # noqa: E402
 from turing_rd.stability import solve_spectrum  # noqa: E402
+from turing_rd.spectral_policy import candidate_decision, screen_candidate  # noqa: E402
 from turing_rd.steady import relax_polish  # noqa: E402
 
 OUT = ROOT / "results" / "sphere_spots_layout"
@@ -84,26 +85,20 @@ def run(surface, seed, t_max=200000.0):
     row = {"seed": seed, "n_centres": n, "riesz_energy": riesz_energy(x), "setup_s": setup, "type": st.get("type"),
            "n_spots": st.get("n_components"), "full_residual": float(full), "relax_time": info["relax_time"],
            "relax_steps": info["relax_steps"], "wall_s": time.time() - t0, "spectra": []}
-    if full <= A.TOL:
-        for sigma in (0.0, 1e-3):
-            rep, _ = solve_spectrum(g, p, u, v, k=12, sigma=sigma, which="LM")
-            row["spectra"].append({"sigma": sigma, "converged": rep["solver_converged"], "validated": rep["all_pairs_validated"],
-                                   "max_real": rep["full_max_real"], "positive_reliable": rep["found_reliable_positive"]})
-        ok = [s for s in row["spectra"] if s["converged"] and s["validated"]]
-        row["max_real"] = max(s["max_real"] for s in ok) if ok else None
-        row["stable"] = bool(ok and not any(s["positive_reliable"] for s in row["spectra"]) and row["max_real"] < 0)
-    else:
-        row["stable"] = False
+    row.update(screen_candidate(g, p, u, v, full, solve_spectrum))
     np.savez_compressed(OUT / f"state_seed{seed}.npz", u=u, v=v)
     return row
 
 
 def summary():
     rows = [json.loads(p.read_text()) for p in sorted(OUT.glob("row_seed*.json"))]
-    ok = [r for r in rows if r["stable"]]
+    decisions = [candidate_decision(r) for r in rows]
+    ok = [r for r, d in zip(rows, decisions) if d["numerical_check_passed"]]
     out = {"runs": len(rows), "complete_and_stable": len(ok),
            "not_converged": sum(r["full_residual"] > A.TOL for r in rows),
-           "positive_mode": sum(r["full_residual"] <= A.TOL and not r["stable"] for r in rows),
+           "positive_mode": sum(d["status"] == "unstable_positive_mode" for d in decisions),
+           "insufficient_evidence": sum(d["outcome"] == "insufficient" for d in decisions),
+           "strict_reassessment": decisions,
            "median_relax_steps": float(np.median([r["relax_steps"] for r in rows])) if rows else None,
            "spot_counts": sorted({r["n_spots"] for r in rows}), "audit_cvt_layout": AUDIT, "rows": rows}
     (OUT / "summary.json").write_text(json.dumps(out, indent=1))
