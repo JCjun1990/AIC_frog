@@ -37,7 +37,7 @@ import hashlib  # noqa: E402
 import json  # noqa: E402
 import sys  # noqa: E402
 import time  # noqa: E402
-import warnings  # noqa: E402
+import inspect  # noqa: E402
 from concurrent.futures import ProcessPoolExecutor, as_completed  # noqa: E402
 from pathlib import Path  # noqa: E402
 
@@ -51,8 +51,8 @@ from turing_rd.diagnostics import linear_stability, pattern_stats, full_steady_r
 from turing_rd.initial import perturbed_ic  # noqa: E402
 from turing_rd.steady import relax_polish, rotation_generators  # noqa: E402
 from turing_rd.result_io import save_certified_mat  # noqa: E402
+from turing_rd import experiment_cache as EC  # noqa: E402
 
-warnings.filterwarnings("ignore")
 OUT = ROOT / "results" / "ai_generation"
 GRID_F = np.round(np.arange(0.020, 0.06001, 0.005), 4)            # 9 x 5 "coarse" training grid
 GRID_K = np.array([0.057, 0.059, 0.061, 0.063, 0.065])
@@ -64,6 +64,7 @@ PDE_SCHEDULE = lambda t_max: ((1.0, 20000.0), (4.0, t_max))        # noqa: E731 
 AI_SCHEDULE = lambda t_max: ((1.0, 2000.0), (4.0, t_max))          # noqa: E731
 _GEOM: dict = {}
 _ROT: dict = {}
+EXPERIMENT_ALGORITHM_VERSION = "ai-pde-generation-v1"
 
 
 def geom(surface: str) -> Geometry:
@@ -230,35 +231,156 @@ def _safe(fn, args):
                 "stable": False, "total_s": 0.0, "solve_s": float("nan"), "relax_time": float("nan")}
 
 
+def experiment_identity(fn, args):
+    """Identity of the actual worker, including dirty source and the actual robust/cotan L,M.
+
+    No eigensolve is initiated here. An existing 600-mode basis is loaded and bound
+    when available; newly created/changed dependencies cause a run to be refused as
+    reusable evidence rather than being saved under an obsolete identity.
+    """
+    from turing_rd.result_io import geometry_identity
+    from turing_rd.solver import GrayScottSolver, SPDOperator
+    from turing_rd import steady
+
+    if fn not in (run_ai, run_pde):
+        raise ValueError("cache protocol only supports run_ai and run_pde")
+    bound = inspect.signature(fn).bind(*args)
+    bound.apply_defaults()
+    call = dict(bound.arguments)
+    for key in ("F", "k", "t_max"):
+        call[key] = float(call[key])
+        if not np.isfinite(call[key]):
+            raise ValueError(f"nonfinite experiment parameter: {key}")
+    call["seed"] = int(call["seed"])
+    if "model_path" in call:
+        call["model_path"] = str(Path(call["model_path"]).resolve())
+    model = EC.model_identity(call["model_path"]) if fn is run_ai else None
+    g = geom(call["surface"])
+    basis_path = g._cache_key("eig600")
+    if g._eig is None and basis_path is not None and basis_path.is_file():
+        g.eigenbasis(600)  # read existing input only; never implicitly generate it
+    basis = None if g._eig is None else {
+        "modes": min(600, len(g._eig[0])),
+        "arrays_sha256": EC.array_identity(g._eig[0][:600], g._eig[1][:, :600])}
+    relaxation = EC.defaults(relax_polish)
+    relaxation.update(schedule=(AI_SCHEDULE if fn is run_ai else PDE_SCHEDULE)(call["t_max"]),
+                      check_every=500.0 if fn is run_ai else 1000.0, tol=TOL,
+                      rotations="rotation_generators" if call["surface"].startswith("sphere") else None,
+                      orient=call.get("orient", False))
+    return {"protocol": EC.PROTOCOL, "algorithm_version": EXPERIMENT_ALGORITHM_VERSION,
+            "pipeline": "ai" if fn is run_ai else "pde", "call": call,
+            "input_data": EC.file_identity(ROOT / "frog.mat") if call["surface"] == "frog" else
+                          {"generator": "icosphere", "level": int(call["surface"][6:])},
+            "geometry": geometry_identity(g), "basis": basis,
+            "basis_file": EC.file_identity(basis_path, required=False) if basis_path else None,
+            "model": model, "PDE": GSParams(call["F"], call["k"]).as_dict(),
+            "solver": {"relaxation": relaxation, "integrator": EC.defaults(GrayScottSolver),
+                       "linear_solver": EC.defaults(SPDOperator), "rollout": EC.defaults(GrayScottSolver.rollout),
+                       "newton": EC.defaults(steady.newton_polish),
+                       "rotation_newton": EC.defaults(steady.rotation_newton),
+                       "orient_polish": EC.defaults(steady.orient_polish),
+                       "initial": EC.defaults(perturbed_ic), "spectral_check": EC.defaults(linear_stability),
+                       "compute_dtype": "float64", "storage_dtype": call.get("state_dtype", "float64")},
+            "code": EC.code_identity(ROOT), "environment": EC.dependency_versions()}
+
+
+def _verified_job(fn, args, identity):
+    try:
+        if EC.fingerprint(experiment_identity(fn, args)) != EC.fingerprint(identity):
+            raise EC.CacheRejected("experiment dependencies changed before worker execution")
+        result = _safe(fn, args)
+        if not result.get("error"):
+            if EC.fingerprint(experiment_identity(fn, args)) != EC.fingerprint(identity):
+                raise EC.CacheRejected("experiment dependencies changed during execution; no trusted cache written")
+            result["experiment_cache"] = {"protocol": EC.PROTOCOL, "fingerprint": EC.fingerprint(identity)}
+        return result
+    except Exception as exc:
+        return {"pipeline": identity["pipeline"], "surface": args[0], "F": args[1], "k": args[2],
+                "seed": args[3], "error": repr(exc), "converged": False, "stable": False}
+
+
+def _load_experiment(path, expected):
+    row, identity = EC.load_cache(path, expected)
+    binding = {"pipeline": identity["pipeline"],
+               **{k: identity["call"][k] for k in ("surface", "F", "k", "seed")}}
+    if any(row.get(k) != v for k, v in binding.items()) or row.get("experiment_cache") != {
+            "protocol": EC.PROTOCOL, "fingerprint": EC.fingerprint(identity)}:
+        raise EC.CacheRejected("cached result does not bind to experiment metadata")
+    return row
+
+
+def cached_results(jobs, checkpoint):
+    """Load an explicitly requested current protocol; missing/stale evidence fails."""
+    rows = []
+    for fn, args in jobs:
+        identity = experiment_identity(fn, args)
+        rows.append(_load_experiment(EC.cache_path(checkpoint, identity), identity))
+    return rows
+
+
+def checkpoint_rows(checkpoint, log=print):
+    """Summarise only current, fingerprint-validated entries; never read root legacy pickles."""
+    rows, configurations = [], {}
+    for path in sorted((Path(checkpoint) / EC.PROTOCOL).glob("*.cache")):
+        try:
+            _, saved = EC.load_cache(path)
+            fn = {"ai": run_ai, "pde": run_pde}[saved["pipeline"]]
+            call = saved["call"]
+            args = tuple(call[k] for k in inspect.signature(fn).parameters)
+            row = _load_experiment(path, experiment_identity(fn, args))
+            group = (saved["pipeline"], call["surface"])
+            configuration = {k: v for k, v in call.items() if k not in ("F", "k", "seed")}
+            configurations.setdefault(group, set()).add(EC.fingerprint(configuration))
+            rows.append(row)
+        except (EC.CacheRejected, FileNotFoundError, KeyError, ValueError) as exc:
+            log(f"cache excluded {path.name}: {exc}")
+    if not rows:
+        raise EC.CacheRejected("no current-protocol evidence; legacy *.pkl are preserved but not trusted")
+    if any(len(values) > 1 for values in configurations.values()):
+        raise EC.CacheRejected("multiple configurations in one pipeline/surface; select explicit jobs with cached_results()")
+    return rows
+
+
 def pool_map(jobs, workers, log, checkpoint: Path | None = None):
-    """Run jobs in parallel. With `checkpoint`, every finished job is pickled there at once and jobs
-    already present are loaded instead of rerun, so an interrupted stage resumes where it stopped."""
-    import pickle
+    """Content-bound cache; old root *.pkl remain untouched and are never migrated."""
+    jobs = list(jobs)
     out, todo = [], []
-    for fn, a in jobs:
-        key = f"{'ai' if fn is run_ai else 'pde'}_{a[0]}_{a[1]:.4f}_{a[2]:.4f}_{a[3]}.pkl"
-        path = checkpoint / key if checkpoint else None
-        if path is not None and path.exists():
-            out.append(pickle.loads(path.read_bytes()))
-        else:
-            todo.append((fn, a, path))
+    for fn, args in jobs:
+        identity = experiment_identity(fn, args)
+        path = EC.cache_path(checkpoint, identity) if checkpoint else None
+        if path is not None and path.is_file():
+            try:
+                out.append(_load_experiment(path, identity))
+                continue
+            except EC.CacheRejected as exc:
+                log(f"cache miss (rejected {path.name}): {exc}")
+        todo.append((fn, args, path, identity))
+    if checkpoint and any(Path(checkpoint).glob("*.pkl")):
+        log("legacy *.pkl preserved and ignored: no verified experimental identity")
     if out:
-        log(f"resuming: {len(out)} finished jobs loaded from {checkpoint}, {len(todo)} to run")
-    if checkpoint:
-        checkpoint.mkdir(parents=True, exist_ok=True)
+        log(f"resuming: {len(out)} verified {EC.PROTOCOL} jobs, {len(todo)} to run")
+    if not todo:
+        return out
     with ProcessPoolExecutor(max_workers=workers) as ex:
-        futs = {ex.submit(_safe, fn, a): path for fn, a, path in todo}
-        for i, f in enumerate(as_completed(futs), 1):
-            r = f.result()
-            if futs[f] is not None:
-                futs[f].write_bytes(pickle.dumps(r))
+        futs = {ex.submit(_verified_job, fn, args, identity): (path, identity)
+                for fn, args, path, identity in todo}
+        for i, future in enumerate(as_completed(futs), 1):
+            r = future.result()
+            path, identity = futs[future]
+            if not r.get("error") and path is not None:
+                # Check again in the parent: a later edit must not enter the trusted namespace.
+                fn = run_ai if identity["pipeline"] == "ai" else run_pde
+                args = tuple(identity["call"][k] for k in inspect.signature(fn).parameters)
+                if EC.fingerprint(experiment_identity(fn, args)) != EC.fingerprint(identity):
+                    r["error"] = "experiment dependencies changed before cache persistence"
+                else:
+                    EC.save_cache(path, identity, r)
             out.append(r)
             if r.get("error"):
-                log(f"[{i}/{len(todo)}] ERROR {r['pipeline']} {r['surface']} F={r['F']:.4f} k={r['k']:.4f}: {r['error']}")
-                continue
-            log(f"[{i}/{len(jobs)}] {r['pipeline']} {r['surface']} F={r['F']:.4f} k={r['k']:.4f} seed={r['seed']}: "
-                f"{r['type']} n={r['n_components']} converged={r.get('converged')} t={r.get('relax_time', 0):.0f} "
-                f"{r['total_s']:.0f}s")
+                log(f"[{i}/{len(todo)}] ERROR {r['pipeline']} {r['surface']}: {r['error']}")
+            else:
+                log(f"[{i}/{len(jobs)}] {r['pipeline']} {r['surface']} F={r['F']:.17g} "
+                    f"k={r['k']:.17g} seed={r['seed']}: {r['type']} converged={r.get('converged')}")
     return out
 
 
@@ -374,6 +496,8 @@ def stage_train(surfaces, log):
         t0 = time.time()
         model = fit_model(X, types, stats_y, sm, spot_y, pm)
         joblib.dump(model, d / "model.joblib")
+        EC.write_training_provenance(d / "model.joblib", [EC.file_identity(d / "dataset.json")],
+                                     {"stage": "explicit ai_generation train", "rows": len(rows)})
         fit_s = time.time() - t0
         # leave-one-grid-point-out generalization error
         cv = {"type_correct": [], "kappa0_rel": [], "qv_rmse": [], "density_rel": [], "n_spots_rel": [], "pv_rmse": []}
@@ -398,8 +522,8 @@ def stage_evaluate(surfaces, workers, log, seeds=(1, 2, 3), t_max=200000.0, pipe
     for surface in surfaces:
         train_surface = "sphere5" if surface.startswith("sphere") else surface
         model_path = str(OUT / train_surface / "model.joblib")
-        if "ai" in pipelines:
-            geom(surface).eigenbasis(600)
+        # Both pipelines use spectral pattern diagnostics; pin their shared basis before fingerprinting.
+        geom(surface).eigenbasis(600)
         pts = held_out_points() if surface == train_surface else held_out_points()[:2]
         for F, k, name in pts:
             for s in seeds:
@@ -411,9 +535,8 @@ def stage_evaluate(surfaces, workers, log, seeds=(1, 2, 3), t_max=200000.0, pipe
 
 
 def stage_summarize(log):
-    """Merge every finished evaluation job (from this or another machine's evaluation_jobs/)."""
-    import pickle
-    rows = [pickle.loads(p.read_bytes()) for p in sorted((OUT / "evaluation_jobs").glob("*.pkl"))]
+    """Merge verified current-environment jobs; archived plain pickles are not promoted."""
+    rows = checkpoint_rows(OUT / "evaluation_jobs", log)
     rows = [r for r in rows if not r.get("error")]
     names = {(F, k): n for F, k, n in held_out_points()}
     for r in rows:
@@ -557,9 +680,7 @@ def stage_robustness(log, surfaces, seeds, workers, t_max=200000.0):
             for sd in seeds:
                 jobs.append((run_ai, (surface, p.F, p.k, sd, t_max, str(OUT / train / "model.joblib"), False,
                                       surface.startswith("sphere"))))
-    pool_map(jobs, workers, log, checkpoint=OUT / "tasks" / "robustness_jobs")
-    import pickle
-    rows = [pickle.loads(f.read_bytes()) for f in sorted((OUT / "tasks" / "robustness_jobs").glob("*.pkl"))]
+    rows = pool_map(jobs, workers, log, checkpoint=OUT / "tasks" / "robustness_jobs")
     lines = ["# 任务结果的多种子稳健性", "",
              "- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。",
              "- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。", "",

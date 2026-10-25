@@ -20,8 +20,9 @@ Stages (fixed seeds throughout; outputs in results/inversion/):
     6 final        steady states at the estimate and, for reference, at the given spot parameters,
                    polished to 1e-12, with linear stability and the feature table
 
-    python scripts/invert_target.py                     full run (about 15 min, Mac CPU, 8 workers)
-    python scripts/invert_target.py --quick             plumbing check (3 x 3 grid, 2 seeds)
+    New runs default to full-pde-v1 and require a fresh output directory. Legacy replay
+    requires --reference-protocol legacy-rate-v1. Neither protocol changes formal estimates.
+    A strict run fails when reference coverage or final spectral evidence is insufficient.
 """
 from __future__ import annotations
 
@@ -46,7 +47,8 @@ import scipy.io as sio  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from turing_rd import SPOTS, Geometry, GSParams, load_frog  # noqa: E402
-from turing_rd.inverse import OBJECTIVE, TYPE_PENALTY, feature_distance, is_steady, steady_states  # noqa: E402
+from turing_rd.inverse import (OBJECTIVE, TYPE_PENALTY, feature_distance, is_steady, steady_states,
+                               reference_usable, STRICT_REFERENCE_PROTOCOL, LEGACY_REFERENCE_PROTOCOL)  # noqa: E402
 from turing_rd.preprocess import HeatLowPass, admissible, integral_identities, select_cutoff  # noqa: E402
 
 OUT = ROOT / "results" / "inversion"
@@ -89,22 +91,27 @@ def job_types(args):
 
 
 def job_grid(args):
-    """All seeds at one (F, k): steady states, features at every cut-off; states returned as float32."""
+    """All seeds at one (F, k); strict states retain float64, explicit legacy caches use float32."""
     F, k, seeds, cfg = args
     res = steady_states(W["g"], F, k, seeds, SPOTS.Du, SPOTS.Dv, t_max=cfg["t_max"], dt=cfg["dt"],
                         rate_tol=cfg["rate_tol"], polish_tol=cfg["polish_tol"])
     out = []
     for r in res:
         feats = {str(kh): features_of(r["u"], r["v"], kh) for kh in W["lp"]}
+        dtype = np.float64 if cfg.get("reference_protocol") == STRICT_REFERENCE_PROTOCOL else np.float32
         out.append({**{key: r[key] for key in ("F", "k", "seed", "t", "rate", "polished", "residual", "ptc_iters",
                                                "status", "wall_s")},
-                    "features": feats, "u": r["u"].astype(np.float32), "v": r["v"].astype(np.float32)})
+                    "full_steady_diagnostic": r["full_steady_diagnostic"],
+                    "reference_quality": r["reference_quality"],
+                    "reference_protocol": cfg.get("reference_protocol", LEGACY_REFERENCE_PROTOCOL),
+                    "features": feats, "u": r["u"].astype(dtype), "v": r["v"].astype(dtype)})
     return out
 
 
 def job_final(args):
     """One seed at one (F, k): steady state polished to round-off, residuals, linear stability, features."""
     from turing_rd.diagnostics import linear_stability, pde_residual
+    from turing_rd.quality import full_residual_record
     from turing_rd.steady import ptc_polish
     label, F, k, seed, cfg, kh = args
     g = W["g"]
@@ -119,6 +126,9 @@ def job_final(args):
     return {"label": label, "F": F, "k": k, "seed": seed, "t": r["t"], "status": r["status"],
             "polished_in_loop": r["polished"], "rel_residual": rel, "ptc_extra_iters": max(len(hist) - 1, 0),
             "steady_rel": pde_residual(g, p, u, v)["steady_rel"], "stability": stab,
+            "full_steady_diagnostic": full_residual_record(g, p, u, v),
+            "spectral_report": stab.get("spectral_report") if stab else None,
+            "reference_protocol": cfg.get("reference_protocol", LEGACY_REFERENCE_PROTOCOL),
             "features": features_of(u, v, kh), "features_raw": _scalars(W["fx"].describe(u, v)),
             "u": u, "v": v, "wall_s": r["wall_s"]}
 
@@ -126,6 +136,36 @@ def job_final(args):
 # ---------------------------------------------------------------------------------------------
 # helpers
 # ---------------------------------------------------------------------------------------------
+def surrogate_support(usable, protocol):
+    """Keep the historical plumbing fallback explicit; strict runs cannot use it."""
+    feasible = np.asarray(usable) >= 0.5
+    fallback = feasible.sum() < 3
+    if protocol not in (STRICT_REFERENCE_PROTOCOL, LEGACY_REFERENCE_PROTOCOL):
+        raise ValueError("unknown inversion reference protocol: " + protocol)
+    if fallback and protocol == STRICT_REFERENCE_PROTOCOL:
+        raise ValueError("full-pde-v1 requires at least 3 feasible reference points; no legacy fallback")
+    return np.ones_like(feasible) if fallback else feasible, bool(fallback)
+
+
+def select_representatives(finals, labels, protocol):
+    """Strict representatives require measured stationarity and validated finite spectra."""
+    from turing_rd.inverse import reference_quality
+    if protocol not in (STRICT_REFERENCE_PROTOCOL, LEGACY_REFERENCE_PROTOCOL):
+        raise ValueError("unknown inversion reference protocol: " + protocol)
+    representatives = {}
+    for label in labels:
+        rows = [r for r in finals if r["label"] == label]
+        if protocol == STRICT_REFERENCE_PROTOCOL:
+            accepted = [r for r in rows if reference_quality(r)["spectrally_screened"]]
+            if not accepted:
+                raise ValueError(f"full-pde-v1: {label} has no full-steady, spectrum-validated representative")
+        else:
+            accepted = [r for r in rows if r["rel_residual"] < 1e-10 and r["stability"] is not None
+                        and r["stability"]["max_real"] < 0] or rows
+        representatives[label] = min(accepted, key=lambda r: r["distance"])
+    return representatives
+
+
 def boot_se(x, n=2000, seed=0):
     rng = np.random.default_rng(seed)
     x = np.asarray(x)
@@ -169,12 +209,16 @@ def main():
     ap.add_argument("--kappa-half", type=float, default=None, help="override the chosen low-pass cut-off")
     ap.add_argument("--no-typemap", action="store_true")
     ap.add_argument("--reuse", action="store_true", help="reuse grid results of an identical earlier run")
+    ap.add_argument("--reference-protocol", choices=(STRICT_REFERENCE_PROTOCOL, LEGACY_REFERENCE_PROTOCOL),
+                    default=STRICT_REFERENCE_PROTOCOL, help="new runs default to full dual-equation residual acceptance")
     ap.add_argument("--quick", action="store_true", help="tiny run to check the plumbing")
     ap.add_argument("--out", default=str(OUT))
     args = ap.parse_args()
     if args.quick:
         args.seeds, args.grid, args.t_max, args.t_max_final = 2, [3, 3], 6000.0, 6000.0
     out = Path(args.out)
+    if args.reference_protocol == STRICT_REFERENCE_PROTOCOL and (out / "summary.json").exists():
+        ap.error("strict reference run needs a fresh --out; historical inversion results are protected")
     out.mkdir(parents=True, exist_ok=True)
     fh = open(out / "run.log", "w")
     T0 = time.time()
@@ -240,13 +284,26 @@ def main():
     seeds = [1000 * (i + 1) for i in range(args.seeds)]
     cfg = {"t_max": args.t_max, "t_max_final": args.t_max_final, "dt": args.dt, "rate_tol": args.rate_tol,
            "polish_tol": args.polish_tol}
+    if args.reference_protocol == STRICT_REFERENCE_PROTOCOL:
+        cfg["reference_protocol"] = STRICT_REFERENCE_PROTOCOL  # distinct cache identity, no silent legacy reuse
     grid_cfg = {k_: v_ for k_, v_ in cfg.items() if k_ != "t_max_final"}
     key = hashlib.sha1(json.dumps([list(Fg), list(kg), seeds, grid_cfg, kappas], sort_keys=True).encode()).hexdigest()[:12]
+    reference_identity = None
+    if args.reference_protocol == STRICT_REFERENCE_PROTOCOL:
+        from turing_rd import experiment_cache as EC
+        from turing_rd.result_io import geometry_identity
+        reference_identity = {"protocol": STRICT_REFERENCE_PROTOCOL, "F": Fg.tolist(), "k": kg.tolist(),
+            "seeds": seeds, "config": grid_cfg, "cutoffs": kappas, "code": EC.code_identity(ROOT),
+            "mesh": geometry_identity(g), "input_data": EC.file_identity(ROOT / "frog.mat"),
+            "environment": EC.dependency_versions()}
+        key = EC.fingerprint(reference_identity)
     cache = out / "grid_cache.npz"
     grid = None
     if args.reuse and cache.exists():
         z = np.load(cache, allow_pickle=True)
-        if str(z["key"]) == key:
+        identity_matches = (reference_identity is None or ("reference_identity" in z.files and
+                            json.loads(str(z["reference_identity"])) == reference_identity))
+        if str(z["key"]) == key and identity_matches:
             grid = list(z["grid"])
             grid_wall = float(z["grid_wall"]) if "grid_wall" in z.files else float("nan")
             log(f"[4] reusing {len(grid)} grid evaluations from {cache.name} (computed in {grid_wall:.0f} s)", fh)
@@ -259,14 +316,15 @@ def main():
                 f"polished {sum(r['polished'] for r in rows)}/{len(rows)}, t_end {max(r['t'] for r in rows):.0f}, "
                 f"types {[r['features'][str(kh)]['type'] for r in rows]} ({time.time() - t:.0f}s)", fh)
         grid_wall = time.time() - t
-        np.savez_compressed(cache, key=key, grid=np.array(grid, dtype=object), grid_wall=grid_wall)
+        extra = {"reference_identity": json.dumps(reference_identity, sort_keys=True, allow_nan=False)} if reference_identity else {}
+        np.savez_compressed(cache, key=key, grid=np.array(grid, dtype=object), grid_wall=grid_wall, **extra)
     walls["grid"] = grid_wall                             # the original computation time when reused
 
     def J_table(kk):
         """Per (F, k) point: (seed, distance, per-criterion) for every seed; unsteady seeds get the penalty."""
         tab = {}
         for r in grid:
-            if is_steady(r):
+            if reference_usable(r, protocol=args.reference_protocol):
                 d, per = feature_distance(r["features"][str(kk)], tgt[str(kk)])
             else:
                 d, per = TYPE_PENALTY, {g_: TYPE_PENALTY for g_ in OBJECTIVE}
@@ -284,7 +342,7 @@ def main():
     U = (Dmat < TYPE_PENALTY).mean(1)                        # share of seeds with a steady spot pattern
     X = np.array([((F - F0) / args.dF, (k - k0) / args.dk) for F, k in pts])
     polished = float(np.mean([r["polished"] for r in grid]))
-    steady = float(np.mean([is_steady(r) for r in grid]))
+    steady = float(np.mean([reference_usable(r, protocol=args.reference_protocol) for r in grid]))
     status = {}
     for r in grid:
         status[r["status"]] = status.get(r["status"], 0) + 1
@@ -321,10 +379,8 @@ def main():
     def J_total(jf, jp):
         return np.sqrt((n_crit * jf ** 2 + jp ** 2) / (n_crit + 1))
 
-    feas = U >= 0.5
-    fallback = feas.sum() < 3            # e.g. --quick: nothing steady yet; keep the plumbing running on raw medians
+    feas, fallback = surrogate_support(U, args.reference_protocol)
     if fallback:
-        feas = np.ones_like(feas)
         log("    fewer than 3 feasible grid points: the surrogate falls back to medians including penalties "
             "(plumbing check only, not a result)", fh)
 
@@ -431,10 +487,8 @@ def main():
             f"(steady_rel {r['steady_rel']:.1e}), max Re lambda {st['max_real'] if st else float('nan'):.2e}, "
             f"type {r['features']['type']}, n {r['features_raw']['n_spots']:.0f}, distance {r['distance']:.3f}", fh)
 
-    def ok(r):
-        return r["rel_residual"] < 1e-10 and r["stability"] is not None and r["stability"]["max_real"] < 0
     by = {lab: [r for r in finals if r["label"] == lab] for lab in sets}
-    reps = {lab: min([r for r in rs if ok(r)] or rs, key=lambda r: r["distance"]) for lab, rs in by.items()}
+    reps = select_representatives(finals, sets, args.reference_protocol)
     rep = reps["estimate"]
     np.savez(out / "final_state.npz", u=rep["u"], v=rep["v"], F=rep["F"], k=rep["k"], Du=SPOTS.Du, Dv=SPOTS.Dv,
              seed=rep["seed"], vertices=g.V, faces=g.F)
@@ -443,7 +497,7 @@ def main():
 
     # ---- summary ------------------------------------------------------------------------------------
     names = [n for grp in OBJECTIVE.values() for n in grp]
-    summary = {
+    summary = {"reference_protocol": args.reference_protocol,
         "given_spots": {"F": GIVEN[0], "k": GIVEN[1], "Du": SPOTS.Du, "Dv": SPOTS.Dv},
         "preprocess": {"kappa_half": kh, "kappa_half_auto": kh_auto, "sigma": lp.sigma, "tau": lp.tau,
                        "v_neg_area_raw": float(g.M[vt < 0].sum() / g.area), "v_max_raw": float(vt.max()),
@@ -461,7 +515,8 @@ def main():
         "estimate": est_t, "features_only": est_f, "probes": probes, "gp_kernel": str(gp.kernel_),
         "final": [{k_: r[k_] for k_ in ("label", "F", "k", "seed", "t", "status", "polished_in_loop", "rel_residual",
                                          "steady_rel", "stability", "distance", "per_criterion", "features",
-                                         "features_raw", "wall_s")} for r in finals],
+                                         "features_raw", "wall_s", "full_steady_diagnostic", "spectral_report",
+                                         "reference_protocol")} for r in finals],
         "representative": {lab: r["seed"] for lab, r in reps.items()},
         "target_features": tgt[str(kh)], "target_features_raw": tgt_raw,
         "objective": {g_: {n: list(v_) for n, v_ in grp.items()} for g_, grp in OBJECTIVE.items()},
@@ -582,6 +637,8 @@ def write_report(out, s, g, vt, vp, reps, by, curve, types, X, U, XX, mu_f, mu_t
                 f"{'是' if p_['feasible'] else '否'} | {p_['J_features']:.2f} | {p_['J_pde']:.2f} | {p_['J_total']:.2f} |")
 
     L = ["# Solution.mat 反演（只反演 F、k；Du、Dv 取题给值）\n",
+         f"参考库协议：`{s.get('reference_protocol', LEGACY_REFERENCE_PROTOCOL)}`。"
+         "低变化率和 polish 标志不等于完整双变量稳态；有限谱筛选不构成全谱证明。\n",
          f"一键命令：`python scripts/invert_target.py`；总用时 {s['wall_seconds']['total'] / 60:.1f} 分钟"
          + ("（网格取自缓存，用时为原始计算时间，其余阶段为本次重算）" if s.get("grid_reused") else "") +
          f"（Mac CPU，{s['workers']} 进程）。各阶段：" +

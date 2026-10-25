@@ -19,6 +19,7 @@ import scipy.sparse.linalg as spla
 from turing_rd import Geometry, SPOTS, icosphere
 from turing_rd.diagnostics import jacobian, linear_stability
 from turing_rd.steady import weak_jacobian, weak_residual
+from turing_rd.spectral_policy import SpectrumConfig
 from turing_rd.stability import (aggregate_spectra, eigenpair_diagnostics,
                                  rotation_subspace, solve_spectrum)
 
@@ -113,6 +114,7 @@ class NumericalSpectrumPolicyTests(unittest.TestCase):
         cls.geom = Geometry(icosphere(1), laplacian="robust", cache_dir=None)
         cls.u = np.ones(cls.geom.n)
         cls.v = np.zeros(cls.geom.n)
+        cls.configs = tuple(SpectrumConfig(s, w, 6) for s, w in [(1e-3, "LM"), (0., "LM"), (None, "LR")])
         cls.reports = []
         cls.vectors = []
         for sigma, which in [(1e-3, "LM"), (0.0, "LM"), (None, "LR")]:
@@ -138,21 +140,21 @@ class NumericalSpectrumPolicyTests(unittest.TestCase):
         self.assertEqual(Q.shape, (2 * self.geom.n, 0))
 
     def test_two_shifts_and_independent_rightmost_negative_check_can_pass(self):
-        result = aggregate_spectra(self.reports, full_residual=1e-15)
+        result = aggregate_spectra(self.reports, full_residual=1e-15, configs=self.configs)
         self.assertTrue(result["numerical_check_passed"])
 
     def test_single_shift_is_insufficient_for_stability_acceptance(self):
-        result = aggregate_spectra(self.reports[:1], full_residual=1e-15)
+        result = aggregate_spectra(self.reports[:1], full_residual=1e-15, configs=self.configs)
         self.assertFalse(result["numerical_check_passed"])
 
     def test_relative_equilibrium_cannot_receive_full_steady_stability_acceptance(self):
-        result = aggregate_spectra(self.reports, full_residual=1e-6)
+        result = aggregate_spectra(self.reports, full_residual=1e-6, configs=self.configs)
         self.assertFalse(result["numerical_check_passed"])
 
     def test_failed_or_partial_solver_cannot_receive_stability_acceptance(self):
         reports = copy.deepcopy(self.reports)
         reports[2]["solver_converged"] = False
-        result = aggregate_spectra(reports, full_residual=1e-15)
+        result = aggregate_spectra(reports, full_residual=1e-15, configs=self.configs)
         self.assertFalse(result["numerical_check_passed"])
 
     def test_confirmed_positive_cannot_be_hidden_by_nonrotation_maximum(self):
@@ -165,7 +167,7 @@ class NumericalSpectrumPolicyTests(unittest.TestCase):
             report["full_max_real"] = 1.665e-6
             report["nonrotation_max_real"] = -4.61e-5
             report["found_reliable_positive"] = True
-        result = aggregate_spectra(reports, full_residual=1e-15)
+        result = aggregate_spectra(reports, full_residual=1e-15, configs=self.configs)
         self.assertFalse(result["numerical_check_passed"])
 
     def test_arpack_partial_convergence_is_recorded_and_fails_closed(self):

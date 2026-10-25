@@ -1,0 +1,1253 @@
+{
+  "protocol": "methodology-evidence-v1",
+  "sources": [
+    {
+      "path": "submission/task2_frog/ai_model/dataset.json",
+      "sha256": "ee19eb9e949faa7cdf62883e2c609ec4464b4b836ed19c11eb6d0d4ffa1165bf"
+    },
+    {
+      "path": "submission/task1_sphere/ai_model/dataset.json",
+      "sha256": "4157f250928e0c0ee7ad8976ef76f2f4a915b84b36b15f5a1a0146aa9da9a4f6"
+    },
+    {
+      "path": "submission/evidence/generalization/dense_dataset_frog.json",
+      "sha256": "98a7b7879cef2e45539710f0acf30f17982431207f49e5d3e804ffd22e318930"
+    },
+    {
+      "path": "submission/evidence/generalization/dense_dataset_sphere5.json",
+      "sha256": "80d627eb08a41965628273808369613992130882b821b2d129b71fa6f18e22c8"
+    },
+    {
+      "path": "submission/evidence/generalization/testset.json",
+      "sha256": "e59571edd6c093bdc65bad9b1cbd86553ebd31240e5f62e6c3e257d3d813a83e"
+    },
+    {
+      "path": "submission/task3_inversion/summary.json",
+      "sha256": "d975a6094a8859c1b58602bfa17d371cb03a92478017446a20dea2338853469b"
+    },
+    {
+      "path": "submission/task3_inversion/best_match/summary.json",
+      "sha256": "8db05e2eecd17c884ffc18201e7a69e70ed25743c37deac139593031b4566439"
+    }
+  ],
+  "datasets": {
+    "v1_frog": {
+      "quality_protocol": "endpoint-label-quality-v1",
+      "total": 45,
+      "finite_time_state": 45,
+      "complete_steady": 32,
+      "spectrum_checked_pass": 0,
+      "spectrum_positive": 0,
+      "spectrum_insufficient": 45,
+      "not_complete_steady": 13,
+      "types": {
+        "spots": 11,
+        "stripes_or_maze": 14,
+        "uniform": 11,
+        "holes": 9
+      },
+      "steady_types": {
+        "uniform": 11,
+        "spots": 5,
+        "stripes_or_maze": 9,
+        "holes": 7
+      },
+      "mixed_terminal_type_points": [],
+      "mixed_complete_steady_type_points": [],
+      "multistability_limitation": "different finite-time types alone do not prove steady multistability",
+      "spectral_limitation": "summary-only historical samples, including unknown requested counts, are insufficient under this protocol",
+      "source": {
+        "path": "submission/task2_frog/ai_model/dataset.json",
+        "sha256": "ee19eb9e949faa7cdf62883e2c609ec4464b4b836ed19c11eb6d0d4ffa1165bf"
+      },
+      "legacy_spectral_status": {
+        "not_recorded": 45
+      },
+      "legacy_stable_flag_count": 31,
+      "spectrum_known_failed": 0,
+      "spectrum_failure_unknown": 45
+    },
+    "v1_sphere5": {
+      "quality_protocol": "endpoint-label-quality-v1",
+      "total": 45,
+      "finite_time_state": 45,
+      "complete_steady": 15,
+      "spectrum_checked_pass": 0,
+      "spectrum_positive": 0,
+      "spectrum_insufficient": 45,
+      "not_complete_steady": 30,
+      "types": {
+        "spots": 13,
+        "uniform": 14,
+        "holes": 8,
+        "stripes_or_maze": 10
+      },
+      "steady_types": {
+        "uniform": 14,
+        "spots": 1
+      },
+      "mixed_terminal_type_points": [],
+      "mixed_complete_steady_type_points": [],
+      "multistability_limitation": "different finite-time types alone do not prove steady multistability",
+      "spectral_limitation": "summary-only historical samples, including unknown requested counts, are insufficient under this protocol",
+      "source": {
+        "path": "submission/task1_sphere/ai_model/dataset.json",
+        "sha256": "4157f250928e0c0ee7ad8976ef76f2f4a915b84b36b15f5a1a0146aa9da9a4f6"
+      },
+      "legacy_spectral_status": {
+        "not_recorded": 44,
+        "attempted_insufficient_detail": 1
+      },
+      "legacy_stable_flag_count": 14,
+      "spectrum_known_failed": 0,
+      "spectrum_failure_unknown": 45
+    },
+    "v2_frog": {
+      "quality_protocol": "endpoint-label-quality-v1",
+      "total": 306,
+      "finite_time_state": 306,
+      "complete_steady": 257,
+      "spectrum_checked_pass": 0,
+      "spectrum_positive": 0,
+      "spectrum_insufficient": 306,
+      "not_complete_steady": 49,
+      "types": {
+        "uniform": 73,
+        "spots": 88,
+        "stripes_or_maze": 73,
+        "holes": 72
+      },
+      "steady_types": {
+        "uniform": 72,
+        "stripes_or_maze": 65,
+        "spots": 62,
+        "holes": 58
+      },
+      "mixed_terminal_type_points": [
+        {
+          "surface": "frog",
+          "F": 0.02,
+          "k": 0.057,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            101000,
+            1000
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.02,
+          "k": 0.058,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            101001,
+            1001
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.02,
+          "k": 0.059,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            101002,
+            1002
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0225,
+          "k": 0.06,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            101012,
+            1012
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0225,
+          "k": 0.064,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            101016,
+            1016
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.025,
+          "k": 0.062,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            1023,
+            101023
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.025,
+          "k": 0.064,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            101025,
+            1025
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.025,
+          "k": 0.065,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            101026,
+            1026
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0275,
+          "k": 0.063,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            101033,
+            1033
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0275,
+          "k": 0.064,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            1034,
+            101034
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0275,
+          "k": 0.065,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            101035,
+            1035
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.03,
+          "k": 0.059,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            101038,
+            1038
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.03,
+          "k": 0.065,
+          "types": [
+            "stripes_or_maze",
+            "uniform"
+          ],
+          "seeds": [
+            101044,
+            1044
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.04,
+          "k": 0.061,
+          "types": [
+            "holes",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            101076,
+            1076
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0425,
+          "k": 0.058,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            1082,
+            101082
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0425,
+          "k": 0.062,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            1086,
+            101086
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0425,
+          "k": 0.063,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            101087,
+            1087
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.045,
+          "k": 0.063,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            101096,
+            1096
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.045,
+          "k": 0.065,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            101098,
+            1098
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0475,
+          "k": 0.062,
+          "types": [
+            "holes",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            101104,
+            1104
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0475,
+          "k": 0.064,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            1106,
+            101106
+          ]
+        }
+      ],
+      "mixed_complete_steady_type_points": [
+        {
+          "surface": "frog",
+          "F": 0.025,
+          "k": 0.064,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0275,
+          "k": 0.063,
+          "types": [
+            "spots",
+            "uniform"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0275,
+          "k": 0.064,
+          "types": [
+            "spots",
+            "uniform"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0275,
+          "k": 0.065,
+          "types": [
+            "spots",
+            "uniform"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.03,
+          "k": 0.059,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.04,
+          "k": 0.061,
+          "types": [
+            "holes",
+            "stripes_or_maze"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0425,
+          "k": 0.058,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0425,
+          "k": 0.062,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0425,
+          "k": 0.063,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.045,
+          "k": 0.063,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.045,
+          "k": 0.065,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0475,
+          "k": 0.062,
+          "types": [
+            "holes",
+            "stripes_or_maze"
+          ]
+        },
+        {
+          "surface": "frog",
+          "F": 0.0475,
+          "k": 0.064,
+          "types": [
+            "spots",
+            "stripes_or_maze"
+          ]
+        }
+      ],
+      "multistability_limitation": "different finite-time types alone do not prove steady multistability",
+      "spectral_limitation": "summary-only historical samples, including unknown requested counts, are insufficient under this protocol",
+      "source": {
+        "path": "submission/evidence/generalization/dense_dataset_frog.json",
+        "sha256": "98a7b7879cef2e45539710f0acf30f17982431207f49e5d3e804ffd22e318930"
+      },
+      "legacy_spectral_status": {
+        "not_recorded": 306
+      },
+      "legacy_stable_flag_count": 253,
+      "spectrum_known_failed": 0,
+      "spectrum_failure_unknown": 306
+    },
+    "v2_sphere5": {
+      "quality_protocol": "endpoint-label-quality-v1",
+      "total": 306,
+      "finite_time_state": 306,
+      "complete_steady": 90,
+      "spectrum_checked_pass": 0,
+      "spectrum_positive": 0,
+      "spectrum_insufficient": 306,
+      "not_complete_steady": 216,
+      "types": {
+        "spots": 94,
+        "uniform": 83,
+        "stripes_or_maze": 75,
+        "holes": 54
+      },
+      "steady_types": {
+        "uniform": 83,
+        "spots": 7
+      },
+      "mixed_terminal_type_points": [
+        {
+          "surface": "sphere5",
+          "F": 0.0225,
+          "k": 0.061,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            1013,
+            101013
+          ]
+        },
+        {
+          "surface": "sphere5",
+          "F": 0.0225,
+          "k": 0.062,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            1014,
+            101014
+          ]
+        },
+        {
+          "surface": "sphere5",
+          "F": 0.025,
+          "k": 0.065,
+          "types": [
+            "stripes_or_maze",
+            "uniform"
+          ],
+          "seeds": [
+            1026,
+            101026
+          ]
+        },
+        {
+          "surface": "sphere5",
+          "F": 0.03,
+          "k": 0.057,
+          "types": [
+            "holes",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            1036,
+            101036
+          ]
+        },
+        {
+          "surface": "sphere5",
+          "F": 0.0375,
+          "k": 0.06,
+          "types": [
+            "holes",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            1066,
+            101066
+          ]
+        },
+        {
+          "surface": "sphere5",
+          "F": 0.0425,
+          "k": 0.061,
+          "types": [
+            "holes",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            1085,
+            101085
+          ]
+        },
+        {
+          "surface": "sphere5",
+          "F": 0.05,
+          "k": 0.062,
+          "types": [
+            "holes",
+            "stripes_or_maze"
+          ],
+          "seeds": [
+            1113,
+            101113
+          ]
+        }
+      ],
+      "mixed_complete_steady_type_points": [],
+      "multistability_limitation": "different finite-time types alone do not prove steady multistability",
+      "spectral_limitation": "summary-only historical samples, including unknown requested counts, are insufficient under this protocol",
+      "source": {
+        "path": "submission/evidence/generalization/dense_dataset_sphere5.json",
+        "sha256": "80d627eb08a41965628273808369613992130882b821b2d129b71fa6f18e22c8"
+      },
+      "legacy_spectral_status": {
+        "not_recorded": 299,
+        "attempted_insufficient_detail": 7
+      },
+      "legacy_stable_flag_count": 83,
+      "spectrum_known_failed": 0,
+      "spectrum_failure_unknown": 306
+    }
+  },
+  "test": {
+    "frog": {
+      "quality_protocol": "endpoint-label-quality-v1",
+      "total": 64,
+      "finite_time_state": 64,
+      "complete_steady": 57,
+      "spectrum_checked_pass": 0,
+      "spectrum_positive": 0,
+      "spectrum_insufficient": 64,
+      "not_complete_steady": 7,
+      "types": {
+        "uniform": 13,
+        "holes": 14,
+        "spots": 17,
+        "stripes_or_maze": 20
+      },
+      "steady_types": {
+        "uniform": 13,
+        "holes": 14,
+        "spots": 12,
+        "stripes_or_maze": 18
+      },
+      "mixed_terminal_type_points": [
+        {
+          "surface": "frog",
+          "F": 0.02095,
+          "k": 0.05972,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            710001,
+            710000
+          ]
+        }
+      ],
+      "mixed_complete_steady_type_points": [],
+      "multistability_limitation": "different finite-time types alone do not prove steady multistability",
+      "spectral_limitation": "summary-only historical samples, including unknown requested counts, are insufficient under this protocol"
+    },
+    "sphere5": {
+      "quality_protocol": "endpoint-label-quality-v1",
+      "total": 64,
+      "finite_time_state": 64,
+      "complete_steady": 16,
+      "spectrum_checked_pass": 0,
+      "spectrum_positive": 0,
+      "spectrum_insufficient": 64,
+      "not_complete_steady": 48,
+      "types": {
+        "uniform": 19,
+        "spots": 17,
+        "stripes_or_maze": 18,
+        "holes": 10
+      },
+      "steady_types": {
+        "uniform": 16
+      },
+      "mixed_terminal_type_points": [
+        {
+          "surface": "sphere5",
+          "F": 0.02272,
+          "k": 0.06208,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            705001,
+            705000
+          ]
+        },
+        {
+          "surface": "sphere5",
+          "F": 0.02095,
+          "k": 0.05972,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            710000,
+            710001
+          ]
+        },
+        {
+          "surface": "sphere5",
+          "F": 0.02583,
+          "k": 0.0641,
+          "types": [
+            "spots",
+            "uniform"
+          ],
+          "seeds": [
+            713001,
+            713000
+          ]
+        }
+      ],
+      "mixed_complete_steady_type_points": [],
+      "multistability_limitation": "different finite-time types alone do not prove steady multistability",
+      "spectral_limitation": "summary-only historical samples, including unknown requested counts, are insufficient under this protocol"
+    }
+  },
+  "inversion": {
+    "total": 294,
+    "counts_from_aggregate_only": {
+      "polished": 130,
+      "legacy_accepted": 176
+    },
+    "extra_legacy_accepted": 46,
+    "legacy_accepted_fraction": 0.5986394557823129,
+    "raw_per_endpoint_states_rates_residuals_present": false,
+    "strict_confirmed_from_retained_grid_evidence": 0,
+    "actual_strict_steady_count": null,
+    "strict_loss_surface": null,
+    "strict_parameter_shift": null,
+    "counts_scope": "integer counts cross-checked from aggregate fractions/statuses; not a new row-by-row is_steady replay",
+    "missing": "grid_cache.npz with per-record status/rate/full residual and original fields is absent",
+    "interpretation": "zero strict evidence coverage is not evidence of zero physical steady states",
+    "status_counts": {
+      "uniform": 27,
+      "steady": 103,
+      "dynamic": 89,
+      "moving": 75
+    },
+    "formal_estimate_unchanged": {
+      "F": 0.027712399999999998,
+      "k": 0.0600398,
+      "J": 1.7483049050723682,
+      "band_threshold": 1.8767319236508624,
+      "band_F": [
+        0.026712399999999997,
+        0.0287124
+      ],
+      "band_k": [
+        0.0598398,
+        0.06133979999999999
+      ],
+      "bootstrap_F": [
+        0.027712399999999998,
+        0.027712399999999998,
+        0.027812399999999998,
+        0.027812399999999998,
+        0.027812399999999998
+      ],
+      "bootstrap_k": [
+        0.059989799999999996,
+        0.059989799999999996,
+        0.059989799999999996,
+        0.0600398,
+        0.0600398
+      ],
+      "cutoff_sensitivity": {
+        "16.0": {
+          "F": 0.027212399999999998,
+          "k": 0.0602898,
+          "F_features": 0.031512399999999996,
+          "k_features": 0.059939799999999994,
+          "closed_form": [
+            0.026768898543142985,
+            0.058413360051882954
+          ]
+        },
+        "25.0": {
+          "F": 0.0282124,
+          "k": 0.05988979999999999,
+          "F_features": 0.0288124,
+          "k_features": 0.0597898,
+          "closed_form": [
+            0.028057464762669942,
+            0.06044300744111597
+          ]
+        }
+      }
+    },
+    "landscape": [
+      {
+        "F": 0.0215124,
+        "k": 0.0566398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0215124,
+        "k": 0.0576398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0215124,
+        "k": 0.0586398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0215124,
+        "k": 0.0596398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0215124,
+        "k": 0.0606398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0215124,
+        "k": 0.0616398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0215124,
+        "k": 0.0626398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0235124,
+        "k": 0.0566398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0235124,
+        "k": 0.0576398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0235124,
+        "k": 0.0586398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0235124,
+        "k": 0.0596398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0235124,
+        "k": 0.0606398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0235124,
+        "k": 0.0616398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": 1.9326863986497684,
+        "legacy_usable_spot_fraction": 0.16666666666666666,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0235124,
+        "k": 0.0626398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0255124,
+        "k": 0.0566398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0255124,
+        "k": 0.0576398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0255124,
+        "k": 0.0586398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0255124,
+        "k": 0.0596398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0255124,
+        "k": 0.0606398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": 1.9450064185991622,
+        "legacy_usable_spot_fraction": 0.16666666666666666,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0255124,
+        "k": 0.0616398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": 2.037441549772793,
+        "legacy_usable_spot_fraction": 0.3333333333333333,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0255124,
+        "k": 0.0626398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": 1.9442952042274486,
+        "legacy_usable_spot_fraction": 0.3333333333333333,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0275124,
+        "k": 0.0566398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0275124,
+        "k": 0.0576398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0275124,
+        "k": 0.0586398,
+        "legacy_median_with_penalties": 1.8641154988090838,
+        "legacy_conditional_spot_median": 1.7958277298227259,
+        "legacy_usable_spot_fraction": 0.6666666666666666,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0275124,
+        "k": 0.0596398,
+        "legacy_median_with_penalties": 3.510417557048573,
+        "legacy_conditional_spot_median": 1.9733850918854332,
+        "legacy_usable_spot_fraction": 0.5,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0275124,
+        "k": 0.0606398,
+        "legacy_median_with_penalties": 2.348181379757943,
+        "legacy_conditional_spot_median": 2.277597282111659,
+        "legacy_usable_spot_fraction": 0.6666666666666666,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0275124,
+        "k": 0.0616398,
+        "legacy_median_with_penalties": 2.195547703594861,
+        "legacy_conditional_spot_median": 2.1753582483114764,
+        "legacy_usable_spot_fraction": 0.8333333333333334,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0275124,
+        "k": 0.0626398,
+        "legacy_median_with_penalties": 2.1417287269533194,
+        "legacy_conditional_spot_median": 2.1086344023040167,
+        "legacy_usable_spot_fraction": 0.8333333333333334,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0295124,
+        "k": 0.0566398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0295124,
+        "k": 0.0576398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0295124,
+        "k": 0.0586398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0295124,
+        "k": 0.0596398,
+        "legacy_median_with_penalties": 2.1667276455795577,
+        "legacy_conditional_spot_median": 2.0324260431261205,
+        "legacy_usable_spot_fraction": 0.6666666666666666,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0295124,
+        "k": 0.0606398,
+        "legacy_median_with_penalties": 2.0883985041627033,
+        "legacy_conditional_spot_median": 2.0544385191269123,
+        "legacy_usable_spot_fraction": 0.6666666666666666,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0295124,
+        "k": 0.0616398,
+        "legacy_median_with_penalties": 2.2003866441226365,
+        "legacy_conditional_spot_median": 2.2003866441226365,
+        "legacy_usable_spot_fraction": 1.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0295124,
+        "k": 0.0626398,
+        "legacy_median_with_penalties": 3.6361698918785805,
+        "legacy_conditional_spot_median": 2.0630460957299697,
+        "legacy_usable_spot_fraction": 0.5,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0315124,
+        "k": 0.0566398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0315124,
+        "k": 0.0576398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0315124,
+        "k": 0.0586398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0315124,
+        "k": 0.0596398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": 2.025655587853155,
+        "legacy_usable_spot_fraction": 0.16666666666666666,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0315124,
+        "k": 0.0606398,
+        "legacy_median_with_penalties": 2.0114557864366693,
+        "legacy_conditional_spot_median": 2.005439751963127,
+        "legacy_usable_spot_fraction": 0.8333333333333334,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0315124,
+        "k": 0.0616398,
+        "legacy_median_with_penalties": 2.111732076144781,
+        "legacy_conditional_spot_median": 2.111732076144781,
+        "legacy_usable_spot_fraction": 1.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0315124,
+        "k": 0.0626398,
+        "legacy_median_with_penalties": 2.0990134480890017,
+        "legacy_conditional_spot_median": 2.0990134480890017,
+        "legacy_usable_spot_fraction": 1.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0335124,
+        "k": 0.0566398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0335124,
+        "k": 0.0576398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0335124,
+        "k": 0.0586398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0335124,
+        "k": 0.0596398,
+        "legacy_median_with_penalties": 5.0,
+        "legacy_conditional_spot_median": null,
+        "legacy_usable_spot_fraction": 0.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0335124,
+        "k": 0.0606398,
+        "legacy_median_with_penalties": 2.146944783415643,
+        "legacy_conditional_spot_median": 2.146944783415643,
+        "legacy_usable_spot_fraction": 1.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0335124,
+        "k": 0.0616398,
+        "legacy_median_with_penalties": 2.126692806787206,
+        "legacy_conditional_spot_median": 2.126692806787206,
+        "legacy_usable_spot_fraction": 1.0,
+        "strict_loss": null
+      },
+      {
+        "F": 0.0335124,
+        "k": 0.0626398,
+        "legacy_median_with_penalties": 2.2617019202770723,
+        "legacy_conditional_spot_median": 2.2617019202770723,
+        "legacy_usable_spot_fraction": 1.0,
+        "strict_loss": null
+      }
+    ]
+  },
+  "best_match": {
+    "layout": "cvt_3",
+    "seed": 2003,
+    "initial_spots": 20,
+    "final_spots": 16,
+    "J_previous": 1.9502571447760688,
+    "J_best": 1.5539702580094354,
+    "F": 0.027712399999999998,
+    "k": 0.0600398,
+    "mat_sha256": "4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c",
+    "historical_spectra_have_pair_residuals": false,
+    "historical_spectra_have_vectors": false,
+    "equal_budget_non_AI_ablation_executed": false
+  },
+  "limitations": [
+    "Sphere steady test subset contains only uniform states; 16/16 is not nontrivial-pattern generalization.",
+    "Finite validated samples are not full-spectrum proofs; unknown requested counts prevent strict protocol pass.",
+    "Training quality uses saved original endpoint residuals, not newly certified float32 caches.",
+    "Missing inverse grid fields prevent strict reclassification or quantification of F/k bias."
+  ]
+}

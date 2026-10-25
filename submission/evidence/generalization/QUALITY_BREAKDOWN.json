@@ -1,0 +1,494 @@
+{
+ "schema_version": "scientific-quality-v2",
+ "threshold": 1e-11,
+ "dense": {
+  "frog": {
+   "surface": "frog",
+   "n": 306,
+   "unique_rows": 306,
+   "duplicate_rows": 0,
+   "steady": 257,
+   "nonsteady": 49,
+   "types": {
+    "uniform": 73,
+    "spots": 88,
+    "stripes_or_maze": 73,
+    "holes": 72
+   },
+   "steady_types": {
+    "uniform": 72,
+    "stripes_or_maze": 65,
+    "spots": 62,
+    "holes": 58
+   },
+   "spectral_status": {
+    "not_attempted": 0,
+    "solver_not_converged": 0,
+    "invalid_eigenpairs": 0,
+    "sign_unresolved": 0,
+    "numerical_sample_passed": 0,
+    "reliable_positive": 0,
+    "attempted_insufficient_detail": 0,
+    "not_recorded": 306
+   },
+   "spectrum_attempted": 0,
+   "steady_and_spec": 0,
+   "spectrum_scope": "saved single-shift sample, not formal multi-configuration acceptance"
+  },
+  "sphere5": {
+   "surface": "sphere5",
+   "n": 306,
+   "unique_rows": 306,
+   "duplicate_rows": 0,
+   "steady": 90,
+   "nonsteady": 216,
+   "types": {
+    "spots": 94,
+    "uniform": 83,
+    "stripes_or_maze": 75,
+    "holes": 54
+   },
+   "steady_types": {
+    "uniform": 83,
+    "spots": 7
+   },
+   "spectral_status": {
+    "not_attempted": 0,
+    "solver_not_converged": 0,
+    "invalid_eigenpairs": 0,
+    "sign_unresolved": 0,
+    "numerical_sample_passed": 0,
+    "reliable_positive": 0,
+    "attempted_insufficient_detail": 7,
+    "not_recorded": 299
+   },
+   "spectrum_attempted": 7,
+   "steady_and_spec": 0,
+   "spectrum_scope": "saved single-shift sample, not formal multi-configuration acceptance"
+  }
+ },
+ "test": {
+  "frog": {
+   "surface": "frog",
+   "n": 64,
+   "unique_rows": 64,
+   "duplicate_rows": 0,
+   "steady": 57,
+   "nonsteady": 7,
+   "types": {
+    "uniform": 13,
+    "holes": 14,
+    "spots": 17,
+    "stripes_or_maze": 20
+   },
+   "steady_types": {
+    "uniform": 13,
+    "holes": 14,
+    "spots": 12,
+    "stripes_or_maze": 18
+   },
+   "spectral_status": {
+    "not_attempted": 7,
+    "solver_not_converged": 0,
+    "invalid_eigenpairs": 7,
+    "sign_unresolved": 0,
+    "numerical_sample_passed": 50,
+    "reliable_positive": 0,
+    "attempted_insufficient_detail": 0,
+    "not_recorded": 0
+   },
+   "spectrum_attempted": 57,
+   "steady_and_spec": 50,
+   "spectrum_scope": "saved single-shift sample, not formal multi-configuration acceptance"
+  },
+  "sphere5": {
+   "surface": "sphere5",
+   "n": 64,
+   "unique_rows": 64,
+   "duplicate_rows": 0,
+   "steady": 16,
+   "nonsteady": 48,
+   "types": {
+    "uniform": 19,
+    "spots": 17,
+    "stripes_or_maze": 18,
+    "holes": 10
+   },
+   "steady_types": {
+    "uniform": 16
+   },
+   "spectral_status": {
+    "not_attempted": 48,
+    "solver_not_converged": 0,
+    "invalid_eigenpairs": 0,
+    "sign_unresolved": 0,
+    "numerical_sample_passed": 16,
+    "reliable_positive": 0,
+    "attempted_insufficient_detail": 0,
+    "not_recorded": 0
+   },
+   "spectrum_attempted": 16,
+   "steady_and_spec": 16,
+   "spectrum_scope": "saved single-shift sample, not formal multi-configuration acceptance"
+  }
+ },
+ "independence": {
+  "frog": {
+   "train_points": 153,
+   "test_points": 32,
+   "overlapping_points": 0,
+   "overlapping_seeds": 0,
+   "duplicate_test_rows": 0,
+   "train_F_range": [
+    0.02,
+    0.06
+   ],
+   "train_k_range": [
+    0.057,
+    0.065
+   ],
+   "test_F_range": [
+    0.02095,
+    0.05926
+   ],
+   "test_k_range": [
+    0.05709,
+    0.06493
+   ],
+   "scope": "training_box_interpolation"
+  },
+  "sphere5": {
+   "train_points": 153,
+   "test_points": 32,
+   "overlapping_points": 0,
+   "overlapping_seeds": 0,
+   "duplicate_test_rows": 0,
+   "train_F_range": [
+    0.02,
+    0.06
+   ],
+   "train_k_range": [
+    0.057,
+    0.065
+   ],
+   "test_F_range": [
+    0.02095,
+    0.05926
+   ],
+   "test_k_range": [
+    0.05709,
+    0.06493
+   ],
+   "scope": "training_box_interpolation"
+  }
+ },
+ "accuracy": {
+  "frog": {
+   "v1": {
+    "all": {
+     "n": 64,
+     "correct": 44,
+     "accuracy": 0.6875
+    },
+    "steady": {
+     "n": 57,
+     "correct": 39,
+     "accuracy": 0.6842105263157895
+    },
+    "steady_spec": {
+     "n": 50,
+     "correct": 36,
+     "accuracy": 0.72
+    },
+    "steady_nontrivial": {
+     "n": 44,
+     "correct": 29,
+     "accuracy": 0.6590909090909091
+    },
+    "nonsteady": {
+     "n": 7,
+     "correct": 5,
+     "accuracy": 0.7142857142857143
+    },
+    "by_class": {
+     "holes": {
+      "n": 14,
+      "correct": 8,
+      "accuracy": 0.5714285714285714
+     },
+     "spots": {
+      "n": 17,
+      "correct": 12,
+      "accuracy": 0.7058823529411765
+     },
+     "stripes_or_maze": {
+      "n": 20,
+      "correct": 14,
+      "accuracy": 0.7
+     },
+     "uniform": {
+      "n": 13,
+      "correct": 10,
+      "accuracy": 0.7692307692307693
+     }
+    }
+   },
+   "v2": {
+    "all": {
+     "n": 64,
+     "correct": 59,
+     "accuracy": 0.921875
+    },
+    "steady": {
+     "n": 57,
+     "correct": 53,
+     "accuracy": 0.9298245614035088
+    },
+    "steady_spec": {
+     "n": 50,
+     "correct": 48,
+     "accuracy": 0.96
+    },
+    "steady_nontrivial": {
+     "n": 44,
+     "correct": 40,
+     "accuracy": 0.9090909090909091
+    },
+    "nonsteady": {
+     "n": 7,
+     "correct": 6,
+     "accuracy": 0.8571428571428571
+    },
+    "by_class": {
+     "holes": {
+      "n": 14,
+      "correct": 12,
+      "accuracy": 0.8571428571428571
+     },
+     "spots": {
+      "n": 17,
+      "correct": 14,
+      "accuracy": 0.8235294117647058
+     },
+     "stripes_or_maze": {
+      "n": 20,
+      "correct": 20,
+      "accuracy": 1.0
+     },
+     "uniform": {
+      "n": 13,
+      "correct": 13,
+      "accuracy": 1.0
+     }
+    }
+   }
+  },
+  "sphere5": {
+   "v1": {
+    "all": {
+     "n": 64,
+     "correct": 57,
+     "accuracy": 0.890625
+    },
+    "steady": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "steady_spec": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "steady_nontrivial": {
+     "n": 0,
+     "correct": 0,
+     "accuracy": null
+    },
+    "nonsteady": {
+     "n": 48,
+     "correct": 41,
+     "accuracy": 0.8541666666666666
+    },
+    "by_class": {
+     "holes": {
+      "n": 10,
+      "correct": 8,
+      "accuracy": 0.8
+     },
+     "spots": {
+      "n": 17,
+      "correct": 15,
+      "accuracy": 0.8823529411764706
+     },
+     "stripes_or_maze": {
+      "n": 18,
+      "correct": 16,
+      "accuracy": 0.8888888888888888
+     },
+     "uniform": {
+      "n": 19,
+      "correct": 18,
+      "accuracy": 0.9473684210526315
+     }
+    }
+   },
+   "v2": {
+    "all": {
+     "n": 64,
+     "correct": 61,
+     "accuracy": 0.953125
+    },
+    "steady": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "steady_spec": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "steady_nontrivial": {
+     "n": 0,
+     "correct": 0,
+     "accuracy": null
+    },
+    "nonsteady": {
+     "n": 48,
+     "correct": 45,
+     "accuracy": 0.9375
+    },
+    "by_class": {
+     "holes": {
+      "n": 10,
+      "correct": 10,
+      "accuracy": 1.0
+     },
+     "spots": {
+      "n": 17,
+      "correct": 15,
+      "accuracy": 0.8823529411764706
+     },
+     "stripes_or_maze": {
+      "n": 18,
+      "correct": 18,
+      "accuracy": 1.0
+     },
+     "uniform": {
+      "n": 19,
+      "correct": 18,
+      "accuracy": 0.9473684210526315
+     }
+    }
+   }
+  }
+ },
+ "model_roles": {
+  "formal": "v1",
+  "research_retained": "v2"
+ },
+ "totals": {
+  "endpoints": 128,
+  "steady": 73
+ },
+ "limitations": [
+  "Strata use stored endpoint residuals, not a new float32-field MAT certification.",
+  "Single-shift sample acceptance is not formal three-configuration acceptance or a full-spectrum proof.",
+  "Original requested_k and eigenvectors are not saved in these legacy single-shift summaries.",
+  "Missing training spectral diagnostics do not establish either an attempt or a pass.",
+  "Uniform steady samples cannot demonstrate nontrivial patterned-steady generalization."
+ ],
+ "provenance": {
+  "files": {
+   "submission/evidence/generalization/testset.json": "e59571edd6c093bdc65bad9b1cbd86553ebd31240e5f62e6c3e257d3d813a83e",
+   "submission/evidence/generalization/dense_dataset_frog.json": "98a7b7879cef2e45539710f0acf30f17982431207f49e5d3e804ffd22e318930",
+   "submission/task2_frog/ai_model/model.joblib": "9a29124ab1eb2ab82948378f75372095514f0afe033e0a50693fb969e3989038",
+   "results/ai_generation_fine/frog/model.joblib": "a131dacbe74f1a956d43aa0021a3432821de82f794023a06d5b53f6ec35e5b71",
+   "submission/task2_frog/ai_model/dataset.json": "ee19eb9e949faa7cdf62883e2c609ec4464b4b836ed19c11eb6d0d4ffa1165bf",
+   "submission/evidence/generalization/dense_dataset_sphere5.json": "80d627eb08a41965628273808369613992130882b821b2d129b71fa6f18e22c8",
+   "submission/task1_sphere/ai_model/model.joblib": "bf05b8ac78ded38a59dc52c415102f08825c3f866e5c8e16f3b4d7fdd59d17da",
+   "results/ai_generation_fine/sphere5/model.joblib": "ed4fa287c93728de3e96ddeead0b2f28c85b67a01754fd524b7376c81b5cee3c",
+   "submission/task1_sphere/ai_model/dataset.json": "4157f250928e0c0ee7ad8976ef76f2f4a915b84b36b15f5a1a0146aa9da9a4f6"
+  },
+  "method": "saved model inference, no training/PDE",
+  "environment": {
+   "numpy": "2.3.2",
+   "scipy": "1.17.0",
+   "scikit-learn": "1.7.1",
+   "joblib": "1.5.3"
+  }
+ },
+ "models": {
+  "frog": {
+   "v1": {
+    "path": "submission/task2_frog/ai_model/model.joblib",
+    "sha256": "9a29124ab1eb2ab82948378f75372095514f0afe033e0a50693fb969e3989038"
+   },
+   "v2": {
+    "path": "results/ai_generation_fine/frog/model.joblib",
+    "sha256": "a131dacbe74f1a956d43aa0021a3432821de82f794023a06d5b53f6ec35e5b71"
+   }
+  },
+  "sphere5": {
+   "v1": {
+    "path": "submission/task1_sphere/ai_model/model.joblib",
+    "sha256": "bf05b8ac78ded38a59dc52c415102f08825c3f866e5c8e16f3b4d7fdd59d17da"
+   },
+   "v2": {
+    "path": "results/ai_generation_fine/sphere5/model.joblib",
+    "sha256": "ed4fa287c93728de3e96ddeead0b2f28c85b67a01754fd524b7376c81b5cee3c"
+   }
+  }
+ },
+ "formal_train_independence": {
+  "frog": {
+   "train_points": 45,
+   "test_points": 32,
+   "overlapping_points": 0,
+   "overlapping_seeds": 0,
+   "duplicate_test_rows": 0,
+   "train_F_range": [
+    0.02,
+    0.06
+   ],
+   "train_k_range": [
+    0.057,
+    0.065
+   ],
+   "test_F_range": [
+    0.02095,
+    0.05926
+   ],
+   "test_k_range": [
+    0.05709,
+    0.06493
+   ],
+   "scope": "training_box_interpolation"
+  },
+  "sphere5": {
+   "train_points": 45,
+   "test_points": 32,
+   "overlapping_points": 0,
+   "overlapping_seeds": 0,
+   "duplicate_test_rows": 0,
+   "train_F_range": [
+    0.02,
+    0.06
+   ],
+   "train_k_range": [
+    0.057,
+    0.065
+   ],
+   "test_F_range": [
+    0.02095,
+    0.05926
+   ],
+   "test_k_range": [
+    0.05709,
+    0.06493
+   ],
+   "scope": "training_box_interpolation"
+  }
+ }
+}

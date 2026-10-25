@@ -8,3 +8,6 @@
 
 # Frozen payload bytes are certificate-bound, including their original line endings.
 submission/** -text whitespace=cr-at-eol
+
+# Saved spectral evidence is SHA256-bound, including original JSON line endings.
+results/methodology_stage6_20261025T121811/best_match_spectrum/evidence/** -text whitespace=cr-at-eol

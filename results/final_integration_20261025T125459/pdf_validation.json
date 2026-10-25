@@ -1,0 +1,45 @@
+{
+  "pages": 2,
+  "required_claims_checked": [
+    "128",
+    "73",
+    "16/64",
+    "均匀态",
+    "2.38",
+    "中位积分步数",
+    "不是完整墙钟加速",
+    "均为 6 条带",
+    "7 条带 seed2",
+    "1.950",
+    "1.554",
+    "1.748",
+    "0.0277124",
+    "0.0600398",
+    "336 项",
+    "有限谱",
+    "全谱",
+    "40 个特征对",
+    "严格稳态数和参数偏移未知",
+    "∂",
+    "√",
+    "≤",
+    "Σ",
+    "λ",
+    "∫"
+  ],
+  "font": "Arial Unicode MS, embedded subset",
+  "text_bounds": [
+    {
+      "page": 1,
+      "text_spans": 54,
+      "bbox_checked": true
+    },
+    {
+      "page": 2,
+      "text_spans": 52,
+      "bbox_checked": true
+    }
+  ],
+  "replacement_characters": false,
+  "rendering": "Poppler 130 dpi, both pages visually inspected; no overlap/clipping/missing math glyphs"
+}

@@ -49,6 +49,8 @@ for _p in (str(ROOT), str(HERE)):
         sys.path.insert(0, _p)
 from turing_rd import SPOTS, Geometry, GSParams, ai_init, load_frog  # noqa: E402
 from turing_rd.diagnostics import full_steady_residual, jacobian, linear_stability  # noqa: E402
+from turing_rd.spectral_policy import (INVERSION_SCREEN_CONFIGS, evaluate_spectra,
+                                       failed_spectrum)  # noqa: E402
 from turing_rd.inverse import feature_distance  # noqa: E402
 from turing_rd.preprocess import HeatLowPass, admissible  # noqa: E402
 from turing_rd.steady import relax_polish  # noqa: E402
@@ -173,11 +175,19 @@ def job(args):
     res = full_steady_residual(g, p, u, v)["full_joint_rms_over_F"]
     row = {"idx": idx, "layout": layout, "n_init": n, "seed": seed, "residual": float(res),
            "relax_time": info["relax_time"], "wall_s": None, "max_re_screen": None}
-    if res <= TOL:
+    reports = []
+    if np.isfinite(res) and 0 <= res <= TOL:
         try:
-            row["max_re_screen"] = float(linear_stability(g, p, u, v, k=8)["max_real"])
-        except Exception as exc:                        # ARPACK failure: recorded, candidate not stable
+            sample = linear_stability(g, p, u, v, k=8)
+            row["max_re_screen"] = sample["max_real"]
+            # The legacy scalar maximum alone is never passing evidence.
+            reports.append(sample.get("spectral_report", {}))
+        except Exception as exc:
             row["screen_error"] = repr(exc)[:200]
+            reports.append(failed_spectrum(INVERSION_SCREEN_CONFIGS[0], repr(exc)))
+    row["screen_spectra"] = reports
+    row["screen_decision"] = evaluate_spectra(reports, float(res),
+        configs=INVERSION_SCREEN_CONFIGS, scope="task3_single_shift_preliminary_screen", tol=TOL)
     row.update(measure(u, v))
     row["n_final"] = int(len(spot_centres(v)))
     row["wall_s"] = time.time() - t0
@@ -189,21 +199,17 @@ def job(args):
 # certificate for the selected state
 # ---------------------------------------------------------------------------------------------
 def certify(g, p, u, v, seed, out):
-    from i03_frog_stability import CONFIGS, decide_frog, solve_config
+    from i03_frog_stability import solve_config
     from turing_rd.result_io import save_certified_mat
+    from turing_rd.spectrum_evidence import save_evidence
     cert = save_certified_mat(out / "solution_best_match.mat", g, p, u, v, seed=seed,
                               provenance={"script": "scripts/inversion_best_match.py",
                                           "method": "AI multistart + minimum feature distance"})
-    mass = np.concatenate([g.M, g.M])
-    J = jacobian(g, p, u, v)
-    reports = []
-    for cfg in CONFIGS:
-        report, _ = solve_config(J, mass, np.sqrt(mass), cfg)
-        reports.append(report)
-    decision = decide_frog(reports, cert["residual"]["value"], tol=TOL)
-    return cert, {"configs": [{k: r[k] for k in ("sigma", "which", "requested_k", "returned_k", "solver_converged",
-                                                 "all_pairs_validated", "full_max_real")} for r in reports],
-                  "decision": decision}
+    evidence = save_evidence(out / "solution_best_match.mat", cert, g, p, out / "spectral_evidence", solve_config)
+    if not evidence["decision"]["numerical_check_passed"]:
+        raise RuntimeError("best-match spectral evidence did not pass; failed evidence preserved")
+    evidence["evidence_file"] = "spectral_evidence/certificate.json"
+    return cert, evidence
 
 
 def render(g, panels, path):
@@ -277,8 +283,19 @@ def install(run_dir, submission=ROOT / "submission"):
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     known = {r["path"] for r in manifest["files"]}
     dest.mkdir(parents=True)
-    for name, reason in INSTALL_FILES.items():
+    files = dict(INSTALL_FILES)
+    saved = json.loads((run_dir / "summary.json").read_text(encoding="utf-8")).get("stability", {})
+    if saved.get("evidence_file"):
+        evidence_path = run_dir / saved["evidence_file"]
+        evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+        files[evidence_path.relative_to(run_dir).as_posix()] = "MAT-bound finite-spectrum evidence index"
+        for entry in evidence["artifacts"]:
+            for key in ("report_file", "vectors_file"):
+                name = (evidence_path.parent / entry[key]).relative_to(run_dir).as_posix()
+                files[name] = "saved eigenvectors and independent pair residuals"
+    for name, reason in files.items():
         src, dst = run_dir / name, dest / name
+        dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
         rel = f"task3_inversion/best_match/{name}"
         if rel in known:
@@ -291,7 +308,7 @@ def install(run_dir, submission=ROOT / "submission"):
     newline = "\r\n" if b"\r\n" in manifest_path.read_bytes()[:200] else "\n"     # keep the file's own line endings
     text = json.dumps(manifest, ensure_ascii=False, indent=1, allow_nan=False) + "\n"
     manifest_path.write_bytes(text.replace("\n", newline).encode("utf-8"))
-    print(f"installed {len(INSTALL_FILES)} files into {dest.relative_to(ROOT)} and the package manifest")
+    print(f"installed {len(files)} files into {dest.relative_to(ROOT)} and the package manifest")
 
 
 def main():
@@ -339,7 +356,11 @@ def main():
                   f"res {r['residual']:.1e}  maxRe {r['max_re_screen']}  J {r['J']:.3f}  "
                   f"lambda_peak {r['peak_wavelength']:.3f}  {r['wall_s']:.0f}s", flush=True)
     rows.sort(key=lambda r: r["idx"])
-    ok = [r for r in rows if r["residual"] <= TOL and r["max_re_screen"] is not None and r["max_re_screen"] < 0]
+    from json_safe import write_json_exclusive
+    write_json_exclusive(args.out / "screening_records.json", [
+        {key: r[key] for key in ("idx", "layout", "n_init", "seed", "residual",
+                                "max_re_screen", "screen_spectra", "screen_decision")} for r in rows])
+    ok = [r for r in rows if r["screen_decision"]["numerical_check_passed"]]
     if not ok:
         raise SystemExit("no complete, screened-stable candidate")
     best = min(ok, key=lambda r: r["J"])
@@ -411,6 +432,8 @@ def write_markdown(out, s):
         d = s["stability"]["decision"]
         L += ["", f"完整残差 {s['mat_certificate']['residual']['value']:.2e}（≤ 1e-11）；三组 shift-invert 谱："
                   f"{d['status']}，采样最大实部 {max(d['sampled_maxima']):.3e}。有限谱采样，不是全谱证明。"]
+    L += ["", "这是固定 F/k 下的多初值搜索。AI 提供初值剖面，PDE/Newton 与候选筛选决定最终状态。",
+          "没有非 AI 等预算多初值对照，不能据此证明 AI 的独立因果贡献或参数反演精度提升。"]
     (out / "summary.md").write_text("\n".join(L) + "\n", encoding="utf-8")
 
 

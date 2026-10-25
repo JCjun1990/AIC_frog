@@ -1,0 +1,66 @@
+read-only existing MAT -> three unprojected shift-invert solves
+spectrum 0: 12/12, max_real=-0.0001860545855782343, converged=True
+spectrum 1: 20/20, max_real=-0.00018605458557830116, converged=True
+spectrum 2: 8/8, max_real=-0.00018605458557830834, converged=True
+{
+  "pde_residual_recomputed": true,
+  "full_residual": 2.030535561466331e-14,
+  "mat_sha256": "4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c",
+  "saved_spectral_metadata_verified": true,
+  "eigenpair_residuals_recomputed_from_saved_vectors": true,
+  "fresh_eigensolve_in_this_verification": false,
+  "decision": {
+    "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+    "scope": "task3_three_shift_saved_vector_finite_check",
+    "required_configurations": [
+      {
+        "sigma": 0.001,
+        "which": "LM",
+        "k": 12
+      },
+      {
+        "sigma": 0.0,
+        "which": "LM",
+        "k": 20
+      },
+      {
+        "sigma": 1e-05,
+        "which": "LM",
+        "k": 8
+      }
+    ],
+    "full_steady_state": true,
+    "full_residual": 2.030535561466331e-14,
+    "full_residual_tolerance": 1e-11,
+    "found_reliable_positive": false,
+    "reliable_positive_eigenvalues": [],
+    "unresolved_near_zero_eigenvalues": [],
+    "checked_eigenpairs": 40,
+    "full_max_real_checked": -0.0001860545855782343,
+    "sampled_maxima": [
+      -0.0001860545855782343,
+      -0.00018605458557830116,
+      -0.00018605458557830834
+    ],
+    "configurations": 3,
+    "distinct_valid_shifts": [
+      0.0,
+      1e-05,
+      0.001
+    ],
+    "valid_direct_LR_runs": 0,
+    "all_requested_solves_and_pairs_validated": true,
+    "sampled_maxima_agree": true,
+    "sampled_maxima_agreement_tolerance": 1e-10,
+    "all_checked_signs_resolved_negative": true,
+    "numerical_check_passed": true,
+    "status": "numerical_check_passed",
+    "outcome": "passed",
+    "failure_reasons": [],
+    "relative_equilibrium_accepted_as_steady": false,
+    "rotation_projection": false,
+    "rotations_excluded_from_full_decision": false,
+    "mathematical_full_spectrum_proof": false
+  },
+  "mathematical_full_spectrum_proof": false
+}

@@ -186,6 +186,19 @@ def main():
         spec = importlib.util.spec_from_file_location("packaged_submission_workflow", code_dir / "scripts/submission_workflow.py")
         workflow = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(workflow)
+        checked_manifest = workflow.check_manifest(extracted)
+        check("strict_manifest_validation", checked_manifest["manifest_files"] == len(entries), str(checked_manifest))
+        from turing_rd.delivery_checks import audit_json
+        json_status = audit_json(extracted, workflow.payload_files(extracted) + ["PACKAGE_MANIFEST.json"])
+        check("json_strict_and_legacy_compatibility", True, json.dumps(json_status, ensure_ascii=False))
+        import joblib
+        model_spec = importlib.util.spec_from_file_location("packaged_ai_generation", code_dir / "scripts/ai_generation.py")
+        model_entry = importlib.util.module_from_spec(model_spec); model_spec.loader.exec_module(model_entry)
+        predictions = {}
+        for task in ("task1_sphere", "task2_frog"):
+            model = joblib.load(extracted / task / "ai_model/model.joblib")
+            predictions[task] = model_entry.predict(model, .028, .062)["type"]
+        check("packaged_formal_model_inference", len(predictions) == 2, json.dumps(predictions))
         geometries = {}
         candidate_failures = []
         for key, spec in TASKS.items():
@@ -216,7 +229,8 @@ def main():
             bound = stability["input"]["mat_sha256"]
             decision = stability["decision"]
             status = decision["status"]
-            spectral_evidence = workflow.validate_spectral_record(stability, sha(mat))
+            spectral_evidence = workflow.validate_spectral_record(stability, sha(mat), certificate,
+                surface="frog" if spec["surface"] == "frog" else "sphere")
             sample_ok = spectral_evidence["status"] == "numerical_check_passed"
             precision_ok = fresh["precision"]["passed"]
             full_residual_ok = residual <= 1e-11
@@ -252,6 +266,10 @@ def main():
             best_shape = pattern_stats(geometries["frog"], vb)
             check("inversion_best_match_is_steady", best_residual <= 1e-11,
                   f"residual={best_residual:.3e}, pattern={best_shape['type']}/{best_shape['n_components']}")
+            evidence = workflow.verify_best_match(extracted, geometries["frog"])
+            check("inversion_best_match_evidence_scope", evidence["pde_residual_recomputed"] and
+                  (evidence["saved_spectral_metadata_verified"] or evidence["historical_spectrum_status"] == "insufficient_evidence"),
+                  json.dumps(evidence, ensure_ascii=False))
         md = (extracted / "task3_inversion/summary.md").read_text(encoding="utf-8")
         check("inversion_report_has_errors", ("误差" in md) and ("波长" in md or "wavelength" in md))
         pngs = [extracted / "task3_inversion" / name for name in

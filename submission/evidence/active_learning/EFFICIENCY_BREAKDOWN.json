@@ -1,0 +1,35 @@
+{
+ "schema_version": "integration-step-evidence-v1",
+ "source_sha256": "362ac19135c9e923d52282a5e38450f23710e0bb1f2387670e79c951a6713b1b",
+ "formal_model": "v1",
+ "research_retained_model": "v2",
+ "end_to_end": {
+  "e2e_v2_frog": {
+   "summary": {
+    "pde (legacy)": {
+     "runs": 24,
+     "complete": 22,
+     "median_steps": 25875.0,
+     "median_steps_complete": 25875.0
+    },
+    "ai v1 (legacy)": {
+     "runs": 24,
+     "complete": 24,
+     "median_steps": 15062.5,
+     "median_steps_complete": 15062.5
+    },
+    "ai v2": {
+     "runs": 24,
+     "complete": 23,
+     "median_steps": 10875.0,
+     "median_steps_complete": 10875.0
+    }
+   },
+   "median_integration_step_ratio": 2.3793103448275863,
+   "new_per_run_records": 24,
+   "point_count": 8,
+   "wall_clock_speedup_verified": false,
+   "scope": "legacy completion flags plus stored residual, not formal spectral recertification"
+  }
+ }
+}

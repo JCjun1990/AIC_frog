@@ -22,6 +22,7 @@ from __future__ import annotations
 
 from collections import OrderedDict
 from dataclasses import dataclass, asdict
+import math
 from typing import Callable
 
 import warnings
@@ -55,8 +56,25 @@ STRIPES = GSParams(F=0.054, k=0.063)
 # ---------------------------------------------------------------------------------------------
 # linear algebra
 # ---------------------------------------------------------------------------------------------
+class CGConvergenceError(RuntimeError):
+    """No usable solution/gradient: inspect ``info`` for per-RHS true residuals."""
+
+    def __init__(self, info):
+        self.info = info
+        super().__init__(f"CG {info.get('phase', 'raw')} failed: {info['status']}; "
+                         f"iterations={info['iterations']}/{info['maxiter']}, "
+                         f"max true relative residual={info['max_relative_residual']}, rtol={info['rtol']}")
+
+    def __reduce__(self):
+        return type(self), (self.info,)
+
+
 class SPDOperator:
-    """Holds L and M for one surface and solves (c M - alpha L) x = b on the chosen backend."""
+    """Solve (c M - alpha L) x = b; CG failures raise CGConvergenceError.
+
+    Successful calls retain the tensor API. ``last_cg_info`` records the latest
+    raw/forward/adjoint solve, not a trajectory-wide convergence certificate.
+    """
 
     def __init__(self, geom: Geometry, backend: str = "lu", device="cpu", dtype=torch.float64,
                  cg_rtol: float = 1e-10, cg_maxiter: int = 2000, lu_cache: int = 8):
@@ -73,9 +91,13 @@ class SPDOperator:
         self.M = torch.as_tensor(geom.M, dtype=dtype, device=self.device)
         self.Ldiag = torch.as_tensor(geom.L.diagonal(), dtype=dtype, device=self.device)
         self.cg_rtol, self.cg_maxiter = cg_rtol, cg_maxiter
+        if backend == "cg" and (not math.isfinite(cg_rtol) or cg_rtol < 0 or
+                                not isinstance(cg_maxiter, int) or cg_maxiter < 0):
+            raise ValueError("CG requires finite rtol >= 0 and integer maxiter >= 0")
         self._lu: OrderedDict = OrderedDict()
         self._lu_cache = lu_cache
         self.cg_iterations = 0
+        self.last_cg_info = None
 
     # L x for (n,) or (n, B)
     def Lmv(self, x: torch.Tensor) -> torch.Tensor:
@@ -104,7 +126,14 @@ class SPDOperator:
         return torch.as_tensor(x, dtype=b.dtype, device=b.device)
 
     def _cg_solve(self, c: float, alpha: torch.Tensor, b: torch.Tensor, x0=None) -> torch.Tensor:
-        """Batched Jacobi-PCG; alpha is a scalar or one value per column of b."""
+        """Jacobi-PCG, accepted only if ||b-Ax||_2 <= cg_rtol ||b||_2 per RHS.
+
+        The recurrence residual is a stopping hint, never the acceptance test.
+        No absolute floor or automatic LU fallback relaxes the requested tolerance.
+        """
+        self.cg_iterations, self.last_cg_info = 0, None
+        if b.dim() not in (1, 2) or alpha.numel() not in (1, 1 if b.dim() == 1 else b.shape[1]):
+            raise ValueError("CG expects b=(n,) or (n,B), alpha scalar or one value per RHS")
         squeeze = b.dim() == 1
         B = b.unsqueeze(1) if squeeze else b
         a = alpha.reshape(1, -1) if alpha.numel() > 1 else alpha.reshape(1, 1)
@@ -113,30 +142,105 @@ class SPDOperator:
         def A(x):
             return c * Mc * x - a * (self.L @ x)
 
-        dinv = 1.0 / (c * Mc - a * self.Ldiag.unsqueeze(1))
+        diagonal = c * Mc - a * self.Ldiag.unsqueeze(1)
+        dinv = 1.0 / diagonal
         x = B * dinv if x0 is None else (x0.unsqueeze(1) if squeeze else x0).clone()
+        bnorm = B.norm(dim=0)
+        limit = self.cg_rtol * bnorm
+        iterations, restarts = 0, 0
+
+        def finish(reason, residual=None):
+            true_r = B - A(x) if residual is None else residual
+            absolute = true_r.norm(dim=0)
+            finite_inputs = (math.isfinite(c) and bool(torch.isfinite(B).all()) and
+                             bool(torch.isfinite(a).all()) and bool(torch.isfinite(x).all()))
+            finite = (finite_inputs and bool(torch.isfinite(true_r).all()) and
+                      bool(torch.isfinite(bnorm).all()) and bool(torch.isfinite(absolute).all()))
+            residual_nonzero = (true_r != 0).any(dim=0)
+            norm_underflow = bool((((bnorm == 0) & (B != 0).any(dim=0)) |
+                                   ((absolute == 0) & residual_nonzero)).any())
+            passed = torch.isfinite(absolute) & torch.isfinite(bnorm) & (absolute <= limit)
+            passed = passed & ~((absolute == 0) & residual_nonzero)
+            relative = torch.where(bnorm > 0, absolute / torch.where(bnorm > 0, bnorm, torch.ones_like(bnorm)),
+                                   torch.where(~residual_nonzero, torch.zeros_like(absolute),
+                                               torch.full_like(absolute, float("inf"))))
+            fatal = reason in ("nonfinite_input_or_operator", "nonfinite_iteration", "nonpositive_preconditioner", "breakdown")
+            converged = bool(finite and passed.all() and not fatal and not norm_underflow)
+
+            def numbers(tensor):
+                return [float(v) if math.isfinite(float(v)) else None for v in tensor.detach().cpu().tolist()]
+
+            self.cg_iterations = iterations  # number of updates, including the last permitted update
+            self.last_cg_info = {
+                "backend": "cg", "phase": "raw", "status": "converged" if converged else reason,
+                "converged": converged, "iterations": iterations, "maxiter": self.cg_maxiter,
+                "rtol": self.cg_rtol, "dtype": str(b.dtype), "finite": finite,
+                "rhs_norm": numbers(bnorm), "absolute_residual": numbers(absolute),
+                "relative_residual": numbers(relative), "residual_limit": numbers(limit),
+                "max_relative_residual": numbers(relative.max().reshape(1))[0],
+                "converged_per_rhs": passed.detach().cpu().tolist(), "residual_restarts": restarts,
+                "true_residual_verified": finite and not norm_underflow, "norm_underflow": norm_underflow, "fallback": None,
+                "residual_definition": "Euclidean ||b-(c M-alpha L)x||_2 / ||b||_2 per RHS; zero RHS requires exact zero residual"}
+            if not converged:
+                if not finite:
+                    self.last_cg_info["status"] = "nonfinite_input_or_operator" if iterations == 0 else "nonfinite_iteration"
+                elif norm_underflow:
+                    self.last_cg_info["status"] = "residual_norm_underflow"
+                elif reason == "converged":
+                    self.last_cg_info["status"] = "true_residual_failed"
+                raise CGConvergenceError(self.last_cg_info)
+            return x.squeeze(1) if squeeze else x
+
+        if not math.isfinite(c) or not bool(torch.isfinite(B).all()) or not bool(torch.isfinite(a).all()) or not bool(torch.isfinite(x).all()):
+            return finish("nonfinite_input_or_operator")
+        if not bool(torch.isfinite(diagonal).all()) or not bool((diagonal > 0).all()):
+            return finish("nonpositive_preconditioner")
         r = B - A(x)
+        if not bool(torch.isfinite(r).all()):
+            return finish("nonfinite_input_or_operator", r)
         z = dinv * r
         p = z.clone()
         rz = (r * z).sum(0)
-        bnorm = B.norm(dim=0)
-        it = 0
-        for it in range(self.cg_maxiter):
-            done = r.norm(dim=0) <= self.cg_rtol * bnorm
+        if not bool(torch.isfinite(z).all()) or not bool(torch.isfinite(rz).all()):
+            return finish("nonfinite_iteration")
+        for _ in range(self.cg_maxiter):
+            done = r.norm(dim=0) <= limit
             if bool(done.all()):
-                break
+                true_r = B - A(x)
+                if bool((true_r.norm(dim=0) <= limit).all()):
+                    return finish("converged", true_r)
+                # Recurrence drift: restart only the previously invalid stopping
+                # path, using the true residual and the unchanged tolerance.
+                r = true_r
+                z = dinv * r
+                p, rz = z.clone(), (r * z).sum(0)
+                restarts += 1
+                done = r.norm(dim=0) <= limit
             Ap = A(p)
             pAp = (p * Ap).sum(0)
+            if not bool(torch.isfinite(Ap).all()) or not bool(torch.isfinite(rz).all()):
+                return finish("nonfinite_iteration")
+            if not bool(torch.isfinite(pAp).all()):
+                return finish("nonfinite_iteration")
+            if bool(((~done) & ((pAp <= 0) | (rz <= 0))).any()):
+                return finish("breakdown")
             step = torch.where(done, torch.zeros_like(pAp), rz / torch.where(done, torch.ones_like(pAp), pAp))
             x = x + step * p
             r = r - step * Ap
+            iterations += 1
+            if not bool(torch.isfinite(x).all()) or not bool(torch.isfinite(r).all()):
+                return finish("nonfinite_iteration")
             z = dinv * r
             rz_new = (r * z).sum(0)
+            if not bool(torch.isfinite(z).all()) or not bool(torch.isfinite(rz_new).all()):
+                return finish("nonfinite_iteration")
             beta = torch.where(done, torch.zeros_like(rz), rz_new / torch.where(done, torch.ones_like(rz), rz))
             p = z + beta * p
+            if not bool(torch.isfinite(p).all()):
+                return finish("nonfinite_iteration")
             rz = rz_new
-        self.cg_iterations = it
-        return x.squeeze(1) if squeeze else x
+        # A final update may converge exactly at maxiter; only its TRUE residual decides.
+        return finish("max_iterations")
 
     def solve_raw(self, c: float, alpha: torch.Tensor, b: torch.Tensor) -> torch.Tensor:
         if self.backend == "lu":
@@ -151,7 +255,13 @@ class SPDOperator:
 class _SPDSolve(torch.autograd.Function):
     @staticmethod
     def forward(ctx, b, alpha, c, op):
-        x = op.solve_raw(c, alpha, b)
+        try:
+            x = op.solve_raw(c, alpha, b)
+        except CGConvergenceError as exc:
+            exc.info["phase"] = "forward"
+            raise CGConvergenceError(exc.info) from exc
+        if op.backend == "cg":
+            op.last_cg_info["phase"] = "forward"
         ctx.save_for_backward(x, alpha)
         ctx.c, ctx.op = c, op
         return x
@@ -160,7 +270,13 @@ class _SPDSolve(torch.autograd.Function):
     def backward(ctx, g):
         x, alpha = ctx.saved_tensors
         op, c = ctx.op, ctx.c
-        lam = op.solve_raw(c, alpha, g.contiguous())
+        try:
+            lam = op.solve_raw(c, alpha, g.contiguous())
+        except CGConvergenceError as exc:
+            exc.info["phase"] = "backward"
+            raise CGConvergenceError(exc.info) from exc
+        if op.backend == "cg":
+            op.last_cg_info["phase"] = "backward"
         grad_alpha = None
         if ctx.needs_input_grad[1]:
             prod = lam * op.Lmv(x)                      # dA/dalpha = -L  ->  dL/dalpha = lam^T L x
@@ -250,9 +366,13 @@ class GrayScottSolver:
             chunk = min(chunk, checkpoint_every)
         while step < n_steps:
             m = min(chunk - step % chunk, n_steps - step)       # land on multiples of the log interval
+            if record_every:
+                m = min(m, record_every - step % record_every)  # checkpoint chunks must not skip callbacks
             # SBDF2 history (up, vp) is u^{n-1}; for logging du/dt we keep the last two levels
             if checkpoint_every and torch.is_grad_enabled():
-                u, v, up, vp, fup, fvp = checkpoint(lambda *s: self._advance(m, P, *s),
+                # Bind this segment's length: backward recomputation happens
+                # after the loop has reassigned m for the later segments.
+                u, v, up, vp, fup, fvp = checkpoint(lambda *s, n_steps=m: self._advance(n_steps, P, *s),
                                                     u, v, up, vp, fup, fvp, use_reentrant=False)
             else:
                 u, v, up, vp, fup, fvp = self._advance(m, P, u, v, up, vp, fup, fvp)
