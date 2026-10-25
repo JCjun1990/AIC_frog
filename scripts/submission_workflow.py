@@ -275,7 +275,7 @@ def portable_acceptance(mat, cert, geom, exc, tol=1e-11, abs_agree=1e-12):
 def verify_best_match_steady(submission, geom=None):
     """Check A: actual robust MAT, parameters, hash and complete PDE residual."""
     from turing_rd import Geometry, GSParams, load_frog
-    from turing_rd.result_io import validate_certificate
+    from turing_rd.result_io import validate_certificate_portable
     from turing_rd.spectral_policy import FROG_CONFIGS, FROG_SIGN_FLOOR, evaluate_spectra
     submission = Path(submission)
     directory = submission / "task3_inversion/best_match"
@@ -289,12 +289,13 @@ def verify_best_match_steady(submission, geom=None):
     if geom.laplacian != "robust":
         raise ValueError("best-match acceptance requires the robust operator")
     cert = summary["mat_certificate"]
-    fresh = validate_certificate(directory / "solution_best_match.mat", cert, expected_params=params,
-                                 expected_seed=summary["best"]["seed"], expected_geometry=geom)
+    fresh = validate_certificate_portable(directory / "solution_best_match.mat", cert, expected_params=params,
+                                          expected_seed=summary["best"]["seed"], expected_geometry=geom)
     historical = evaluate_spectra(summary.get("stability", {}).get("configs", []),
         fresh["residual"]["value"], configs=FROG_CONFIGS, sign_floor=FROG_SIGN_FLOOR,
         scope="historical_best_match_summary_only")
     return {"available": True, "pde_residual_recomputed": True, "full_residual": fresh["residual"]["value"],
+              "verification_mode": fresh.get("verification_mode", "strict: bit-identical operator"),
               "mat_sha256": fresh["mat_sha256"], "historical_spectrum_status": historical["status"],
               "historical_spectrum_failure_reasons": historical["failure_reasons"],
               "saved_spectral_metadata_verified": False, "eigenpair_residuals_recomputed_from_saved_vectors": False,
@@ -419,12 +420,12 @@ def main():
         if not args.task or not args.out: parser.error("--task and --out required")
         import numpy as np
         from turing_rd import Geometry, GSParams, icosphere, load_frog
-        from turing_rd.result_io import read_mat_fields, validate_certificate, geometry_identity
+        from turing_rd.result_io import read_mat_fields, validate_certificate_portable, geometry_identity
         from turing_rd.stability import solve_spectrum
         directory = args.submission / args.task; cert = load(directory / "summary.json")["mat_certificate"]
         mesh = load_frog(args.submission / "code/frog.mat") if args.task.startswith("task2") else icosphere(6)
         geom = Geometry(mesh, laplacian="robust", cache_dir=None); params = GSParams(**cert["parameters"])
-        fresh = validate_certificate(directory / "solution.mat", cert, expected_params=params, expected_seed=cert["seed"], expected_geometry=geom)
+        fresh = validate_certificate_portable(directory / "solution.mat", cert, expected_params=params, expected_seed=cert["seed"], expected_geometry=geom)
         u, v = read_mat_fields(directory / "solution.mat", geom.n)
         report, vectors = solve_spectrum(geom, params, u, v, k=8, sigma=0, which="LM")
         args.out.mkdir(parents=True, exist_ok=False)

@@ -84,9 +84,18 @@ python code/scripts/ai_generation.py generate --out reproduction_inputs --genera
 
 `prepare-models` 将网络复制为 `reproduction_inputs/frog/model.joblib` 与
 `reproduction_inputs/sphere5/model.joblib`，不依赖旧 `results/` 或 shell 复制命令。
-输出目录存在时拒绝覆盖。生成步骤较贵，本次未重新训练或重跑完整生成。
-**此命令重跑 seed0 通用生成流程，不保证找到正式七条带 seed2 或逐位复现既有 MAT。**
+输出目录存在时拒绝覆盖。
+`generate` 的 4 个任务并行运行（`--workers`，默认最多 4 个进程），种子按任务固定：球面条纹用种子 2，其余用种子 0
+（`TASK_SEEDS`；种子 0 的球面条纹会落到带 +1.67e-6 可靠正倾斜模态的六条带态，故不用；可用 `--generate-seed sphere6:stripes=0` 复查）。
+2026-10-26 在 Windows CPU（全新解压的包，Python 3.13）上按本命令实测：总耗时 47.5 分钟（含首次计算网格特征基约 10 分钟）；
+青蛙斑点 22 斑、球面斑点 45 斑、球面条纹七条带（最大实部 −1.4778e-6）与正式结果为同一稳态；青蛙条纹为 5 段迷宫，
+类型一致且稳定，但多稳的迷宫对浮点运算顺序敏感，不同运行可能落在同类的另一个稳态。四组均满足完整残差 ≤ 1e-11 且已采样谱为负。
 正式提交的是包内经证书绑定的四组 MAT；精确回读验收用第一条命令。
+`verify` 的每项输出带 `verification_mode`：与生成机同为 x86 时为 `strict`（组装出的 L/M 逐位相同，2026-10-26 Windows 实测）；
+其他 CPU 架构（如 ARM Mac）组装 L/M 的末位舍入不同，此时为 `portable`：网格哈希、点面数、算子类型、总质量（相对 1e-12）
+和 MAT 哈希仍严格比对，完整残差用本机算子重算，须 ≤ 1e-11 且与记录值相差 ≤ 1e-12；保存的特征向量的残差在本机重算，
+与记录值之差须小于通过阈值的千分之一，稳定性判定一律用本机重算值。同日在 Apple M 系列 Mac 上实测五项全部 PASS
+（最佳匹配残差记录 2.03e-14，本机重算 2.85e-14）。
 
 独立重算一个有限谱样本（可选，耗时，不能取代已保存的三配置证据）：
 
