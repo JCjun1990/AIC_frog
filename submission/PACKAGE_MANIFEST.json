@@ -69,7 +69,7 @@
   "task 4 (not in preliminary round)"
  ],
  "schema_version": "aic-frog-i03-package-v2",
- "generated_utc": "2026-10-25T05:03:00.145949+00:00",
+ "generated_utc": "2026-10-25T09:48:50.031163+00:00",
  "round": "初赛",
  "team": "待填",
  "delivery_status": "draft: team name pending; do not upload",
@@ -123,9 +123,9 @@
   {
    "path": "README_提交.md",
    "source": "submission/README_提交.md",
-   "source_sha256": "cd029bd10f7b21ced6cd6475999720aa3c00a0bad44d4030b4436e163c45dda0",
-   "sha256": "cd029bd10f7b21ced6cd6475999720aa3c00a0bad44d4030b4436e163c45dda0",
-   "bytes": 13228,
+   "source_sha256": "57ef58b46712196439406a52f5e949aa3087ba065029ed814a51d8340742e3bf",
+   "sha256": "57ef58b46712196439406a52f5e949aa3087ba065029ed814a51d8340742e3bf",
+   "bytes": 13234,
    "reason": "current portable instructions and evidence limits",
    "sanitized": false,
    "transformations": [],
@@ -183,15 +183,28 @@
       "transformations": []
      },
      "reason": "stage 7: regenerate current scientific documents from saved-model inference, immutable evidence and this executed test record"
+    },
+    {
+     "previous_entry": {
+      "path": "README_提交.md",
+      "source": "submission/README_提交.md",
+      "source_sha256": "cd029bd10f7b21ced6cd6475999720aa3c00a0bad44d4030b4436e163c45dda0",
+      "sha256": "cd029bd10f7b21ced6cd6475999720aa3c00a0bad44d4030b4436e163c45dda0",
+      "bytes": 13228,
+      "reason": "current portable instructions and evidence limits",
+      "sanitized": false,
+      "transformations": []
+     },
+     "reason": "stage 8: data-derived current execution count, strict saved-vector protocol and new relative release locations"
     }
    ]
   },
   {
    "path": "VALIDATION.md",
    "source": "submission/VALIDATION.md",
-   "source_sha256": "8bc0fa62e581ce7f0fb440e6deef3081924109adc359203f56bd9f46f5bdf98e",
-   "sha256": "8bc0fa62e581ce7f0fb440e6deef3081924109adc359203f56bd9f46f5bdf98e",
-   "bytes": 1312,
+   "source_sha256": "119242c3c9f223d73fb88303f885e177c55a9864efd9fa77649bb44294463a63",
+   "sha256": "119242c3c9f223d73fb88303f885e177c55a9864efd9fa77649bb44294463a63",
+   "bytes": 1563,
    "reason": "current engineering validation and explicit expensive-step limits",
    "sanitized": false,
    "transformations": [],
@@ -210,6 +223,20 @@
       "historical_provenance": {}
      },
      "reason": "stage 7: regenerate current scientific documents from saved-model inference, immutable evidence and this executed test record"
+    },
+    {
+     "previous_entry": {
+      "path": "VALIDATION.md",
+      "source": "submission/VALIDATION.md",
+      "source_sha256": "8bc0fa62e581ce7f0fb440e6deef3081924109adc359203f56bd9f46f5bdf98e",
+      "sha256": "8bc0fa62e581ce7f0fb440e6deef3081924109adc359203f56bd9f46f5bdf98e",
+      "bytes": 1312,
+      "reason": "current engineering validation and explicit expensive-step limits",
+      "sanitized": false,
+      "transformations": [],
+      "historical_provenance": {}
+     },
+     "reason": "stage 8: data-derived current execution count, strict saved-vector protocol and new relative release locations"
     }
    ]
   },
@@ -532,9 +559,9 @@
   {
    "path": "code/scripts/i03_verify_package.py",
    "source": "scripts/i03_verify_package.py",
-   "source_sha256": "a8c2f5eec9a9dece283aaf2fd31d9333657dd2c7cb1c702daee71ed9a48dd60d",
-   "sha256": "a8c2f5eec9a9dece283aaf2fd31d9333657dd2c7cb1c702daee71ed9a48dd60d",
-   "bytes": 20613,
+   "source_sha256": "7665574326f641520ae4af4a1f8d25bbd4864a2b2dcdef4cbbcead0209ae0f09",
+   "sha256": "7665574326f641520ae4af4a1f8d25bbd4864a2b2dcdef4cbbcead0209ae0f09",
+   "bytes": 21533,
    "reason": "portable reproduction/verification entry point",
    "sanitized": false,
    "transformations": [],
@@ -587,6 +614,22 @@
      "reason": "refresh packaged runtime from repository source",
      "repository_source": "scripts/i03_verify_package.py",
      "repository_source_sha256": "a8c2f5eec9a9dece283aaf2fd31d9333657dd2c7cb1c702daee71ed9a48dd60d"
+    },
+    {
+     "previous_entry": {
+      "path": "code/scripts/i03_verify_package.py",
+      "source": "scripts/i03_verify_package.py",
+      "source_sha256": "a8c2f5eec9a9dece283aaf2fd31d9333657dd2c7cb1c702daee71ed9a48dd60d",
+      "sha256": "a8c2f5eec9a9dece283aaf2fd31d9333657dd2c7cb1c702daee71ed9a48dd60d",
+      "bytes": 20613,
+      "reason": "portable reproduction/verification entry point",
+      "sanitized": false,
+      "transformations": [],
+      "historical_provenance": {}
+     },
+     "reason": "refresh packaged runtime from repository source",
+     "repository_source": "scripts/i03_verify_package.py",
+     "repository_source_sha256": "7665574326f641520ae4af4a1f8d25bbd4864a2b2dcdef4cbbcead0209ae0f09"
     }
    ]
   },
@@ -735,9 +778,26 @@
    "reason": "portable runtime source",
    "sanitized": false,
    "transformations": [],
-   "sha256": "746f6d0d3e0efa39bead7713f517f5bf62e7b27e7be4808b4170e116dff6b519",
-   "bytes": 11197,
-   "source_sha256": "746f6d0d3e0efa39bead7713f517f5bf62e7b27e7be4808b4170e116dff6b519"
+   "sha256": "64b1505084c9023dc3630d95929d916ee75c5b6e5a0affb2a88cf0f7d98139e5",
+   "bytes": 11306,
+   "source_sha256": "64b1505084c9023dc3630d95929d916ee75c5b6e5a0affb2a88cf0f7d98139e5",
+   "manifest_updates": [
+    {
+     "previous_entry": {
+      "path": "code/scripts/report_v3.py",
+      "source": "scripts/report_v3.py",
+      "reason": "portable runtime source",
+      "sanitized": false,
+      "transformations": [],
+      "sha256": "746f6d0d3e0efa39bead7713f517f5bf62e7b27e7be4808b4170e116dff6b519",
+      "bytes": 11197,
+      "source_sha256": "746f6d0d3e0efa39bead7713f517f5bf62e7b27e7be4808b4170e116dff6b519"
+     },
+     "reason": "refresh packaged runtime from repository source",
+     "repository_source": "scripts/report_v3.py",
+     "repository_source_sha256": "64b1505084c9023dc3630d95929d916ee75c5b6e5a0affb2a88cf0f7d98139e5"
+    }
+   ]
   },
   {
    "path": "code/scripts/run_baseline.py",
@@ -821,9 +881,9 @@
   {
    "path": "code/scripts/submission_workflow.py",
    "source": "scripts/submission_workflow.py",
-   "source_sha256": "5c7e2b717a6fe8d473192dfd396b14717ea72b690ddde8640bc98c1b0cbfe17b",
-   "sha256": "5c7e2b717a6fe8d473192dfd396b14717ea72b690ddde8640bc98c1b0cbfe17b",
-   "bytes": 23050,
+   "source_sha256": "0b97fd407a7195240403886d0910e90a4314fd9a038a753ec6ba1ee9df03110e",
+   "sha256": "0b97fd407a7195240403886d0910e90a4314fd9a038a753ec6ba1ee9df03110e",
+   "bytes": 25416,
    "reason": "portable reproduction/verification entry point",
    "sanitized": false,
    "transformations": [],
@@ -876,6 +936,22 @@
      "reason": "refresh packaged runtime from repository source",
      "repository_source": "scripts/submission_workflow.py",
      "repository_source_sha256": "5c7e2b717a6fe8d473192dfd396b14717ea72b690ddde8640bc98c1b0cbfe17b"
+    },
+    {
+     "previous_entry": {
+      "path": "code/scripts/submission_workflow.py",
+      "source": "scripts/submission_workflow.py",
+      "source_sha256": "5c7e2b717a6fe8d473192dfd396b14717ea72b690ddde8640bc98c1b0cbfe17b",
+      "sha256": "5c7e2b717a6fe8d473192dfd396b14717ea72b690ddde8640bc98c1b0cbfe17b",
+      "bytes": 23050,
+      "reason": "portable reproduction/verification entry point",
+      "sanitized": false,
+      "transformations": [],
+      "historical_provenance": {}
+     },
+     "reason": "refresh packaged runtime from repository source",
+     "repository_source": "scripts/submission_workflow.py",
+     "repository_source_sha256": "0b97fd407a7195240403886d0910e90a4314fd9a038a753ec6ba1ee9df03110e"
     }
    ]
   },
@@ -895,9 +971,26 @@
    "reason": "portable runtime source",
    "sanitized": false,
    "transformations": [],
-   "sha256": "fb5039aa9203dea16499e3e0bd012401db2f4503286df807ac7b4e31ad568fe5",
-   "bytes": 12785,
-   "source_sha256": "fb5039aa9203dea16499e3e0bd012401db2f4503286df807ac7b4e31ad568fe5"
+   "sha256": "448d393e8beee7ecb2e5a1be2a1be5f3debe56077edbf8dabba816b63ada58ab",
+   "bytes": 14999,
+   "source_sha256": "448d393e8beee7ecb2e5a1be2a1be5f3debe56077edbf8dabba816b63ada58ab",
+   "manifest_updates": [
+    {
+     "previous_entry": {
+      "path": "code/scripts/update_scientific_docs.py",
+      "source": "scripts/update_scientific_docs.py",
+      "reason": "portable runtime source",
+      "sanitized": false,
+      "transformations": [],
+      "sha256": "fb5039aa9203dea16499e3e0bd012401db2f4503286df807ac7b4e31ad568fe5",
+      "bytes": 12785,
+      "source_sha256": "fb5039aa9203dea16499e3e0bd012401db2f4503286df807ac7b4e31ad568fe5"
+     },
+     "reason": "refresh packaged runtime from repository source",
+     "repository_source": "scripts/update_scientific_docs.py",
+     "repository_source_sha256": "448d393e8beee7ecb2e5a1be2a1be5f3debe56077edbf8dabba816b63ada58ab"
+    }
+   ]
   },
   {
    "path": "code/scripts/verify_geometry.py",
@@ -1164,9 +1257,26 @@
    "reason": "PDE runtime source",
    "sanitized": false,
    "transformations": [],
-   "sha256": "24b7783901c5adb93b0a4e8d0a284ba2b80d413ed81fe181e67be4b71e234188",
-   "bytes": 9308,
-   "source_sha256": "24b7783901c5adb93b0a4e8d0a284ba2b80d413ed81fe181e67be4b71e234188"
+   "sha256": "28632ebe18d1633004040d330b5c607c017e665a18b65d07b61bf19d7b3c1a66",
+   "bytes": 9449,
+   "source_sha256": "28632ebe18d1633004040d330b5c607c017e665a18b65d07b61bf19d7b3c1a66",
+   "manifest_updates": [
+    {
+     "previous_entry": {
+      "path": "code/turing_rd/spectrum_evidence.py",
+      "source": "turing_rd/spectrum_evidence.py",
+      "reason": "PDE runtime source",
+      "sanitized": false,
+      "transformations": [],
+      "sha256": "24b7783901c5adb93b0a4e8d0a284ba2b80d413ed81fe181e67be4b71e234188",
+      "bytes": 9308,
+      "source_sha256": "24b7783901c5adb93b0a4e8d0a284ba2b80d413ed81fe181e67be4b71e234188"
+     },
+     "reason": "refresh packaged runtime from repository source",
+     "repository_source": "turing_rd/spectrum_evidence.py",
+     "repository_source_sha256": "28632ebe18d1633004040d330b5c607c017e665a18b65d07b61bf19d7b3c1a66"
+    }
+   ]
   },
   {
    "path": "code/turing_rd/stability.py",
@@ -1674,6 +1784,46 @@
    "sha256": "0f01d81112e95dc2a661c0d91566acc059b2cd00c8ddf86cd5cbd64f6e0de550",
    "bytes": 305,
    "source_sha256": "0f01d81112e95dc2a661c0d91566acc059b2cd00c8ddf86cd5cbd64f6e0de550"
+  },
+  {
+   "path": "evidence/releases/stage8_20261025T173837/code_snapshot.json",
+   "source": "submission/evidence/releases/stage8_20261025T173837/code_snapshot.json",
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "sha256": "e5e0167ac83a379d9994f284c6ef0ca3cf6a0b066aadbd38a0b63f5012a77151",
+   "bytes": 10153,
+   "source_sha256": "e5e0167ac83a379d9994f284c6ef0ca3cf6a0b066aadbd38a0b63f5012a77151"
+  },
+  {
+   "path": "evidence/releases/stage8_20261025T173837/historical_source_binding.json",
+   "source": "submission/evidence/releases/stage8_20261025T173837/historical_source_binding.json",
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "sha256": "2393feafb7564dde5d38057ace17b0037c9aa545c54435ea7fef7c69e6771e44",
+   "bytes": 509,
+   "source_sha256": "2393feafb7564dde5d38057ace17b0037c9aa545c54435ea7fef7c69e6771e44"
+  },
+  {
+   "path": "evidence/releases/stage8_20261025T173837/mat_validation.json",
+   "source": "submission/evidence/releases/stage8_20261025T173837/mat_validation.json",
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "sha256": "7a7913e757c5f1994c90c40bcde01d718a63db78e7bcf0b6225d63cc41fdb064",
+   "bytes": 6446,
+   "source_sha256": "7a7913e757c5f1994c90c40bcde01d718a63db78e7bcf0b6225d63cc41fdb064"
+  },
+  {
+   "path": "evidence/releases/stage8_20261025T173837/unit_tests.json",
+   "source": "submission/evidence/releases/stage8_20261025T173837/unit_tests.json",
+   "reason": "evaluation and numerical verification evidence",
+   "sanitized": false,
+   "transformations": [],
+   "sha256": "afb095656ba30143d8e1c51a6173ec19cf4f4525e5e6db16dfd6f9c05d54b20f",
+   "bytes": 305,
+   "source_sha256": "afb095656ba30143d8e1c51a6173ec19cf4f4525e5e6db16dfd6f9c05d54b20f"
   },
   {
    "path": "evidence/sphere_bandcount/bands_6_vs_7.png",
@@ -2400,6 +2550,6 @@
   "sha256": "b6fcd50e9bf5fb88287eec5e434cd02b3ea12919f4cfe45736791325ca7939dd",
   "retained": "Git history and full local safety backup"
  },
- "payload_file_count": 133,
+ "payload_file_count": 137,
  "manifest_scope": "workspace_payload"
 }

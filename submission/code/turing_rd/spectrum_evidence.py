@@ -153,6 +153,7 @@ def validate_evidence(certificate_path, mat, geom, params, seed, *, recompute_pa
     if not decision["numerical_check_passed"]:
         raise ValueError("spectral evidence insufficient: " + ", ".join(decision["failure_reasons"]))
     return {"pde_residual_recomputed": True, "full_residual": fresh["residual"]["value"],
+            "current_saved_vector_spectrum_status": "numerical_check_passed" if recompute_pairs else "metadata_only_not_current_acceptance",
             "mat_sha256": fresh["mat_sha256"], "saved_spectral_metadata_verified": True,
             "eigenpair_residuals_recomputed_from_saved_vectors": bool(recompute_pairs),
             "fresh_eigensolve_in_this_verification": False, "decision": decision,

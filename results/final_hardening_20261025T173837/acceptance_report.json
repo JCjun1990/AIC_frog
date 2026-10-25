@@ -1,0 +1,180 @@
+{
+  "schema_version": "aic-frog-i03-acceptance-v1",
+  "generated_utc": "2026-10-25T09:51:16.966984+00:00",
+  "status": "PASS",
+  "verification_mode": "current_saved_vectors_v1",
+  "zip": {
+    "zip": "待填_初赛_AI-MECH-2026-002_result.zip",
+    "zip_bytes": 32564247,
+    "files": 138,
+    "team": "待填",
+    "round": "初赛",
+    "problem": "AI-MECH-2026-002",
+    "delivery_status": "draft: team name pending; do not upload"
+  },
+  "extraction": {
+    "temporary_directory": "D:\\Code\\AIC_frog_audit_backup\\stage8_20261025T173837\\i03_accept_dtmtf59p",
+    "kept": false,
+    "note": "extracted outside the repository; removed after the checks"
+  },
+  "checks": [
+    {
+      "check": "zip_crc",
+      "passed": true,
+      "detail": "138 entries",
+      "status": "PASS"
+    },
+    {
+      "check": "zip_root_layout",
+      "passed": true,
+      "detail": "README and manifest at the archive root",
+      "status": "PASS"
+    },
+    {
+      "check": "zip_relative_posix_names",
+      "passed": true,
+      "detail": "unsafe=[]",
+      "status": "PASS"
+    },
+    {
+      "check": "required_deliverables_present",
+      "passed": true,
+      "detail": "missing=[]",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_present",
+      "passed": true,
+      "detail": "137 files",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_hashes_match",
+      "passed": true,
+      "detail": "mismatched=[]",
+      "status": "PASS"
+    },
+    {
+      "check": "zip_files_all_listed",
+      "passed": true,
+      "detail": "unlisted=[]",
+      "status": "PASS"
+    },
+    {
+      "check": "every_file_has_reason_and_source",
+      "passed": true,
+      "detail": "",
+      "status": "PASS"
+    },
+    {
+      "check": "no_absolute_local_paths",
+      "passed": true,
+      "detail": "offenders=[]",
+      "status": "PASS"
+    },
+    {
+      "check": "no_secret_material",
+      "passed": true,
+      "detail": "flagged=[]",
+      "status": "PASS"
+    },
+    {
+      "check": "no_task4_material",
+      "passed": true,
+      "detail": "",
+      "status": "PASS"
+    },
+    {
+      "check": "packaged_code_imports",
+      "passed": true,
+      "detail": "turing_rd loaded from D:\\Code\\AIC_frog_audit_backup\\stage8_20261025T173837\\i03_accept_dtmtf59p\\package\\code\\turing_rd",
+      "status": "PASS"
+    },
+    {
+      "check": "strict_manifest_validation",
+      "passed": true,
+      "detail": "{'manifest_files': 137, 'payload_files': 137}",
+      "status": "PASS"
+    },
+    {
+      "check": "json_strict_and_legacy_compatibility",
+      "passed": true,
+      "detail": "{\"protocol\": \"delivery-json-acceptance-v1\", \"strict_json_files\": [\"PACKAGE_MANIFEST.json\", \"evidence/active_learning/EFFICIENCY_BREAKDOWN.json\", \"evidence/active_learning/summary.json\", \"evidence/generalization/QUALITY_BREAKDOWN.json\", \"evidence/generalization/dense_dataset_frog.json\", \"evidence/generalization/dense_dataset_sphere5.json\", \"evidence/generalization/summary.json\", \"evidence/generalization/testset.json\", \"evidence/json_schema_audit.json\", \"evidence/methodology/best_match_spectrum/certificate.json\", \"evidence/methodology/best_match_spectrum/spectrum_0.json\", \"evidence/methodology/best_match_spectrum/spectrum_1.json\", \"evidence/methodology/best_match_spectrum/spectrum_2.json\", \"evidence/methodology/methodology.json\", \"evidence/release/code_snapshot.json\", \"evidence/release/mat_validation.json\", \"evidence/release/unit_tests.json\", \"evidence/releases/stage8_20261025T173837/code_snapshot.json\", \"evidence/releases/stage8_20261025T173837/historical_source_binding.json\", \"evidence/releases/stage8_20261025T173837/mat_validation.json\", \"evidence/releases/stage8_20261025T173837/unit_tests.json\", \"evidence/sphere_bandcount/summary.json\", \"evidence/sphere_spots_layout/summary.json\", \"evidence/verification/geometry.json\", \"evidence/verification/solver.json\", \"task1_sphere/ai_model/cv.json\", \"task1_sphere/spots/stability_certificate.json\", \"task1_sphere/spots/summary.json\", \"task1_sphere/stripes/stability_certificate.json\", \"task1_sphere/stripes/summary.json\", \"task2_frog/ai_model/cv.json\", \"task2_frog/spots/stability_certificate.json\", \"task2_frog/spots/summary.json\", \"task2_frog/stripes/stability_certificate.json\", \"task2_frog/stripes/summary.json\", \"task3_inversion/best_match/summary.json\"], \"legacy_nonstandard_json\": [{\"path\": \"task1_sphere/ai_model/dataset.json\", \"sha256\": \"4157f250928e0c0ee7ad8976ef76f2f4a915b84b36b15f5a1a0146aa9da9a4f6\", \"nonfinite_tokens\": {\"Infinity\": 14}, \"status\": \"preserved_legacy_python_json_extension\"}, {\"path\": \"task2_frog/ai_model/dataset.json\", \"sha256\": \"ee19eb9e949faa7cdf62883e2c609ec4464b4b836ed19c11eb6d0d4ffa1165bf\", \"nonfinite_tokens\": {\"Infinity\": 10}, \"status\": \"preserved_legacy_python_json_extension\"}, {\"path\": \"task3_inversion/summary.json\", \"sha256\": \"d975a6094a8859c1b58602bfa17d371cb03a92478017446a20dea2338853469b\", \"nonfinite_tokens\": {\"NaN\": 61}, \"status\": \"preserved_legacy_python_json_extension\"}], \"strict_count\": 36, \"legacy_count\": 3, \"scope\": \"syntax and immutable legacy compatibility; no alteration of input values\"}",
+      "status": "PASS"
+    },
+    {
+      "check": "packaged_formal_model_inference",
+      "passed": true,
+      "detail": "{\"task1_sphere\": \"spots\", \"task2_frog\": \"spots\"}",
+      "status": "PASS"
+    },
+    {
+      "check": "four_mat_acceptance",
+      "passed": true,
+      "detail": "[]",
+      "status": "PASS"
+    },
+    {
+      "check": "inversion_parameters_present",
+      "passed": true,
+      "detail": "F=0.027712 k=0.060040",
+      "status": "PASS"
+    },
+    {
+      "check": "inversion_mat_is_steady",
+      "passed": true,
+      "detail": "residual=9.061e-14, pattern=spots/21",
+      "status": "PASS"
+    },
+    {
+      "check": "inversion_best_match_is_steady",
+      "passed": true,
+      "detail": "{\"available\": true, \"pde_residual_recomputed\": true, \"full_residual\": 2.030535561466331e-14, \"mat_sha256\": \"4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c\", \"historical_spectrum_status\": \"insufficient_evidence\", \"historical_spectrum_failure_reasons\": [\"configuration_0:untrusted_pair_absolute_tolerance\", \"configuration_0:untrusted_pair_relative_tolerance\", \"configuration_0:eigenpair_count_or_protocol_mismatch\", \"configuration_0:missing_eigenpair_residuals\", \"configuration_1:untrusted_pair_absolute_tolerance\", \"configuration_1:untrusted_pair_relative_tolerance\", \"configuration_1:eigenpair_count_or_protocol_mismatch\", \"configuration_1:missing_eigenpair_residuals\", \"configuration_2:untrusted_pair_absolute_tolerance\", \"configuration_2:untrusted_pair_relative_tolerance\", \"configuration_2:eigenpair_count_or_protocol_mismatch\", \"configuration_2:missing_eigenpair_residuals\", \"sampled_largest_real_parts_disagree\", \"not_all_checked_eigenvalue_signs_resolved_negative\"], \"saved_spectral_metadata_verified\": false, \"eigenpair_residuals_recomputed_from_saved_vectors\": false, \"current_saved_vector_spectrum_status\": \"missing_evidence\", \"fresh_eigensolve_in_this_verification\": false, \"mathematical_full_spectrum_proof\": false}",
+      "status": "PASS"
+    },
+    {
+      "check": "inversion_best_match_saved_vector_spectrum",
+      "passed": true,
+      "detail": "{\"available\": true, \"pde_residual_recomputed\": true, \"full_residual\": 2.030535561466331e-14, \"mat_sha256\": \"4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c\", \"historical_spectrum_status\": \"insufficient_evidence\", \"historical_spectrum_failure_reasons\": [\"configuration_0:untrusted_pair_absolute_tolerance\", \"configuration_0:untrusted_pair_relative_tolerance\", \"configuration_0:eigenpair_count_or_protocol_mismatch\", \"configuration_0:missing_eigenpair_residuals\", \"configuration_1:untrusted_pair_absolute_tolerance\", \"configuration_1:untrusted_pair_relative_tolerance\", \"configuration_1:eigenpair_count_or_protocol_mismatch\", \"configuration_1:missing_eigenpair_residuals\", \"configuration_2:untrusted_pair_absolute_tolerance\", \"configuration_2:untrusted_pair_relative_tolerance\", \"configuration_2:eigenpair_count_or_protocol_mismatch\", \"configuration_2:missing_eigenpair_residuals\", \"sampled_largest_real_parts_disagree\", \"not_all_checked_eigenvalue_signs_resolved_negative\"], \"saved_spectral_metadata_verified\": true, \"eigenpair_residuals_recomputed_from_saved_vectors\": true, \"current_saved_vector_spectrum_status\": \"numerical_check_passed\", \"fresh_eigensolve_in_this_verification\": false, \"mathematical_full_spectrum_proof\": false, \"decision\": {\"acceptance_policy_version\": \"finite-spectrum-acceptance-v1\", \"scope\": \"task3_three_shift_saved_vector_finite_check\", \"required_configurations\": [{\"sigma\": 0.001, \"which\": \"LM\", \"k\": 12}, {\"sigma\": 0.0, \"which\": \"LM\", \"k\": 20}, {\"sigma\": 1e-05, \"which\": \"LM\", \"k\": 8}], \"full_steady_state\": true, \"full_residual\": 2.030535561466331e-14, \"full_residual_tolerance\": 1e-11, \"found_reliable_positive\": false, \"reliable_positive_eigenvalues\": [], \"unresolved_near_zero_eigenvalues\": [], \"checked_eigenpairs\": 40, \"full_max_real_checked\": -0.0001860545855782343, \"sampled_maxima\": [-0.0001860545855782343, -0.00018605458557830116, -0.00018605458557830834], \"configurations\": 3, \"distinct_valid_shifts\": [0.0, 1e-05, 0.001], \"valid_direct_LR_runs\": 0, \"all_requested_solves_and_pairs_validated\": true, \"sampled_maxima_agree\": true, \"sampled_maxima_agreement_tolerance\": 1e-10, \"all_checked_signs_resolved_negative\": true, \"numerical_check_passed\": true, \"status\": \"numerical_check_passed\", \"outcome\": \"passed\", \"failure_reasons\": [], \"relative_equilibrium_accepted_as_steady\": false, \"rotation_projection\": false, \"rotations_excluded_from_full_decision\": false, \"mathematical_full_spectrum_proof\": false}, \"status\": \"PASS\", \"acceptance_protocol\": \"current_saved_vectors_v1\"}",
+      "status": "PASS"
+    },
+    {
+      "check": "inversion_report_has_errors",
+      "passed": true,
+      "detail": "",
+      "status": "PASS"
+    },
+    {
+      "check": "inversion_visuals_present",
+      "passed": true,
+      "detail": "",
+      "status": "PASS"
+    },
+    {
+      "check": "report_page_limit",
+      "passed": true,
+      "detail": "2 pages",
+      "status": "PASS"
+    },
+    {
+      "check": "report_numbers_match_package",
+      "passed": true,
+      "detail": "missing=[]",
+      "status": "PASS"
+    },
+    {
+      "check": "zip_name_matches_manifest",
+      "passed": true,
+      "detail": "待填_初赛_AI-MECH-2026-002_result.zip",
+      "status": "PASS"
+    },
+    {
+      "check": "delivery_status_recorded",
+      "passed": true,
+      "detail": "draft: team name pending; do not upload",
+      "status": "PASS"
+    }
+  ],
+  "failed": [],
+  "report_checked": true
+}

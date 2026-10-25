@@ -272,15 +272,13 @@ def portable_acceptance(mat, cert, geom, exc, tol=1e-11, abs_agree=1e-12):
     return fresh
 
 
-def verify_best_match(submission, geom=None, evidence=None):
-    """Keep MAT readback, old summaries, saved vectors and fresh solves distinct."""
+def verify_best_match_steady(submission, geom=None):
+    """Check A: actual robust MAT, parameters, hash and complete PDE residual."""
     from turing_rd import Geometry, GSParams, load_frog
     from turing_rd.result_io import validate_certificate
     from turing_rd.spectral_policy import FROG_CONFIGS, FROG_SIGN_FLOOR, evaluate_spectra
     submission = Path(submission)
     directory = submission / "task3_inversion/best_match"
-    if not (directory / "solution_best_match.mat").is_file():
-        return {"available": False, "scope": "optional_best_match_not_present"}
     summary = load(directory / "summary.json")
     estimate = load(submission / "task3_inversion/summary.json")["estimate"]
     params = GSParams(estimate["F"], estimate["k"])
@@ -288,17 +286,36 @@ def verify_best_match(submission, geom=None, evidence=None):
         raise ValueError("best-match parameters differ from formal inversion estimate")
     if geom is None:
         geom = Geometry(load_frog(submission / "code/frog.mat"), laplacian="robust", cache_dir=None)
+    if geom.laplacian != "robust":
+        raise ValueError("best-match acceptance requires the robust operator")
     cert = summary["mat_certificate"]
     fresh = validate_certificate(directory / "solution_best_match.mat", cert, expected_params=params,
                                  expected_seed=summary["best"]["seed"], expected_geometry=geom)
     historical = evaluate_spectra(summary.get("stability", {}).get("configs", []),
         fresh["residual"]["value"], configs=FROG_CONFIGS, sign_floor=FROG_SIGN_FLOOR,
         scope="historical_best_match_summary_only")
-    result = {"available": True, "pde_residual_recomputed": True, "full_residual": fresh["residual"]["value"],
+    return {"available": True, "pde_residual_recomputed": True, "full_residual": fresh["residual"]["value"],
               "mat_sha256": fresh["mat_sha256"], "historical_spectrum_status": historical["status"],
               "historical_spectrum_failure_reasons": historical["failure_reasons"],
               "saved_spectral_metadata_verified": False, "eigenpair_residuals_recomputed_from_saved_vectors": False,
+              "current_saved_vector_spectrum_status": "missing_evidence",
               "fresh_eigensolve_in_this_verification": False, "mathematical_full_spectrum_proof": False}
+
+
+def verify_best_match(submission, geom=None, evidence=None, *, historical_compatibility=False):
+    """Check B is mandatory by default; explicit legacy mode never yields formal PASS."""
+    from turing_rd import Geometry, GSParams, load_frog
+    submission = Path(submission); directory = submission / "task3_inversion/best_match"
+    if historical_compatibility and not (directory / "solution_best_match.mat").is_file():
+        return {"available": False, "status": "LIMITED_EVIDENCE",
+                "historical_spectrum_status": "not_available",
+                "current_saved_vector_spectrum_status": "missing_evidence"}
+    if geom is None:
+        geom = Geometry(load_frog(submission / "code/frog.mat"), laplacian="robust", cache_dir=None)
+    result = verify_best_match_steady(submission, geom)
+    summary = load(directory / "summary.json")
+    estimate = load(submission / "task3_inversion/summary.json")["estimate"]
+    params = GSParams(estimate["F"], estimate["k"])
     declared = summary.get("stability", {}).get("evidence_file")
     if evidence is not None:
         path = Path(evidence)
@@ -308,16 +325,29 @@ def verify_best_match(submission, geom=None, evidence=None):
             raise ValueError("best-match evidence escapes its result directory")
     else:
         path = submission / "evidence/methodology/best_match_spectrum/certificate.json"
-    if evidence is not None or declared or path.is_file():
+    if evidence is not None or declared or path.is_file() or not historical_compatibility:
         from turing_rd.spectrum_evidence import validate_evidence
         result.update(validate_evidence(path, directory / "solution_best_match.mat", geom, params,
                                          summary["best"]["seed"]))
     else:
         result["limitation"] = "historical spectral summaries lack per-pair residuals/vectors; not upgraded to a strict pass"
+    result["status"] = "LIMITED_EVIDENCE" if historical_compatibility else "PASS"
+    result["acceptance_protocol"] = "explicit_historical_compatibility" if historical_compatibility else "current_saved_vectors_v1"
+    if not historical_compatibility and not current_saved_vectors_passed(result):
+        raise ValueError("current best-match saved-vector evidence did not pass")
     return result
 
 
-def verify(submission, best_match_evidence=None):
+def current_saved_vectors_passed(result):
+    """A historical insufficient-evidence status is never positive pass evidence."""
+    return (result.get("pde_residual_recomputed") is True
+            and result.get("current_saved_vector_spectrum_status") == "numerical_check_passed"
+            and result.get("saved_spectral_metadata_verified") is True
+            and result.get("eigenpair_residuals_recomputed_from_saved_vectors") is True
+            and result.get("decision", {}).get("numerical_check_passed") is True)
+
+
+def verify(submission, best_match_evidence=None, *, historical_compatibility=False):
     from turing_rd import Geometry, GSParams, icosphere, load_frog
     from turing_rd.result_io import validate_certificate
     from turing_rd.diagnostics import pattern_stats
@@ -343,8 +373,10 @@ def verify(submission, best_match_evidence=None):
             sha(directory / "solution.mat"), cert, surface="frog" if surface == "task2_frog" else "sphere")
         results[task] = {"mat_sha256": fresh["mat_sha256"], "full_residual": fresh["residual"]["value"],
                          "float64_accepted": fresh["accepted"], "verification_mode": mode, "spectrum": spectral}
-    return {"status": "PASS", "tasks": results, "manifest_files": checked["manifest_files"],
-            "best_match": verify_best_match(submission, geometries.get("task2_frog"), best_match_evidence)}
+    return {"status": "LIMITED_EVIDENCE" if historical_compatibility else "PASS",
+            "tasks": results, "manifest_files": checked["manifest_files"],
+            "best_match": verify_best_match(submission, geometries.get("task2_frog"), best_match_evidence,
+                                             historical_compatibility=historical_compatibility)}
 
 
 def prepare_models(submission, out):
@@ -370,6 +402,7 @@ def main():
     parser.add_argument("--task", choices=TASKS)
     parser.add_argument("--zip", type=Path, help="built package ZIP, for verify-zip")
     parser.add_argument("--best-match-evidence", type=Path, help="independent task3 saved-vector certificate, read-only")
+    parser.add_argument("--historical-compatibility", action="store_true", help="explicit legacy review; reports LIMITED_EVIDENCE, never PASS")
     args = parser.parse_args()
     if args.out and args.out.exists():
         parser.error("output exists; use a fresh path")
@@ -377,7 +410,7 @@ def main():
         if not args.out: parser.error("--out required")
         result = prepare_models(args.submission, args.out)
     elif args.command == "verify":
-        result = verify(args.submission, args.best_match_evidence)
+        result = verify(args.submission, args.best_match_evidence, historical_compatibility=args.historical_compatibility)
     elif args.command == "verify-zip":
         if not args.zip:
             parser.error("--zip required")
@@ -403,7 +436,7 @@ def main():
                   "scope": "new single-shift sample, does not replace the saved three-configuration certificate"}
         (args.out / "spectrum.json").write_text(json.dumps(result, indent=2, allow_nan=False), encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
-    return 1 if isinstance(result, dict) and result.get("status") == "FAIL" else 0
+    return 1 if isinstance(result, dict) and result.get("status") in ("FAIL", "LIMITED_EVIDENCE") else 0
 
 
 if __name__ == "__main__":

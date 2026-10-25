@@ -39,7 +39,8 @@ def report_sections(c, tests_run):
     """Pure, testable science statements shared with Markdown generators."""
     sections = {**E.claims(c),
             "verification": f"本轮实际执行 {tests_run} 项单元测试并通过，数量来自运行记录，不是源码计数。"
-                            "四组正式结果的完整残差及三配置谱证书独立验收。有限谱检查不等于全谱数学证明。",
+                            "四组正式结果的完整残差及三配置谱证书独立验收。最佳匹配强制验收保存向量，历史摘要不足不能代替通过。"
+                            "有限谱检查不等于全谱数学证明。",
             "methods": "Gray-Scott：∂u/∂t = Du Δ_s u − uv² + F(1−u)；∂v/∂t = Dv Δ_s v + uv² − (F+k)v。"
                        "[D]=L²/T，[F]=[k]=1/T，u、v 无量纲。采用 robust Laplace-Beltrami 离散与集中质量矩阵 M，"
                        "IMEX SBDF2 时间推进，Newton 精修。完整稳态残差 R=√((RMS_M(Ru)²+RMS_M(Rv)²)/2)/F ≤ 1e-11，"

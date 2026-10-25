@@ -1,100 +1,68 @@
 {
-  "schema_version": "aic-frog-final-integration-v1",
-  "release_id": "stage7_20261025T125459",
+  "schema_version": "final-evidence-release-v2",
+  "release_id": "stage8_20261025T173837",
   "freeze_status": "READY_TO_FREEZE_WITH_LIMITATIONS",
   "engineering_status": "PASS",
   "upload_ready": false,
-  "upload_blockers": [
-    "Team name is still pending; rebuild the named PDF and ZIP and repeat acceptance before upload."
-  ],
-  "version": {
-    "branch": "audit/evidence-consistency-20261023",
-    "HEAD": "f643a04ca99ef76378490f30a0c663e8831c763e",
-    "working_tree_committed": false,
-    "source_fingerprint": "490a3a32cdc08bdef3b23725cc58a689a03ec1f957b6fe6c4bfbd7123108c810",
-    "snapshot": "submission/evidence/release/code_snapshot.json",
-    "modified_files": 43,
-    "untracked_files": 131,
-    "deleted_files": 0,
-    "total_changed_files": 174,
-    "git_status_counts": {
-      " M": 43,
-      "??": 131
-    }
+  "code_provenance": {
+    "validation_git_base": "a637d1dd8be29c7b128ef9325e9b970ab5a3aa28",
+    "validated_source_fingerprint": "d66c438ddb82be450be7b524afec144e08b2f7ffa201ed9ea262b731129c3433",
+    "source_snapshot": "submission/evidence/releases/stage8_20261025T173837/code_snapshot.json",
+    "historical_release_binding": {
+      "historical_validation_git_base": "f643a04ca99ef76378490f30a0c663e8831c763e",
+      "validated_source_fingerprint": "490a3a32cdc08bdef3b23725cc58a689a03ec1f957b6fe6c4bfbd7123108c810",
+      "later_published_commit": "a637d1dd8be29c7b128ef9325e9b970ab5a3aa28",
+      "source_file_count": 93,
+      "committed_and_working_source_match": true,
+      "source_drift_after_publish": false,
+      "distinction": "The historical validation base is not the release commit; all committed source bytes match the validated source."
+    },
+    "publication_commit_binding": "The actual later Git commit is reported after commit/push and checked against every source SHA256. No self-referential commit SHA is embedded here."
   },
-  "phase_results": [
-    {
-      "stage": 1,
-      "status": "PASS",
-      "scope": "strict manifest sync, provenance and workspace/ZIP equality",
-      "tests": "test_manifest_consistency"
-    },
-    {
-      "stage": 2,
-      "status": "PASS",
-      "scope": "fixed spectral policy, all required configurations and pair/sign checks fail closed",
-      "tests": "test_spectral_acceptance, test_portable_submission"
-    },
-    {
-      "stage": 3,
-      "status": "PASS",
-      "scope": "recomputed strata, actual model inference and pure Markdown/PDF generators",
-      "tests": "test_scientific_generators, test_evidence_wording"
-    },
-    {
-      "stage": 4,
-      "status": "PASS",
-      "scope": "versioned cache fingerprint, invalidation, integrity, atomic writes, inference without implicit training",
-      "tests": "test_experiment_cache"
-    },
-    {
-      "stage": 5,
-      "status": "PASS",
-      "scope": "checkpoint segment binding and CG true-residual failure propagation",
-      "tests": "test_solver_safety"
-    },
-    {
-      "stage": 6,
-      "status": "PASS_WITH_SCIENTIFIC_LIMITATIONS",
-      "scope": "explicit label/reference protocols; actual saved best-match eigenvectors; missing legacy grid fields remain unknown",
-      "tests": "test_methodology"
-    }
-  ],
   "unit_tests": {
     "schema_version": "executed-unittest-v1",
-    "tests_run": 336,
+    "tests_run": 350,
     "failures": 0,
     "errors": 0,
     "skipped": 0,
     "successful": true,
-    "source_fingerprint": "490a3a32cdc08bdef3b23725cc58a689a03ec1f957b6fe6c4bfbd7123108c810",
+    "source_fingerprint": "d66c438ddb82be450be7b524afec144e08b2f7ffa201ed9ea262b731129c3433",
     "sources_unchanged": true,
-    "wall_seconds": 27.995738400000846
+    "wall_seconds": 28.519378999990295
   },
+  "new_regression_tests": 14,
   "protected_assets": {
     "unchanged": 55,
-    "record": "results/final_integration_20261025T125459/asset_hashes.json"
+    "record": "results/final_hardening_20261025T173837/asset_hashes.json",
+    "additional_immutable_historical_files": 251
   },
   "current_zip": {
-    "path": "submission/drafts/stage7_20261025T125459/待填_初赛_AI-MECH-2026-002_result.zip",
-    "sha256": "0fd8874e67e2f1abaa00530acbe00671a36504410c46c574fc1d5999e01224ab",
-    "bytes": 32553609,
-    "manifest_payload_files": 133,
-    "zip_entries_including_manifest": 134,
+    "path": "submission/drafts/stage8_20261025T173837/待填_初赛_AI-MECH-2026-002_result.zip",
+    "sha256": "acc48f829a3b9db24085f93a802f431975db5e07244148b97fc0627f5fd77f12",
+    "bytes": 32564247,
+    "manifest_payload_files": 137,
+    "zip_entries_including_manifest": 138,
     "independent_checks": 26,
-    "acceptance": "results/final_integration_20261025T125459/acceptance_report.json",
-    "crc_passed": true,
-    "workspace_correspondence_passed": true
+    "acceptance": "results/final_hardening_20261025T173837/acceptance_report.json",
+    "verification_mode": "current_saved_vectors_v1",
+    "workspace_correspondence": "PASS"
   },
   "current_pdf": {
-    "path": "submission/report/stage7_20261025T125459/初赛技术报告_v3_最终修订.pdf",
-    "sha256": "d810c3c323dcf16aad30fcd8115b6001790e6a747baf17712e89c99119a24349",
+    "path": "submission/report/stage8_20261025T173837/初赛技术报告_v3_严格验收修订.pdf",
+    "sha256": "8b2e3ecdca9ab806bac725f7aed65429004fb24be6021981b210baa946db76db",
     "pages": 2,
     "text_and_rendering_passed": true
   },
+  "best_match_checks": {
+    "complete_steady": "PASS",
+    "historical_spectrum_status": "insufficient_evidence",
+    "current_saved_vector_spectrum_status": "numerical_check_passed",
+    "saved_eigenpairs_checked": 40,
+    "mathematical_full_spectrum_proof": false
+  },
   "workspace_verification": {
     "status": "PASS",
-    "manifest_files": 133,
+    "manifest_files": 137,
     "formal_tasks": {
       "task1_sphere/spots": {
         "mat_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
@@ -185,6 +153,7 @@
       ],
       "saved_spectral_metadata_verified": true,
       "eigenpair_residuals_recomputed_from_saved_vectors": true,
+      "current_saved_vector_spectrum_status": "numerical_check_passed",
       "fresh_eigensolve_in_this_verification": false,
       "mathematical_full_spectrum_proof": false,
       "decision": {
@@ -239,368 +208,39 @@
         "rotation_projection": false,
         "rotations_excluded_from_full_decision": false,
         "mathematical_full_spectrum_proof": false
-      }
+      },
+      "status": "PASS",
+      "acceptance_protocol": "current_saved_vectors_v1"
     }
   },
-  "validation_matrix": {
-    "all_unit_tests": "PASS",
-    "new_regressions": "PASS",
-    "git_diff_check": "PASS",
-    "model_load_and_inference": "PASS",
-    "workspace_manifest_verify": "PASS",
-    "independent_zip_extraction": "PASS",
-    "zip_crc": "PASS",
-    "per_file_sha256": "PASS",
-    "four_mat_structure": "PASS",
-    "four_full_pde_readback": "PASS",
-    "formal_spectral_metadata": "PASS",
-    "best_match_readback_and_saved_vector_residuals": "PASS",
-    "inversion_parameters_unchanged": "PASS",
-    "strict_json_and_legacy_marking": "PASS",
-    "pdf_two_pages_text_rendering": "PASS",
-    "generator_regression": "PASS",
-    "cache_invalidation": "PASS",
-    "spectral_failure_paths": "PASS",
-    "checkpoint_and_cg": "PASS",
-    "workspace_zip_correspondence": "PASS"
-  },
   "json": {
-    "strict_files": 32,
-    "legacy_files": 3,
-    "legacy_exceptions": "version-controlled fixed path/hash/token policy in turing_rd/delivery_checks.py"
+    "strict_files": 36,
+    "legacy_files": 3
   },
   "static": {
-    "compiled_python_files": 141,
+    "compiled_python_files": 142,
     "runtime_copies_checked": 52,
     "git_diff_check": "PASS",
     "unexpected_deletions": [],
-    "credential_pattern_matches": [],
-    "new_binary_files": [
-      {
-        "path": "submission/drafts/stage7_20261025T125459/待填_初赛_AI-MECH-2026-002_result.zip",
-        "bytes": 32553609,
-        "sha256": "0fd8874e67e2f1abaa00530acbe00671a36504410c46c574fc1d5999e01224ab"
-      },
-      {
-        "path": "submission/report/stage7_20261025T125459/初赛技术报告_v3_最终修订.pdf",
-        "bytes": 1100913,
-        "sha256": "d810c3c323dcf16aad30fcd8115b6001790e6a747baf17712e89c99119a24349"
-      }
-    ],
-    "binary_scope": "new spectral-vector evidence from stage6, plus the new PDF and new ZIP; prior binaries remain protected"
+    "credential_matches": [],
+    "immutable_historical_files_unchanged": 251
+  },
+  "historical_validation": {
+    "preserved_file": "results/final_hardening_20261025T173837/historical_stage7_delivery_validation.json",
+    "sha256": "948b22dd347084b790a0dc8591a8a9c81225d47219a86eddbfe79387cb39f602",
+    "meaning": "Immutable pre-commit stage7 validation, not the new release commit."
   },
   "freeze_blockers": [],
-  "research_before_optimization": [
-    "Create a new strict inversion reference library with saved original fields and full dual-equation residuals; the historical 46 records cannot be reconstructed.",
-    "Use explicit label-quality filters in new separately named model experiments."
+  "upload_blockers": [
+    "Team name is still pending; rebuild the named report/ZIP and repeat acceptance before official upload."
   ],
-  "accepted_limitations": [
-    "Finite spectral evidence is not a mathematical full-spectrum proof; formal four candidates retain metadata-only evidence, best-match has saved eigenvectors.",
-    "All 16 complete-steady sphere test samples are uniform; nontrivial patterned-steady generalization is unproven.",
-    "No equal-budget non-AI ablation establishing independent causal AI contribution.",
-    "2.38x is a median integration-step ratio, not a wall-clock speedup.",
-    "Historical robustness/search experiments were not rerun from scratch.",
-    "Historical sklearn weights were saved with 1.9.1, loaded here with 1.7.1; warning retained, no universal pickle compatibility or Linux execution claimed."
+  "accepted_scientific_limitations": [
+    "The sphere complete-steady test subset contains only 16 uniform states.",
+    "No equal-budget non-AI causal ablation.",
+    "Finite sampled spectra are not full-spectrum mathematical proofs.",
+    "2.38x is an integration-step median ratio, not wall-clock acceleration.",
+    "Legacy inversion reference records lack original complete fields; strict parameter sensitivity remains unknown.",
+    "Historical sklearn weight versions differ from this machine; no universal pickle compatibility or Linux execution is claimed."
   ],
-  "historical_validation": {
-    "schema_version": "aic-frog-engineering-delivery-20261022",
-    "base_main": "c89c2ca",
-    "engineering_status": "PASS",
-    "upload_ready": false,
-    "upload_blocker": "team name pending; named report/package require final check",
-    "unit_tests": {
-      "before": 89,
-      "after": 95,
-      "passed": true
-    },
-    "independent_zip_acceptance": {
-      "passed": true,
-      "checks": 22,
-      "check_names": [
-        "zip_crc",
-        "zip_root_layout",
-        "zip_relative_posix_names",
-        "required_deliverables_present",
-        "manifest_present",
-        "manifest_hashes_match",
-        "zip_files_all_listed",
-        "every_file_has_reason_and_source",
-        "no_absolute_local_paths",
-        "no_secret_material",
-        "no_task4_material",
-        "packaged_code_imports",
-        "four_mat_acceptance",
-        "inversion_parameters_present",
-        "inversion_mat_is_steady",
-        "inversion_best_match_is_steady",
-        "inversion_report_has_errors",
-        "inversion_visuals_present",
-        "report_page_limit",
-        "report_numbers_match_package",
-        "zip_name_matches_manifest",
-        "delivery_status_recorded"
-      ],
-      "zip": "submission/drafts/待填_初赛_AI-MECH-2026-002_result.zip",
-      "zip_sha256": "0a8e5456692445db1d285a1c77dcc0e9d75a3959c16fcf2264fca3dd0d87cea1",
-      "zip_bytes": 13643142,
-      "report": "submission/report/初赛技术报告_v3.pdf",
-      "report_sha256": "6a36d9540fd1b406b45855fdebd6cc03cb672c3479e00f6cebda2bc25a7b8a95",
-      "report_pages": 2,
-      "runtime": "Windows 11 CPU, Python 3.12.5 (numpy 2.3.2, scipy 1.17.0, torch 2.14.1+cpu)"
-    },
-    "historical_zip_preserved": {
-      "path": "submission/待填_初赛_AI-MECH-2026-002_result.zip",
-      "sha256": "b6fcd50e9bf5fb88287eec5e434cd02b3ea12919f4cfe45736791325ca7939dd"
-    },
-    "formal_mat_readback": {
-      "status": "PASS",
-      "tasks": {
-        "task1_sphere/spots": {
-          "mat_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
-          "full_residual": 8.422602727722893e-15,
-          "float64_accepted": true,
-          "spectrum": {
-            "status": "numerical_check_passed",
-            "checked_pairs": 40,
-            "sampled_max_real": -6.231004404613164e-06,
-            "max_absolute_pair_residual": 1.7287113905760838e-13,
-            "max_relative_pair_residual": 7.551918127315448e-10,
-            "evidence": "saved metadata checked; eigenvectors are not bundled",
-            "mathematical_full_spectrum_proof": false
-          }
-        },
-        "task1_sphere/stripes": {
-          "mat_sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
-          "full_residual": 2.4366269654958772e-14,
-          "float64_accepted": true,
-          "spectrum": {
-            "status": "numerical_check_passed",
-            "checked_pairs": 40,
-            "sampled_max_real": -1.4777975565754154e-06,
-            "max_absolute_pair_residual": 1.4283866417741944e-14,
-            "max_relative_pair_residual": 2.3296503863459255e-09,
-            "evidence": "saved metadata checked; eigenvectors are not bundled",
-            "mathematical_full_spectrum_proof": false
-          }
-        },
-        "task2_frog/spots": {
-          "mat_sha256": "19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb",
-          "full_residual": 2.1711302588470847e-14,
-          "float64_accepted": true,
-          "spectrum": {
-            "status": "numerical_check_passed",
-            "checked_pairs": 40,
-            "sampled_max_real": -0.00010348974019058204,
-            "max_absolute_pair_residual": 1.503716635453165e-14,
-            "max_relative_pair_residual": 9.550663303918817e-12,
-            "evidence": "saved metadata checked; eigenvectors are not bundled",
-            "mathematical_full_spectrum_proof": false
-          }
-        },
-        "task2_frog/stripes": {
-          "mat_sha256": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
-          "full_residual": 1.0056589446857191e-14,
-          "float64_accepted": true,
-          "spectrum": {
-            "status": "numerical_check_passed",
-            "checked_pairs": 40,
-            "sampled_max_real": -0.0001548304287718098,
-            "max_absolute_pair_residual": 5.020027371746558e-15,
-            "max_relative_pair_residual": 9.035325539183106e-12,
-            "evidence": "saved metadata checked; eigenvectors are not bundled",
-            "mathematical_full_spectrum_proof": false
-          }
-        }
-      },
-      "manifest_files": 105
-    },
-    "model_loading_smoke": [
-      {
-        "surface": "frog",
-        "sha256": "9a29124ab1eb2ab82948378f75372095514f0afe033e0a50693fb969e3989038",
-        "prediction_type": "spots",
-        "warnings": {
-          "InconsistentVersionWarning_count": 110
-        }
-      },
-      {
-        "surface": "sphere5",
-        "sha256": "bf05b8ac78ded38a59dc52c415102f08825c3f866e5c8e16f3b4d7fdd59d17da",
-        "prediction_type": "spots",
-        "warnings": {
-          "InconsistentVersionWarning_count": 110
-        }
-      }
-    ],
-    "json_schema": "strict new outputs; 3 immutable legacy NaN/Infinity input files explicitly listed in submission/evidence/json_schema_audit.json",
-    "spectral_scope": "saved three-configuration eigenpair metadata audited; full spectra not recomputed/proven; frog unshifted LR failures preserved",
-    "linux_runtime": "not_run",
-    "expensive_training_and_generation": "not_run",
-    "removed_scripts": [
-      {
-        "path": "scripts/windows/setup_ssh.ps1",
-        "sha256": "529aadb22e3fd69d86725a46645dd864eb106752cb66c88aa26faab4361d701b",
-        "contains_personal_path": false,
-        "contains_ip": false,
-        "reason": "unreferenced host/network/remote-maintenance utility; never executed"
-      },
-      {
-        "path": "scripts/windows/reset_amcache.ps1",
-        "sha256": "091346a57ff8326dcf3e8f093ce565e3602c32416a6797cea805a931050c42bc",
-        "contains_personal_path": false,
-        "contains_ip": false,
-        "reason": "unreferenced host/network/remote-maintenance utility; never executed"
-      },
-      {
-        "path": "scripts/windows/reset_amcache.bat",
-        "sha256": "0cf76d1b9688ed7bba6509d1e735f00d836b14c388154fb1684135bc1510d426",
-        "contains_personal_path": false,
-        "contains_ip": false,
-        "reason": "unreferenced host/network/remote-maintenance utility; never executed"
-      },
-      {
-        "path": "scripts/windows/open_firewall.bat",
-        "sha256": "4dbb52628964d78658b54dda28bb41f76dd928dbc1103b86b90a20446f0df427",
-        "contains_personal_path": false,
-        "contains_ip": false,
-        "reason": "unreferenced host/network/remote-maintenance utility; never executed"
-      },
-      {
-        "path": "scripts/windows/net_diag.ps1",
-        "sha256": "31d71fb20bc56390b011505e0b4bf7a48d886d83655d57f3064b8b9f8168dfce",
-        "contains_personal_path": false,
-        "contains_ip": true,
-        "reason": "unreferenced host/network/remote-maintenance utility; never executed"
-      },
-      {
-        "path": "scripts/windows/crash_info.ps1",
-        "sha256": "f579b64c4af82eb9e3e9374a190b84e3a42bea9cce8f095b334c5658051b690f",
-        "contains_personal_path": false,
-        "contains_ip": false,
-        "reason": "unreferenced host/network/remote-maintenance utility; never executed"
-      },
-      {
-        "path": "scripts/windows/push_from_mac.sh",
-        "sha256": "316754fb85bd3a7c83a03fa9cf15d1114d20a51e0505b8724cc11e8b06c37bab",
-        "contains_personal_path": true,
-        "contains_ip": false,
-        "reason": "unreferenced host/network/remote-maintenance utility; never executed"
-      },
-      {
-        "path": "scripts/windows/stop_jobs.bat",
-        "sha256": "c8c032170c13ac0cdae73dba1999cc41628e4cf76b7c8a945cac93e819add612",
-        "contains_personal_path": false,
-        "contains_ip": false,
-        "reason": "unreferenced host/network/remote-maintenance utility; never executed"
-      }
-    ],
-    "task3_best_match": {
-      "script": "scripts/inversion_best_match.py",
-      "files": "submission/task3_inversion/best_match/",
-      "candidates": 66,
-      "selected": "cvt_3, 20 initial spots, seed 2003 -> 16 spots",
-      "J": 1.554,
-      "J_previous_representative": 1.95,
-      "full_residual": 2.03e-14,
-      "spectral_status": "numerical_check_passed (three shift-invert configurations)",
-      "cross_platform": "Windows and Mac select the same initial state; J equal to 6 digits",
-      "selected_layout": "cvt_3 (uniform CVT), not anchored target layout",
-      "ai_scope": "AI predicts steady profile/count; target-derived and CVT layouts are both candidates; no equal-budget ablation"
-    },
-    "portable_verify": "submission_workflow.py verify: strict on bit-identical operators (Windows x86); on other CPUs only the L/M bit fingerprint may differ -> mesh hash, mass and full residual rechecked",
-    "named_build": "i03_package.py --team <name>: draft notice/section removed, VALIDATION.md not packaged; acceptance PASS with a test name",
-    "generalization": {
-      "script": "scripts/generalization_eval.py",
-      "evidence": "submission/evidence/generalization/",
-      "test_set": "32 Sobol (F,k) points x 2 seeds per surface = 128 PDE numerical endpoints; full steady 73 (frog 57/64, sphere 16/64); spectrum-checked steady endpoints: frog 50, sphere 16 (Windows laptop)",
-      "type_accuracy_v1": {
-        "frog": 0.688,
-        "sphere5": 0.891
-      },
-      "type_accuracy_v2": {
-        "frog": 0.922,
-        "sphere5": 0.953
-      },
-      "kappa0_rel_median_v1": {
-        "frog": 0.034,
-        "sphere5": 0.022
-      },
-      "kappa0_rel_median_v2": {
-        "frog": 0.027,
-        "sphere5": 0.017
-      },
-      "physics_features_v2p": "no additional gain",
-      "formal_results_changed": false,
-      "steady_counts": {
-        "total": 128,
-        "frog": 57,
-        "sphere5": 16,
-        "frog_total": 64,
-        "sphere5_total": 64
-      },
-      "type_accuracy_v2_scope": "all 64 PDE endpoints per surface; not a full-steady success rate",
-      "v2_steady_subset_accuracy": {
-        "frog": {
-          "correct": 53,
-          "n": 57,
-          "accuracy": 0.9298245614035088
-        },
-        "sphere5": {
-          "correct": 16,
-          "n": 16,
-          "accuracy": 1.0
-        }
-      },
-      "v1_steady_subset_accuracy": {
-        "frog": {
-          "correct": 39,
-          "n": 57,
-          "accuracy": 0.6842105263157895
-        },
-        "sphere5": {
-          "correct": 16,
-          "n": 16,
-          "accuracy": 1.0
-        }
-      }
-    },
-    "sphere_stripes_bandcount": {
-      "script": "scripts/sphere_bandcount.py",
-      "evidence": "submission/evidence/sphere_bandcount/",
-      "axes": 10,
-      "stable_6_bands": 10,
-      "stable_7_bands": 0,
-      "lr_check": "seeds 1, 5 agree",
-      "previous_random_phase": "9/23 without positive mode",
-      "formal_results_changed": false,
-      "selected_band_counts": "10/10 axes selected 6 bands; 7 bands stable 0/10; formal 7-band seed2 is an independent branch"
-    },
-    "active_learning_and_end_to_end": {
-      "script": "scripts/active_learning.py",
-      "evidence": "submission/evidence/active_learning/",
-      "v3_adopted": false,
-      "reason": "boundary uncertainty is multistability; no reliable gain on validation, lower on test",
-      "end_to_end_frog_heldout": {
-        "pde": "22/24, median steps 25875",
-        "ai_v1": "24/24, 15062",
-        "ai_v2": "23/24, 10875 (about 2.4x)"
-      },
-      "final_network": "v2 (dense self-generated data)",
-      "formal_results_changed": false,
-      "metric_scope": "median integration steps among completed runs; NOT wall-clock acceleration",
-      "v2_completed": "23/24",
-      "pde_completed": "22/24",
-      "v1_legacy": "24/24, 15062.5 median steps, historical summary without per-run records"
-    },
-    "review_2026_10_23": {
-      "task3_extra_candidates": "180 more (246 total); best stays the submitted 16-spot state, J 1.554",
-      "sphere_spots_thomson_layout": "11/23 complete and stable vs CVT 14/23; not adopted",
-      "formal_results_changed": false
-    },
-    "evidence_audit_2026_10_23": {
-      "generalization_full_steady": "73/128 (frog 57/64, sphere 16/64)",
-      "v2_scope": "type accuracy on all PDE endpoints; sphere steady-subset v1=v2=16/16",
-      "status": "docs corrected; MATs/models/ZIP payload hashes to be revalidated after rebuild"
-    }
-  }
+  "public_history_notice": "Paths in immutable historical execution records remain; this commit does not erase existing Git history."
 }

@@ -71,6 +71,13 @@ def render_documents(root, quality, tests_run, release=None):
     handover = handover.replace('正式 4 组结果仍由 v1 网络生成，报告与 README_提交 已写明"复赛更新改用 v2"。',
                                "正式 4 组结果仍由 v1 网络生成；研究保留的改进模型为 v2，不能说正式结果已经改用 v2。")
     handover = handover.replace("--font <CJK 字体> --team <队名>`", "--font <CJK 字体> --team <队名> --test-results <本轮测试JSON>`")
+    # Maintained public prose is editable; immutable audit records are not sanitized.
+    import re
+    handover = re.sub(r"(?m)^- Windows 笔记本上的工作目录.*$",
+        "- 本地工作目录和虚拟环境依设备配置；公开文档使用仓库相对路径，不记录个人目录。", handover)
+    handover = re.sub(r"秒级（Mac 用 .*?）", "秒级（显式提供支持中文和数学符号的字体文件）", handover)
+    handover = handover.replace("（建议删除，历史在 Git 中）", "（保留供回退；当前文件以 DELIVERY_VALIDATION.json 为准）")
+    handover = handover.replace("Windows 重建结果同步（zip SHA256", "历史 Windows 重建记录同步（非当前验收包；zip SHA256")
     submission_path = next((root / "submission").glob("README_*.md"))
     submission = submission_path.read_text(encoding="utf-8")
     submission = replace_section(submission, "## 2.", "## 3.", inversion_markdown(c))
@@ -90,6 +97,7 @@ def render_documents(root, quality, tests_run, release=None):
         from scripts.submission_workflow import manifest_path
         report_path = manifest_path(release["report"])
         zip_path = manifest_path(release["zip"])
+        tests_path = manifest_path(release.get("unit_tests", "evidence/release/unit_tests.json"))
         current = ("## 当前报告\n\n"
                    f"本轮两页技术报告：`{report_path}`，独立于答案 ZIP 提交。队名仍为待填。\n\n"
                    f"本轮草稿 ZIP：`{zip_path}`。旧 PDF 和旧 ZIP 均保留，不作为本轮验收对象。\n\n"
@@ -97,8 +105,12 @@ def render_documents(root, quality, tests_run, release=None):
         submission = submission[:submission.index("## 当前报告")] + current
         readme = re.sub(r"(?m)^  report/初赛技术报告_v3.pdf.*$", f"  {report_path}   本轮两页报告；旧报告保留", readme)
         readme = re.sub(r"(?m)^  drafts/待填_初赛_AI-MECH-2026-002_result.zip.*$", f"  {zip_path}   本轮待填队名草稿", readme)
+        readme = re.sub(r"(?m)^  report/.*本轮两页报告.*$", f"  {report_path}   本轮两页报告；旧报告保留", readme)
+        readme = re.sub(r"(?m)^  drafts/.*本轮待填队名草稿.*$", f"  {zip_path}   本轮待填队名草稿", readme)
         readme = readme.replace("当前 `submission/drafts/` ZIP 保留为上一版快照，尚未包含阶段 3 修订；第 7 阶段统一重建，队名仍为待填。",
             f"本轮报告为 `submission/{report_path}`；草稿为 `submission/{zip_path}`。旧包保留，实际验收状态见 DELIVERY_VALIDATION.json。")
+        readme = re.sub(r"(?m)^本轮报告为 .*旧包保留.*$",
+            f"本轮报告为 `submission/{report_path}`；草稿为 `submission/{zip_path}`。旧包保留，实际验收状态见 DELIVERY_VALIDATION.json。", readme)
         readme = readme.replace("提交包与报告已完成工程验收（历史基准；本次验收见 `submission/VALIDATION.md`）。",
             "当前版本与本轮验收状态见 `DELIVERY_VALIDATION.json`；旧验收日志只作历史证据。")
         readme = re.sub(r"(?m)^> 最新交接.*$", "> 当前交接：见 [HANDOVER.md](HANDOVER.md)；本轮版本与验收见 DELIVERY_VALIDATION.json。", readme)
@@ -111,16 +123,24 @@ def render_documents(root, quality, tests_run, release=None):
             "以下第 2 节起为历史操作及其耗时，不用作当前通过证据。\n"
             "<!-- end final release locations -->\n\n") + history
         validation = ("# 本轮交付验收范围\n\n"
-            f"实际执行 {tests_run} 项单元测试并通过，记录见 evidence/release/unit_tests.json。"
+            f"实际执行 {tests_run} 项单元测试并通过，记录见 {tests_path}。"
             "本文件在构建前生成，最终 CRC、逐文件 SHA256、包内代码回读与报告验收结论由独立验收产生，"
             "见仓库根 DELIVERY_VALIDATION.json，避免自引用包哈希。\n\n"
             "四组正式 MAT、证书、模型、反演和最佳匹配原文件保持原字节。"
             "四组正式谱证据为保存元数据验收；最佳匹配另有保存向量可重算特征对残差。有限谱不是全谱证明。\n\n"
+            "当前严格协议强制要求最佳匹配三配置及保存向量独立残差通过；历史摘要不足不能替代该检查。"
+            "显式 --historical-compatibility 仅报告 LIMITED_EVIDENCE，不得用于正式冻结。\n\n"
             f"泛化共 {quality['totals']['endpoints']} 条数值终态，其中 {quality['totals']['steady']} 条完整残差记录达标；球面稳态测试全部均匀态。"
             + E.claims(c)["efficiency"] + "历史实验不冒充本轮从头复跑。\n\n"
             "历史 JSON 扩展文件及哈希见 evidence/json_schema_audit.json；未知非标准 JSON 必须拒绝。"
             "历史模型 sklearn 版本不同，保留加载警告；本机推理通过不保证跨版本 pickle 兼容。\n\n"
             f"本轮报告：{report_path}。队名仍待填，当前为工程草稿，不能直接上传。\n")
+        provenance = ("\n### 版本与公开历史范围\n\n"
+            "验收 Git 基线、验收源码指纹和后续发布提交分别记录；历史基线不等于发布提交。"
+            "使用逐文件 SHA256 确认提交源码与验收内容对应，不在提交内预写自身最终 SHA。\n\n"
+            "原始审计环境记录可能保留机器路径或用户名；这些文件为不可变历史证据。"
+            "本轮只清理当前维护文档，不改写历史记录或 Git 历史，也不声称旧公开信息已被删除。\n")
+        handover += provenance if "### 版本与公开历史范围" not in handover else ""
     documents = {"README.md": readme, "HANDOVER.md": handover,
             submission_path.relative_to(root).as_posix(): submission,
             "submission/evidence/generalization/QUALITY_BREAKDOWN.json": json.dumps(quality, ensure_ascii=False, indent=1, allow_nan=False) + "\n",

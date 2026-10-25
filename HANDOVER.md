@@ -48,7 +48,7 @@
 
 任务 3 在固定 F=0.0277124、k=0.0600398 下搜索 66 个初值，选中 cvt_3：初始 20 斑，最终 16 斑，目标 15 斑。同一特征距离 J 为 1.950 → 1.554。反演估计的另一目标指标 1.748 与此不同，不能混用。F/k 不因此改变；未执行非 AI 等预算多初值对照，不能证明 AI 的独立因果贡献。最佳匹配历史谱仅保留三组配置摘要。另有独立补充证据，实际保存三组共 40 个特征对及向量，绑定同一 MAT；最大采样实部 -1.861e-04，验收可重算保存向量的残差。这不是全谱证明，也不表示本轮重新运行多初值搜索。
 
-本轮实际执行 **336 项单元测试**并通过；数量来自执行记录并绑定当前源码。历史 89、95、99 项属于不同版本，不代表当前测试数。
+本轮实际执行 **350 项单元测试**并通过；数量来自执行记录并绑定当前源码。历史 89、95、99 项属于不同版本，不代表当前测试数。
 历史多种子与旧运行耗时没有在本轮重新计算；有限谱数值检查不是全谱数学证明。
 <!-- end generated scientific evidence -->
 
@@ -57,7 +57,7 @@
 <!-- final release locations -->
 ### 本轮交付与历史记录
 
-两页报告：`submission/report/stage7_20261025T125459/初赛技术报告_v3_最终修订.pdf`；草稿包：`submission/drafts/stage7_20261025T125459/待填_初赛_AI-MECH-2026-002_result.zip`。
+两页报告：`submission/report/stage8_20261025T173837/初赛技术报告_v3_严格验收修订.pdf`；草稿包：`submission/drafts/stage8_20261025T173837/待填_初赛_AI-MECH-2026-002_result.zip`。
 
 当前测试、资产保护、包哈希和独立验收见 `DELIVERY_VALIDATION.json`。以下第 2 节起为历史操作及其耗时，不用作当前通过证据。
 <!-- end final release locations -->
@@ -80,7 +80,7 @@
 
 提交包（`submission/`）：新增 `task3_inversion/best_match/` 和 `evidence/` 下 5 个目录（generalization、sphere_bandcount、
 active_learning、best_match_search、sphere_spots_layout）；`PACKAGE_MANIFEST.json`、`code/scripts/` 与 `drafts/` 草稿 zip 已按
-Windows 重建结果同步（zip SHA256 `465b629a…`）。
+历史 Windows 重建记录同步（非当前验收包；zip SHA256 `465b629a…`）。
 
 `results/` 下是各次运行的摘要与候选记录；原始中间文件（含机器名的原始数据、计算记录、日志、未采用的模型）已在 `.gitignore` 中排除。
 `results/ai_generation_fine/*/model.joblib` 是 v2 网络（报告里的泛化数字就来自这两个文件）。
@@ -94,16 +94,16 @@ Windows 重建结果同步（zip SHA256 `465b629a…`）。
 | 泛化误差 | `python scripts/generalization_eval.py testset --workers 22`，再 `train`、`evaluate` | 测试集约 70 分钟（Windows） |
 | 主动学习 / 端到端 | `python scripts/active_learning.py select / run / train / validate / e2e --model v2` | 各约 20–60 分钟 |
 | 球面条纹择稳 | `python scripts/sphere_bandcount.py --seeds 1 2 3 4 5 6 7 8 9 10 --workers 8` | Mac 约 25 分钟 |
-| 报告 | `python scripts/report_v3.py --out <新文件> --font <CJK 字体> --team <队名> --test-results <本轮测试JSON>` | 秒级（Mac 用 `/Library/Fonts/Arial Unicode.ttf`，Windows 用 `C:\Windows\Fonts\simhei.ttf`） |
+| 报告 | `python scripts/report_v3.py --out <新文件> --font <CJK 字体> --team <队名> --test-results <本轮测试JSON>` | 秒级（显式提供支持中文和数学符号的字体文件） |
 | 打包与验收 | `python scripts/i03_package.py --team <队名> --out <目录>`；`python scripts/i03_verify_package.py --zip <zip> --out <目录> --report <pdf>` | 约 5 分钟 |
 
 ## 4. 注意事项
 
 - **队名仍是"待填"**。上传前：`i03_package.py --team 队名` 重新打包，`report_v3.py --team 队名` 重新生成报告，再跑一次验收。
-- `submission/` 根目录的旧 zip 和 `report/初赛技术报告.pdf`、`_交付草稿_v2.pdf` 都是旧稿，**上传时别拿错**（建议删除，历史在 Git 中）。
+- `submission/` 根目录的旧 zip 和 `report/初赛技术报告.pdf`、`_交付草稿_v2.pdf` 都是旧稿，**上传时别拿错**（保留供回退；当前文件以 DELIVERY_VALIDATION.json 为准）。
 - 仓库目前是公开的；推送后所有新结果对外可见。
 - 正式 4 组结果仍由 v1 网络生成；研究保留的改进模型为 v2，不能说正式结果已经改用 v2。
-- Windows 笔记本上的工作目录是 `C:\Users\18650\turing2`（精简 main 的副本）；venv 已装 PyMuPDF。打游戏前确认没有 Python 进程。
+- 本地工作目录和虚拟环境依设备配置；公开文档使用仓库相对路径，不记录个人目录。
 
 ## 5. 待办（按优先级）
 
@@ -113,3 +113,9 @@ Windows 重建结果同步（zip SHA256 `465b629a…`）。
 4. 可选：用 v2 重新生成正式结果并重出证书（约 3–4 小时，主要是一致性，对分数影响小）。
 5. k 偏低 3.2%：没有确定的修法，真值已知时改方法易被视为调参，暂不建议。
 6. 复赛报告（≥1000 字）；总决赛任务 4（力学调控）与 PPT（≤20 页）。
+
+### 版本与公开历史范围
+
+验收 Git 基线、验收源码指纹和后续发布提交分别记录；历史基线不等于发布提交。使用逐文件 SHA256 确认提交源码与验收内容对应，不在提交内预写自身最终 SHA。
+
+原始审计环境记录可能保留机器路径或用户名；这些文件为不可变历史证据。本轮只清理当前维护文档，不改写历史记录或 Git 历史，也不声称旧公开信息已被删除。

@@ -329,7 +329,8 @@ class SavedSpectralEvidenceTests(unittest.TestCase):
         return submission
 
     def test_package_verification_keeps_historical_summary_insufficient(self):
-        result = SW.verify_best_match(self.package_fixture(), self.g)
+        result = SW.verify_best_match(self.package_fixture(), self.g, historical_compatibility=True)
+        self.assertEqual(result["status"], "LIMITED_EVIDENCE")
         self.assertTrue(result["pde_residual_recomputed"])
         self.assertEqual(result["historical_spectrum_status"], "insufficient_evidence")
         self.assertFalse(result["saved_spectral_metadata_verified"])

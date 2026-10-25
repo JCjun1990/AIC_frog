@@ -71,10 +71,31 @@ def sha(path):
     return digest.hexdigest()
 
 
-def check(name, passed, detail=""):
-    CHECKS.append({"check": name, "passed": bool(passed), "detail": detail})
-    print(f"[{'x' if passed else ' '}] {name} {detail}", flush=True)
+def check(name, passed, detail="", *, limited=False):
+    CHECKS.append({"check": name, "passed": bool(passed) and not limited, "detail": detail,
+                   "status": "LIMITED_EVIDENCE" if limited else "PASS" if passed else "FAIL"})
+    print(f"[{'LIMITED_EVIDENCE' if limited else 'x' if passed else ' '}] {name} {detail}", flush=True)
     return bool(passed)
+
+
+def verify_best_match_checks(extracted, geom, workflow, *, historical_compatibility=False):
+    """Separate complete stationarity from mandatory current saved-vector evidence."""
+    try:
+        steady = workflow.verify_best_match_steady(extracted, geom)
+        check("inversion_best_match_is_steady", steady["pde_residual_recomputed"], json.dumps(steady))
+    except Exception as exc:
+        check("inversion_best_match_is_steady", False, repr(exc))
+        check("inversion_best_match_saved_vector_spectrum", False, "full-steady MAT validation failed")
+        return
+    try:
+        evidence = workflow.verify_best_match(extracted, geom, historical_compatibility=historical_compatibility)
+        if historical_compatibility:
+            check("inversion_best_match_saved_vector_spectrum", False, json.dumps(evidence), limited=True)
+        else:
+            check("inversion_best_match_saved_vector_spectrum", workflow.current_saved_vectors_passed(evidence),
+                  json.dumps(evidence))
+    except Exception as exc:
+        check("inversion_best_match_saved_vector_spectrum", False, repr(exc))
 
 
 def unsafe_zip_members(archive):
@@ -102,6 +123,7 @@ def main():
     parser.add_argument("--zip", type=Path, required=True)
     parser.add_argument("--out", type=Path, default=ROOT / "results" / "i03_delivery" / "acceptance")
     parser.add_argument("--report", type=Path, help="optional report PDF for consistency checks")
+    parser.add_argument("--historical-compatibility", action="store_true", help="legacy review only; cannot produce a formal PASS")
     args = parser.parse_args()
     args.zip = args.zip.resolve()
     args.out = args.out.resolve()
@@ -259,17 +281,8 @@ def main():
               f"F={estimate['F']:.6f} k={estimate['k']:.6f}")
         check("inversion_mat_is_steady", inv_residual <= 1e-11,
               f"residual={inv_residual:.3e}, pattern={inv_shape['type']}/{inv_shape['n_components']}")
-        best = extracted / "task3_inversion/best_match/solution_best_match.mat"
-        if best.is_file():                      # generated pattern closest to the target (inversion_best_match.py)
-            ub, vb = read_mat_fields(best, geometries["frog"].n)
-            best_residual = full_steady_residual(geometries["frog"], params, ub, vb)["full_joint_rms_over_F"]
-            best_shape = pattern_stats(geometries["frog"], vb)
-            check("inversion_best_match_is_steady", best_residual <= 1e-11,
-                  f"residual={best_residual:.3e}, pattern={best_shape['type']}/{best_shape['n_components']}")
-            evidence = workflow.verify_best_match(extracted, geometries["frog"])
-            check("inversion_best_match_evidence_scope", evidence["pde_residual_recomputed"] and
-                  (evidence["saved_spectral_metadata_verified"] or evidence["historical_spectrum_status"] == "insufficient_evidence"),
-                  json.dumps(evidence, ensure_ascii=False))
+        verify_best_match_checks(extracted, geometries["frog"], workflow,
+                                 historical_compatibility=args.historical_compatibility)
         md = (extracted / "task3_inversion/summary.md").read_text(encoding="utf-8")
         check("inversion_report_has_errors", ("误差" in md) and ("波长" in md or "wavelength" in md))
         pngs = [extracted / "task3_inversion" / name for name in
@@ -292,7 +305,7 @@ def main():
             pages = document.page_count
             text = "".join(page.get_text() for page in document)
             document.close()
-            check("report_page_limit", pages <= 2, f"{pages} pages")
+            check("report_page_limit", pages == 2, f"{pages} pages")
             expected = set()
             for key in TASKS:
                 summary = json.loads((extracted / key / "summary.json").read_text(encoding="utf-8"))
@@ -325,12 +338,14 @@ def main():
 
 
 def write_report(args, extracted, work, ref):
-    failed = [item for item in CHECKS if not item["passed"]]
-    status = "PASS" if CHECKS and not failed else "FAIL"
+    failed = [item for item in CHECKS if not item["passed"] and item.get("status") != "LIMITED_EVIDENCE"]
+    limited = getattr(args, "historical_compatibility", False) or any(item.get("status") == "LIMITED_EVIDENCE" for item in CHECKS)
+    status = "FAIL" if failed or not CHECKS else "LIMITED_EVIDENCE" if limited else "PASS"
     document = {
         "schema_version": "aic-frog-i03-acceptance-v1",
         "generated_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "status": status,
+        "verification_mode": "explicit_historical_compatibility" if limited else "current_saved_vectors_v1",
         "zip": ref,
         "extraction": {"temporary_directory": str(work), "kept": False,
                        "note": "extracted outside the repository; removed after the checks"},
@@ -347,7 +362,7 @@ def write_report(args, extracted, work, ref):
              "| # | 检查 | 结果 | 说明 |", "|---|---|---|---|"]
     for index, item in enumerate(CHECKS, 1):
         detail = str(item["detail"]).replace("|", "/")[:160]
-        lines.append(f"| {index} | {item['check']} | {'PASS' if item['passed'] else 'FAIL'} | {detail} |")
+        lines.append(f"| {index} | {item['check']} | {item.get('status', 'PASS' if item['passed'] else 'FAIL')} | {detail} |")
     lines += ["", "所有检查均在解包后的文件上执行；MAT 残差用包内 `code/turing_rd` 与包内 "
                   "`frog.mat` 重新计算，未使用仓库中的结果缓存。"]
     (args.out / "acceptance_report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")

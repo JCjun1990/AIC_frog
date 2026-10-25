@@ -1,0 +1,25 @@
+{
+  "maintained_documents_checked": [
+    "README.md",
+    "HANDOVER.md",
+    "submission/README_提交.md",
+    "submission/VALIDATION.md",
+    "scripts/report_v3.py"
+  ],
+  "unnecessary_absolute_paths_in_maintained_documents": [],
+  "immutable_historical_files_with_environment_paths": [
+    "results/baseline/sphere_spots/summary.json",
+    "results/baseline/sphere_stripes/summary.json",
+    "results/evidence_consistency_audit/20261023T230500/ENVIRONMENT.json",
+    "results/evidence_consistency_audit/20261024T150800/ENVIRONMENT.json",
+    "results/evidence_consistency_audit/20261024T150800/REGRESSION_TESTS.md",
+    "results/evidence_consistency_audit/20261024T150800/acceptance_report.json",
+    "results/evidence_consistency_audit/20261024T150800/acceptance_report.md",
+    "results/evidence_consistency_audit/20261024T150800/installed_acceptance_report.json",
+    "results/evidence_consistency_audit/20261024T150800/installed_acceptance_report.md",
+    "results/final_integration_20261025T125459/acceptance_report.json",
+    "results/final_integration_20261025T125459/acceptance_report.md"
+  ],
+  "historical_records_unchanged": true,
+  "scope": "Paths in immutable historical execution records remain; this commit does not erase existing Git history."
+}
