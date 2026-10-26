@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 import hashlib
 import importlib.metadata
 import json
+import math
 from pathlib import Path
 import platform
 from types import SimpleNamespace
@@ -240,7 +241,7 @@ def save_certified_mat(path, geom, p, u, v, *, seed, tol=DEFAULT_RESIDUAL_TOL,
 
 
 def validate_certificate(path, certificate, *, expected_params, expected_seed,
-                         expected_geometry, tol=DEFAULT_RESIDUAL_TOL) -> dict:
+                         expected_geometry, tol=DEFAULT_RESIDUAL_TOL, residual_atol=1e-15) -> dict:
     """Validate the binding and independently repeat the read-back PDE acceptance.
 
     ``expected_geometry`` must be the real Geometry object, not merely a label or
@@ -276,8 +277,44 @@ def validate_certificate(path, certificate, *, expected_params, expected_seed,
             if cert.get(section, {}).get(field) != value:
                 raise ValueError(f"MAT certificate {section}.{field} mismatch")
     value = res.get("value")
-    if value is None or not np.isfinite(value) or not np.isclose(value, fresh["residual"]["value"], rtol=1e-8, atol=1e-15):
+    if value is None or not np.isfinite(value) or not np.isclose(value, fresh["residual"]["value"], rtol=1e-8, atol=residual_atol):
         raise ValueError("MAT certificate residual does not match read-back recomputation")
     if cert.get("stability_status") != "not_evaluated_by_i01":
         raise ValueError("I01 certificate cannot certify linear stability")
     return fresh
+
+
+# geometry_identity fields that describe the input mesh. Only actual_L_M_sha256 (and mass_sum in its last bits)
+# depend on how a given CPU / BLAS / compiler rounds the assembled cotangent weights. With such an operator a
+# residual at the round-off floor (~1e-14) is recomputed as another round-off-floor value (measured on ARM:
+# 2.03e-14 -> 2.85e-14), so it must agree absolutely within the fixed 1e-12
+# cross-machine agreement budget (one tenth of the 1e-11 acceptance limit).
+STABLE_GEOMETRY_FIELDS = ("name", "n_vertices", "n_faces", "laplacian", "mesh_sha256")
+MASS_SUM_RTOL = 1e-12
+PORTABLE_RESIDUAL_ATOL = 1e-12
+
+
+def validate_certificate_portable(path, certificate, *, expected_geometry, **kwargs) -> dict:
+    """validate_certificate, tolerating only a different bit fingerprint of the assembled L/M on another machine.
+
+    The mesh hash, counts, operator type and total mass must still match; every other check (MAT hash,
+    parameters, seed, tolerance, read-back residual <= tolerance) is then repeated by validate_certificate with
+    this machine's operator, and the recorded residual must agree with it to PORTABLE_RESIDUAL_ATOL.
+    """
+    try:
+        return validate_certificate(path, certificate, expected_geometry=expected_geometry, **kwargs)
+    except ValueError as exc:
+        if str(exc) != "MAT certificate geometry mismatch":
+            raise
+        cert = json.loads(Path(certificate).read_text(encoding="utf-8")) if isinstance(certificate, (str, Path)) else certificate
+        recorded, mine = cert.get("geometry"), geometry_identity(expected_geometry)
+        if (not isinstance(recorded, Mapping) or set(recorded) != set(mine)
+                or any(recorded[field] != mine[field] for field in STABLE_GEOMETRY_FIELDS)
+                or not isinstance(recorded["mass_sum"], float)
+                or not math.isclose(recorded["mass_sum"], mine["mass_sum"], rel_tol=MASS_SUM_RTOL)):
+            raise
+        fresh = validate_certificate(path, dict(cert, geometry=mine), expected_geometry=expected_geometry,
+                                     residual_atol=PORTABLE_RESIDUAL_ATOL, **kwargs)
+        fresh["verification_mode"] = ("portable: L/M bit fingerprint differs (floating-point rounding); "
+                                      "mesh, mass and full residual rechecked")
+        return fresh

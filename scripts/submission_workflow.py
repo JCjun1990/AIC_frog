@@ -250,7 +250,7 @@ def portable_acceptance(mat, cert, geom, exc, tol=1e-11, abs_agree=1e-12):
     the operator type and the total mass; the full residual is recomputed here with this machine's
     robust operator and must be <= tol and agree with the recorded value to abs_agree."""
     from turing_rd import GSParams
-    from turing_rd.result_io import geometry_identity, verify_mat
+    from turing_rd.result_io import geometry_identity, validate_certificate_portable
     if str(exc) != "MAT certificate geometry mismatch":
         raise exc
     mine, rec = geometry_identity(geom), cert.get("geometry", {})
@@ -262,7 +262,14 @@ def portable_acceptance(mat, cert, geom, exc, tol=1e-11, abs_agree=1e-12):
     if cert.get("mat_sha256") != sha(mat):
         raise ValueError("MAT certificate mat_sha256 mismatch") from exc
     params = GSParams(**cert["parameters"])
-    fresh = verify_mat(mat, geom, params, seed=cert["seed"], tol=tol, provenance=cert.get("provenance"))
+    # Reuse every strict certificate check after the permitted operator mismatch.
+    # A local residual alone cannot validate a certificate's formula, pass flags,
+    # tolerance or claimed stability scope.
+    try:
+        fresh = validate_certificate_portable(mat, cert, expected_geometry=geom,
+                                              expected_params=params, expected_seed=cert["seed"], tol=tol)
+    except ValueError as error:
+        raise ValueError("portable read-back acceptance failed: " + str(error)) from error
     recorded = cert.get("residual", {}).get("value")
     value = fresh["residual"]["value"]
     if not (fresh["accepted"] and cert.get("accepted") and recorded is not None and recorded <= tol

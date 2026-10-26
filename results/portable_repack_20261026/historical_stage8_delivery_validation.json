@@ -1,0 +1,246 @@
+{
+  "schema_version": "final-evidence-release-v2",
+  "release_id": "stage8_20261025T173837",
+  "freeze_status": "READY_TO_FREEZE_WITH_LIMITATIONS",
+  "engineering_status": "PASS",
+  "upload_ready": false,
+  "code_provenance": {
+    "validation_git_base": "a637d1dd8be29c7b128ef9325e9b970ab5a3aa28",
+    "validated_source_fingerprint": "d66c438ddb82be450be7b524afec144e08b2f7ffa201ed9ea262b731129c3433",
+    "source_snapshot": "submission/evidence/releases/stage8_20261025T173837/code_snapshot.json",
+    "historical_release_binding": {
+      "historical_validation_git_base": "f643a04ca99ef76378490f30a0c663e8831c763e",
+      "validated_source_fingerprint": "490a3a32cdc08bdef3b23725cc58a689a03ec1f957b6fe6c4bfbd7123108c810",
+      "later_published_commit": "a637d1dd8be29c7b128ef9325e9b970ab5a3aa28",
+      "source_file_count": 93,
+      "committed_and_working_source_match": true,
+      "source_drift_after_publish": false,
+      "distinction": "The historical validation base is not the release commit; all committed source bytes match the validated source."
+    },
+    "publication_commit_binding": "The actual later Git commit is reported after commit/push and checked against every source SHA256. No self-referential commit SHA is embedded here."
+  },
+  "unit_tests": {
+    "schema_version": "executed-unittest-v1",
+    "tests_run": 350,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true,
+    "source_fingerprint": "d66c438ddb82be450be7b524afec144e08b2f7ffa201ed9ea262b731129c3433",
+    "sources_unchanged": true,
+    "wall_seconds": 28.519378999990295
+  },
+  "new_regression_tests": 14,
+  "protected_assets": {
+    "unchanged": 55,
+    "record": "results/final_hardening_20261025T173837/asset_hashes.json",
+    "additional_immutable_historical_files": 251
+  },
+  "current_zip": {
+    "path": "submission/drafts/stage8_20261025T173837/待填_初赛_AI-MECH-2026-002_result.zip",
+    "sha256": "acc48f829a3b9db24085f93a802f431975db5e07244148b97fc0627f5fd77f12",
+    "bytes": 32564247,
+    "manifest_payload_files": 137,
+    "zip_entries_including_manifest": 138,
+    "independent_checks": 26,
+    "acceptance": "results/final_hardening_20261025T173837/acceptance_report.json",
+    "verification_mode": "current_saved_vectors_v1",
+    "workspace_correspondence": "PASS"
+  },
+  "current_pdf": {
+    "path": "submission/report/stage8_20261025T173837/初赛技术报告_v3_严格验收修订.pdf",
+    "sha256": "8b2e3ecdca9ab806bac725f7aed65429004fb24be6021981b210baa946db76db",
+    "pages": 2,
+    "text_and_rendering_passed": true
+  },
+  "best_match_checks": {
+    "complete_steady": "PASS",
+    "historical_spectrum_status": "insufficient_evidence",
+    "current_saved_vector_spectrum_status": "numerical_check_passed",
+    "saved_eigenpairs_checked": 40,
+    "mathematical_full_spectrum_proof": false
+  },
+  "workspace_verification": {
+    "status": "PASS",
+    "manifest_files": 137,
+    "formal_tasks": {
+      "task1_sphere/spots": {
+        "mat_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+        "full_residual": 8.422602727722893e-15,
+        "float64_accepted": true,
+        "verification_mode": "strict: bit-identical operator",
+        "spectrum": {
+          "status": "numerical_check_passed",
+          "checked_pairs": 40,
+          "sampled_max_real": -6.231004404613164e-06,
+          "max_absolute_pair_residual": 1.7287113905760838e-13,
+          "max_relative_pair_residual": 7.551918127315448e-10,
+          "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+          "evidence": "saved metadata checked; eigenvectors are not bundled",
+          "mathematical_full_spectrum_proof": false
+        }
+      },
+      "task1_sphere/stripes": {
+        "mat_sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
+        "full_residual": 2.4366269654958772e-14,
+        "float64_accepted": true,
+        "verification_mode": "strict: bit-identical operator",
+        "spectrum": {
+          "status": "numerical_check_passed",
+          "checked_pairs": 40,
+          "sampled_max_real": -1.4777975565754154e-06,
+          "max_absolute_pair_residual": 1.4283866417741944e-14,
+          "max_relative_pair_residual": 2.3296503863459255e-09,
+          "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+          "evidence": "saved metadata checked; eigenvectors are not bundled",
+          "mathematical_full_spectrum_proof": false
+        }
+      },
+      "task2_frog/spots": {
+        "mat_sha256": "19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb",
+        "full_residual": 2.1711302588470847e-14,
+        "float64_accepted": true,
+        "verification_mode": "strict: bit-identical operator",
+        "spectrum": {
+          "status": "numerical_check_passed",
+          "checked_pairs": 40,
+          "sampled_max_real": -0.00010348974019058204,
+          "max_absolute_pair_residual": 1.503716635453165e-14,
+          "max_relative_pair_residual": 9.550663303918817e-12,
+          "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+          "evidence": "saved metadata checked; eigenvectors are not bundled",
+          "mathematical_full_spectrum_proof": false
+        }
+      },
+      "task2_frog/stripes": {
+        "mat_sha256": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
+        "full_residual": 1.0056589446857191e-14,
+        "float64_accepted": true,
+        "verification_mode": "strict: bit-identical operator",
+        "spectrum": {
+          "status": "numerical_check_passed",
+          "checked_pairs": 40,
+          "sampled_max_real": -0.0001548304287718098,
+          "max_absolute_pair_residual": 5.020027371746558e-15,
+          "max_relative_pair_residual": 9.035325539183106e-12,
+          "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+          "evidence": "saved metadata checked; eigenvectors are not bundled",
+          "mathematical_full_spectrum_proof": false
+        }
+      }
+    },
+    "best_match": {
+      "available": true,
+      "pde_residual_recomputed": true,
+      "full_residual": 2.030535561466331e-14,
+      "mat_sha256": "4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c",
+      "historical_spectrum_status": "insufficient_evidence",
+      "historical_spectrum_failure_reasons": [
+        "configuration_0:untrusted_pair_absolute_tolerance",
+        "configuration_0:untrusted_pair_relative_tolerance",
+        "configuration_0:eigenpair_count_or_protocol_mismatch",
+        "configuration_0:missing_eigenpair_residuals",
+        "configuration_1:untrusted_pair_absolute_tolerance",
+        "configuration_1:untrusted_pair_relative_tolerance",
+        "configuration_1:eigenpair_count_or_protocol_mismatch",
+        "configuration_1:missing_eigenpair_residuals",
+        "configuration_2:untrusted_pair_absolute_tolerance",
+        "configuration_2:untrusted_pair_relative_tolerance",
+        "configuration_2:eigenpair_count_or_protocol_mismatch",
+        "configuration_2:missing_eigenpair_residuals",
+        "sampled_largest_real_parts_disagree",
+        "not_all_checked_eigenvalue_signs_resolved_negative"
+      ],
+      "saved_spectral_metadata_verified": true,
+      "eigenpair_residuals_recomputed_from_saved_vectors": true,
+      "current_saved_vector_spectrum_status": "numerical_check_passed",
+      "fresh_eigensolve_in_this_verification": false,
+      "mathematical_full_spectrum_proof": false,
+      "decision": {
+        "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+        "scope": "task3_three_shift_saved_vector_finite_check",
+        "required_configurations": [
+          {
+            "sigma": 0.001,
+            "which": "LM",
+            "k": 12
+          },
+          {
+            "sigma": 0.0,
+            "which": "LM",
+            "k": 20
+          },
+          {
+            "sigma": 1e-05,
+            "which": "LM",
+            "k": 8
+          }
+        ],
+        "full_steady_state": true,
+        "full_residual": 2.030535561466331e-14,
+        "full_residual_tolerance": 1e-11,
+        "found_reliable_positive": false,
+        "reliable_positive_eigenvalues": [],
+        "unresolved_near_zero_eigenvalues": [],
+        "checked_eigenpairs": 40,
+        "full_max_real_checked": -0.0001860545855782343,
+        "sampled_maxima": [
+          -0.0001860545855782343,
+          -0.00018605458557830116,
+          -0.00018605458557830834
+        ],
+        "configurations": 3,
+        "distinct_valid_shifts": [
+          0.0,
+          1e-05,
+          0.001
+        ],
+        "valid_direct_LR_runs": 0,
+        "all_requested_solves_and_pairs_validated": true,
+        "sampled_maxima_agree": true,
+        "sampled_maxima_agreement_tolerance": 1e-10,
+        "all_checked_signs_resolved_negative": true,
+        "numerical_check_passed": true,
+        "status": "numerical_check_passed",
+        "outcome": "passed",
+        "failure_reasons": [],
+        "relative_equilibrium_accepted_as_steady": false,
+        "rotation_projection": false,
+        "rotations_excluded_from_full_decision": false,
+        "mathematical_full_spectrum_proof": false
+      },
+      "status": "PASS",
+      "acceptance_protocol": "current_saved_vectors_v1"
+    }
+  },
+  "json": {
+    "strict_files": 36,
+    "legacy_files": 3
+  },
+  "static": {
+    "compiled_python_files": 142,
+    "runtime_copies_checked": 52,
+    "git_diff_check": "PASS",
+    "unexpected_deletions": [],
+    "credential_matches": [],
+    "immutable_historical_files_unchanged": 251
+  },
+  "historical_validation": {
+    "preserved_file": "results/final_hardening_20261025T173837/historical_stage7_delivery_validation.json",
+    "sha256": "948b22dd347084b790a0dc8591a8a9c81225d47219a86eddbfe79387cb39f602",
+    "meaning": "Immutable pre-commit stage7 validation, not the new release commit."
+  },
+  "freeze_blockers": [],
+  "upload_blockers": [
+    "Team name is still pending; rebuild the named report/ZIP and repeat acceptance before official upload."
+  ],
+  "accepted_scientific_limitations": [
+    "The sphere complete-steady test subset contains only 16 uniform states.",
+    "No equal-budget non-AI causal ablation.",
+    "Finite sampled spectra are not full-spectrum mathematical proofs.",
+    "2.38x is an integration-step median ratio, not wall-clock acceleration.",
+    "Legacy inversion reference records lack original complete fields; strict parameter sensitivity remains unknown.",
+    "Historical sklearn weight versions differ from this machine; no universal pickle compatibility or Linux execution is claimed."
+  ],
+  "public_history_notice": "Paths in immutable historical execution records remain; this commit does not erase existing Git history."
+}

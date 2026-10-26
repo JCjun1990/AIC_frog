@@ -12,7 +12,7 @@ import numpy as np
 
 from turing_rd import Geometry, SPOTS, icosphere
 from turing_rd import spectrum_evidence as S
-from turing_rd.result_io import save_certified_mat, validate_certificate_portable
+from turing_rd.result_io import file_sha256, save_certified_mat, validate_certificate_portable
 from turing_rd.spectral_policy import PAIR_ABSOLUTE_TOL, PAIR_RELATIVE_TOL
 from turing_rd.stability import eigenpair_diagnostics
 
@@ -91,6 +91,29 @@ class SpectralEvidencePortabilityTests(unittest.TestCase):
         def off(row):                                                     # still passing, but not what was saved
             row["residual_absolute_M"] += 1e-11
         with self.with_recomputed_pairs(off), self.assertRaisesRegex(ValueError, "residual"):
+            self.validate()
+
+    def test_recomputed_pde_failure_cannot_use_saved_passing_decision(self):
+        with self.with_recomputed_residual(2e-11), self.assertRaisesRegex(ValueError, "insufficient"):
+            self.validate()
+
+    def test_roundoff_agreement_cannot_override_current_pair_acceptance(self):
+        path = self.out / "certificate.json"
+        cert = json.loads(path.read_text(encoding="utf-8"))
+        budget = S.PAIR_RECOMPUTE_ATOL["residual_absolute_M"]
+        for report, artifact in zip(cert["configs"], cert["artifacts"]):
+            for row in report["pairs"]:
+                row["residual_absolute_M"] = PAIR_ABSOLUTE_TOL - .25 * budget
+            report_path = self.out / artifact["report_file"]
+            report_path.write_text(json.dumps(report), encoding="utf-8")
+            artifact["report_sha256"] = file_sha256(report_path)
+        cert["decision"] = S._decide(cert["configs"], cert["mat_certificate"]["residual"]["value"])
+        self.assertTrue(cert["decision"]["numerical_check_passed"])
+        path.write_text(json.dumps(cert), encoding="utf-8")
+        def current_failure(row):
+            row["residual_absolute_M"] = PAIR_ABSOLUTE_TOL + .25 * budget
+            row["residual_passed"] = False
+        with self.with_recomputed_pairs(current_failure), self.assertRaisesRegex(ValueError, "insufficient"):
             self.validate()
 
     def test_operator_rounding_on_another_machine_is_accepted(self):

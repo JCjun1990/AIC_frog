@@ -14,3 +14,6 @@ results/methodology_stage6_20261025T121811/best_match_spectrum/evidence/** -text
 
 # Preserve the historical release record copied into the final hardening audit.
 results/final_hardening_20261025T173837/** -text whitespace=cr-at-eol
+
+# Portable repack evidence includes a byte-preserved historical release record.
+results/portable_repack_20261026/** -text whitespace=cr-at-eol

@@ -1,0 +1,146 @@
+{
+  "protocol": "portable-repack-review-v1",
+  "reviewed_branch": "fix/portable-verify-and-seeds",
+  "reviewed_commit": "e5baf02b818bb1ae0bf0b38358597651f7dea43e",
+  "original_unit_tests": {
+    "schema_version": "executed-unittest-v1",
+    "tests_run": 364,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true,
+    "source_fingerprint": "2af06660d58d8c7c02de740d082fa7542132dfd6dcee509a1080b53cc26697ad",
+    "sources_unchanged": true,
+    "wall_seconds": 48.736391300015384
+  },
+  "current_unit_tests": {
+    "schema_version": "executed-unittest-v1",
+    "tests_run": 370,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true,
+    "source_fingerprint": "7cde3af5c5209080736aee83429a7383e4b3998ad728ff769934f28071265fc8",
+    "sources_unchanged": true,
+    "wall_seconds": 39.99268769999617
+  },
+  "portable_reproduction_before": {
+    "bad_formula": "UNEXPECTED_PASS",
+    "bad_structure": "UNEXPECTED_PASS",
+    "loose_tolerance": "UNEXPECTED_PASS",
+    "bad_stability_scope": "UNEXPECTED_PASS"
+  },
+  "portable_reproduction_after": {
+    "bad_formula": {
+      "rejected": true,
+      "reason": "portable read-back acceptance failed: MAT certificate residual definition mismatch"
+    },
+    "bad_structure": {
+      "rejected": true,
+      "reason": "portable read-back acceptance failed: MAT certificate or independent read-back acceptance failed: "
+    },
+    "loose_tolerance": {
+      "rejected": true,
+      "reason": "portable read-back acceptance failed: MAT certificate tolerance is looser than the required tolerance"
+    },
+    "bad_stability_scope": {
+      "rejected": true,
+      "reason": "portable read-back acceptance failed: I01 certificate cannot certify linear stability"
+    }
+  },
+  "changes": [
+    "retain strict certificate checks in formal portable fallback",
+    "use same portable MAT policy in independent package verification",
+    "reject invalid or ignored task seeds and nonpositive worker counts",
+    "parallel task seed dispatch regression",
+    "local spectral residual failure cannot use saved passing decision",
+    "distinguish metadata checks from saved-vector recomputation"
+  ],
+  "protected_assets": {
+    "count": 61,
+    "sha256": {
+      "Solution.mat": "a8a552991cfcd329a5c991c45ecc64c564a03c214988c3bd2fff2473d787d582",
+      "frog.mat": "6ba3bad43b2733803be148a6744c1b695f270cf0f8a3ba6fbd1b8afd2751d755",
+      "results/ai_generation_fine/frog/model.joblib": "a131dacbe74f1a956d43aa0021a3432821de82f794023a06d5b53f6ec35e5b71",
+      "results/ai_generation_fine/sphere5/model.joblib": "ed4fa287c93728de3e96ddeead0b2f28c85b67a01754fd524b7376c81b5cee3c",
+      "results/evidence_consistency_audit/20261023T231500/old_draft.zip": "465b629af4d241a5350f48bcce1722830348d42c53404d954913bdb6d3c198df",
+      "results/evidence_consistency_audit/20261023T231500/old_report_v3.pdf": "2df2cb75cfdde18c0cee474e6b8e4cf997d3faad999f10d412183c6549bdf332",
+      "results/evidence_consistency_audit/20261023T231500/report_v3_fixed.pdf": "c0454116248b75f090fa4ba3154ef57ce3e5b462a5d4854d6c33068c3e35fc13",
+      "results/evidence_consistency_audit/20261023T231500/report_v3_fixed_arial.pdf": "6a36d9540fd1b406b45855fdebd6cc03cb672c3479e00f6cebda2bc25a7b8a95",
+      "results/inversion_best_match/solution_best_match.mat": "4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c",
+      "results/inversion_best_match_crosscheck_mac/solution_best_match.mat": "2ae3d1d9a3d1b24f378b8c3abfb59d54a96cc33f2844943436ea217b948b9a7d",
+      "results/inversion_best_match_more_mac/solution_best_match.mat": "fe7363ff49fc86eb6d88b9619d99dd4e2e5fd23ed8a9c9a0b073a5a36924f2c3",
+      "submission/code/Solution.mat": "a8a552991cfcd329a5c991c45ecc64c564a03c214988c3bd2fff2473d787d582",
+      "submission/code/frog.mat": "6ba3bad43b2733803be148a6744c1b695f270cf0f8a3ba6fbd1b8afd2751d755",
+      "submission/drafts/stage8_20261025T173837/待填_初赛_AI-MECH-2026-002_result.zip": "acc48f829a3b9db24085f93a802f431975db5e07244148b97fc0627f5fd77f12",
+      "submission/drafts/待填_初赛_AI-MECH-2026-002_result.zip": "0a8e5456692445db1d285a1c77dcc0e9d75a3959c16fcf2264fca3dd0d87cea1",
+      "submission/evidence/releases/stage8_20261025T173837/code_snapshot.json": "e5e0167ac83a379d9994f284c6ef0ca3cf6a0b066aadbd38a0b63f5012a77151",
+      "submission/evidence/releases/stage8_20261025T173837/historical_source_binding.json": "2393feafb7564dde5d38057ace17b0037c9aa545c54435ea7fef7c69e6771e44",
+      "submission/evidence/releases/stage8_20261025T173837/mat_validation.json": "7a7913e757c5f1994c90c40bcde01d718a63db78e7bcf0b6225d63cc41fdb064",
+      "submission/evidence/releases/stage8_20261025T173837/unit_tests.json": "afb095656ba30143d8e1c51a6173ec19cf4f4525e5e6db16dfd6f9c05d54b20f",
+      "submission/report/stage3_scientific_20261025/report_v3_scientific_revision.pdf": "1b6bbf0af1430f9b22bc9df36229a07b2f07c6e6bea27d30a8ac5072bef93d74",
+      "submission/report/stage3_scientific_20261025/report_v3_scientific_revision_v2.pdf": "5cb6ef90b64c86726bd93dc8ba5d8a44fc8b0ff09b245c1893bd65e11a086d77",
+      "submission/report/stage8_20261025T173837/初赛技术报告_v3_严格验收修订.pdf": "8b2e3ecdca9ab806bac725f7aed65429004fb24be6021981b210baa946db76db",
+      "submission/report/初赛技术报告.pdf": "d80c2184c107e74b54fc9ff25925955a8c11ffbdd6e1238eaba280ee1fb7ef7a",
+      "submission/report/初赛技术报告_v3.pdf": "6a36d9540fd1b406b45855fdebd6cc03cb672c3479e00f6cebda2bc25a7b8a95",
+      "submission/report/初赛技术报告_交付草稿_v2.pdf": "cff3892478dea1fdc38442f3d541d296809862bbd61b965ac938b6429f905eae",
+      "submission/task1_sphere/ai_model/cv.json": "acdaf62049991e26b919e56bbeb2b92ae34e570f212db3c6daf6f57ccf2ed8c8",
+      "submission/task1_sphere/ai_model/dataset.json": "4157f250928e0c0ee7ad8976ef76f2f4a915b84b36b15f5a1a0146aa9da9a4f6",
+      "submission/task1_sphere/ai_model/model.joblib": "bf05b8ac78ded38a59dc52c415102f08825c3f866e5c8e16f3b4d7fdd59d17da",
+      "submission/task1_sphere/spots/solution.mat": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+      "submission/task1_sphere/spots/stability_certificate.json": "941b44b69a75cd6edf96926c22644f1de7595066be9d3ab087230b3e43b3f96f",
+      "submission/task1_sphere/spots/summary.json": "f31626dd2f98753412f174f33a4cac694eae64ad9351eb9a971b81dfd2b3cab1",
+      "submission/task1_sphere/stripes/solution.mat": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
+      "submission/task1_sphere/stripes/stability_certificate.json": "025d675ace800e8752f7e6d2f4eadb9822c02e7d765b22fa8fbe8d8769685678",
+      "submission/task1_sphere/stripes/summary.json": "47e2289b72af678776068ff743b20a5ea577dc77905e086c24d1981451958b98",
+      "submission/task2_frog/ai_model/cv.json": "654322175033402e9c44ed05594a460910d05ffaf8ef3aa2a12259c002c295a0",
+      "submission/task2_frog/ai_model/dataset.json": "ee19eb9e949faa7cdf62883e2c609ec4464b4b836ed19c11eb6d0d4ffa1165bf",
+      "submission/task2_frog/ai_model/model.joblib": "9a29124ab1eb2ab82948378f75372095514f0afe033e0a50693fb969e3989038",
+      "submission/task2_frog/spots/solution.mat": "19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb",
+      "submission/task2_frog/spots/stability_certificate.json": "3ea6afe851176c8b39e60cc8d48c214ea9b61213730c9d3dbc96fa775acd6887",
+      "submission/task2_frog/spots/summary.json": "3a42fc48f9a3eb57b7ea379b4b9e83825a8edd232e2a2ed7d1c0373bd61933d6",
+      "submission/task2_frog/stripes/solution.mat": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
+      "submission/task2_frog/stripes/stability_certificate.json": "b6f527be86202d24969fa237cbfe0240b5692cebee6d0e70db85c9af89965de7",
+      "submission/task2_frog/stripes/summary.json": "9bd4bf61f79a5361366dfc573def8ab7aaeb62be8d210067fcf038b0399a12c8",
+      "submission/task3_inversion/best_match/best_match_vs_target.png": "76dc7bb19c293cd4aa6d959a271ab8a3b5815f107a000206b010d03fb6c4670d",
+      "submission/task3_inversion/best_match/candidates.csv": "6879b61ba0072f467c3087ea73ca22d054723c5074d3384d23b3638d4441e3b5",
+      "submission/task3_inversion/best_match/report_panel.png": "5a1ec07ba16e3185a3732828e66259716b33436296ddf9b23bbcbe07e6b2f0ce",
+      "submission/task3_inversion/best_match/solution_best_match.mat": "4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c",
+      "submission/task3_inversion/best_match/summary.json": "8db05e2eecd17c884ffc18201e7a69e70ed25743c37deac139593031b4566439",
+      "submission/task3_inversion/best_match/summary.md": "94d29bf98d22e2a2a2c11de76b6612e2b923d95fe03236fd0a0aa327bc41d711",
+      "submission/task3_inversion/criteria.png": "36b2f075f5fb0b3c94bbf94c23f36a7cdacc0b36a103a8c822f7a8a3d7096c69",
+      "submission/task3_inversion/cutoff.png": "6dd4e14cf674a6d43fbc46dcee8bc26006a8c80d71e47b6566f109bfa16036d6",
+      "submission/task3_inversion/cutoff_curve.csv": "4db74b01b64b648125221ef9c328803d4c5638ade1db8721f8700b882763e9bf",
+      "submission/task3_inversion/final_vs_target.png": "91e746e7d75d14a2fa6758d8b106979dcd469359207d9c661a510598a08d8746",
+      "submission/task3_inversion/grid_points.csv": "9f3450f747860c9ce773c64aae5715a7d24350f57d6280e1317857bdca2f748d",
+      "submission/task3_inversion/landscape.png": "5bd0ad104338b5896d62aecc3eb2c139094cba2e9029b2a13afa6520e3ea199c",
+      "submission/task3_inversion/solution.mat": "6dda0fcdee688cbd9c5d7ec50f94e61f8a99ee69f3befc64fd05bad761ca20b7",
+      "submission/task3_inversion/summary.json": "d975a6094a8859c1b58602bfa17d371cb03a92478017446a20dea2338853469b",
+      "submission/task3_inversion/summary.md": "5ba7646ddd0a125691179d59745e2c8b3aba01d8ec61b78fa73e9f83e874ce92",
+      "submission/task3_inversion/type_map.csv": "141d7279b745d68ee7f20c9795addbbc5bc44cab9e980e23dd8d39a3f67c7c6a",
+      "submission/待填_初赛_AI-MECH-2026-002_result.zip": "b6fcd50e9bf5fb88287eec5e434cd02b3ea12919f4cfe45736791325ca7939dd",
+      "附件3.生物曲面扩散动力学及图灵斑图生成、演化与调控赛题规则.pdf": "c263eceb0f9605653b29967c50c8e53e40f40058aed46f2dc9955e0583b983d4"
+    },
+    "unchanged": true
+  },
+  "actual_environment": {
+    "python": "3.12.5",
+    "machine": "AMD64",
+    "system": "Windows"
+  },
+  "arm_hardware_verified_in_this_run": false,
+  "new_zip_peer_cross_platform_revalidation": "PENDING",
+  "reported_history": {
+    "source": "user-supplied handover 2026-10-26",
+    "Windows_generation_minutes": 47.5,
+    "arm_five_portable_passes": "reported by handover; original logs not attached; not rerun here"
+  },
+  "no_training_generation_or_inversion_rerun": true,
+  "formal_spectra_scope": "saved metadata only, no bundled eigenvectors",
+  "best_match_scope": "40 saved eigenvectors, residuals recomputed; no fresh eigensolve or full-spectrum proof",
+  "retained_pdf": {
+    "path": "submission/report/stage8_20261025T173837/初赛技术报告_v3_严格验收修订.pdf",
+    "sha256": "8b2e3ecdca9ab806bac725f7aed65429004fb24be6021981b210baa946db76db",
+    "historical_tests": 350
+  }
+}

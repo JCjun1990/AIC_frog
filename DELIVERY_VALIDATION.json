@@ -1,68 +1,55 @@
 {
-  "schema_version": "final-evidence-release-v2",
-  "release_id": "stage8_20261025T173837",
-  "freeze_status": "READY_TO_FREEZE_WITH_LIMITATIONS",
+  "schema_version": "portable-repack-release-v1",
+  "release_id": "portable_20261026",
   "engineering_status": "PASS",
+  "cross_platform_release_status": "PENDING_PEER_WINDOWS_AND_ARM_REVALIDATION",
   "upload_ready": false,
+  "source_branch": "fix/portable-verify-and-seeds",
+  "not_merged_to_main": true,
+  "previous_frozen_main": "684763da70d1f6e8ce768b946c50856d36e0a0a9",
   "code_provenance": {
-    "validation_git_base": "a637d1dd8be29c7b128ef9325e9b970ab5a3aa28",
-    "validated_source_fingerprint": "d66c438ddb82be450be7b524afec144e08b2f7ffa201ed9ea262b731129c3433",
-    "source_snapshot": "submission/evidence/releases/stage8_20261025T173837/code_snapshot.json",
-    "historical_release_binding": {
-      "historical_validation_git_base": "f643a04ca99ef76378490f30a0c663e8831c763e",
-      "validated_source_fingerprint": "490a3a32cdc08bdef3b23725cc58a689a03ec1f957b6fe6c4bfbd7123108c810",
-      "later_published_commit": "a637d1dd8be29c7b128ef9325e9b970ab5a3aa28",
-      "source_file_count": 93,
-      "committed_and_working_source_match": true,
-      "source_drift_after_publish": false,
-      "distinction": "The historical validation base is not the release commit; all committed source bytes match the validated source."
-    },
-    "publication_commit_binding": "The actual later Git commit is reported after commit/push and checked against every source SHA256. No self-referential commit SHA is embedded here."
+    "validation_git_base": "e5baf02b818bb1ae0bf0b38358597651f7dea43e",
+    "validated_source_fingerprint": "7cde3af5c5209080736aee83429a7383e4b3998ad728ff769934f28071265fc8",
+    "source_snapshot": "submission/evidence/releases/portable_20261026/code_snapshot.json",
+    "source_files": 96,
+    "publication_binding": "The later published commit is checked against all source SHA256 values; no self-reference."
   },
   "unit_tests": {
     "schema_version": "executed-unittest-v1",
-    "tests_run": 350,
+    "tests_run": 370,
     "failures": 0,
     "errors": 0,
     "skipped": 0,
     "successful": true,
-    "source_fingerprint": "d66c438ddb82be450be7b524afec144e08b2f7ffa201ed9ea262b731129c3433",
+    "source_fingerprint": "7cde3af5c5209080736aee83429a7383e4b3998ad728ff769934f28071265fc8",
     "sources_unchanged": true,
-    "wall_seconds": 28.519378999990295
+    "wall_seconds": 39.99268769999617
   },
-  "new_regression_tests": 14,
   "protected_assets": {
-    "unchanged": 55,
-    "record": "results/final_hardening_20261025T173837/asset_hashes.json",
-    "additional_immutable_historical_files": 251
+    "unchanged": 61,
+    "record": "results/portable_repack_20261026/protected_assets.json"
   },
   "current_zip": {
-    "path": "submission/drafts/stage8_20261025T173837/待填_初赛_AI-MECH-2026-002_result.zip",
-    "sha256": "acc48f829a3b9db24085f93a802f431975db5e07244148b97fc0627f5fd77f12",
-    "bytes": 32564247,
-    "manifest_payload_files": 137,
-    "zip_entries_including_manifest": 138,
+    "path": "submission/drafts/portable_20261026/待填_初赛_AI-MECH-2026-002_result.zip",
+    "sha256": "1b1a2d440e1db2f47ff01300a0552d211b496865f7b1eee62cb98263674f8a4e",
+    "bytes": 32580502,
+    "manifest_payload_files": 141,
+    "zip_entries_including_manifest": 142,
     "independent_checks": 26,
-    "acceptance": "results/final_hardening_20261025T173837/acceptance_report.json",
-    "verification_mode": "current_saved_vectors_v1",
+    "acceptance": "results/portable_repack_20261026/acceptance_report.json",
     "workspace_correspondence": "PASS"
   },
   "current_pdf": {
     "path": "submission/report/stage8_20261025T173837/初赛技术报告_v3_严格验收修订.pdf",
     "sha256": "8b2e3ecdca9ab806bac725f7aed65429004fb24be6021981b210baa946db76db",
     "pages": 2,
-    "text_and_rendering_passed": true
-  },
-  "best_match_checks": {
-    "complete_steady": "PASS",
-    "historical_spectrum_status": "insufficient_evidence",
-    "current_saved_vector_spectrum_status": "numerical_check_passed",
-    "saved_eigenpairs_checked": 40,
-    "mathematical_full_spectrum_proof": false
+    "text_and_rendering_passed": true,
+    "retained_from": "stage8_20261025T173837",
+    "regenerated": false,
+    "historical_test_count_in_pdf": 350
   },
   "workspace_verification": {
     "status": "PASS",
-    "manifest_files": 137,
     "formal_tasks": {
       "task1_sphere/spots": {
         "mat_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
@@ -133,6 +120,7 @@
       "available": true,
       "pde_residual_recomputed": true,
       "full_residual": 2.030535561466331e-14,
+      "verification_mode": "strict: bit-identical operator",
       "mat_sha256": "4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c",
       "historical_spectrum_status": "insufficient_evidence",
       "historical_spectrum_failure_reasons": [
@@ -213,26 +201,35 @@
       "acceptance_protocol": "current_saved_vectors_v1"
     }
   },
+  "readme_command_verification": {
+    "status": "PASS",
+    "four_tasks_and_best_match": "5/5 strict on this Windows x86_64 machine",
+    "record": "results/portable_repack_20261026/readme_verify.json"
+  },
+  "portable_simulation": {
+    "status": "PASS",
+    "four_tasks_and_best_match": "5/5 portable after one-ULP in-memory L/M perturbation",
+    "record": "results/portable_repack_20261026/simulated_portable.json",
+    "is_actual_arm_test": false
+  },
+  "review": {
+    "pre_fix_portable_bypass": "reproduced in four negative cases; fixed by full certificate validation",
+    "new_regressions": 6,
+    "spectrum_acceptance_thresholds_changed": false,
+    "formal_saved_spectra": "metadata only; best match separately rechecks 40 saved vectors"
+  },
   "json": {
-    "strict_files": 36,
+    "strict_files": 40,
     "legacy_files": 3
   },
   "static": {
-    "compiled_python_files": 142,
-    "runtime_copies_checked": 52,
-    "git_diff_check": "PASS",
-    "unexpected_deletions": [],
-    "credential_matches": [],
-    "immutable_historical_files_unchanged": 251
+    "compiled_python_files": 144,
+    "runtime_python_copies": 48,
+    "git_diff_check": "PASS"
   },
-  "historical_validation": {
-    "preserved_file": "results/final_hardening_20261025T173837/historical_stage7_delivery_validation.json",
-    "sha256": "948b22dd347084b790a0dc8591a8a9c81225d47219a86eddbfe79387cb39f602",
-    "meaning": "Immutable pre-commit stage7 validation, not the new release commit."
-  },
-  "freeze_blockers": [],
-  "upload_blockers": [
-    "Team name is still pending; rebuild the named report/ZIP and repeat acceptance before official upload."
+  "pending": [
+    "Independent verification of this new ZIP on the Windows laptop and real ARM Mac.",
+    "Team name and final official upload remain outside this repack."
   ],
   "accepted_scientific_limitations": [
     "The sphere complete-steady test subset contains only 16 uniform states.",
@@ -242,5 +239,6 @@
     "Legacy inversion reference records lack original complete fields; strict parameter sensitivity remains unknown.",
     "Historical sklearn weight versions differ from this machine; no universal pickle compatibility or Linux execution is claimed."
   ],
-  "public_history_notice": "Paths in immutable historical execution records remain; this commit does not erase existing Git history."
+  "no_retraining_or_production_generation_or_inversion": true,
+  "historical_validation": "results/portable_repack_20261026/historical_stage8_delivery_validation.json"
 }

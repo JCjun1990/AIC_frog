@@ -72,7 +72,8 @@ class FinalGeneratorTests(unittest.TestCase):
             E.context(ROOT, self.q)
 
     def test_final_document_generator_is_repeatable_and_drops_obsolete_current_notes(self):
-        release = {"report": "report/new/report.pdf", "zip": "drafts/new/draft.zip"}
+        release = {"report": "report/new/report.pdf", "zip": "drafts/new/draft.zip",
+                   "report_note": "保留的 PDF 是历史验收快照；当前测试见新版本记录。"}
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             for rel in ("README.md", "HANDOVER.md", "submission/README_提交.md",
@@ -91,6 +92,8 @@ class FinalGeneratorTests(unittest.TestCase):
             self.assertNotIn("第 7 阶段再统一", text)
             self.assertNotIn("尚未包含阶段 3 修订", first["README.md"])
             self.assertIn("构建前生成", first["submission/VALIDATION.md"])
+            self.assertIn(release["report_note"], first["submission/README_提交.md"])
+            self.assertIn(release["report_note"], first["submission/VALIDATION.md"])
 
     def test_report_preserves_methodological_unknowns_and_finite_spectrum_scope(self):
         sections = R.report_sections(self.c, 41)

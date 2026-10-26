@@ -63,6 +63,23 @@ class PortableVerifyTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "seed"):
             workflow.portable_acceptance(self.path, cert, self.geom, ctx.exception)
 
+    def test_geometry_fallback_does_not_bypass_other_certificate_checks(self):
+        changes = {
+            "formula": lambda c: c["residual"].update(formula="wrong"),
+            "normalization": lambda c: c["residual"].update(normalization="different"),
+            "projection": lambda c: c["residual"].update(rotation_projection=True),
+            "tolerance": lambda c: c["residual"].update(tolerance=1.),
+            "structure": lambda c: c["structure"].update(passed=False),
+            "precision": lambda c: c["precision"].update(passed=False),
+            "physical_range": lambda c: c["physical_range"].update(passed=False),
+            "scope": lambda c: c.update(stability_status="strictly_stable"),
+        }
+        for name, change in changes.items():
+            cert, exc = self.rounding_only()
+            change(cert)
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                workflow.portable_acceptance(self.path, cert, self.geom, exc)
+
 
 if __name__ == "__main__":
     unittest.main()

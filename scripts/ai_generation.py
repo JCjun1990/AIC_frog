@@ -624,6 +624,19 @@ def task_seed(surface, name, overrides=None):
     return (overrides or {}).get((surface, name), TASK_SEEDS.get((surface, name), 0))
 
 
+def parse_generate_seeds(items, surfaces):
+    """Reject ignored, duplicate or invalid task seed overrides before any solve."""
+    overrides = {}
+    for item in items:
+        key, separator, value = item.partition("=")
+        surface, colon, name = key.partition(":")
+        if (not separator or not colon or surface not in surfaces or name not in TASKS
+                or not value.isascii() or not value.isdigit() or (surface, name) in overrides):
+            raise ValueError(f"invalid or duplicate --generate-seed {item!r}; use a requested SURFACE:TASK=nonnegative_seed")
+        overrides[(surface, name)] = int(value)
+    return overrides
+
+
 def stage_generate(log, surfaces=("frog", "sphere6"), t_max=200000.0, output_dir=None, workers=1, seeds=None):
     """Task results: given spot / stripe parameters on the frog and the unit sphere (L6). On the sphere a
     converged relative equilibrium is then followed to the mesh-preferred orientation (orient=True).
@@ -633,6 +646,8 @@ def stage_generate(log, surfaces=("frog", "sphere6"), t_max=200000.0, output_dir
     """
     from turing_rd.viz import render_field
     import scipy.io as sio
+    if not isinstance(workers, int) or isinstance(workers, bool) or workers < 1:
+        raise ValueError("generation workers must be a positive integer")
     destination = Path(output_dir) if output_dir is not None else OUT / "tasks_float64"
     targets = [destination / f"{surface}_{name}" for surface in surfaces for name in TASKS]
     if any(d.exists() for d in targets):
@@ -786,13 +801,10 @@ def main():
     if args.stage in ("all", "evaluate", "summarize"):
         stage_summarize(log)
     if args.stage in ("all", "generate"):
-        overrides = {}
-        for item in args.generate_seed:
-            key, _, value = item.partition("=")
-            surface, _, name = key.partition(":")
-            if name not in TASKS or not value.lstrip("-").isdigit():
-                ap.error(f"--generate-seed expects SURFACE:TASK=SEED with TASK in {sorted(TASKS)}, got {item!r}")
-            overrides[(surface, name)] = int(value)
+        try:
+            overrides = parse_generate_seeds(args.generate_seed, args.generate_surfaces)
+        except ValueError as error:
+            ap.error(str(error))
         stage_generate(log, args.generate_surfaces, t_max=args.generate_t_max, output_dir=args.generate_out,
                        workers=args.workers, seeds=overrides)
     if args.stage == "robustness":

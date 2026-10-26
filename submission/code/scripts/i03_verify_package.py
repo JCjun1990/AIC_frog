@@ -200,7 +200,7 @@ def main():
         import numpy as np
         from turing_rd import Geometry, GSParams, icosphere, load_frog
         from turing_rd.diagnostics import full_steady_residual, pattern_stats
-        from turing_rd.result_io import file_sha256, read_mat_fields, validate_certificate
+        from turing_rd.result_io import file_sha256, read_mat_fields, validate_certificate_portable
         from turing_rd import geometry as geometry_module
         imported_from_package = str(Path(geometry_module.__file__).resolve()).startswith(str(code_dir.resolve()))
         check("packaged_code_imports", imported_from_package,
@@ -232,8 +232,8 @@ def main():
                 mesh = load_frog(code_dir / "frog.mat") if spec["surface"] == "frog" else icosphere(6)
                 geometries[spec["surface"]] = Geometry(mesh, laplacian="robust", cache_dir=None)
             geom = geometries[spec["surface"]]
-            fresh = validate_certificate(mat, certificate, expected_params=params,
-                                         expected_seed=summary["seed"], expected_geometry=geom)
+            fresh = validate_certificate_portable(mat, certificate, expected_params=params,
+                                                  expected_seed=summary["seed"], expected_geometry=geom)
             u, v = read_mat_fields(mat, geom.n)
             dtype_ok = u.dtype == np.float64 and v.dtype == np.float64
             finite = bool(np.isfinite(u).all() and np.isfinite(v).all())

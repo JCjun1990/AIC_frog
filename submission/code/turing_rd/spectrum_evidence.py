@@ -9,13 +9,19 @@ from pathlib import Path
 import numpy as np
 
 from .diagnostics import jacobian
-from .result_io import file_sha256, read_mat_fields, validate_certificate
-from .spectral_policy import (FROG_CONFIGS, FROG_SIGN_FLOOR, POLICY_VERSION,
-                              evaluate_spectra, failed_spectrum)
+from .result_io import file_sha256, read_mat_fields, validate_certificate, validate_certificate_portable
+from .spectral_policy import (FROG_CONFIGS, FROG_SIGN_FLOOR, PAIR_ABSOLUTE_TOL, PAIR_RELATIVE_TOL,
+                              POLICY_VERSION, evaluate_spectra, failed_spectrum)
 from .stability import eigenpair_diagnostics
 from .experiment_cache import code_identity, dependency_versions
 
 EVIDENCE_VERSION = "mat-bound-eigenvectors-v1"
+# Eigenpair residuals sit at the round-off floor (~1e-15), so another numpy / BLAS / L-M rounding recomputes
+# them as other round-off-floor values (measured: 6e-15 relative on x86; up to 13% relative, 4e-16 absolute
+# on ARM). Only differences far below the pass thresholds are accepted; the stability decision itself is
+# re-derived from the recomputed numbers below, so a pair that fails here-and-now still fails.
+PAIR_RECOMPUTE_RTOL = 1e-9
+PAIR_RECOMPUTE_ATOL = {"residual_absolute_M": 1e-3 * PAIR_ABSOLUTE_TOL, "residual_relative_M": 1e-3 * PAIR_RELATIVE_TOL}
 
 
 def _clean(value):
@@ -103,15 +109,19 @@ def validate_evidence(certificate_path, mat, geom, params, seed, *, recompute_pa
         raise ValueError("unknown eigenvector evidence protocol")
     if certificate.get("mathematical_full_spectrum_proof") is not False:
         raise ValueError("finite evidence cannot claim a full-spectrum proof")
-    fresh = validate_certificate(mat, certificate["mat_certificate"], expected_params=params,
-                                 expected_seed=seed, expected_geometry=geom)
+    fresh = validate_certificate_portable(mat, certificate["mat_certificate"], expected_params=params,
+                                          expected_seed=seed, expected_geometry=geom)
+    # the recorded geometry was just bound to this mesh (bit-identical, or up to L/M round-off on another machine)
+    bound = dict(fresh, geometry=certificate["mat_certificate"]["geometry"])
     for key in ("mat_sha256", "parameters", "seed", "geometry"):
-        if certificate.get("input", {}).get(key) != fresh[key]:
+        if certificate.get("input", {}).get(key) != bound[key]:
             raise ValueError("spectral evidence MAT binding mismatch: " + key)
     reports = certificate.get("configs", []); artifacts = certificate.get("artifacts", [])
     if len(reports) != len(FROG_CONFIGS) or len(artifacts) != len(FROG_CONFIGS):
         raise ValueError("incomplete evidence configurations")
-    if certificate.get("decision") != _decide(reports, fresh["residual"]["value"]):
+    # the saved decision is bound to the recorded residual, which validate_certificate_portable has just tied to
+    # this machine's read-back; the final decision below uses the read-back value itself
+    if certificate.get("decision") != _decide(reports, certificate["mat_certificate"]["residual"]["value"]):
         raise ValueError("saved spectral decision does not match fixed policy")
     mass = np.concatenate([geom.M, geom.M])
     if recompute_pairs:
@@ -145,7 +155,8 @@ def validate_evidence(certificate_path, mat, geom, params, seed, *, recompute_pa
                     raise ValueError("eigenvalues do not match saved metrics")
                 for key in ("residual_absolute_M", "residual_relative_M"):
                     old = b.get(key)
-                    if not isinstance(old, (float, int)) or not math.isclose(a[key], old, rel_tol=16 * math.ulp(1.), abs_tol=0.):
+                    if not isinstance(old, (float, int)) or not math.isclose(
+                            a[key], old, rel_tol=PAIR_RECOMPUTE_RTOL, abs_tol=PAIR_RECOMPUTE_ATOL[key]):
                         raise ValueError("eigenpair residual does not match actual saved vector")
             checked["pairs"] = pairs
         verified.append(checked)

@@ -1,0 +1,154 @@
+{
+  "status": "PASS",
+  "tasks": {
+    "task1_sphere/spots": {
+      "mat_sha256": "44f5931a623d15600dd5811f8d9366c049d732b917c7c1691f44a65f5c0586f3",
+      "full_residual": 8.422602727722893e-15,
+      "float64_accepted": true,
+      "verification_mode": "strict: bit-identical operator",
+      "spectrum": {
+        "status": "numerical_check_passed",
+        "checked_pairs": 40,
+        "sampled_max_real": -6.231004404613164e-06,
+        "max_absolute_pair_residual": 1.7287113905760838e-13,
+        "max_relative_pair_residual": 7.551918127315448e-10,
+        "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+        "evidence": "saved metadata checked; eigenvectors are not bundled",
+        "mathematical_full_spectrum_proof": false
+      }
+    },
+    "task1_sphere/stripes": {
+      "mat_sha256": "ef132d82c549a78912be21e3ef70edb31725e7e5a74d1793a0e73c15c0dcae10",
+      "full_residual": 2.4366269654958772e-14,
+      "float64_accepted": true,
+      "verification_mode": "strict: bit-identical operator",
+      "spectrum": {
+        "status": "numerical_check_passed",
+        "checked_pairs": 40,
+        "sampled_max_real": -1.4777975565754154e-06,
+        "max_absolute_pair_residual": 1.4283866417741944e-14,
+        "max_relative_pair_residual": 2.3296503863459255e-09,
+        "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+        "evidence": "saved metadata checked; eigenvectors are not bundled",
+        "mathematical_full_spectrum_proof": false
+      }
+    },
+    "task2_frog/spots": {
+      "mat_sha256": "19a92c65ec759c9a7fa4e58ceaf9d5b9716e9eea660a23f1e87651f11bd737cb",
+      "full_residual": 2.1711302588470847e-14,
+      "float64_accepted": true,
+      "verification_mode": "strict: bit-identical operator",
+      "spectrum": {
+        "status": "numerical_check_passed",
+        "checked_pairs": 40,
+        "sampled_max_real": -0.00010348974019058204,
+        "max_absolute_pair_residual": 1.503716635453165e-14,
+        "max_relative_pair_residual": 9.550663303918817e-12,
+        "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+        "evidence": "saved metadata checked; eigenvectors are not bundled",
+        "mathematical_full_spectrum_proof": false
+      }
+    },
+    "task2_frog/stripes": {
+      "mat_sha256": "aa99f1373d76cc704c62ea87c8daabd7ef74adf0627c6d24eca3aa25b0150a82",
+      "full_residual": 1.0056589446857191e-14,
+      "float64_accepted": true,
+      "verification_mode": "strict: bit-identical operator",
+      "spectrum": {
+        "status": "numerical_check_passed",
+        "checked_pairs": 40,
+        "sampled_max_real": -0.0001548304287718098,
+        "max_absolute_pair_residual": 5.020027371746558e-15,
+        "max_relative_pair_residual": 9.035325539183106e-12,
+        "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+        "evidence": "saved metadata checked; eigenvectors are not bundled",
+        "mathematical_full_spectrum_proof": false
+      }
+    }
+  },
+  "manifest_files": 140,
+  "best_match": {
+    "available": true,
+    "pde_residual_recomputed": true,
+    "full_residual": 2.030535561466331e-14,
+    "verification_mode": "strict: bit-identical operator",
+    "mat_sha256": "4e06d56e575eda2c5c2671d8e249d52460a5a50c9f6771ee30fa7c4abbf5501c",
+    "historical_spectrum_status": "insufficient_evidence",
+    "historical_spectrum_failure_reasons": [
+      "configuration_0:untrusted_pair_absolute_tolerance",
+      "configuration_0:untrusted_pair_relative_tolerance",
+      "configuration_0:eigenpair_count_or_protocol_mismatch",
+      "configuration_0:missing_eigenpair_residuals",
+      "configuration_1:untrusted_pair_absolute_tolerance",
+      "configuration_1:untrusted_pair_relative_tolerance",
+      "configuration_1:eigenpair_count_or_protocol_mismatch",
+      "configuration_1:missing_eigenpair_residuals",
+      "configuration_2:untrusted_pair_absolute_tolerance",
+      "configuration_2:untrusted_pair_relative_tolerance",
+      "configuration_2:eigenpair_count_or_protocol_mismatch",
+      "configuration_2:missing_eigenpair_residuals",
+      "sampled_largest_real_parts_disagree",
+      "not_all_checked_eigenvalue_signs_resolved_negative"
+    ],
+    "saved_spectral_metadata_verified": true,
+    "eigenpair_residuals_recomputed_from_saved_vectors": true,
+    "current_saved_vector_spectrum_status": "numerical_check_passed",
+    "fresh_eigensolve_in_this_verification": false,
+    "mathematical_full_spectrum_proof": false,
+    "decision": {
+      "acceptance_policy_version": "finite-spectrum-acceptance-v1",
+      "scope": "task3_three_shift_saved_vector_finite_check",
+      "required_configurations": [
+        {
+          "sigma": 0.001,
+          "which": "LM",
+          "k": 12
+        },
+        {
+          "sigma": 0.0,
+          "which": "LM",
+          "k": 20
+        },
+        {
+          "sigma": 1e-05,
+          "which": "LM",
+          "k": 8
+        }
+      ],
+      "full_steady_state": true,
+      "full_residual": 2.030535561466331e-14,
+      "full_residual_tolerance": 1e-11,
+      "found_reliable_positive": false,
+      "reliable_positive_eigenvalues": [],
+      "unresolved_near_zero_eigenvalues": [],
+      "checked_eigenpairs": 40,
+      "full_max_real_checked": -0.0001860545855782343,
+      "sampled_maxima": [
+        -0.0001860545855782343,
+        -0.00018605458557830116,
+        -0.00018605458557830834
+      ],
+      "configurations": 3,
+      "distinct_valid_shifts": [
+        0.0,
+        1e-05,
+        0.001
+      ],
+      "valid_direct_LR_runs": 0,
+      "all_requested_solves_and_pairs_validated": true,
+      "sampled_maxima_agree": true,
+      "sampled_maxima_agreement_tolerance": 1e-10,
+      "all_checked_signs_resolved_negative": true,
+      "numerical_check_passed": true,
+      "status": "numerical_check_passed",
+      "outcome": "passed",
+      "failure_reasons": [],
+      "relative_equilibrium_accepted_as_steady": false,
+      "rotation_projection": false,
+      "rotations_excluded_from_full_decision": false,
+      "mathematical_full_spectrum_proof": false
+    },
+    "status": "PASS",
+    "acceptance_protocol": "current_saved_vectors_v1"
+  }
+}

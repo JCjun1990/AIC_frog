@@ -102,6 +102,9 @@ def render_documents(root, quality, tests_run, release=None):
                    f"本轮两页技术报告：`{report_path}`，独立于答案 ZIP 提交。队名仍为待填。\n\n"
                    f"本轮草稿 ZIP：`{zip_path}`。旧 PDF 和旧 ZIP 均保留，不作为本轮验收对象。\n\n"
                    "本轮结果、哈希和验收状态见仓库根 `DELIVERY_VALIDATION.json`；包内 `VALIDATION.md` 说明验收范围。\n")
+        report_note = release.get("report_note", "")
+        if report_note:
+            current += "\n" + report_note + "\n"
         submission = submission[:submission.index("## 当前报告")] + current
         readme = re.sub(r"(?m)^  report/初赛技术报告_v3.pdf.*$", f"  {report_path}   本轮两页报告；旧报告保留", readme)
         readme = re.sub(r"(?m)^  drafts/待填_初赛_AI-MECH-2026-002_result.zip.*$", f"  {zip_path}   本轮待填队名草稿", readme)
@@ -135,6 +138,8 @@ def render_documents(root, quality, tests_run, release=None):
             "历史 JSON 扩展文件及哈希见 evidence/json_schema_audit.json；未知非标准 JSON 必须拒绝。"
             "历史模型 sklearn 版本不同，保留加载警告；本机推理通过不保证跨版本 pickle 兼容。\n\n"
             f"本轮报告：{report_path}。队名仍待填，当前为工程草稿，不能直接上传。\n")
+        if report_note:
+            validation += "\n" + report_note + "\n"
         provenance = ("\n### 版本与公开历史范围\n\n"
             "验收 Git 基线、验收源码指纹和后续发布提交分别记录；历史基线不等于发布提交。"
             "使用逐文件 SHA256 确认提交源码与验收内容对应，不在提交内预写自身最终 SHA。\n\n"

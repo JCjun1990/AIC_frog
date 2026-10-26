@@ -287,7 +287,8 @@ def validate_certificate(path, certificate, *, expected_params, expected_seed,
 # geometry_identity fields that describe the input mesh. Only actual_L_M_sha256 (and mass_sum in its last bits)
 # depend on how a given CPU / BLAS / compiler rounds the assembled cotangent weights. With such an operator a
 # residual at the round-off floor (~1e-14) is recomputed as another round-off-floor value (measured on ARM:
-# 2.03e-14 -> 2.85e-14), so it must agree absolutely, three orders below the 1e-11 acceptance limit.
+# 2.03e-14 -> 2.85e-14), so it must agree absolutely within the fixed 1e-12
+# cross-machine agreement budget (one tenth of the 1e-11 acceptance limit).
 STABLE_GEOMETRY_FIELDS = ("name", "n_vertices", "n_faces", "laplacian", "mesh_sha256")
 MASS_SUM_RTOL = 1e-12
 PORTABLE_RESIDUAL_ATOL = 1e-12
