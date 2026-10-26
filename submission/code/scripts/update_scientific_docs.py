@@ -53,6 +53,21 @@ def inversion_markdown(c):
             "目标、原代表解与最佳匹配均保留，参数未因多初值搜索改变。复现搜索成本较高；本轮仅重算统计并核对保存证据。\n")
 
 
+def portable_verification_markdown():
+    """Public wording follows the actual portable acceptance protocol."""
+    return (
+        "`verify` 的每项输出带 `verification_mode`：优先严格验收；仅算子指纹不同或残差对账超出严格比较预算时，尝试 `portable`。\n"
+        "即使 L/M 指纹一致，残差归约的浮点舍入差异也可进入 portable；模式不按 x86/ARM 名称选择。\n"
+        "portable 保留完整的证书结构、参数、种子、公式、容差与 MAT 哈希检查。网格哈希、点面数和 robust 算子类型须一致，"
+        "总质量在相对 1e-12 内一致；保存值与本机完整残差均须满足原有 ≤ 1e-11 标准，且二者在固定 1e-12 绝对比较预算内一致。\n"
+        "这是跨平台数值验收，不是完整 L/M 矩阵逐元素等价证明。\n")
+
+
+def validate_release_note(note):
+    if not isinstance(note, str) or "???" in note or "\ufffd" in note:
+        raise ValueError("release report note contains corrupted text")
+    return note
+
 def render_documents(root, quality, tests_run, release=None):
     """Pure formatting over supplied records; output values are generated, not hand-edited."""
     root = Path(root); c = E.context(root, quality); block = science_block(c, tests_run)
@@ -80,6 +95,7 @@ def render_documents(root, quality, tests_run, release=None):
     handover = handover.replace("Windows 重建结果同步（zip SHA256", "历史 Windows 重建记录同步（非当前验收包；zip SHA256")
     submission_path = next((root / "submission").glob("README_*.md"))
     submission = submission_path.read_text(encoding="utf-8")
+    submission = replace_section(submission, "`verify` 的每项输出带", "四组正式谱证书", portable_verification_markdown())
     submission = replace_section(submission, "## 2.", "## 3.", inversion_markdown(c))
     submission = replace_section(submission, "## 5.", "## 6.", "## 5. 科学统计与证据范围\n\n" + block
         + "\n完整 v1/v2 推理复算需要研究仓库中的两版权重；包内未包含研究 v2 权重，缺失时明确失败，不会自动重训。"
@@ -102,7 +118,7 @@ def render_documents(root, quality, tests_run, release=None):
                    f"本轮两页技术报告：`{report_path}`，独立于答案 ZIP 提交。队名仍为待填。\n\n"
                    f"本轮草稿 ZIP：`{zip_path}`。旧 PDF 和旧 ZIP 均保留，不作为本轮验收对象。\n\n"
                    "本轮结果、哈希和验收状态见仓库根 `DELIVERY_VALIDATION.json`；包内 `VALIDATION.md` 说明验收范围。\n")
-        report_note = release.get("report_note", "")
+        report_note = validate_release_note(release.get("report_note", ""))
         if report_note:
             current += "\n" + report_note + "\n"
         submission = submission[:submission.index("## 当前报告")] + current

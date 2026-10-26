@@ -1,0 +1,31 @@
+{
+  "review_base": "112eb4f413fb2df7fb7ea5c010e84aabc918c9ce",
+  "old_review_base": "e5baf02b818bb1ae0bf0b38358597651f7dea43e",
+  "pre_fix": {
+    "robustness_input_seeds": [
+      0,
+      2
+    ],
+    "baseline_seed": 2,
+    "reported_seeds": [
+      2,
+      2
+    ],
+    "identical_operator_mocked_residual": 2.85e-14,
+    "residual_only_portability": "rejected"
+  },
+  "post_fix": {
+    "robustness_reported_seeds": [
+      2,
+      0
+    ],
+    "baseline_seed_source": "recorded summary or MAT certificate, never guessed",
+    "identical_operator_mocked_residual": "accepted within fixed comparison budget",
+    "negative_paths": "covered by full executed suite"
+  },
+  "new_regression_tests": 13,
+  "new_formal_pde_runs": 0,
+  "new_training_runs": 0,
+  "is_actual_arm_validation": false,
+  "scope": "finite spectral evidence only; no element-wise operator equivalence claim"
+}

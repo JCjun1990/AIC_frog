@@ -1,0 +1,8 @@
+{
+  "compiled_python_files": 145,
+  "runtime_python_copies": 48,
+  "source_snapshot_files": 97,
+  "git_diff_check": "PASS",
+  "unexpected_deletions": [],
+  "quality_inference_recomputed": "v1/v2 both surfaces; identical to current packaged statistics"
+}

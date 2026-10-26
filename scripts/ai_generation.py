@@ -701,10 +701,36 @@ def stage_generate(log, surfaces=("frog", "sphere6"), t_max=200000.0, output_dir
         raise RuntimeError("MAT readback rejected; diagnostic outputs retained: " + ", ".join(rejected))
 
 
-def stage_robustness(log, surfaces, seeds, workers, t_max=200000.0):
-    """Task pipeline (as in generate) at the given parameters for extra seeds; with seed 0 from generate it
-    gives the spread of each task result. Finished runs are kept in tasks/robustness_jobs, so adding seeds later
-    only runs the new ones. Writes tasks/robustness.md and .json."""
+def merge_robustness_seeds(rows, baseline=None):
+    """Include the actual baseline seed once without guessing missing identities.
+
+    Historical runs may use different defaults or explicit overrides. A saved
+    certificate may supply the seed; conflicting identities must fail.
+    """
+    merged, seen = [], set()
+    for source in ([baseline] if baseline is not None else []) + list(rows):
+        row = dict(source)
+        certified = row.get("mat_certificate", {}).get("seed")
+        seed = row.get("seed", certified)
+        if (not isinstance(seed, int) or isinstance(seed, bool) or seed < 0
+                or (certified is not None and certified != seed)):
+            raise ValueError("missing, invalid or conflicting seed in robustness result")
+        if seed not in seen:
+            row["seed"] = seed
+            merged.append(row)
+            seen.add(seed)
+    return merged
+
+
+def stage_robustness(log, surfaces, seeds, workers, t_max=200000.0, baseline_dir=None):
+    """Summarize unique recorded seeds; no new formal stability certification.
+
+    Prefer generate's tasks_float64 baseline; tasks is the legacy fallback.
+    --robust-baseline selects an explicit generation directory.
+    """
+    baseline_dir = Path(baseline_dir) if baseline_dir is not None else (
+        OUT / "tasks_float64" if (OUT / "tasks_float64").is_dir() else OUT / "tasks")
+    seeds = list(dict.fromkeys(seeds))
     jobs = []
     for surface in sorted(surfaces, key=lambda s: not s.startswith("sphere")):          # slow sphere runs first
         train = "sphere5" if surface.startswith("sphere") else surface
@@ -715,8 +741,8 @@ def stage_robustness(log, surfaces, seeds, workers, t_max=200000.0):
                                       surface.startswith("sphere"))))
     rows = pool_map(jobs, workers, log, checkpoint=OUT / "tasks" / "robustness_jobs")
     lines = ["# 任务结果的多种子稳健性", "",
-             "- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；种子 0 即 `tasks/` 里的任务结果。",
-             "- 成功：相对残差 ≤ 1e-11（球面为扣除转动后）且线性稳定。", "",
+             "- 题给参数下，用同一条 AI 初值 + Newton 流程跑多个随机种子；基准来自选定目录 summary 中实际记录的 seed，同种子只计一次。",
+             "- 历史统计口径：沿用记录中的 stable 标志；球面残差列可能为扣除转动后的值。此表不替代正式完整残差或严格有限谱验收。", "",
              "| 任务 | 种子数 | 成功 | 类型 | 斑点数 / 段数 | 波长 λ | 最大相对残差 | max Re λ 范围 | 求解时间中位数 s |",
              "| --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
     out = {}
@@ -724,9 +750,9 @@ def stage_robustness(log, surfaces, seeds, workers, t_max=200000.0):
         for name, p in TASKS.items():
             rs = [r for r in rows if r.get("surface") == surface and abs(r["F"] - p.F) < 1e-9 and abs(r["k"] - p.k) < 1e-9
                   and not r.get("error")]
-            f0 = OUT / "tasks" / f"{surface}_{name}" / "summary.json"
-            if f0.exists():
-                r0 = json.loads(f0.read_text()); r0.setdefault("seed", 0); rs = [r0] + [r for r in rs if r["seed"] != 0]
+            f0 = baseline_dir / f"{surface}_{name}" / "summary.json"
+            baseline = json.loads(f0.read_text(encoding="utf-8")) if f0.exists() else None
+            rs = merge_robustness_seeds(rs, baseline)
             if not rs:
                 continue
             ok = [r for r in rs if r.get("stable")]
@@ -761,6 +787,7 @@ def main():
                     help="fresh formal-task directory (default: --out/tasks_float64); never overwrites tasks/")
     ap.add_argument("--generate-seed", nargs="*", default=[], metavar="SURFACE:TASK=SEED",
                     help="override a task seed, e.g. sphere6:stripes=0 (defaults: TASK_SEEDS, else 0)")
+    ap.add_argument("--robust-baseline", type=Path, help="recorded baseline directory (default: tasks_float64, else legacy tasks)")
     ap.add_argument("--robust-seeds", type=int, nargs="+", default=[1, 2, 3, 4], help="extra seeds for `robustness`")
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--eval-workers", type=int, default=4)
@@ -808,7 +835,8 @@ def main():
         stage_generate(log, args.generate_surfaces, t_max=args.generate_t_max, output_dir=args.generate_out,
                        workers=args.workers, seeds=overrides)
     if args.stage == "robustness":
-        stage_robustness(log, args.generate_surfaces, args.robust_seeds, args.workers, t_max=args.generate_t_max)
+        stage_robustness(log, args.generate_surfaces, args.robust_seeds, args.workers,
+                         t_max=args.generate_t_max, baseline_dir=args.robust_baseline)
 
 
 if __name__ == "__main__":

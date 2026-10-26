@@ -12,7 +12,7 @@ import numpy as np
 
 from turing_rd import Geometry, SPOTS, icosphere
 from turing_rd import spectrum_evidence as S
-from turing_rd.result_io import file_sha256, save_certified_mat, validate_certificate_portable
+from turing_rd.result_io import file_sha256, save_certified_mat, validate_certificate, validate_certificate_portable
 from turing_rd.spectral_policy import PAIR_ABSOLUTE_TOL, PAIR_RELATIVE_TOL
 from turing_rd.stability import eigenpair_diagnostics
 
@@ -138,8 +138,7 @@ class SpectralEvidencePortabilityTests(unittest.TestCase):
 
 
 class PortableCertificateTests(unittest.TestCase):
-    """validate_certificate_portable softens exactly one check, the L/M bit fingerprint, and the residual
-    agreement that depends on it."""
+    """Portable agreement has a fixed budget; all acceptance and binding checks remain strict."""
     @classmethod
     def setUpClass(cls):
         cls.g = Geometry(icosphere(1), cache_dir=None)
@@ -158,10 +157,10 @@ class PortableCertificateTests(unittest.TestCase):
             cert["residual"]["value"] = residual
         return cert
 
-    def test_identical_machine_stays_strict(self):
+    def test_identical_values_stay_strict_and_strict_api_keeps_original_budget(self):
         self.assertNotIn("verification_mode", self.validate(self.cert))
         with self.assertRaisesRegex(ValueError, "residual does not match"):
-            self.validate(self.changed(residual=3e-14))
+            validate_certificate(self.mat, self.changed(residual=3e-14), expected_params=SPOTS, expected_seed=2, expected_geometry=self.g)
 
     def test_operator_rounding_alone_is_accepted_and_labelled(self):
         mass = self.cert["geometry"]["mass_sum"] * (1 + 2e-16)

@@ -1,6 +1,6 @@
 {
   "schema_version": "portable-repack-release-v1",
-  "release_id": "portable_20261026",
+  "release_id": "portable_followup_20261026",
   "engineering_status": "PASS",
   "cross_platform_release_status": "PENDING_PEER_WINDOWS_AND_ARM_REVALIDATION",
   "upload_ready": false,
@@ -8,35 +8,35 @@
   "not_merged_to_main": true,
   "previous_frozen_main": "684763da70d1f6e8ce768b946c50856d36e0a0a9",
   "code_provenance": {
-    "validation_git_base": "e5baf02b818bb1ae0bf0b38358597651f7dea43e",
-    "validated_source_fingerprint": "7cde3af5c5209080736aee83429a7383e4b3998ad728ff769934f28071265fc8",
-    "source_snapshot": "submission/evidence/releases/portable_20261026/code_snapshot.json",
-    "source_files": 96,
-    "publication_binding": "The later published commit is checked against all source SHA256 values; no self-reference."
+    "validation_git_base": "112eb4f413fb2df7fb7ea5c010e84aabc918c9ce",
+    "validated_source_fingerprint": "817c7e95a6a432858cacf65d5c51093f76ced87933307b679fc960473f0496b7",
+    "source_snapshot": "submission/evidence/releases/portable_followup_20261026/code_snapshot.json",
+    "source_files": 97,
+    "publication_binding": "Subsequent publication commit must match every source SHA256; no self-reference."
   },
   "unit_tests": {
     "schema_version": "executed-unittest-v1",
-    "tests_run": 370,
+    "tests_run": 383,
     "failures": 0,
     "errors": 0,
     "skipped": 0,
     "successful": true,
-    "source_fingerprint": "7cde3af5c5209080736aee83429a7383e4b3998ad728ff769934f28071265fc8",
+    "source_fingerprint": "817c7e95a6a432858cacf65d5c51093f76ced87933307b679fc960473f0496b7",
     "sources_unchanged": true,
-    "wall_seconds": 39.99268769999617
+    "wall_seconds": 49.49979409997468
   },
   "protected_assets": {
-    "unchanged": 61,
-    "record": "results/portable_repack_20261026/protected_assets.json"
+    "unchanged": 66,
+    "record": "results/portable_followup_20261026/protected_assets.json"
   },
   "current_zip": {
-    "path": "submission/drafts/portable_20261026/待填_初赛_AI-MECH-2026-002_result.zip",
-    "sha256": "1b1a2d440e1db2f47ff01300a0552d211b496865f7b1eee62cb98263674f8a4e",
-    "bytes": 32580502,
-    "manifest_payload_files": 141,
-    "zip_entries_including_manifest": 142,
+    "path": "submission/drafts/portable_followup_20261026/待填_初赛_AI-MECH-2026-002_result.zip",
+    "sha256": "b721462afe4692d618a9759b0f3bb86499c6c542dad25322b9e8cacb2603770c",
+    "bytes": 32590512,
+    "manifest_payload_files": 145,
+    "zip_entries_including_manifest": 146,
     "independent_checks": 26,
-    "acceptance": "results/portable_repack_20261026/acceptance_report.json",
+    "acceptance": "results/portable_followup_20261026/acceptance_report.json",
     "workspace_correspondence": "PASS"
   },
   "current_pdf": {
@@ -204,28 +204,34 @@
   "readme_command_verification": {
     "status": "PASS",
     "four_tasks_and_best_match": "5/5 strict on this Windows x86_64 machine",
-    "record": "results/portable_repack_20261026/readme_verify.json"
+    "record": "results/portable_followup_20261026/readme_verify.json"
   },
   "portable_simulation": {
     "status": "PASS",
-    "four_tasks_and_best_match": "5/5 portable after one-ULP in-memory L/M perturbation",
-    "record": "results/portable_repack_20261026/simulated_portable.json",
+    "four_tasks_and_best_match": "5/5 portable after in-memory one-ULP L/M perturbation",
+    "record": "results/portable_followup_20261026/simulated_portable.json",
     "is_actual_arm_test": false
   },
   "review": {
-    "pre_fix_portable_bypass": "reproduced in four negative cases; fixed by full certificate validation",
-    "new_regressions": 6,
+    "baseline": "112eb4f413fb2df7fb7ea5c010e84aabc918c9ce",
+    "new_regressions": 13,
+    "seed_deduplication": "reproduced [2,2] before fix; actual recorded baseline replaces only its own seed; now [2,0]",
+    "residual_only_roundoff": "fixed-budget fallback covers identical L/M fingerprint; strict API unchanged",
+    "saved_and_current_residual_must_each_pass": true,
     "spectrum_acceptance_thresholds_changed": false,
-    "formal_saved_spectra": "metadata only; best match separately rechecks 40 saved vectors"
+    "scope": "numerical portability, not element-wise operator equivalence or full-spectrum proof"
   },
   "json": {
-    "strict_files": 40,
+    "strict_files": 44,
     "legacy_files": 3
   },
   "static": {
-    "compiled_python_files": 144,
+    "compiled_python_files": 145,
     "runtime_python_copies": 48,
-    "git_diff_check": "PASS"
+    "source_snapshot_files": 97,
+    "git_diff_check": "PASS",
+    "unexpected_deletions": [],
+    "quality_inference_recomputed": "v1/v2 both surfaces; identical to current packaged statistics"
   },
   "pending": [
     "Independent verification of this new ZIP on the Windows laptop and real ARM Mac.",
@@ -240,5 +246,10 @@
     "Historical sklearn weight versions differ from this machine; no universal pickle compatibility or Linux execution is claimed."
   ],
   "no_retraining_or_production_generation_or_inversion": true,
-  "historical_validation": "results/portable_repack_20261026/historical_stage8_delivery_validation.json"
+  "historical_validation": "results/portable_followup_20261026/historical_portable_validation.json",
+  "post_pack_unit_tests": {
+    "tests_run": 383,
+    "successful": true,
+    "record": "results/portable_followup_20261026/post_pack_tests.json"
+  }
 }

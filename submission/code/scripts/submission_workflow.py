@@ -244,14 +244,14 @@ def validate_spectral_record(certificate, mat_sha256, mat_certificate=None, *, s
 
 
 def portable_acceptance(mat, cert, geom, exc, tol=1e-11, abs_agree=1e-12):
-    """Fallback when ONLY the bit-level fingerprint of the assembled L/M differs (another CPU / BLAS /
-    compiler rounds the cotangent weights differently in the last bits). Everything else is still
-    checked strictly: the MAT SHA256, parameters, seed, the input mesh hash, vertex/face counts,
-    the operator type and the total mass; the full residual is recomputed here with this machine's
-    robust operator and must be <= tol and agree with the recorded value to abs_agree."""
+    """Numerical portability after operator fingerprint or residual agreement mismatch.
+
+    Every certificate check and the full PDE threshold remain strict. A fixed
+    residual comparison budget does not establish element-wise operator equivalence.
+    """
     from turing_rd import GSParams
-    from turing_rd.result_io import geometry_identity, validate_certificate_portable
-    if str(exc) != "MAT certificate geometry mismatch":
+    from turing_rd.result_io import geometry_identity, validate_certificate_portable, PORTABLE_FALLBACK_ERRORS
+    if str(exc) not in PORTABLE_FALLBACK_ERRORS:
         raise exc
     mine, rec = geometry_identity(geom), cert.get("geometry", {})
     for field in ("name", "n_vertices", "n_faces", "laplacian", "mesh_sha256"):
@@ -275,7 +275,6 @@ def portable_acceptance(mat, cert, geom, exc, tol=1e-11, abs_agree=1e-12):
     if not (fresh["accepted"] and cert.get("accepted") and recorded is not None and recorded <= tol
             and abs(value - recorded) <= abs_agree):
         raise ValueError("portable read-back acceptance failed: " + ", ".join(fresh["failure_reasons"])) from exc
-    fresh["verification_mode"] = "portable: L/M bit fingerprint differs (floating-point rounding); mesh, mass and full residual rechecked"
     return fresh
 
 

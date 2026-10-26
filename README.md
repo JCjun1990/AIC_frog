@@ -19,7 +19,7 @@ submission/
   code/                         可复现代码 + 两个组委会附件
   task3_inversion/best_match/   反演参数下最接近目标的生成稳态（2026-10-22 晚新增）
   report/stage8_20261025T173837/初赛技术报告_v3_严格验收修订.pdf   本轮两页报告；旧报告保留
-  drafts/portable_20261026/待填_初赛_AI-MECH-2026-002_result.zip   本轮待填队名草稿
+  drafts/portable_followup_20261026/待填_初赛_AI-MECH-2026-002_result.zip   本轮待填队名草稿
   待填_初赛_AI-MECH-2026-002_result.zip   历史旧草稿（不要上传）
 ```
 
@@ -82,7 +82,7 @@ submission/
 
 任务 3 在固定 F=0.0277124、k=0.0600398 下搜索 66 个初值，选中 cvt_3：初始 20 斑，最终 16 斑，目标 15 斑。同一特征距离 J 为 1.950 → 1.554。反演估计的另一目标指标 1.748 与此不同，不能混用。F/k 不因此改变；未执行非 AI 等预算多初值对照，不能证明 AI 的独立因果贡献。最佳匹配历史谱仅保留三组配置摘要。另有独立补充证据，实际保存三组共 40 个特征对及向量，绑定同一 MAT；最大采样实部 -1.861e-04，验收可重算保存向量的残差。这不是全谱证明，也不表示本轮重新运行多初值搜索。
 
-本轮实际执行 **370 项单元测试**并通过；数量来自执行记录并绑定当前源码。历史 89、95、99 项属于不同版本，不代表当前测试数。
+本轮实际执行 **383 项单元测试**并通过；数量来自执行记录并绑定当前源码。历史 89、95、99 项属于不同版本，不代表当前测试数。
 历史多种子与旧运行耗时没有在本轮重新计算；有限谱数值检查不是全谱数学证明。
 <!-- end generated scientific evidence -->
 
@@ -96,7 +96,7 @@ python scripts/verify_solver.py
 python scripts/verify_geometry.py
 ```
 
-本轮报告为 `submission/report/stage8_20261025T173837/初赛技术报告_v3_严格验收修订.pdf`；草稿为 `submission/drafts/portable_20261026/待填_初赛_AI-MECH-2026-002_result.zip`。旧包保留，实际验收状态见 DELIVERY_VALIDATION.json。
+本轮报告为 `submission/report/stage8_20261025T173837/初赛技术报告_v3_严格验收修订.pdf`；草稿为 `submission/drafts/portable_followup_20261026/待填_初赛_AI-MECH-2026-002_result.zip`。旧包保留，实际验收状态见 DELIVERY_VALIDATION.json。
 
 完整提交包已包含 `submission/code/`，可直接在解压目录中查看/复算；
 `submission/README_提交.md` 给出逐任务复现命令与口径说明。
